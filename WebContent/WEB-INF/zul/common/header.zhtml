@@ -1,0 +1,574 @@
+<header class="header-container" xmlns:z="zul" xmlns:x="xhtml" xmlns:zk="zk" viewModel="@id('vm') @init('vn.toancauxanh.service.HeaderService')">
+	<div class="top-header">
+		<div class="center">
+			<div class="box-logo">
+				<a href="${execution.contextPath}/congtrinh">
+				<div class="box-title-page">
+					<h4>
+						HỆ THỐNG QUẢN LÝ		 
+					</h4>
+					<h5>PHÒNG KHÁM NHA KHOA TCX</h5>
+				</div>
+			</div>
+			<div class="box-user-header">
+				<div class="menu-bar-icon">
+					<button class="button-menu"
+						onclick="toggleMenu()">
+						<img src="/backend/assets/images/mn1.png" />
+					</button>
+				</div>
+				<div class="dropdown1" style="float:right;">
+					<li class="dropbtn1" style="display: inline">
+						
+						<z:image class="border-image"
+							content="@load(entry.nhanVien.imageContent)" />
+						<span href="#" class="account-name">
+							<z:label
+								value=@load(vm.currentUser.hoVaTen) />
+						</span>
+						<span class="caret"></span>
+					</li>
+					<div class="dropdown-content1">
+						<x:a class="ctent" href="#" zk:if="${!dakhoa}"
+							zk:onClick="@command('redirectPage', zul='/WEB-INF/zul/common/view.zul',vmArgs=vm,vm=entry.nhanVien)">
+							Thông tin
+						</x:a>
+						<a class="ctent"
+							href="${execution.contextPath}/logout">
+							Đăng xuất
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="bottom-header laptop-mode">
+		<div class="center center-menu">
+			<div class="open-menu" style="text-align: center;">
+				<ul class="ds-menu">
+					<li
+						class="menu-top-list ${resource eq 'congtrinh'?'active-menu':''}"
+						zk:if="${entry.quyen.congtrinh_lietke and !dakhoa}">
+						<a class="link-menu"
+							href="${execution.contextPath}/congtrinh">
+							<span
+								class="icon-ds box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý hồ sơ bệnh nhân</span>
+						</a>
+					</li>
+				
+					<li
+						class="menu-top-list ${resource eq 'chungchihanhnghecanhan'
+	     				|| resource eq 'chungchihanhnghetochuc' ?'active-menu':''}"
+						zk:if="${(entry.quyen.chungchihanhnghecanhan_lietke or entry.quyen.chungchihanhnghetochuc_lietke) and !dakhoa}">
+						<a class="link-menu" href="javascript:;">
+							<span
+								class="iconct-chung-chi box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý lịch hẹn</span>
+						</a>
+						<ul class="sub-menu menu-pull-left" style="width: 230px;" zk:if="${entry.quyen.chungchihanhnghecanhan_lietke and !dakhoa}">
+							<li class="menu-items">
+								<a class="item-link"
+									href="${execution.contextPath}/chungchihanhnghecanhan">
+									Chứng chỉ hành nghề cá nhân
+								</a>
+							</li>
+							<li class="menu-items" zk:if="${entry.quyen.chungchihanhnghetochuc_lietke and !dakhoa}">
+								<a class="item-link"
+									href="${execution.contextPath}/chungchihanhnghetochuc">
+									Chứng chỉ hành nghề tổ chức
+								</a>
+							</li>							
+						</ul>
+					</li>
+					
+					<li
+						class="menu-top-list ${resource eq 'vanban'?'active-menu':''}"
+						zk:if="${entry.quyen.vanban_lietke and !dakhoa}">
+						<a class="link-menu"
+							href="${execution.contextPath}/vanban">
+							<span
+								class="iconct-thu-vien box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý nhân viên</span>
+						</a>
+					</li>
+					<li
+						class="menu-top-list ${resource eq 'nhathau'?'active-menu':''}"
+						zk:if="${entry.quyen.nhathau_lietke and !dakhoa}">
+						<a class="link-menu"
+							href="${execution.contextPath}/nhathau">
+							<span
+								class="iconct-icon-dau-thau box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý danh mục</span>
+						</a>
+					</li>
+					
+					<li
+						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'linhvuccongtrinh' || resource eq 'linhvuchoatdong' || resource eq 'linhvuccapchungchihanhnghe'
+	     				|| resource eq 'thutucthanhphanhoso' || resource eq 'capdonvihanhchinh' || resource eq 'duan' || resource eq 'donvihanhchinh' || resource eq 'donvibanhanh' ||resource eq 'phongban'
+	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ||  resource eq 'loaicongtrinh'
+	     				||  resource eq 'nhomduan' ||  resource eq 'hangmuccongtrinh' ||  resource eq 'quocgia' ?'active-menu':''}"
+						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.linhvuccongtrinh_lietke
+						|| entry.quyen.linhvuccapchungchihanhnghe_lietke || entry.quyen.linhvuchoatdong_lietke
+	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.duan_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
+	     				|| entry.quyen.vaitro_lietke || entry.quyen.phongban_lietke || entry.quyen.quantrihethong_lietke
+	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke || entry.quyen.loaicongtrinh_lietke 
+	     				|| entry.quyen.nhomduan_lietke || entry.quyen.hangmuccongtrinh_lietke || entry.quyen.quocgia_lietke ) and !dakhoa }">
+
+						<a class="link-menu" href="javascript:;">
+							<span
+								class="icon-setting box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý hệ thống</span>
+						</a>
+						<ul class="sub-menu menu-pull-left">
+						
+							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.duan_lietke || entry.quyen.nhomduan_lietke}">
+								<a class="item-link menu-con" tabindex="-1"
+									href="javascript:void(0)">
+									Quản lý dự án
+									<span class="caret-right"></span>
+								</a>
+								<ul class="dropdown-menu box-menu-con">
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.duan_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/duan" class="menu-items dropdown-menu-con">
+											Dự án
+										</a>
+									</li>
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nhomduan_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/nhomduan" class="menu-items dropdown-menu-con">
+											Nhóm dự án
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuccapchungchihanhnghe_lietke || entry.quyen.linhvuchoatdong_lietke 
+							|| entry.quyen.linhvuccongtrinh_lietke}">
+								<a class="item-link menu-con" tabindex="-1"
+									href="javascript:void(0)">
+									Quản lý lĩnh vực
+									<span class="caret-right"></span>
+								</a>
+								<ul class="dropdown-menu box-menu-con">
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuccapchungchihanhnghe_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/linhvuccapchungchihanhnghe" class="menu-items dropdown-menu-con">
+											Lĩnh vực cấp CCHN
+										</a>
+									</li>
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuchoatdong_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/linhvuchoatdong" class="menu-items dropdown-menu-con">
+											Lĩnh vực hoạt động
+										</a>
+									</li>
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuccongtrinh_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/linhvuccongtrinh" class="menu-items dropdown-menu-con">
+											Lĩnh vực công trình
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li class="menu-items"
+								zk:if="${entry.quyen.thutucthanhphanhoso_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/thutucthanhphanhoso">
+									Thủ tục thành phần hồ sơ
+								</a>
+							</li>
+							<li class="menu-items"
+								zk:if="${entry.quyen.loaicongtrinh_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/loaicongtrinh">
+									Loại công trình
+								</a>
+							</li>
+							<li class="menu-items"
+								zk:if="${entry.quyen.hangmuccongtrinh_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/hangmuccongtrinh">
+									Hạng mục công trình
+								</a>
+							</li>
+							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.donvibanhanh_lietke || entry.quyen.capdonvihanhchinh_lietke
+							|| entry.quyen.donvihanhchinh_lietke}">
+								<a class="item-link menu-con" tabindex="-1"
+									href="javascript:void(0)">
+									Quản lý đơn vị
+									<span class="caret-right"></span>
+								</a>
+								<ul class="dropdown-menu box-menu-con">
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.donvibanhanh_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/donvibanhanh" class="menu-items dropdown-menu-con">
+											Đơn vị ban hành
+										</a>
+									</li>
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.capdonvihanhchinh_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/capdonvihanhchinh" class="menu-items dropdown-menu-con">
+											Cấp đơn vị hành chính
+										</a>
+									</li>
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.donvihanhchinh_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/donvihanhchinh" class="menu-items dropdown-menu-con">
+											Đơn vị hành chính
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nguoidung_lietke || entry.quyen.vaitro_lietke || entry.quyen.lichsunguoidung_lietke}">
+								<a class="item-link menu-con" tabindex="-1"
+									href="javascript:void(0)">
+									Quản lý người dùng
+									<span class="caret-right"></span>
+								</a>
+								<ul class="dropdown-menu box-menu-con">
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nguoidung_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/nguoidung" class="menu-items dropdown-menu-con">
+											Người dùng
+										</a>
+									</li>
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.lichsunguoidung_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/lichsunguoidung" class="menu-items dropdown-menu-con">
+											Lịch sử người dùng
+										</a>
+									</li>
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.vaitro_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/vaitro" class="menu-items dropdown-menu-con">
+											Vai trò
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li class="menu-items"
+								zk:if="${entry.quyen.phongban_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/phongban">
+									Phòng ban
+								</a>
+							</li>
+							<li class="menu-items"
+								zk:if="${entry.quyen.quocgia_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/quocgia">
+									Quốc gia
+								</a>
+							</li>
+							<li class="menu-items"
+								zk:if="${entry.quyen.cauhinhhethong_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/cauhinhhethong">
+									Cấu hình
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="menu-top-list" zk:if="${!dakhoa}">
+						<x:a class="link-menu" href="#"
+							zk:onClick='Executions.createComponents("/WEB-INF/zul/cauhinhhethong/hotro.zul", null, null);'>
+							<span
+								class="icon-Help box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Trợ giúp</span>
+						</x:a>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+	
+	<!-- Phần menu cho mobile -->
+	<div class="bottom-header mobile-mode">
+		<div class="center center-menu">
+			<div class="open-menu" style="text-align: center;">
+				<ul class="ds-menu" style="overflow-y: scroll;">
+					<li
+						class="menu-top-list ${resource eq 'congtrinh'?'active-menu':''}"
+						zk:if="${entry.quyen.congtrinh_lietke and !dakhoa}">
+						<a class="link-menu"
+							href="${execution.contextPath}/congtrinh">
+							<span
+								class="icon-ds box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý công trình</span>
+						</a>
+					</li>
+					<li	class="menu-top-list ${resource eq 'chungchihanhnghecanhan' || resource eq 'chungchihanhnghetochuc' ?'active-menu':''}"
+						zk:if="${(entry.quyen.chungchihanhnghecanhan_lietke or entry.quyen.chungchihanhnghetochuc_lietke) and !dakhoa}">
+						<a class="link-menu flx-box-mobile" onclick="changeArrow(3)" data-toggle="collapse" href="#demo2" role="button" aria-expanded="false" aria-controls="demo2">
+							<div>
+								<span
+									class="iconct-chung-chi box-icon-menu box-icon-menu1">
+								</span>
+								<span class="text-menu">Quản lý hệ chứng chỉ</span>
+							</div>
+							<span id="iconPlusChungChi" class="icon-custom-down-arrow"></span>
+						</a>
+						<ul class="collapse margin-42" id="demo2">
+							<li zk:if="${entry.quyen.chungchihanhnghecanhan_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/chungchihanhnghecanhan">Chứng chỉ hành nghề cá nhân</a>
+							</li>
+							<li zk:if="${entry.quyen.chungchihanhnghetochuc_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/chungchihanhnghetochuc">Chứng chỉ hành nghề tổ chức</a>
+							</li>
+						</ul>
+					</li>
+					
+					<li
+						class="menu-top-list ${resource eq 'vanban'?'active-menu':''}"
+						zk:if="${entry.quyen.vanban_lietke and !dakhoa}">
+						<a class="link-menu"
+							href="${execution.contextPath}/vanban">
+							<span
+								class="iconct-thu-vien box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý văn bản</span>
+						</a>
+					</li>
+					<li
+						class="menu-top-list ${resource eq 'nhathau'?'active-menu':''}"
+						zk:if="${entry.quyen.nhathau_lietke and !dakhoa}">
+						<a class="link-menu"
+							href="${execution.contextPath}/nhathau">
+							<span
+								class="iconct-icon-dau-thau box-icon-menu box-icon-menu1">
+							</span>
+							<span class="text-menu">Quản lý nhà thầu</span>
+						</a>
+					</li>
+					<li class="menu-top-list ${resource eq 'baocaothongke' || resource eq 'baocaothongkeduan' ?'active-menu':''}"
+						zk:if="${(entry.quyen.baocaothongke_lietke || entry.quyen.baocaothongkeduan_lietke) and !dakhoa}">
+						<a class="link-menu flx-box-mobile" onclick="changeArrow(5)" data-toggle="collapse" 
+							href="#demo5" role="button" aria-expanded="false" aria-controls="demo5" >
+							<div>
+								<span
+									class="icon-thongke box-icon-menu box-icon-menu1">
+								</span>
+								<span class="text-menu">Báo cáo thống kê</span>
+							</div>
+							<span id="iconPlusBaoCao" class="icon-custom-down-arrow"></span>
+						</a>
+						
+						<ul class="collapse margin-42" id="demo5">
+							<li zk:if="${entry.quyen.baocaothongke_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/baocaothongke">Thống kê công trình</a>
+							</li>
+							<li zk:if="${entry.quyen.baocaothongkeduan_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/baocaothongkeduan">Thống kê dự án</a>
+							</li>
+						</ul>
+					</li>
+					<li
+						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'linhvuccongtrinh'
+	     				|| resource eq 'thutucthanhphanhoso' || resource eq 'capdonvihanhchinh' || resource eq 'duan' || resource eq 'donvihanhchinh' || resource eq 'donvibanhanh' ||resource eq 'phongban'
+	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ?'active-menu':''}"
+						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.linhvuccongtrinh_lietke
+	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.duan_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
+	     				|| entry.quyen.vaitro_lietke || entry.quyen.phongban_lietke || entry.quyen.quantrihethong_lietke
+	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke) and !dakhoa }">
+
+						<a class="link-menu flx-box-mobile" onclick="changeArrow(4)" data-toggle="collapse" href="#demo3" role="button" aria-expanded="false" aria-controls="demo3">
+							<div>
+								<span
+									class="icon-setting box-icon-menu box-icon-menu1">
+								</span>
+								<span class="text-menu">Quản lý hệ thống</span>
+							</div>
+							<span id="qlht" class="icon-custom-down-arrow"></span>
+						</a>
+						<ul class="collapse margin-42" id="demo3">
+							<li zk:if="${entry.quyen.duan_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/duan">Dự án</a>
+							</li>
+							<li zk:if="${entry.quyen.nhomduan_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/nhomduan">Nhóm dự án</a>
+							</li>
+							<li zk:if="${entry.quyen.linhvuccapchungchihanhnghe_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/linhvuccapchungchihanhnghe">Lĩnh vực cấp CCHN</a>
+							</li>
+							<li zk:if="${entry.quyen.linhvuchoatdong_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/linhvuchoatdong">Lĩnh vực hoạt động</a>
+							</li>
+							<li zk:if="${entry.quyen.linhvuccongtrinh_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/linhvuccongtrinh">Lĩnh vực công trình</a>
+							</li>
+							<li zk:if="${entry.quyen.nguoidung_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/nguoidung">Người dùng</a>
+							</li>
+							<li zk:if="${entry.quyen.phongban_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/phongban">Phòng ban</a>
+							</li>
+							<li zk:if="${entry.quyen.loaicongtrinh_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/loaicongtrinh">Loại công trình</a>
+							</li>
+							<li zk:if="${entry.quyen.hangmuccongtrinh_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/hangmuccongtrinh">Hạng mục công trình</a>
+							</li>
+							<li zk:if="${entry.quyen.thutucthanhphanhoso_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/thutucthanhphanhoso">Thủ tục thành phần hồ sơ</a>
+							</li>
+							<li zk:if="${entry.quyen.donvibanhanh_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/donvibanhanh">Đơn vị ban hành</a>
+							</li>
+							<li zk:if="${entry.quyen.quocgia_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/quocgia">Quốc gia</a>
+							</li>
+							<li zk:if="${entry.quyen.capdonvihanhchinh_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/capdonvihanhchinh">Cấp đơn vị hành chính</a>
+							</li>
+							<li zk:if="${entry.quyen.phongban_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/donvihanhchinh">Đơn vị hành chính</a>
+							</li>
+							<li zk:if="${entry.quyen.lichsunguoidung_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/lichsunguoidung">Lịch sử người dùng</a>
+							</li>
+							<li zk:if="${entry.quyen.vaitro_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/vaitro">Vai trò</a>
+							</li>
+							<li zk:if="${entry.quyen.cauhinhhethong_lietke}">
+								<a class="link-menu blue-color"
+									href="${execution.contextPath}/cauhinhhethong">Cấu hình</a>
+							</li>
+						</ul>
+					</li>
+					<li class="menu-top-list" zk:if="${!dakhoa}">
+						<x:a class="link-menu" href="${execution.contextPath}/trogiup">
+						<span class="icon-Help box-icon-menu"></span>
+						<span class="text-menu">Trợ giúp</span>
+						</x:a>
+						</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		function toggleMenu() {
+			if($('.open-menu').hasClass('menu-is-open')) {
+				$('.open-menu').removeClass('menu-is-open');
+				$('body').removeAttr('style');
+				$('html').removeAttr('style');
+			} else {
+				$('.open-menu').addClass('menu-is-open');
+				$('body').css('overflow', 'hidden');
+				$('html').css('overflow', 'hidden');
+			}
+		}
+		
+		function changeArrow(id){
+			if(id == 1){
+				if($('#kh').hasClass('icon-custom-down-arrow')){
+					$('#kh').removeClass('icon-custom-down-arrow');
+					$('#kh').addClass('icon-custom-up-arrow');
+				}else{
+					$('#kh').removeClass('icon-custom-up-arrow');
+					$('#kh').addClass('icon-custom-down-arrow');
+				}
+			}
+			
+			if(id == 2){
+				if($('#vdv').hasClass('icon-custom-down-arrow')){
+					$('#vdv').removeClass('icon-custom-down-arrow');
+					$('#vdv').addClass('icon-custom-up-arrow');
+				}else{
+					$('#vdv').removeClass('icon-custom-up-arrow');
+					$('#vdv').addClass('icon-custom-down-arrow');
+				}
+			}
+			
+			if(id == 3){
+				if($('#iconPlusChungChi').hasClass('icon-custom-down-arrow')){
+					$('#iconPlusChungChi').removeClass('icon-custom-down-arrow');
+					$('#iconPlusChungChi').addClass('icon-custom-up-arrow');
+				}else{
+					$('#iconPlusChungChi').removeClass('icon-custom-up-arrow');
+					$('#iconPlusChungChi').addClass('icon-custom-down-arrow');
+				}
+			}
+			
+			if(id == 4){
+				if($('#qlht').hasClass('icon-custom-down-arrow')){
+					$('#qlht').removeClass('icon-custom-down-arrow');
+					$('#qlht').addClass('icon-custom-up-arrow');
+				}else{
+					$('#qlht').removeClass('icon-custom-up-arrow');
+					$('#qlht').addClass('icon-custom-down-arrow');
+				}
+			}
+			
+			if(id == 5){
+				if($('#iconPlusBaoCao').hasClass('icon-custom-down-arrow')){
+					$('#iconPlusBaoCao').removeClass('icon-custom-down-arrow');
+					$('#iconPlusBaoCao').addClass('icon-custom-up-arrow');
+				}else{
+					$('#iconPlusBaoCao').removeClass('icon-custom-up-arrow');
+					$('#iconPlusBaoCao').addClass('icon-custom-down-arrow');
+				}
+			}
+		}
+		
+		function closeMenu() {
+			$('.open-menu').removeClass('menu-is-open'); 
+		}
+		
+		$(window).resize(function(){ 
+			if($(window).width()>747){
+				$('.close-icon').css('display','none');
+			}
+			else{
+				$('.close-icon').css('display','block');
+			}
+		});
+			
+		$(window).click(function() {
+			$('.list-notify').css({display: 'none'});
+		});
+		
+		$('.total-notify').click(function() {
+			event.stopPropagation();
+		});
+	</script>
+		
+	<script>
+		// js sub menu con
+		$(document).ready(function(){
+		  $('.dropdown-menu-con a.menu-con').hover(function(e){
+		  
+		     $(this).next('ul').toggle(); 
+		  
+		  });
+		  
+		   $('.box-menu-con').hover(function(e){
+		  		 $(this).css("display" , "block");
+		   }, function(e) {
+		   		 $(this).css("display" , "none");
+		   });
+		}); 
+	</script>
+</header>

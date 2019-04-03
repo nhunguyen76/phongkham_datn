@@ -1,0 +1,63 @@
+<?style href="/login/css/login.min.css" type="text/css" ?>
+<?style href="/login/css/custom-login.css" type="text/css" ?>
+<?page title="Đăng nhập" contentType="text/html;charset=UTF-8"?>
+<?meta http-equiv="X-UA-Compatible" content="IE=edge"?>
+<?meta name="viewport" content="width=device-width, initial-scale=1"?>
+<?script type="text/javascript"  src="/login/js/login.min.js"?>
+<?link rel="icon" href="/img/favicon.png" type="image/x-icon" ?>
+<zk xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk" xmlns:w="client" xmlns:ca="client/attribute">
+	<style>
+		body {background: #E9EEF3}
+		.login-head {
+			text-align: center;
+		}
+		.login-title {
+			float: none;
+		}
+		.login-title p {
+			text-align: center;
+		}
+		.login-icon {
+			display: inline-block;
+			float: none;
+		}
+		#login h2 {
+			background-color: #ffffff;
+    		border-bottom: 1px solid #eeeeee;
+    		color: #000;
+    		padding: 18px;
+		}
+		.login_content {
+			background-color: #fbfbfb;
+		}
+	</style>
+	<div class="" apply="org.zkoss.bind.BindComposer">
+		<include src="/WEB-INF/zul/notification.zul"></include>
+		<zscript>
+			String usernameX = "";
+		</zscript>
+		<a class="hiddenanchor" id="toregister"></a>
+		<a class="hiddenanchor" id="tologin"></a>
+
+		<n:div id="wrapper">
+			<div class="login-head" style="padding-top: 45%">
+				<span class="sso-error-icon">
+				</span>
+				<div class="login-title">	
+					<n:p>SỞ XÂY DỰNG ĐÀ NẴNG</n:p>			
+					<n:p> 
+						PHẦN QUẢN LÝ NHÀ NƯỚC CHUYÊN NGÀNH XÂY DỰNG
+					</n:p>
+					
+				</div>
+			</div>
+			<div>
+				 <span>Tài khoản của bạn hiện không tồn tại trong phần mềm quản lý chuyên ngành xây dựng. 
+				 Vui lòng liên hệ với administrator để được cung cấp tài khoản truy cập vào phần mềm quản lý chuyên ngành xây dựng</span>			
+			</div>
+			<div style="margin-left: 158px">
+				<button href="/dang-nhap-sso" >Quay về</button>
+			</div>
+		</n:div>
+	</div>	
+</zk>

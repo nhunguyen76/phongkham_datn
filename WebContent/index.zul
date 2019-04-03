@@ -1,0 +1,7 @@
+<zk>
+	<zscript><![CDATA[  
+		desktop.setCurrentDirectory("/WEB-INF/zul");
+		Executions.forward("/WEB-INF/zul/home.zhtml");
+	]]>	
+	</zscript>
+</zk>

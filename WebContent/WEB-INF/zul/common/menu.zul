@@ -1,0 +1,28 @@
+<zk xmlns:n="native">
+	<div class="box-content-full">
+		<n:section class="box-result">
+			<div class="box-menu">
+				<n:ul>
+					<n:li class="${resource eq 'nguoidung'? 'active' : ''}">
+						<a href="/nguoidung">Người dùng</a>
+					</n:li>
+					<n:li class="${resource eq 'donvi'? 'active' : ''}">
+						<a href="/donvi">Đơn vị</a>
+					</n:li>
+					<n:li class="${resource eq 'vaitro'? 'active' : ''}">
+						<a href="/vaitro">Vai trò</a>
+					</n:li>
+					<n:li class="${resource eq 'loaichidao'? 'active' : ''}">
+						<a href="/loaichidao">Loại chỉ đạo</a>
+					</n:li>
+					<n:li class="${resource eq 'trangthai'? 'active' : ''}">
+						<a href="/trangthai">Trạng thái</a>
+					</n:li>
+					<n:li class="${resource eq 'cauhinhhethong'? 'active' : ''}">
+						<a href="/cauhinhhethong">Cấu hình</a>
+					</n:li>
+				</n:ul>
+			</div>
+		</n:section>
+	</div>
+</zk>

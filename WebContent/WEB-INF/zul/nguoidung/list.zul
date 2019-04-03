@@ -1,0 +1,96 @@
+<z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml"
+	viewModel="@id('vm') @init('vn.toancauxanh.service.NhanVienService')">
+	<zscript><![CDATA[
+		self.page.title= "Quản lý người dùng";
+	]]></zscript>
+	<n:section class="main-container">
+		<div class="center">
+			<div class="bar-top-content">
+				<n:h2 class="title-page-main">QUẢN LÝ NGƯỜI DÙNG</n:h2>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="box-content-full">
+						<n:section class="box-result">
+							<div class="box-form-search">
+								<n:form class="form-src padding-form-bt">
+									<div class="row-box-src">
+										<textbox class="keysearch" value="@bind(vm.arg.tukhoa)" placeholder="Nhập tên người dùng"
+													onOK="@command('cmd', notify=vm, attr='targetQueryNhanVien')" />
+										<x:button class="btn-form-search btn-page width-100-2" type="button" 
+											onClick="@command('cmd', notify=vm, attr='targetQueryNhanVien')" >
+											<n:i class="icon-search"></n:i> Tìm kiếm
+										</x:button>
+									</div>
+								</n:form>
+							</div>
+							<div class="clearfix"></div>
+						</n:section>
+						<n:section class="box-result">
+				        	<div class="box-list-report">
+				          		<div class="box-report-top flex-list">
+				          			<n:p class="title-issue title-list-report margin-button-list">
+				          				Danh sách người dùng
+				          			</n:p>
+				          			<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.nguoidung_them}" 
+			    						onClick="@command('redirectPage', zul='nguoidung/add.zul', vmArgs=vm, vm=null)">
+		    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
+		    						</x:button>
+				          		</div>
+				          		 <div class="wrappre-tb">
+		                			<div class="wp-scrool">
+		                				<grid model="@load(vm.page(vm.targetQueryNhanVien).fetch())" width="100%" id="grid"
+											emptyMessage="Danh sách không có người dùng nào" class="table-report">
+											<columns>
+												<column label="STT" hflex="min" style="text-align: center;"/>
+												<column label="Họ và tên" width="22%" style="text-align: center;"/>
+												<column label="Tên đăng nhập" width="23%" style="text-align: center;"/>	
+												<column label="Vai trò" width="23%" style="text-align: center;"/>				
+												<column label="Trạng thái" width="100px" style="text-align: center;"/>
+												<column label="Thao tác" width="150px" style="text-align: center;"/>
+											</columns>
+											<template name="model">
+												<row apply="org.zkoss.bind.BindComposer" viewModel="@id('item') @init(each)">
+													<label value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)" style="text-align:center;display:block"/>
+													<label value="@load(each.hoVaTen)" style="display:block;"/>
+													<label value="@load(each.tenDangNhap)" style="text-align: center;display:block"/>
+													<label value="@load(each.vaiTroText)" style="text-align: center;display:block"/>
+													<cell style="text-align:center;">
+														<n:span style="font-size: 11px" class="${each.setStyleTrangThai(each.trangThai)}">${each.checkApDung ? 'Áp dụng' : 'Đã khóa'}</n:span>
+													</cell>
+													
+													<div class="text-align-center grid-action">
+														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.nguoidung_sua}" title ="Chỉnh sửa"
+															onClick="@command('redirectPage', zul='nguoidung/view.zul',vmArgs=vm,vm=item)">
+															<n:i class="icon-edit"></n:i>
+														</x:a>
+														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.nguoidung_khoa and item.checkApDung and item.id ne 1}"
+															title ="Khóa" onClick="@command('khoaThanhVien', vm=vm)">
+															<n:i class="icon-custom-lock"></n:i>
+														</x:a>
+														<x:a href="#" class="col-edit" zk:if="${entry.quyen.nguoidung_mokhoa and !item.checkApDung and item.id ne 1}"
+															title ="Mở khóa" onClick="@command('moKhoaThanhVien', vm=vm)">
+															<n:i class="icon-custom-unclock"></n:i>
+														</x:a>
+		                          						<x:a href="#" class="col-del" zk:if="${entry.quyen.nguoidung_xoa and each.id ne 1}" title ="Xóa"
+		                          							onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='targetQueryNhanVien')">
+		                          							<n:i class="icon-cancel"></n:i>
+		                          						</x:a>
+													</div>
+												</row>
+											</template>
+										</grid>
+										<paging pageSize="@load(vm.arg.pagesize)" totalSize="@load(vm.targetQueryNhanVien.fetchCount())"
+											visible="@load(vm.targetQueryNhanVien.fetchCount() > vm.arg.pagesize ? true : false)"
+											activePage="@bind(vm.arg.page)" onPaging="@command('cmd', notify=vm, atr='targetQueryNhanVien')" />
+										
+		                			</div>
+		                		</div>
+				         	 </div>
+				         </n:section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</n:section>
+</z:idspace>
