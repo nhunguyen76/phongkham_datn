@@ -2,7 +2,7 @@
 
 ## Domains ##
 
-* Test: http://projects.greenglobal.vn:6782/sxd-csdldn
+* Test: 
 * Demo: 
 * Live: 
 
