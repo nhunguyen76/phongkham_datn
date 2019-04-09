@@ -2,10 +2,10 @@
 <window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk" apply="org.zkoss.bind.BindComposer"
 	id="nguoiDungWin" border="normal" mode="modal" action="show: slideIn"
 	contentStyle="overflow:auto;" class="pop-up-mg" closable="true" title="${arg.save}"
-	onClose="@command('invokeGG', notify=notifyObject, detach=nguoiDungWin, attr='targetQueryNhanVien')"
-	whatever="@load(false,after='saveNhanVien') @converter('vn.toancauxanh.service.DetachConverter')"
+	onClose="@command('invokeGG', notify=notifyObject, detach=nguoiDungWin, attr='targetQueryNguoiDung')"
+	whatever="@load(false,after='saveNguoiDung') @converter('vn.toancauxanh.service.DetachConverter')"
 	viewModel="@id('vm') @init(arg.model)" validationMessages="@id('vmsgs')" width="65%"
-	form="@id('fx') @load(vm) @save(vm, before={'saveNhanVien'})">
+	form="@id('fx') @load(vm) @save(vm, before={'saveNguoiDung'})">
 	<zscript>
 		entry = new vn.toancauxanh.service.BaseObject().core();
 		notifyObject = arg.get("vmArgs");
@@ -19,7 +19,7 @@
 				    	<div class="form-group">
 				    		<div class="div-image">
 				    			<image id="imageCmp" style="width: 160px; height: 160px;object-fit:cover;border-radius:50%"
-									content="@load(vm.imageContent eq null ? imagevar2 : vm.imageContent) @save(vm.imageContent, before='saveNhanVien')">
+									content="@load(vm.imageContent eq null ? imagevar2 : vm.imageContent) @save(vm.imageContent, before='saveNguoiDung')">
 								</image>
 				    		</div>							
 						</div>
@@ -36,7 +36,7 @@
 							<combobox width="100%" model="@load(entry.phongBans.listAllPhongBan)" class="hv-cbb"
 								readonly="true" disabled="@load(!entry.quyen.nguoidung_them)"
 								value="@load(vm.phongBan ne null ? vm.phongBan.ten : 'Chọn phòng ban')"
-								selectedItem="@load(vm.phongBan) @save(vm.phongBan, before='saveNhanVien') 
+								selectedItem="@load(vm.phongBan) @save(vm.phongBan, before='saveNguoiDung') 
 									@bind(phongBans.selectedPhongBan)
 									@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" >
 								<template name="model">
@@ -50,14 +50,14 @@
 						<div class="col-sm-6">
 							<n:span class="title-issue title-issue-detail">Họ và tên<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%"  maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
-								value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveNhanVien') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
+								value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
 							<label class="error" value="@load(vmsgs[self.previousSibling])" />
 						</div>
 						<div class="col-sm-6">
 							<n:span class="title-issue title-issue-detail">Tên đăng nhập<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%" maxlength="255"
 								disabled="@load((entry.quyen.nguoidung_them and vm.tenDangNhap eq 'admin') or !entry.quyen.nguoidung_them)"
-								value="@bind(vm.tenDangNhap) @save(vm.tenDangNhap, before='saveNhanVien') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty', field='tenDangNhap', id=vm, cmsg='Tên đăng nhập này đã tồn tại.')" />
+								value="@bind(vm.tenDangNhap) @save(vm.tenDangNhap, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty', field='tenDangNhap', id=vm, cmsg='Tên đăng nhập này đã tồn tại.')" />
 							<label class="error" value="@load(vmsgs[self.previousSibling])" />
 						</div>
 					</div>
@@ -66,13 +66,13 @@
 						<div class="col-sm-6" if="${vm.noId()}">
 							<n:span class="title-issue title-issue-detail">Mật khẩu<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%" type="password" maxlength="255"
-								value="@bind(vm.matKhau2) @save(vm.matKhau2, before='saveNhanVien') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
+								value="@bind(vm.matKhau2) @save(vm.matKhau2, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
 							<label class="error" value="@load(vmsgs[self.previousSibling])" />
 						</div>
 						<div class="col-sm-6" if="${vm.noId()}">
 							<n:span class="title-issue title-issue-detail">Xác nhận mật khẩu<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%" type="password" maxlength="255"
-								value="@bind(vm.matKhau) @save(vm.matKhau, before='saveNhanVien') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty', password=vm.matKhau2)" />
+								value="@bind(vm.matKhau) @save(vm.matKhau, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty', password=vm.matKhau2)" />
 							<label class="error" value="@load(vmsgs[self.previousSibling])" />
 						</div>
 					</div>
@@ -88,12 +88,12 @@
 										<div class="form-group">
 											<n:span class="title-issue title-issue-detail">Mật khẩu</n:span>
 											<textbox class="hv-textbox" width="100%" type="password" maxlength="255"
-												value="@bind(vm.matKhau2) @save(vm.matKhau2, before='saveNhanVien')" />
+												value="@bind(vm.matKhau2) @save(vm.matKhau2, before='saveNguoiDung')" />
 										</div>
 										<div class="form-group">
 											<n:span class="title-issue title-issue-detail">Xác nhận mật khẩu</n:span>
 											<textbox class="hv-textbox" width="100%" type="password" maxlength="255"
-												value="@save(vm.matKhau2, before='saveNhanVien') @validator('vn.toancauxanh.vm.BaseValid', password=vm.noId() ? '' : vm.matKhau2)" />
+												value="@save(vm.matKhau2, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', password=vm.noId() ? '' : vm.matKhau2)" />
 											<label class="error" value="@load(vmsgs[self.previousSibling])" />
 										</div>
 									</div>
@@ -105,13 +105,13 @@
 						<div class="col-sm-6">
 							<n:span class="title-issue title-issue-detail">Email<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%" maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
-								value="@bind(vm.email) @save(vm.email, before='saveNhanVien') @validator(vm.validatorEmail)" />
+								value="@bind(vm.email) @save(vm.email, before='saveNguoiDung') @validator(vm.validatorEmail)" />
 							<label class="error" value="@load(vmsgs[self.previousSibling])" />
 						</div>
 						<div class="col-sm-6">
 							<n:span class="title-issue title-issue-detail">Số điện thoại</n:span>
 							<textbox class="hv-textbox" placeholder="Ví dụ: 0905112233" maxlength="11" width="100%" 
-								value="@load(vm.soDienThoai) @save(vm.soDienThoai, before='saveNhanVien') @validator(vm.validateSoDienThoai)" />
+								value="@load(vm.soDienThoai) @save(vm.soDienThoai, before='saveNguoiDung') @validator(vm.validateSoDienThoai)" />
 							<label class="error" value="@load(vmsgs[self.previousSibling])" />
 						</div>
 					</div>
@@ -143,12 +143,12 @@
 	
 	<div class="row box-footer box-thaotac">  		
 		<x:button style="margin-right: 10px;" class="btn btn-success margin-button width-button" 
-		 	zk:if="${(vm.noId() and entry.quyen.nguoidung_them) or (!vm.noId() and entry.quyen.nguoidung_sua) or (!vm.noId() and vm.id eq entry.nhanVien.id)}"
-			onClick="@command('saveNhanVien', list=notifyObject, attr='targetQueryNhanVien', isUpdateInfo=true, wdn=nguoiDungWin)">
+		 	zk:if="${(vm.noId() and entry.quyen.nguoidung_them) or (!vm.noId() and entry.quyen.nguoidung_sua) or (!vm.noId() and vm.id eq entry.nguoiDung.id)}"
+			onClick="@command('saveNguoiDung', list=notifyObject, attr='targetQueryNguoiDung', isUpdateInfo=true, wdn=nguoiDungWin)">
 			<n:i class="icon-save"></n:i>
 			Lưu
 		</x:button>
-		<x:button class="btn btn-info width-button bgcolor-button"  zk:onClick="@command('invokeGG', notify=notifyObject, detach=nguoiDungWin, attr='targetQueryNhanVien')">
+		<x:button class="btn btn-info width-button bgcolor-button"  zk:onClick="@command('invokeGG', notify=notifyObject, detach=nguoiDungWin, attr='targetQueryNguoiDung')">
 			<n:i class="icon-cancel3"></n:i>Đóng
 		</x:button>
 	</div>

@@ -1072,7 +1072,7 @@ input[type=text], textarea {
 }
 
 .top-header {
-	background: linear-gradient(#4099de, #197dcb);
+	background: linear-gradient(#040609, #040609);
 	padding: 12px 0 8px 0;
 	overflow: hidden
 }
@@ -1412,12 +1412,18 @@ input[type=text], textarea {
 }
 
 .main-container {
-	background-color: #EEF7FF;
+	background-color: #f5f7f4;
 	padding-bottom: 26px
 }
 
 .main-container .center {
 	display: block;
+}
+
+.main-container .center-body {
+	display: block;
+	width: 95%;
+	margin: auto;
 }
 
 .footer-container .center {

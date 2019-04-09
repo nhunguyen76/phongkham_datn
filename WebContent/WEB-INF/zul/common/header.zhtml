@@ -21,16 +21,16 @@
 					<li class="dropbtn1" style="display: inline">
 						
 						<z:image class="border-image"
-							content="@load(entry.nhanVien.imageContent)" />
+							content="@load(entry.nguoiDung.imageContent)" />
 						<span href="#" class="account-name">
 							<z:label
-								value=@load(vm.currentUser.hoVaTen) />
+								value=@load(vm.currentUser.tenDangNhap) />
 						</span>
 						<span class="caret"></span>
 					</li>
 					<div class="dropdown-content1">
 						<x:a class="ctent" href="#" zk:if="${!dakhoa}"
-							zk:onClick="@command('redirectPage', zul='/WEB-INF/zul/common/view.zul',vmArgs=vm,vm=entry.nhanVien)">
+							zk:onClick="@command('redirectPage', zul='/WEB-INF/zul/common/view.zul',vmArgs=vm,vm=entry.nguoiDung)">
 							Thông tin
 						</x:a>
 						<a class="ctent"
@@ -49,10 +49,10 @@
 			<div class="open-menu" style="text-align: center;">
 				<ul class="ds-menu">
 					<li
-						class="menu-top-list ${resource eq 'congtrinh'?'active-menu':''}"
+						class="menu-top-list ${resource eq 'hosobenhnhan'?'active-menu':''}"
 						zk:if="${entry.quyen.congtrinh_lietke and !dakhoa}">
 						<a class="link-menu"
-							href="${execution.contextPath}/congtrinh">
+							href="${execution.contextPath}/hosothongtin">
 							<span
 								class="icon-ds box-icon-menu box-icon-menu1">
 							</span>
@@ -110,12 +110,10 @@
 					</li>
 					
 					<li
-						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'linhvuccongtrinh' || resource eq 'linhvuchoatdong' || resource eq 'linhvuccapchungchihanhnghe'
-	     				|| resource eq 'thutucthanhphanhoso' || resource eq 'capdonvihanhchinh' || resource eq 'duan' || resource eq 'donvihanhchinh' || resource eq 'donvibanhanh' ||resource eq 'phongban'
+						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'hosobenhnhan' 
 	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ||  resource eq 'loaicongtrinh'
 	     				||  resource eq 'nhomduan' ||  resource eq 'hangmuccongtrinh' ||  resource eq 'quocgia' ?'active-menu':''}"
-						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.linhvuccongtrinh_lietke
-						|| entry.quyen.linhvuccapchungchihanhnghe_lietke || entry.quyen.linhvuchoatdong_lietke
+						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.hosobenhnhan_lietke
 	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.duan_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
 	     				|| entry.quyen.vaitro_lietke || entry.quyen.phongban_lietke || entry.quyen.quantrihethong_lietke
 	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke || entry.quyen.loaicongtrinh_lietke 

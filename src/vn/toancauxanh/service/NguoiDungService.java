@@ -29,17 +29,17 @@ import vn.toancauxanh.model.QNguoiDung;
 import vn.toancauxanh.model.QVaiTro;
 import vn.toancauxanh.model.VaiTro;
 
-public final class NhanVienService extends BasicService<NguoiDung> {
+public final class NguoiDungService extends BasicService<NguoiDung> {
 
-	public NguoiDung getNhanVien(boolean saving) {
+	public NguoiDung getNguoiDung(boolean saving) {
 		if (Executions.getCurrent() == null) {
 			return null;
 		}
-		return getNhanVien(saving, (HttpServletRequest) Executions.getCurrent().getNativeRequest(),
+		return getNguoiDung(saving, (HttpServletRequest) Executions.getCurrent().getNativeRequest(),
 				(HttpServletResponse) Executions.getCurrent().getNativeResponse());
 	}
 
-	public JPAQuery<NguoiDung> getTargetQueryNhanVien() {
+	public JPAQuery<NguoiDung> getTargetQueryNguoiDung() {
 		String paramTrangThai = MapUtils.getString(argDeco(), Labels.getLabel("param.trangthai"), "").trim();
 		String tuKhoa = MapUtils.getString(argDeco(), Labels.getLabel("param.tukhoa"), "").trim();
 		Long paramVaiTro = (Long) argDeco().get(Labels.getLabel("param.vaitro"));
@@ -48,8 +48,7 @@ public final class NhanVienService extends BasicService<NguoiDung> {
 		JPAQuery<NguoiDung> q = find(NguoiDung.class).where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA));
 
 		if (tuKhoa != null && !tuKhoa.isEmpty()) {
-			q.where(QNguoiDung.nguoiDung.hoVaTen.containsIgnoreCase(tuKhoa)
-					.or(QNguoiDung.nguoiDung.tenDangNhap.containsIgnoreCase(tuKhoa)));
+			q.where(QNguoiDung.nguoiDung.tenDangNhap.containsIgnoreCase(tuKhoa));
 		}
 
 		if (paramVaiTro != null) {
@@ -66,14 +65,14 @@ public final class NhanVienService extends BasicService<NguoiDung> {
 
 	@Command
 	public void login(@BindingParam("email") final String email, @BindingParam("password") final String password) {
-		NguoiDung nhanVien = new JPAQuery<NguoiDung>(em()).from(QNguoiDung.nguoiDung)
+		NguoiDung nguoiDung = new JPAQuery<NguoiDung>(em()).from(QNguoiDung.nguoiDung)
 				.where(QNguoiDung.nguoiDung.daXoa.isFalse()).where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA))
 				.where(QNguoiDung.nguoiDung.tenDangNhap.eq(email))
 				.fetchFirst();
 		BasicPasswordEncryptor encryptor = new BasicPasswordEncryptor();
-		if (nhanVien != null
-				&& encryptor.checkPassword(password.trim() + nhanVien.getSalkey(), nhanVien.getMatKhau())) {
-			String cookieToken = nhanVien
+		if (nguoiDung != null
+				&& encryptor.checkPassword(password.trim() + nguoiDung.getSalkey(), nguoiDung.getMatKhau())) {
+			String cookieToken = nguoiDung
 					.getCookieToken(System.currentTimeMillis() + TimeUnit.MILLISECONDS.convert(6, TimeUnit.HOURS));
 			Session zkSession = Sessions.getCurrent();
 			zkSession.setAttribute("email", cookieToken);
@@ -91,8 +90,8 @@ public final class NhanVienService extends BasicService<NguoiDung> {
 
 	@Command
 	public void logout() {
-		NguoiDung NhanVienLogin = getNhanVien(true);
-		if (NhanVienLogin != null && !NhanVienLogin.noId()) {
+		NguoiDung NguoiDungLogin = getNguoiDung(true);
+		if (NguoiDungLogin != null && !NguoiDungLogin.noId()) {
 			Session zkSession = Sessions.getCurrent();
 			zkSession.removeAttribute("email");
 			HttpServletResponse res = (HttpServletResponse) Executions.getCurrent().getNativeResponse();
@@ -106,14 +105,14 @@ public final class NhanVienService extends BasicService<NguoiDung> {
 
 	public List<NguoiDung> getTacGias() {
 		// TODO add them dk nhan vien là tác giả
-		return getTargetQueryNhanVien().fetch();
+		return getTargetQueryNguoiDung().fetch();
 	}
 
 	public List<NguoiDung> getTacGiasAndNull() {
 		// TODO add them dk nhan vien là tác giả
 		List<NguoiDung> list = new ArrayList<>();
 		list.add(null);
-		list.addAll(getTargetQueryNhanVien().fetch());
+		list.addAll(getTargetQueryNguoiDung().fetch());
 		return list;
 	}
 	
@@ -148,7 +147,6 @@ public final class NhanVienService extends BasicService<NguoiDung> {
 		} else {
 			tacGiasTimKiem.clear();
 			tacGiasTimKiem.addAll(find(NguoiDung.class).where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA))
-					.where(QNguoiDung.nguoiDung.hoVaTen.like("%" + name + "%")).orderBy(QNguoiDung.nguoiDung.hoVaTen.asc())
 					.fetch());
 		}
 		BindUtils.postNotifyChange(null, null, this, "tacGiasTimKiem");
@@ -156,8 +154,8 @@ public final class NhanVienService extends BasicService<NguoiDung> {
 	
 	@Command
 	public void logoutNotRedirect(HttpServletRequest req, HttpServletResponse res) {
-		NguoiDung nhanVienLogin = getNhanVien(false, false, req, res);
-		if (nhanVienLogin != null && !nhanVienLogin.noId()) {
+		NguoiDung nguoiDungLogin = getNguoiDung(false, false, req, res);
+		if (nguoiDungLogin != null && !nguoiDungLogin.noId()) {
 			HttpSession zkSession=req.getSession();
  			zkSession.removeAttribute("email");
  			Cookie cookie = new Cookie("email", null);

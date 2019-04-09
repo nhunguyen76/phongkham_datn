@@ -1,2 +1,2 @@
 <?component name="chung" inline="true" macroURI="chung.zul"?>
-<chung model="${entry.nhanViens.type().newInstance()}" save="Tạo mới người dùng"  vmArgs="${arg.vmArgs}" />
+<chung model="${entry.nguoiDungs.type().newInstance()}" save="Tạo mới người dùng"  vmArgs="${arg.vmArgs}" />

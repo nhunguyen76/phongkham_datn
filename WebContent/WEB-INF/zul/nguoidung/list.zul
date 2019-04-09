@@ -1,5 +1,5 @@
 <z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml"
-	viewModel="@id('vm') @init('vn.toancauxanh.service.NhanVienService')">
+	viewModel="@id('vm') @init('vn.toancauxanh.service.NguoiDungService')">
 	<zscript><![CDATA[
 		self.page.title= "Quản lý người dùng";
 	]]></zscript>
@@ -16,9 +16,9 @@
 								<n:form class="form-src padding-form-bt">
 									<div class="row-box-src">
 										<textbox class="keysearch" value="@bind(vm.arg.tukhoa)" placeholder="Nhập tên người dùng"
-													onOK="@command('cmd', notify=vm, attr='targetQueryNhanVien')" />
+													onOK="@command('cmd', notify=vm, attr='targetQueryNguoiDung')" />
 										<x:button class="btn-form-search btn-page width-100-2" type="button" 
-											onClick="@command('cmd', notify=vm, attr='targetQueryNhanVien')" >
+											onClick="@command('cmd', notify=vm, attr='targetQueryNguoiDung')" >
 											<n:i class="icon-search"></n:i> Tìm kiếm
 										</x:button>
 									</div>
@@ -39,7 +39,7 @@
 				          		</div>
 				          		 <div class="wrappre-tb">
 		                			<div class="wp-scrool">
-		                				<grid model="@load(vm.page(vm.targetQueryNhanVien).fetch())" width="100%" id="grid"
+		                				<grid model="@load(vm.page(vm.targetQueryNguoiDung).fetch())" width="100%" id="grid"
 											emptyMessage="Danh sách không có người dùng nào" class="table-report">
 											<columns>
 												<column label="STT" hflex="min" style="text-align: center;"/>
@@ -73,16 +73,16 @@
 															<n:i class="icon-custom-unclock"></n:i>
 														</x:a>
 		                          						<x:a href="#" class="col-del" zk:if="${entry.quyen.nguoidung_xoa and each.id ne 1}" title ="Xóa"
-		                          							onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='targetQueryNhanVien')">
+		                          							onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='targetQueryNguoiDung')">
 		                          							<n:i class="icon-cancel"></n:i>
 		                          						</x:a>
 													</div>
 												</row>
 											</template>
 										</grid>
-										<paging pageSize="@load(vm.arg.pagesize)" totalSize="@load(vm.targetQueryNhanVien.fetchCount())"
-											visible="@load(vm.targetQueryNhanVien.fetchCount() > vm.arg.pagesize ? true : false)"
-											activePage="@bind(vm.arg.page)" onPaging="@command('cmd', notify=vm, atr='targetQueryNhanVien')" />
+										<paging pageSize="@load(vm.arg.pagesize)" totalSize="@load(vm.targetQueryNguoiDung.fetchCount())"
+											visible="@load(vm.targetQueryNguoiDung.fetchCount() > vm.arg.pagesize ? true : false)"
+											activePage="@bind(vm.arg.page)" onPaging="@command('cmd', notify=vm, atr='targetQueryNguoiDung')" />
 										
 		                			</div>
 		                		</div>

@@ -46,7 +46,7 @@ public final class Quyen extends HashMap<String, Boolean> {
 			return false;
 		}
 		//LOG.info(key_ + "");
-		if (id != 0 && nguoiTao != null && nguoiTao.equals(new BasicService<>().core().getNhanVien())) {
+		if (id != 0 && nguoiTao != null && nguoiTao.equals(new BasicService<>().core().getNguoiDung())) {
 			return true;
 		}
 		String key = key_.toString();

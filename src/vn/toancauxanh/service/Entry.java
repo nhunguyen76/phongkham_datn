@@ -30,11 +30,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Object;
 
-import vn.toancauxanh.cms.service.DanhGiaService;
 import vn.toancauxanh.cms.service.ImageService;
 import vn.toancauxanh.cms.service.LanguageService;
-import vn.toancauxanh.cms.service.SachService;
 import vn.toancauxanh.cms.service.SettingService;
+import vn.toancauxanh.gg.model.HoSoThongTin;
 import vn.toancauxanh.model.GopYPhanMem;
 import vn.toancauxanh.model.VaiTro;
 
@@ -98,34 +97,22 @@ public class Entry extends BaseObject<Object> {
 	public String NGUOIDUNGSUA = "";
 	
 	//////////////////////////////
-	@Value("${url.sach}")
-	public String SACH = "";
-	@Value("${url.sach}" + ":" + "${action.xem}")
-	public String SACHXEM = "";
-	@Value("${url.sach}" + ":" + "${action.them}")
-	public String SACHTHEM = "";
-	@Value("${url.sach}" + ":" + "${action.list}")
-	public String SACHLIST = "";
-	@Value("${url.sach}" + ":" + "${action.xoa}")
-	public String SACHXOA = "";
-	@Value("${url.sach}" + ":" + "${action.sua}")
-	public String SACHSUA = "";
+	@Value("${url.hosobenhnhan}")
+	public String HOSOBENHNHAN = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.xem}")
+	public String HOSOBENHNHANXEM = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.them}")
+	public String HOSOBENHNHANTHEM = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.list}")
+	public String HOSOBENHNHANLIST = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.xoa}")
+	public String HOSOBENHNHANXOA = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.sua}")
+	public String HOSOBENHNHANSUA = "";
 	
-	@Value("${url.danhgia}")
-	public String DANHGIA = "";
-	@Value("${url.danhgia}" + ":" + "${action.xem}")
-	public String DANHGIAXEM = "";
-	@Value("${url.danhgia}" + ":" + "${action.them}")
-	public String DANHGIATHEM = "";
-	@Value("${url.danhgia}" + ":" + "${action.list}")
-	public String DANHGIALIST = "";
-	@Value("${url.danhgia}" + ":" + "${action.xoa}")
-	public String DANHGIAXOA = "";
-	@Value("${url.danhgia}" + ":" + "${action.sua}")
-	public String DANHGIASUA = "";
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, SACH, DANHGIA };
+		return new String[] { NGUOIDUNG, VAITRO, HOSOBENHNHAN };
 	}
 
 	public String[] getACTIONS() {
@@ -237,7 +224,7 @@ public class Entry extends BaseObject<Object> {
 		if (auth == null) {
 			response.sendRedirect(request.getContextPath() + "/cas/login");
 		} else {
-			new NhanVienService().logoutNotRedirect(request, response);
+			new NguoiDungService().logoutNotRedirect(request, response);
 		}
 	}
 	
@@ -248,11 +235,11 @@ public class Entry extends BaseObject<Object> {
 	}
 
 	public final Quyen getQuyen() {
-		return getNhanVien().getTatCaQuyen();
+		return getNguoiDung().getTatCaQuyen();
 	}
 
-	public final NhanVienService getNhanVienService() {
-		return new NhanVienService();
+	public final NguoiDungService getNguoiDungService() {
+		return new NguoiDungService();
 	}
 
 	public final VaiTroService getVaiTros() {
@@ -266,6 +253,10 @@ public class Entry extends BaseObject<Object> {
 	public GopYPhanMem getGopYPhanMem() {
 		return new GopYPhanMem();
 	}
+	
+	public HoSoThongTin getHoSoThongTins() {
+		return new HoSoThongTin();
+	}
 
 	public final ImageService getImages() {
 		return new ImageService();
@@ -275,20 +266,13 @@ public class Entry extends BaseObject<Object> {
 		return new LanguageService();
 	}
 	
-	/////////////////////////
-	public final SachService getSachs() {
-		return new SachService();
-	}
 	
-	public final DanhGiaService getDanhGias() {
-		return new DanhGiaService();
-	}
 	public boolean checkVaiTro(String vaiTro) {
 		if (vaiTro == null || vaiTro.isEmpty()) {
 			return false;
 		}
 		boolean rs = false;
-		for (VaiTro vt : getNhanVien().getVaiTros()) {
+		for (VaiTro vt : getNguoiDung().getVaiTros()) {
 			if (vaiTro.equals(vt.getAlias())) {
 				rs = true;
 				break;

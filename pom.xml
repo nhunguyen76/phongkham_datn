@@ -373,5 +373,5 @@
 		</plugins>
 	</build>
 	<groupId>tcx</groupId>
-	<artifactId>myapp</artifactId>
+	<artifactId>phongkham-datn</artifactId>
 </project>

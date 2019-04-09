@@ -32,7 +32,7 @@
 		}
 	</style>
 	<div class="" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('vn.toancauxanh.service.NhanVienService')">
+		viewModel="@id('vm') @init('vn.toancauxanh.service.NguoiDungService')">
 		<include src="/WEB-INF/zul/notification.zul"></include>
 		<zscript>
 			String usernameX = "";

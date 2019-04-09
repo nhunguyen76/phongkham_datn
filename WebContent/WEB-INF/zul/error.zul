@@ -24,7 +24,7 @@
 				String emailDN = "";
 				BasicService app = new BasicService();
 				try {
-					emailDN = app.nhanVien.tenDangNhap;
+					emailDN = app.nguoiDung.tenDangNhap;
 					System.out.println("emailDN: " + emailDN);
 				} catch (Exception ex) {
 					System.out.println("emailDNx: " + emailDN);

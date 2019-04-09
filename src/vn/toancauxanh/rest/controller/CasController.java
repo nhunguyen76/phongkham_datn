@@ -33,12 +33,12 @@ public class CasController extends BasicService<NguoiDung>{
 			Pac4jAuthenticationToken pac4j = (Pac4jAuthenticationToken) auth;
 			String username = pac4j.getName();
 			
-			NguoiDung nhanVien = new JPAQuery<NguoiDung>(em()).from(QNguoiDung.nguoiDung)
+			NguoiDung nguoiDung = new JPAQuery<NguoiDung>(em()).from(QNguoiDung.nguoiDung)
 					.where(QNguoiDung.nguoiDung.daXoa.isFalse()).where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA))
 					.where(QNguoiDung.nguoiDung.tenDangNhap.eq(username.trim())).fetchFirst();
 			
-			if (nhanVien != null) {
-				String cookieToken = nhanVien
+			if (nguoiDung != null) {
+				String cookieToken = nguoiDung
 						.getCookieToken(System.currentTimeMillis() + TimeUnit.MILLISECONDS.convert(6, TimeUnit.HOURS));
 				Cookie cookie = new Cookie("email", cookieToken);
 				cookie.setPath("/");

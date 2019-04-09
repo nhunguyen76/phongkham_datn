@@ -74,7 +74,7 @@ public class VaiTro extends Model<VaiTro> {
 	}
 
 	@Transient
-	public List<NguoiDung> getListNhanVien() {
+	public List<NguoiDung> getListNguoiDung() {
 		JPAQuery<NguoiDung> q = find(NguoiDung.class)
 				.where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA))
 				.where(QNguoiDung.nguoiDung.vaiTros.contains(this));
@@ -187,17 +187,11 @@ public class VaiTro extends Model<VaiTro> {
 		quyens1.add(core().VAITROXOA);
 		quyens1.add(core().VAITROXEM);
 		
-		quyens1.add(core().SACHTHEM);
-		quyens1.add(core().SACHLIST);
-		quyens1.add(core().SACHSUA);
-		quyens1.add(core().SACHXOA);
-		quyens1.add(core().SACHXEM);
-		
-		quyens1.add(core().DANHGIATHEM);
-		quyens1.add(core().DANHGIALIST);
-		quyens1.add(core().DANHGIASUA);
-		quyens1.add(core().DANHGIAXOA);
-		quyens1.add(core().DANHGIAXEM);
+		quyens1.add(core().HOSOBENHNHANTHEM);
+		quyens1.add(core().HOSOBENHNHANLIST);
+		quyens1.add(core().HOSOBENHNHANSUA);
+		quyens1.add(core().HOSOBENHNHANXOA);
+		quyens1.add(core().HOSOBENHNHANXEM);
 		
 		return quyens1;
 	}
@@ -220,17 +214,11 @@ public class VaiTro extends Model<VaiTro> {
 				quyens1.add(core().NGUOIDUNGLIST);
 				quyens1.add(core().NGUOIDUNGXOA);
 				
-				quyens1.add(core().SACHTHEM);
-				quyens1.add(core().SACHLIST);
-				quyens1.add(core().SACHSUA);
-				quyens1.add(core().SACHXOA);
-				quyens1.add(core().SACHXEM);
-				
-				quyens1.add(core().DANHGIATHEM);
-				quyens1.add(core().DANHGIALIST);
-				quyens1.add(core().DANHGIASUA);
-				quyens1.add(core().DANHGIAXOA);
-				quyens1.add(core().DANHGIAXEM);
+				quyens1.add(core().HOSOBENHNHANTHEM);
+				quyens1.add(core().HOSOBENHNHANLIST);
+				quyens1.add(core().HOSOBENHNHANSUA);
+				quyens1.add(core().HOSOBENHNHANXOA);
+				quyens1.add(core().HOSOBENHNHANXEM);
 			}
 		}
 		return quyens1;
@@ -404,35 +392,35 @@ public class VaiTro extends Model<VaiTro> {
 				});
 	}
 
-	private NguoiDung selectedNhanVien;
+	private NguoiDung selectedNguoiDung;
 
 	@Transient
-	public NguoiDung getSelectedNhanVien() {
-		return selectedNhanVien;
+	public NguoiDung getSelectedNguoiDung() {
+		return selectedNguoiDung;
 	}
 
-	public void setSelectedNhanVien(NguoiDung selectNhanVien) {
-		this.selectedNhanVien = selectNhanVien;
+	public void setSelectedNguoiDung(NguoiDung selectNguoiDung) {
+		this.selectedNguoiDung = selectNguoiDung;
 	}
 
 	@Command
-	public void addNhanVien() {
-		if (selectedNhanVien != null) {
-			if (selectedNhanVien.getVaiTros().contains(this)) {
-				showNotification("NhÃ¢n viÃªn " + selectedNhanVien.getHoVaTen() + " Ä‘Ã£ cÃ³ vai trÃ² nÃ y!", "", "warning");
+	public void addNguoiDung() {
+		if (selectedNguoiDung != null) {
+			if (selectedNguoiDung.getVaiTros().contains(this)) {
+				showNotification("NhÃ¢n viÃªn " +  " Ä‘Ã£ cÃ³ vai trÃ² nÃ y!", "", "warning");
 			} else {
 				Messagebox.show(
 						"Báº¡n cÃ³ cháº¯c cháº¯n muá»‘n thÃªm vai trÃ² " + this.getTenVaiTro() + " cho nhÃ¢n viÃªn "
-								+ selectedNhanVien.getHoVaTen(),
+								,
 						"XÃ¡c nháº­n", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new EventListener<Event>() {
 							@Override
 							public void onEvent(final Event event) {
 								if (Messagebox.ON_OK.equals(event.getName())) {
-									selectedNhanVien.getVaiTros().add(VaiTro.this);
-									selectedNhanVien.save();
-									setSelectedNhanVien(null);
-									BindUtils.postNotifyChange(null, null, VaiTro.this, "listNhanVien");
-									BindUtils.postNotifyChange(null, null, VaiTro.this, "selectedNhanVien");
+									selectedNguoiDung.getVaiTros().add(VaiTro.this);
+									selectedNguoiDung.save();
+									setSelectedNguoiDung(null);
+									BindUtils.postNotifyChange(null, null, VaiTro.this, "listNguoiDung");
+									BindUtils.postNotifyChange(null, null, VaiTro.this, "selectedNguoiDung");
 								}
 							}
 						});

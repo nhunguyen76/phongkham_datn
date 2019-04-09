@@ -90,13 +90,13 @@ public class Model<T extends Model<T>> extends BaseObject<T> {
 
 	@Transient
 	public boolean isCoQuyenChinhSua() {
-		return core().getNhanVien().equals(nguoiTao);
+		return core().getNguoiDung().equals(nguoiTao);
 	}
 
 	@Override
 	public void doSave() {
 		setNgaySua(new Date());
-		setNguoiSua(core().fetchNhanVien(true));
+		setNguoiSua(core().fetchNguoiDung(true));
 		if (noId()) {
 			setNgayTao(getNgaySua());
 			setNguoiTao(getNguoiSua());

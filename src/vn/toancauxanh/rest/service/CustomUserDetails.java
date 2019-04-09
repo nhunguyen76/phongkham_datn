@@ -11,21 +11,21 @@ import java.util.List;
 import vn.toancauxanh.model.NguoiDung;
 
 public class CustomUserDetails extends NguoiDung implements UserDetails {
-	
-	public CustomUserDetails(final NguoiDung nhanVien) {
-		super(nhanVien);
+
+	public CustomUserDetails(final NguoiDung nguoiDung) {
+		super(nguoiDung);
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> rs = new ArrayList<>();
-        rs.add(new SimpleGrantedAuthority(getTenDangNhap()));
-        return rs;
+		rs.add(new SimpleGrantedAuthority(getTenDangNhap()));
+		return rs;
 	}
 
 	@Override
 	public String getPassword() {
-		return super.getMatKhauApi();
+		return super.getMatKhau();
 	}
 
 	@Override
@@ -52,6 +52,5 @@ public class CustomUserDetails extends NguoiDung implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	
-	
+
 }

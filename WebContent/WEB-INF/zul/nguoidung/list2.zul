@@ -1,5 +1,5 @@
 <z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml"
-	viewModel="@id('vm') @init('vn.toancauxanh.service.NhanVienService')">
+	viewModel="@id('vm') @init('vn.toancauxanh.service.NguoiDungService')">
 	<n:section class="main-container">
       <div class="center">
         <div class="bar-top-content">
@@ -62,7 +62,7 @@
 								<n:div class="col-md-2">
 		    						<x:label class="control-label">&#160;</x:label>
 		    						<n:div class="form-group">
-		    							<x:button class="btn btn-warning" type="button" onClick="@command('cmd', notify=vm, attr='targetQueryNhanVien')" >
+		    							<x:button class="btn btn-warning" type="button" onClick="@command('cmd', notify=vm, attr='targetQueryNguoiDung')" >
 											<n:i class="fa fa-search"></n:i> Tìm kiếm
 										</x:button>
 		    						</n:div>
@@ -87,7 +87,7 @@
 	    					<n:div class="dataTables_wrapper form-inline dt-bootstrap">
 	    						<n:div class="row">
 	    							<n:div class="col-md-12">
-	    								<grid model="@load(vm.page(vm.targetQueryNhanVien).fetch())" width="100%" id="grid"
+	    								<grid model="@load(vm.page(vm.targetQueryNguoiDung).fetch())" width="100%" id="grid"
 											emptyMessage="Danh sách không có người dùng nào" class="hidden-xs">
 											<columns>
 												<column label="STT" hflex="min" sclass="text-align-center"/>
@@ -118,7 +118,7 @@
 															<n:i class="fa fa-eye"></n:i>
 														</x:a>
 														<x:a class="btn btn-danger btn-xs" zk:if="${entry.quyen.nguoidung_xoa and item.id ne 1}"
-															onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='targetQueryNhanVien')">
+															onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='targetQueryNguoiDung')">
 															<n:i class="fa fa-trash-o"></n:i>
 														</x:a>
 														<x:a class="btn btn-success btn-xs lock" zk:if="${entry.quyen.nguoidung_sua and item.checkApDung and item.id ne 1}"
@@ -137,9 +137,9 @@
 	    						</n:div>
 	    					</n:div>
 	    					<!-- paging -->
-	    					<paging pageSize="@load(vm.arg.pagesize)" totalSize="@load(vm.targetQueryNhanVien.fetchCount())"
-								visible="@load(vm.targetQueryNhanVien.fetchCount() > vm.arg.pagesize ? true : false)"
-								activePage="@bind(vm.arg.page)" onPaging="@command('cmd', notify=vm, atr='targetQueryNhanVien')" />
+	    					<paging pageSize="@load(vm.arg.pagesize)" totalSize="@load(vm.targetQueryNguoiDung.fetchCount())"
+								visible="@load(vm.targetQueryNguoiDung.fetchCount() > vm.arg.pagesize ? true : false)"
+								activePage="@bind(vm.arg.page)" onPaging="@command('cmd', notify=vm, atr='targetQueryNguoiDung')" />
 	    					<!-- paging -->
 	    				</n:div>
 	   				</n:div>

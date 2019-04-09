@@ -9,25 +9,25 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import vn.toancauxanh.model.NguoiDung;
-import vn.toancauxanh.rest.repository.NhanVienModelRepository;
+import vn.toancauxanh.rest.repository.NguoiDungModelRepository;
 
 @Service
-public class NhanVienModelService implements UserDetailsService{
+public class NguoiDungModelService implements UserDetailsService{
 	
-	private NhanVienModelRepository nhanVienModelRepository;
+	private NguoiDungModelRepository nguoiDungModelRepository;
 	
 	@Autowired
-	public NhanVienModelService(NhanVienModelRepository nhanVienModelRepository) {
-		this.nhanVienModelRepository = nhanVienModelRepository;
+	public NguoiDungModelService(NguoiDungModelRepository nguoiDungModelRepository) {
+		this.nguoiDungModelRepository = nguoiDungModelRepository;
 	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<NguoiDung> nhanVien = nhanVienModelRepository.findByTenDangNhap(username);
-		if (nhanVien == null || !nhanVien.get().isChoPhepDungApi()) {
+		Optional<NguoiDung> nguoiDung = nguoiDungModelRepository.findByTenDangNhap(username);
+		if (nguoiDung == null ) {
 			throw new UsernameNotFoundException(username + " không được phép");
 		}
-		return nhanVien.map(CustomUserDetails::new).get();
+		return nguoiDung.map(CustomUserDetails::new).get();
 	}
 
 }

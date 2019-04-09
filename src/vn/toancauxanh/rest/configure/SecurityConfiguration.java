@@ -1,5 +1,5 @@
 package vn.toancauxanh.rest.configure;
-import vn.toancauxanh.rest.service.NhanVienModelService;
+import vn.toancauxanh.rest.service.NguoiDungModelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private NhanVienModelService nhanVienModelService;
+    private NguoiDungModelService nguoiDungModelService;
     
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(nhanVienModelService)
+        auth.userDetailsService(nguoiDungModelService)
                 .passwordEncoder(passwordEncoder());
     }
     @Override

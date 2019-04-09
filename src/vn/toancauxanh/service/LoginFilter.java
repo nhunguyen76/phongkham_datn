@@ -21,7 +21,7 @@ public final class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 		LOG.info("filter");
-		new BaseObject<>().core().getNhanVien(false, (HttpServletRequest) request, (HttpServletResponse) response);
+		new BaseObject<>().core().getNguoiDung(false, (HttpServletRequest) request, (HttpServletResponse) response);
 		filterChain.doFilter(request, response);
 	}
 

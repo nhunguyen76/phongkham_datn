@@ -73,11 +73,11 @@ public class BasicService<T> extends BaseObject<T> {
 		return fixDenNgay;
 	}
 	
-	public NguoiDung getNhanVien(boolean isSave, boolean toLoginIfNull, HttpServletRequest req, HttpServletResponse res) {
-		NguoiDung nhanVien = null;
+	public NguoiDung getNguoiDung(boolean isSave, boolean toLoginIfNull, HttpServletRequest req, HttpServletResponse res) {
+		NguoiDung nguoiDung = null;
 		String key = getClass() + "." + NguoiDung.class;
-		nhanVien = (NguoiDung) req.getAttribute(key);
-		if (nhanVien == null || nhanVien.noId()) {
+		nguoiDung = (NguoiDung) req.getAttribute(key);
+		if (nguoiDung == null || nguoiDung.noId()) {
 			Object token = null;
 			Cookie[] cookies = req.getCookies();
 			if (cookies != null) {
@@ -94,19 +94,19 @@ public class BasicService<T> extends BaseObject<T> {
 			}
 			if (token != null) {
 				String[] parts = new String(Base64.decodeBase64(token.toString())).split(":");
-				NguoiDung nhanVienLogin = em().find(NguoiDung.class, NumberUtils.toLong(parts[0], 0));
-				if (parts.length == 3 && nhanVienLogin != null) {
+				NguoiDung nguoiDungLogin = em().find(NguoiDung.class, NumberUtils.toLong(parts[0], 0));
+				if (parts.length == 3 && nguoiDungLogin != null) {
 					long expire = NumberUtils.toLong(parts[1], 0);
-					if (expire > System.currentTimeMillis() && token.equals(nhanVienLogin.getCookieToken(expire))) {
-						nhanVien = nhanVienLogin;
+					if (expire > System.currentTimeMillis() && token.equals(nguoiDungLogin.getCookieToken(expire))) {
+						nguoiDung = nguoiDungLogin;
 					}
 				}
 			}
-			if (!isSave && (nhanVien == null)) {
-				if (nhanVien == null) {
-					bootstrapNhanVien();
+			if (!isSave && (nguoiDung == null)) {
+				if (nguoiDung == null) {
+					bootstrapNguoiDung();
 				}
-				nhanVien = new NguoiDung();
+				nguoiDung = new NguoiDung();
 				if (token != null) {
 					req.getSession().removeAttribute("email");
 				}
@@ -114,9 +114,9 @@ public class BasicService<T> extends BaseObject<T> {
 					redirectLogin(req, res);
 				}
 			}
-			req.setAttribute(key, nhanVien);
+			req.setAttribute(key, nguoiDung);
 		}
-		return isSave && nhanVien != null && nhanVien.noId() ? null : nhanVien;
+		return isSave && nguoiDung != null && nguoiDung.noId() ? null : nguoiDung;
 	}
 
 }

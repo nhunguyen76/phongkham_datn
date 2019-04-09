@@ -311,8 +311,8 @@
                      </div>
                   </div>
                   
-                  <div viewModel="@id('vm') @init('vn.toancauxanh.service.NhanVienService')">
-                  	<div  class="margin2x"  id="init" children="@init(vm.targetQueryNhanVien.fetch())">
+                  <div viewModel="@id('vm') @init('vn.toancauxanh.service.NguoiDungService')">
+                  	<div  class="margin2x"  id="init" children="@init(vm.targetQueryNguoiDung.fetch())">
                   		<template name="children" var="node">
                   			<div class="s-12 m-12 l-4 xl-3 xxl-3">
 		                       <a href="/"><img class="full-img" src="../assetsfe/fe/img/gallery-1.svg"></a>

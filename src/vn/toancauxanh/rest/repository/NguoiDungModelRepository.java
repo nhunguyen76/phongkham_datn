@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import vn.toancauxanh.model.NguoiDung;
 
-public interface NhanVienModelRepository extends JpaRepository<NguoiDung, Long>,QueryDslPredicateExecutor<NguoiDung> {
+public interface NguoiDungModelRepository extends JpaRepository<NguoiDung, Long>,QueryDslPredicateExecutor<NguoiDung> {
 	
 	@Query("select nd from NguoiDung nd where nd.daXoa = false and nd.tenDangNhap = ?1")
 	Optional<NguoiDung> findByTenDangNhap(String tenDangNhap);

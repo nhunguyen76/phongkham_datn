@@ -9,7 +9,7 @@ public class HeaderService extends BasicService<NguoiDung> {
 	
 	@Init
 	public void bootstrap() {
-		user = getNhanVien();
+		user = getNguoiDung();
 	}
 	
 	public NguoiDung getUser() {
@@ -17,7 +17,7 @@ public class HeaderService extends BasicService<NguoiDung> {
 	}
 	
 	public NguoiDung getCurrentUser() {
-		currentUser = getNhanVien();
+		currentUser = getNguoiDung();
 		user = currentUser;
 		BindUtils.postNotifyChange(null, null, currentUser, "user");
 		return currentUser;
