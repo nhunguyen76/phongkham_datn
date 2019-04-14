@@ -1413,7 +1413,9 @@ input[type=text], textarea {
 
 .main-container {
 	background-color: #f5f7f4;
-	padding-bottom: 26px
+	padding-bottom: 26px;
+	height:auto;
+	overflow:auto;
 }
 
 .main-container .center {
@@ -1675,7 +1677,9 @@ input[type=text], textarea {
 }
 
 .box-list-report {
-	padding: 12px 24px 20px
+	padding: 12px 24px 20px;
+	height:auto;
+	overflow:auto;
 }
 
 .table-report thead {

@@ -6,32 +6,199 @@
 	]]></zscript>
 	<n:section class="main-container">
 		<div class="center-body">
-			<div class="col-md-12 list-menu-sukien">
-				<div class="col-md-3">
-					<n:span class="title-issue title-issue-detail">
-						Họ và tên
-						<n:span class="required">*</n:span>
-					</n:span>
-					<textbox width="100%" class="hv-textbox"
-						maxlength="255" disabled="${checkView}"
-						value="@bind(vm.hoVaTen) @save(vm.hoVaTen, before='saveHoSoThongTin') 
-							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
-						placeholder="Nhập họ và tên" />
-					<label class="error"
-						value="@load(vmsgs[self.previousSibling])" />
+			<div class="bar-top-content">
+				<n:h2 class="title-page-main">HỒ SƠ BỆNH NHÂN</n:h2>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="box-content-full">
+						<n:section class="box-result">
+				        	<div class="box-list-report">
+				        		<div class="box-report-top flex-list">
+				        			<n:p
+				        				class="title-issue title-list-report margin-button-list">
+				        				Thông tin cá nhân
+				        			</n:p>
+				        		</div>
+				        		<div class="row list-menu-sukien">
+				        			<div class="col-md-3">
+				        				<n:span
+				        					class="title-issue title-issue-detail">
+				        					Họ và tên
+				        					<n:span class="required">*</n:span>
+				        				</n:span>
+				        				<textbox width="100%"
+				        					class="hv-textbox" maxlength="255"
+				        					value="@bind(vm.hoVaTen) @save(vm.hoVaTen, before='saveHoSoThongTin') 
+												@validator(vm.validatorStringUtitsNotBlank)"
+				        					placeholder="Nhập họ và tên" />
+				        				<label class="error"
+				        					value="@load(vmsgs[self.previousSibling])" />
+				        			</div>
+				        			<div class="col-md-3">
+				        				<n:span
+				        					class="title-issue title-issue-detail">
+				        					Ngày sinh<n:span class="required">*</n:span>
+				        				</n:span>
+				        				<datebox format="dd/MM/yyyy"
+				        					value="@bind(vm.ngaySinh) @save(vm.ngaySinh, before='saveHoSoThongTin') 
+												@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+				        					width="100%" placeholder="Nhập ngày sinh">
+				        				</datebox>
+				        				<label class="error"
+				        					value="@load(vmsgs[self.previousSibling])" />
+				        			</div>
+									<div class="col-md-3">
+				        				<n:span
+				        					class="title-issue title-issue-detail">
+				        					Số điện thoại
+				        				</n:span>
+				        				<textbox width="100%"
+				        					maxlength="255" class="hv-textbox"
+				        					value="@bind(vm.soDienThoai) @save(vm.soDienThoai, before='saveHoSoThongTin')"
+				        					placeholder="Nhập số điện thoại" />
+				        			</div>
+				        			<div class="col-md-3">
+				        				<n:span
+				        					class="title-issue title-issue-detail">
+				        					Địa chỉ
+				        				</n:span>
+				        				<textbox width="100%"
+				        					maxlength="255" class="hv-textbox"
+				        					value="@bind(vm.diaChi)" placeholder="Nhập địa chỉ" />
+				        				<label class="error"
+				        					value="@load(vmsgs[self.previousSibling])" />
+				        			</div>
+				        		</div>
+				        		<div class="row list-menu-sukien">
+				        			<div class="col-md-3">
+				        				<n:span
+				        					class="title-issue title-issue-detail">
+				        					Chứng minh nhân dân
+				        				</n:span>
+				        				<vbox>
+				        					<radiogroup id="radiogroup"
+				        						selectedItem="@save(vm.hasCmnd)">
+				        						<radio label="Đã có"
+				        							value="${true}"
+				        							selected="@load(vm.hasCmnd ne null and vm.hasCmnd)" />
+				        						<radio label="Chưa có"
+				        							value="${false}"
+				        							selected="@load(vm.hasCmnd ne null and not vm.hasCmnd)" />
+				        					</radiogroup>
+				        				</vbox>
+				        				<label class="error"
+				        					value="@load(vmsgs[self.previousSibling])" />
+				        			</div>
+				        		</div>
+				        		<div class="row list-menu-sukien" children="@load(vm.hasCmnd)">
+				        			<template name="children">
+					        			<div class="col-md-3" zk:if="${vm.hasCmnd eq 'true'}">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+	
+					        				</n:span>
+					        				<textbox width="100%"
+					        					maxlength="255" class="hv-textbox"
+					        					value="@bind(vm.cmnd) @save(vm.cmnd, before='saveHoSoThongTin') 
+													@validator(vm.validatorCMND)"
+					        					placeholder="Nhập CMND" />
+					        				<label class="error"
+					        					value="@load(vmsgs[self.previousSibling])" />
+					        			</div>
+					        			<div class="col-sm-3" zk:if="${vm.hasCmnd eq 'false'}">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Chứng minh nhân dân của
+					        					người giám hộ
+					        					<n:span class="required">
+					        						*
+					        					</n:span>
+					        				</n:span>
+					        				<textbox width="100%"
+					        					maxlength="255" class="hv-textbox"
+					        					value="@bind(vm.nguoiGiamHo.cmnd) @save(vm.nguoiGiamHo.cmnd, before='saveHoSoThongTin') 
+													@validator(vm.validatorCMND)"
+					        					placeholder="Nhập CMND của người giám hộ" />
+					        				<label class="error"
+					        					value="@load(vmsgs[self.previousSibling])" />
+					        			</div>
+					        			<div class="col-sm-3"
+					        				visible="@load(vm.hasCmnd eq 'false')">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Họ và tên người giám hộ
+					        				</n:span>
+					        				<textbox width="100%"
+					        					maxlength="255" class="hv-textbox"
+					        					value="@bind(vm.nguoiGiamHo.hoVaTen) @save(vm.nguoiGiamHo.hoVaTen, before='saveHoSoThongTin') 
+															@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+					        					placeholder="Nhập họ và tên" />
+					        				<label class="error"
+					        					value="@load(vmsgs[self.previousSibling])" />
+					        			</div>
+				        			</template>
+				        		</div>
+				        		<div class="row list-menu-sukien">
+				        			<div class="col-md-3">
+				        				<n:span
+				        					class="title-issue title-issue-detail">
+				        					Giới tính
+				        					<n:span class="required">
+				        						*
+				        					</n:span>
+				        				</n:span>
+				        				<combobox
+				        					model="@load(entry.hoSoThongTins.gioiTinhs)"
+				        					width="100%" readonly="true" class="hv-cbb"
+				        					placeholder="Chọn giới tính"
+				        					value="@load(vm.gioiTinh eq null ? '' : vm.gioiTinh.text)"
+				        					selectedItem="@bind(vm.gioiTinh) @save(vm.gioiTinh, before={'saveHoSoThongTin'})
+																@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
+				        					<template name="model">
+				        						<comboitem
+				        							label="@load(empty each ? 'Chọn giới tính' :  each.text)" />
+				        					</template>
+				        				</combobox>
+				        				<label class="error"
+				        					value="@load(vmsgs[self.previousSibling])" />
+				        			</div>
+				        		</div>
+					        	<div class="row-vc-process list-menu-sukien">
+									<div class="box-thaotac box-thaotac-new">
+										<div class="range-menu position-button flex-right">
+											<div class="position-flex">
+												<x:span>
+													<x:a class="btn btn-success margin-button width-button" zk:if="${entry.quyen.hosothongtin_them}"
+														zk:onClick="@command('saveHoSoThongTin')">
+														<n:i class="icon-save"></n:i>
+														Lưu
+													</x:a>
+												</x:span>
+											</div>
+										</div>
+									</div>
+								</div>
+				        	</div>
+						</n:section>
+					</div>
 				</div>
-				<div class="col-md-3">
-					<n:span class="title-issue title-issue-detail">
-						Ngày sinh
-						<n:span class="required">*</n:span>
-					</n:span>
-					<datebox format="dd/MM/yyyy"
-						value="@bind(vm.ngaySinh) @save(vm.ngaySinh, before='saveHoSoThongTin') 
-							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
-						width="100%" placeholder="Nhập ngày sinh">
-					</datebox>
-					<label class="error"
-						value="@load(vmsgs[self.previousSibling])" />
+			</div>	
+			
+			<div class="row" style="padding-top:30px;">
+				<div class="col-sm-12">
+					<div class="box-content-full">
+						<n:section class="box-result">
+							<div class="box-list-report">
+								<div class="box-report-top flex-list">
+									<n:p
+										class="title-issue title-list-report margin-button-list">
+										Bệnh án
+									</n:p>
+								</div>
+							</div>
+						</n:section>
+					</div>
 				</div>
 			</div>
 		</div>

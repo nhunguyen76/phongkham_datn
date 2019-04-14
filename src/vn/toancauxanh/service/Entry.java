@@ -254,8 +254,8 @@ public class Entry extends BaseObject<Object> {
 		return new GopYPhanMem();
 	}
 	
-	public HoSoThongTin getHoSoThongTins() {
-		return new HoSoThongTin();
+	public HoSoThongTinService getHoSoThongTins() {
+		return new HoSoThongTinService();
 	}
 
 	public final ImageService getImages() {
