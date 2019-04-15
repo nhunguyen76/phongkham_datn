@@ -15,6 +15,9 @@ import org.zkoss.bind.ValidationContext;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.validator.AbstractValidator;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Window;
 
 import com.querydsl.jpa.impl.JPAQuery;
@@ -22,6 +25,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import vn.toancauxanh.gg.model.enums.GioiTinhEnum;
 import vn.toancauxanh.model.Model;
 import vn.toancauxanh.model.NguoiDung;
+import vn.toancauxanh.service.HoSoThongTinService;
 
 @Entity
 @Table(name = "hosothongtin")
@@ -36,6 +40,10 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	private HoSoThongTin nguoiGiamHo;
 	private NguoiDung taiKhoan;
 
+	public HoSoThongTin() {
+		super();
+	}
+	
 	public String getHoVaTen() {
 		return hoVaTen;
 	}
@@ -135,6 +143,32 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 		this.gioiTinh = gioiTinh;
 	}
 
+	@Transient
+	public HoSoThongTin getById(long id) {
+		if(id>0) {
+			return find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.id.eq(id)).fetchFirst();
+		}else {
+			return new HoSoThongTin();
+		}
+	} 
+	
+	///
+	
+	@Command
+	public void redirectPageSession(@BindingParam("url") String url, @BindingParam("vm") HoSoThongTin vm, @BindingParam("service") HoSoThongTinService hoSoThongTinService) {
+		if (vm != null) {
+			url = url.concat("/" + vm.getId());
+		}
+		putArgSessionPage();
+		Executions.getCurrent().sendRedirect(url);
+	}
+	
+	public void putArgSessionPage() {
+		Session session = Sessions.getCurrent();
+		// chỗ này là chỗ lưu session này, lưu cái getarg là lưu cả cái page
+		session.setAttribute("tiemPhongVM", getArg());
+	}
+	
 	//Validation
 	@Transient
 	public AbstractValidator getValidatorStringUtitsNotBlank() {

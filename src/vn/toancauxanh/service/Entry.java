@@ -31,6 +31,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Object;
 
 import vn.toancauxanh.cms.service.DichVuService;
+import vn.toancauxanh.cms.service.HoSoBenhAnService;
 import vn.toancauxanh.cms.service.ImageService;
 import vn.toancauxanh.cms.service.LanguageService;
 import vn.toancauxanh.cms.service.SettingService;
@@ -124,9 +125,21 @@ public class Entry extends BaseObject<Object> {
 	@Value("${url.dichvu}" + ":" + "${action.sua}")
 	public String DICHVUSUA = "";
 	
+	@Value("${url.hosobenhan}")
+	public String HOSOBENHAN = "";
+	@Value("${url.hosobenhan}" + ":" + "${action.xem}")
+	public String HOSOBENHANXEM = "";
+	@Value("${url.hosobenhan}" + ":" + "${action.them}")
+	public String HOSOBENHANTHEM = "";
+	@Value("${url.hosobenhan}" + ":" + "${action.list}")
+	public String HOSOBENHANLIST = "";
+	@Value("${url.hosobenhan}" + ":" + "${action.xoa}")
+	public String HOSOBENHANXOA = "";
+	@Value("${url.hosobenhan}" + ":" + "${action.sua}")
+	public String HOSOBENHANSUA = "";
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU };
+		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN };
 	}
 
 	public String[] getACTIONS() {
@@ -212,7 +225,7 @@ public class Entry extends BaseObject<Object> {
 	@RequestMapping(value = "/{path:.+$}/chinh-sua/{id:\\d+}")
 	public String cpEdit(@PathVariable String path, @PathVariable long id) {
 		return "forward:/WEB-INF/zul/home.zul?resource=" + path + "&action=sua&file=/WEB-INF/zul/" + path
-				+ "/edit.zul&id=" + id;
+				+ "/add.zul&id=" + id;
 	}
 
 	@RequestMapping(value = "/{path:.+$}/chi-tiet/{id:\\d+}")
@@ -221,6 +234,11 @@ public class Entry extends BaseObject<Object> {
 				+ "/detail.zul&id=" + id;
 	}
 
+	@RequestMapping(value = "/{path:.+$}/id/{id:\\d+}")
+	public String cp(@PathVariable String path, @PathVariable Long id) {
+		return "forward:/WEB-INF/zul/home.zul?resource=" + path + "&action=them&file=/WEB-INF/zul/" + path  + "/add.zul&id="+ id;
+	}
+	
 	@RequestMapping(value = "/login")
 	public String dangNhapBackend() {
 		return "forward:/WEB-INF/zul/login.zul";
@@ -269,6 +287,11 @@ public class Entry extends BaseObject<Object> {
 	public DichVuService getDichVus() {
 		return new DichVuService();
 	}
+	
+	public HoSoBenhAnService getHoSoBenhAns() {
+		return new HoSoBenhAnService();
+	}
+	
 	public final ImageService getImages() {
 		return new ImageService();
 	}

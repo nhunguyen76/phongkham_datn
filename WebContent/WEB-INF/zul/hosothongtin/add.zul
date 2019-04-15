@@ -1,11 +1,14 @@
-<z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml"
-	viewModel="@id('vm') @init('vn.toancauxanh.gg.model.HoSoThongTin')"
-	validationMessages="@id('vmsgs')">
+<z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml">
 	<zscript><![CDATA[
-		self.page.title= "Quản lý hồ sơ";
+	    self.page.title= "Thông tin bệnh nhân";
+		import vn.toancauxanh.gg.model.HoSoThongTin;
+		Long id = Long.parseLong(execution.getParameter("id"));
+		HoSoThongTin hoSoThongTin = new HoSoThongTin().getById(id);
 	]]></zscript>
-	<n:section class="main-container">
-		<div class="center-body">
+	<n:section class="main-container" >
+		<div class="center-body" apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init(hoSoThongTin)"
+			validationMessages="@id('vmsgs')">
 			<div class="bar-top-content">
 				<n:h2 class="title-page-main">HỒ SƠ BỆNH NHÂN</n:h2>
 			</div>
@@ -29,7 +32,7 @@
 				        				</n:span>
 				        				<textbox width="100%"
 				        					class="hv-textbox" maxlength="255"
-				        					value="@bind(vm.hoVaTen) @save(vm.hoVaTen, before='saveHoSoThongTin') 
+				        					value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveHoSoThongTin') 
 												@validator(vm.validatorStringUtitsNotBlank)"
 				        					placeholder="Nhập họ và tên" />
 				        				<label class="error"
@@ -186,16 +189,67 @@
 			</div>	
 			
 			<div class="row" style="padding-top:30px;">
-				<div class="col-sm-12">
+				<div class="col-sm-4">
 					<div class="box-content-full">
 						<n:section class="box-result">
 							<div class="box-list-report">
-								<div class="box-report-top flex-list">
-									<n:p
-										class="title-issue title-list-report margin-button-list">
+								<div class="box-report-top range-menu">
+									<n:p class="title-issue title-list-report">
 										Bệnh án
 									</n:p>
-								</div>
+									<div class="box-button-list">
+										<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.hosobenhan_them}" 
+				    						onClick="@command('redirectPage', zul='hosobenhan/add.zul', vmArgs=vm, vm=null)">
+			    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
+		    							</x:a>
+				          			</div>
+				          		</div>
+								<div class="wrappre-tb">
+		                			<div class="wp-scrool">
+		                				<grid model="@load(vm.page(entry.hoSoBenhAns.getHoSoBenhAnByIdBenhNhan(vm.id)).fetch())" width="100%" id="grid"
+											emptyMessage="Danh sách không có bệnh án nào" class="table-report">
+											<columns>
+												<column label="STT" hflex="min" style="text-align:center"/>
+												<column label="Tên bệnh án" width="15%" style="text-align:center;"/>
+												<column label="Thao tác" width="12%" style="text-align:center;"/>
+											</columns>
+											<template name="model">
+												<row apply="org.zkoss.bind.BindComposer" viewModel="@id('item') @init(each)">
+													<label value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)" style="text-align:center;display:block"/>
+													<a label="@load(each.tenDichVu)" style="display:block"/>
+													<div class="text-align-center grid-action">
+														<x:a href="#" class="col-edit" title ="Chỉnh sửa"
+														zk:if="${entry.quyen.dichvu_sua}" onClick="@command('redirectPage', zul='dichvu/view.zul',vmArgs=vm,vm=item)"><n:i class="icon-edit"></n:i></x:a>
+		                          						<x:a href="#" class="col-del" title="Xóa"
+		                          							zk:if="${entry.quyen.dichvu_xoa}"	
+		                          						onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='targetQuery', type = 'dichvu')">
+		                          						<n:i class="icon-cancel"></n:i></x:a>
+													</div>
+												</row>
+											</template>
+										</grid>
+		                			</div>
+		                		</div>
+							</div>
+						</n:section>
+					</div>
+				</div>
+				<div class="col-sm-8">
+					<div class="box-content-full">
+						<n:section class="box-result">
+							<div class="box-list-report">
+								<div class="box-report-top range-menu">
+									<n:p class="title-issue title-list-report">
+										Chi tiết điều trị
+									</n:p>
+									<div class="box-button-list">
+										<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.hosobenhan_them}" 
+				    						onClick="@command('redirectPage', zul='hosobenhan/add.zul', vmArgs=vm, vm=null)">
+			    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
+		    							</x:a>
+				          			</div>
+				          		</div>
+								
 							</div>
 						</n:section>
 					</div>

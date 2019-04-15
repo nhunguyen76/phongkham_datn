@@ -1,0 +1,44 @@
+<z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml">
+	<zscript><![CDATA[
+		self.page.title= "Hồ sơ bệnh nhân";
+		vn.toancauxanh.gg.model.HoSoThongTin hoSoThongTin = null;
+        try {
+        	Long id = Long.valueOf(execution.getParameter("id"));
+        	hoSoThongTin = entry.hoSoThongTins.getHoSoThongTinById(id);
+		} catch(Exception e) {
+		}
+		String action = execution.getParameter("action");
+		if (action.equals("them")){
+			action =  vn.toancauxanh.gg.model.enums.ThamSoEnum.THEM.getText();
+		}
+		else if (action.equals("sua")){
+			action = vn.toancauxanh.gg.model.enums.ThamSoEnum.SUA.getText();
+		}
+		else if (action.equals("xem")){
+			action = vn.toancauxanh.gg.model.enums.ThamSoEnum.XEM.getText();
+		}
+	]]></zscript>
+	<x:section class="main-container" viewModel="@id('vm') @init(hoSoThongTin)" validationMessages="@id('vmsgs')">
+		<div class="center">
+			<include  zk:if="${entry.quyen.hosothongtin_sua}" src="@load(vm.urlGiaiDoanCongTrinh)"></include>
+			<label class="tb-khong-quyen" zk:if="${!vm.editAble and entry.quyen.congtrinh_xem}" style = "font-size: 20px;">Bạn không có quyền truy cập chức năng này!</label>
+		</div>
+		
+		<n:script>
+			function openAndCloseTabMenu(){
+				if($("#menuTabId").css("display") == "none") {
+					$("#menuTabId").css("display","flex");
+					$("#menuTabId").css("flex-direction","column");
+				}
+				else{
+					$("#menuTabId").css("display","none");
+				}
+				
+			}
+			
+			function redirect(contextPath, id) {
+			        window.location.href= contextPath+ "/congtrinh";		
+			}
+		</n:script>
+	</x:section>
+</z:idspace>
