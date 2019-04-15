@@ -30,6 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Object;
 
+import vn.toancauxanh.cms.service.DichVuService;
 import vn.toancauxanh.cms.service.ImageService;
 import vn.toancauxanh.cms.service.LanguageService;
 import vn.toancauxanh.cms.service.SettingService;
@@ -97,22 +98,35 @@ public class Entry extends BaseObject<Object> {
 	public String NGUOIDUNGSUA = "";
 	
 	//////////////////////////////
-	@Value("${url.hosobenhnhan}")
-	public String HOSOBENHNHAN = "";
-	@Value("${url.hosobenhnhan}" + ":" + "${action.xem}")
-	public String HOSOBENHNHANXEM = "";
-	@Value("${url.hosobenhnhan}" + ":" + "${action.them}")
-	public String HOSOBENHNHANTHEM = "";
-	@Value("${url.hosobenhnhan}" + ":" + "${action.list}")
-	public String HOSOBENHNHANLIST = "";
-	@Value("${url.hosobenhnhan}" + ":" + "${action.xoa}")
-	public String HOSOBENHNHANXOA = "";
-	@Value("${url.hosobenhnhan}" + ":" + "${action.sua}")
-	public String HOSOBENHNHANSUA = "";
+	@Value("${url.hosothongtin}")
+	public String HOSOTHONGTIN = "";
+	@Value("${url.hosothongtin}" + ":" + "${action.xem}")
+	public String HOSOTHONGTINXEM = "";
+	@Value("${url.hosothongtin}" + ":" + "${action.them}")
+	public String HOSOTHONGTINTHEM = "";
+	@Value("${url.hosothongtin}" + ":" + "${action.list}")
+	public String HOSOTHONGTINLIST = "";
+	@Value("${url.hosothongtin}" + ":" + "${action.xoa}")
+	public String HOSOTHONGTINXOA = "";
+	@Value("${url.hosothongtin}" + ":" + "${action.sua}")
+	public String HOSOTHONGTINSUA = "";
+	
+	@Value("${url.dichvu}")
+	public String DICHVU = "";
+	@Value("${url.dichvu}" + ":" + "${action.xem}")
+	public String DICHVUXEM = "";
+	@Value("${url.dichvu}" + ":" + "${action.them}")
+	public String DICHVUTHEM = "";
+	@Value("${url.dichvu}" + ":" + "${action.list}")
+	public String DICHVULIST = "";
+	@Value("${url.dichvu}" + ":" + "${action.xoa}")
+	public String DICHVUXOA = "";
+	@Value("${url.dichvu}" + ":" + "${action.sua}")
+	public String DICHVUSUA = "";
 	
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, HOSOBENHNHAN };
+		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU };
 	}
 
 	public String[] getACTIONS() {
@@ -155,13 +169,7 @@ public class Entry extends BaseObject<Object> {
 		rs.addUrlPatterns("*.gif");
 		return rs;
 	}
-
-	/*
-	 * @Bean public FilterRegistrationBean loginFilter() {
-	 * FilterRegistrationBean rs = new FilterRegistrationBean(new
-	 * LoginFilter()); rs.addUrlPatterns("/cp*"); return rs; }
-	 */
-
+	
 	@RequestMapping(value = "/cpo/{path:.+$}")
 	public String cp2(@PathVariable String path) {
 		return "forward:/WEB-INF/zul/home.zul?resource=" + path + "&action=lietke&file=/WEB-INF/zul/" + path
@@ -258,6 +266,9 @@ public class Entry extends BaseObject<Object> {
 		return new HoSoThongTinService();
 	}
 
+	public DichVuService getDichVus() {
+		return new DichVuService();
+	}
 	public final ImageService getImages() {
 		return new ImageService();
 	}

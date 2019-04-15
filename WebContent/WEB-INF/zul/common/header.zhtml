@@ -112,12 +112,12 @@
 					<li
 						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'hosobenhnhan' 
 	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ||  resource eq 'loaicongtrinh'
-	     				||  resource eq 'nhomduan' ||  resource eq 'hangmuccongtrinh' ||  resource eq 'quocgia' ?'active-menu':''}"
+	     				||  resource eq 'dichvu' ||  resource eq 'hangmuccongtrinh' ||  resource eq 'quocgia' ?'active-menu':''}"
 						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.hosobenhnhan_lietke
-	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.duan_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
+	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.dichvu_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
 	     				|| entry.quyen.vaitro_lietke || entry.quyen.phongban_lietke || entry.quyen.quantrihethong_lietke
 	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke || entry.quyen.loaicongtrinh_lietke 
-	     				|| entry.quyen.nhomduan_lietke || entry.quyen.hangmuccongtrinh_lietke || entry.quyen.quocgia_lietke ) and !dakhoa }">
+	     				|| entry.quyen.nhomdichvu_lietke || entry.quyen.hangmuccongtrinh_lietke || entry.quyen.quocgia_lietke ) and !dakhoa }">
 
 						<a class="link-menu" href="javascript:;">
 							<span
@@ -126,59 +126,35 @@
 							<span class="text-menu">Quản lý hệ thống</span>
 						</a>
 						<ul class="sub-menu menu-pull-left">
-						
-							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.duan_lietke || entry.quyen.nhomduan_lietke}">
+							<li class="menu-items"
+								zk:if="${entry.quyen.dichvu_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/dichvu">
+									Dịch vụ
+								</a>
+							</li>
+							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.dichvu_lietke || entry.quyen.nhomdichvu_lietke}">
 								<a class="item-link menu-con" tabindex="-1"
 									href="javascript:void(0)">
-									Quản lý dự án
+									Quản lý dịch vụ
 									<span class="caret-right"></span>
 								</a>
 								<ul class="dropdown-menu box-menu-con">
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.duan_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/duan" class="menu-items dropdown-menu-con">
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.dichvu_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/dichvu" class="menu-items dropdown-menu-con">
 											Dự án
 										</a>
 									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nhomduan_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/nhomduan" class="menu-items dropdown-menu-con">
+									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nhomdichvu_lietke}">
+										<a tabindex="-1" href="${execution.contextPath}/nhomdichvu" class="menu-items dropdown-menu-con">
 											Nhóm dự án
 										</a>
 									</li>
 								</ul>
 							</li>
 
-							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuccapchungchihanhnghe_lietke || entry.quyen.linhvuchoatdong_lietke 
-							|| entry.quyen.linhvuccongtrinh_lietke}">
-								<a class="item-link menu-con" tabindex="-1"
-									href="javascript:void(0)">
-									Quản lý lĩnh vực
-									<span class="caret-right"></span>
-								</a>
-								<ul class="dropdown-menu box-menu-con">
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuccapchungchihanhnghe_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/linhvuccapchungchihanhnghe" class="menu-items dropdown-menu-con">
-											Lĩnh vực cấp CCHN
-										</a>
-									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuchoatdong_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/linhvuchoatdong" class="menu-items dropdown-menu-con">
-											Lĩnh vực hoạt động
-										</a>
-									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.linhvuccongtrinh_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/linhvuccongtrinh" class="menu-items dropdown-menu-con">
-											Lĩnh vực công trình
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="menu-items"
-								zk:if="${entry.quyen.thutucthanhphanhoso_lietke}">
-								<a class="item-link"
-									href="${execution.contextPath}/thutucthanhphanhoso">
-									Thủ tục thành phần hồ sơ
-								</a>
-							</li>
+							
+							
 							<li class="menu-items"
 								zk:if="${entry.quyen.loaicongtrinh_lietke}">
 								<a class="item-link"
@@ -341,8 +317,8 @@
 							<span class="text-menu">Quản lý nhà thầu</span>
 						</a>
 					</li>
-					<li class="menu-top-list ${resource eq 'baocaothongke' || resource eq 'baocaothongkeduan' ?'active-menu':''}"
-						zk:if="${(entry.quyen.baocaothongke_lietke || entry.quyen.baocaothongkeduan_lietke) and !dakhoa}">
+					<li class="menu-top-list ${resource eq 'baocaothongke' || resource eq 'baocaothongkedichvu' ?'active-menu':''}"
+						zk:if="${(entry.quyen.baocaothongke_lietke || entry.quyen.baocaothongkedichvu_lietke) and !dakhoa}">
 						<a class="link-menu flx-box-mobile" onclick="changeArrow(5)" data-toggle="collapse" 
 							href="#demo5" role="button" aria-expanded="false" aria-controls="demo5" >
 							<div>
@@ -359,18 +335,18 @@
 								<a class="link-menu blue-color"
 									href="${execution.contextPath}/baocaothongke">Thống kê công trình</a>
 							</li>
-							<li zk:if="${entry.quyen.baocaothongkeduan_lietke}">
+							<li zk:if="${entry.quyen.baocaothongkedichvu_lietke}">
 								<a class="link-menu blue-color"
-									href="${execution.contextPath}/baocaothongkeduan">Thống kê dự án</a>
+									href="${execution.contextPath}/baocaothongkedichvu">Thống kê dự án</a>
 							</li>
 						</ul>
 					</li>
 					<li
 						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'linhvuccongtrinh'
-	     				|| resource eq 'thutucthanhphanhoso' || resource eq 'capdonvihanhchinh' || resource eq 'duan' || resource eq 'donvihanhchinh' || resource eq 'donvibanhanh' ||resource eq 'phongban'
+	     				|| resource eq 'thutucthanhphanhoso' || resource eq 'capdonvihanhchinh' || resource eq 'dichvu' || resource eq 'donvihanhchinh' || resource eq 'donvibanhanh' ||resource eq 'phongban'
 	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ?'active-menu':''}"
 						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.linhvuccongtrinh_lietke
-	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.duan_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
+	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.dichvu_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
 	     				|| entry.quyen.vaitro_lietke || entry.quyen.phongban_lietke || entry.quyen.quantrihethong_lietke
 	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke) and !dakhoa }">
 
@@ -384,13 +360,13 @@
 							<span id="qlht" class="icon-custom-down-arrow"></span>
 						</a>
 						<ul class="collapse margin-42" id="demo3">
-							<li zk:if="${entry.quyen.duan_lietke}">
+							<li zk:if="${entry.quyen.dichvu_lietke}">
 								<a class="link-menu blue-color"
-									href="${execution.contextPath}/duan">Dự án</a>
+									href="${execution.contextPath}/dichvu">Dịch vụ</a>
 							</li>
-							<li zk:if="${entry.quyen.nhomduan_lietke}">
+							<li zk:if="${entry.quyen.nhomdichvu_lietke}">
 								<a class="link-menu blue-color"
-									href="${execution.contextPath}/nhomduan">Nhóm dự án</a>
+									href="${execution.contextPath}/nhomdichvu">Nhóm dự án</a>
 							</li>
 							<li zk:if="${entry.quyen.linhvuccapchungchihanhnghe_lietke}">
 								<a class="link-menu blue-color"

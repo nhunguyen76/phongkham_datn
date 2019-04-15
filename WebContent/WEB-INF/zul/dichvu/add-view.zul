@@ -1,0 +1,51 @@
+<idspace>
+	<window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"
+		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
+		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
+		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
+		width="500px"
+		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
+		whatever="@load(false,after='saveDichVu') @converter('vn.toancauxanh.service.DetachConverter')"
+		viewModel="@id('vm') @init(arg.model)"
+		validationMessages="@id('vmsgs')">
+
+		<zscript><![CDATA[
+			vmArgs = arg.get("vmArgs");
+			strSave = arg.get("save");
+		]]></zscript> 
+		
+	<div class="row box-body">
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Mã dịch vụ
+				<n:span class="required">*</n:span>
+			</n:span>
+			<textbox width="100%" class="hv-textbox" maxlength="50"
+						value="@bind(vm.maDichVu) @save(vm.maDichVu, before='saveDichVu') @validator(vm.validatorMaDichVu)" 
+						placeholder="Nhập mã dịch vụ" />
+			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+					Tên dịch vụ
+					<n:span class="required">*</n:span>
+				</n:span>
+				<textbox width="100%" class="hv-textbox" maxlength="255"
+							value="@bind(vm.tenDichVu) @save(vm.tenDichVu, before='saveDichVu') 
+								@validator(vm.validatorTenDichVu)"
+							placeholder="Nhập tên dịch vụ"/>
+				<label class="error"
+					value="@load(vmsgs[self.previousSibling])" />
+		</div>
+	</div>
+	<div class="row box-footer box-thaotac">
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+			onClick="@command('saveDichVu', list=vmArgs, attr='targetQuery',wdn=wdn)">
+			<n:i class="icon-save"></n:i>Lưu 
+		</x:button>
+		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">
+			<n:i class="icon-cancel3"></n:i>Đóng
+		</x:button>
+	</div>
+</window>
+</idspace>

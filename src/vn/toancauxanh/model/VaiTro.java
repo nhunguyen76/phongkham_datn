@@ -187,11 +187,11 @@ public class VaiTro extends Model<VaiTro> {
 		quyens1.add(core().VAITROXOA);
 		quyens1.add(core().VAITROXEM);
 		
-		quyens1.add(core().HOSOBENHNHANTHEM);
-		quyens1.add(core().HOSOBENHNHANLIST);
-		quyens1.add(core().HOSOBENHNHANSUA);
-		quyens1.add(core().HOSOBENHNHANXOA);
-		quyens1.add(core().HOSOBENHNHANXEM);
+		quyens1.add(core().HOSOTHONGTINTHEM);
+		quyens1.add(core().HOSOTHONGTINLIST);
+		quyens1.add(core().HOSOTHONGTINSUA);
+		quyens1.add(core().HOSOTHONGTINXOA);
+		quyens1.add(core().HOSOTHONGTINXEM);
 		
 		return quyens1;
 	}
@@ -214,11 +214,11 @@ public class VaiTro extends Model<VaiTro> {
 				quyens1.add(core().NGUOIDUNGLIST);
 				quyens1.add(core().NGUOIDUNGXOA);
 				
-				quyens1.add(core().HOSOBENHNHANTHEM);
-				quyens1.add(core().HOSOBENHNHANLIST);
-				quyens1.add(core().HOSOBENHNHANSUA);
-				quyens1.add(core().HOSOBENHNHANXOA);
-				quyens1.add(core().HOSOBENHNHANXEM);
+				quyens1.add(core().HOSOTHONGTINTHEM);
+				quyens1.add(core().HOSOTHONGTINLIST);
+				quyens1.add(core().HOSOTHONGTINSUA);
+				quyens1.add(core().HOSOTHONGTINXOA);
+				quyens1.add(core().HOSOTHONGTINXEM);
 			}
 		}
 		return quyens1;
