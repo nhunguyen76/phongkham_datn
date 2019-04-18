@@ -4,7 +4,6 @@ import java.text.Normalizer;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,7 +36,6 @@ import com.querydsl.jpa.impl.JPAQuery;
 
 import vn.greenglobal.core.CoreObject;
 import vn.toancauxanh.cms.service.HomeService;
-import vn.toancauxanh.gg.model.enums.NhomGopY;
 import vn.toancauxanh.model.NguoiDung;
 import vn.toancauxanh.model.QNguoiDung;
 import vn.toancauxanh.model.Setting;
@@ -311,17 +309,6 @@ public class BaseObject<T> extends CoreObject<T> {
 		result.add("Nam");
 		result.add("Nữ");
 		return result;
-	}
-	public List<NhomGopY> getListNhomGopY() {
-		List<NhomGopY> list = new ArrayList<>(Arrays.asList(NhomGopY.values()));
-		return list;
-	}
-	
-	public List<NhomGopY> getListNhomGopYNull() {
-		List<NhomGopY> list = new ArrayList<NhomGopY>();
-		list.add(null);
-		list.addAll(getListNhomGopY());
-		return list;
 	}
 	 
 	@Transient

@@ -153,6 +153,14 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	} 
 	
 	///
+	@Transient
+	public JPAQuery<HoSoBenhAn> getListHoSoBenhAn() {
+		JPAQuery<HoSoBenhAn> q = find(HoSoBenhAn.class).where(QHoSoBenhAn.hoSoBenhAn.benhNhan.id.eq(this.getId()));
+		q.orderBy(QHoSoBenhAn.hoSoBenhAn.ngayTao.desc());
+		return q;
+	}
+	
+	///
 	
 	@Command
 	public void redirectPageSession(@BindingParam("url") String url, @BindingParam("vm") HoSoThongTin vm, @BindingParam("service") HoSoThongTinService hoSoThongTinService) {

@@ -13,6 +13,7 @@ import org.zkoss.util.resource.Labels;
 
 import com.querydsl.jpa.impl.JPAQuery;
 
+import vn.toancauxanh.gg.model.enums.VaiTroEnum;
 import vn.toancauxanh.model.QVaiTro;
 import vn.toancauxanh.model.VaiTro;
 
@@ -34,7 +35,9 @@ public final class VaiTroService extends BasicService<VaiTro> {
 	public Map<String, String> getListDefaultAlias(){
 		if(listDefaultAlias.isEmpty()){
 			listDefaultAlias.put(VaiTro.QUANTRIVIEN, "Quản trị viên");
-		}
+			listDefaultAlias.put(VaiTroEnum.BACSI.name(), VaiTroEnum.BACSI.getText());
+			listDefaultAlias.put(VaiTroEnum.KYTHUATVIEN.name(), VaiTroEnum.KYTHUATVIEN.getText());
+			listDefaultAlias.put(VaiTroEnum.BENHNHAN.name(), VaiTroEnum.BENHNHAN.getText());		}
 		return listDefaultAlias;
 	}
 	

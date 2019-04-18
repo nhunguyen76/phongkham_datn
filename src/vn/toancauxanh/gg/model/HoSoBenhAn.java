@@ -1,10 +1,16 @@
 package vn.toancauxanh.gg.model;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
+import org.zkoss.zul.Window;
 
 import vn.toancauxanh.model.Model;
 
@@ -42,4 +48,14 @@ public class HoSoBenhAn extends Model<HoSoBenhAn> {
 		this.ngayBatDau = ngayBatDau;
 	}
 
+	@Command
+	public void saveHoSoBenhAn(@BindingParam("list") final Object listObject,
+			@BindingParam("attr") final String attr,
+			@BindingParam("wdn") final Window wdn,
+			@BindingParam("vm") HoSoBenhAn hoSoBenhAn)
+			throws IOException {
+		save();
+		wdn.detach();
+		BindUtils.postNotifyChange(null, null, listObject, attr);
+	}
 }

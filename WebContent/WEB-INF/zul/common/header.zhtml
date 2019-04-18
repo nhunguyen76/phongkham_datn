@@ -87,10 +87,10 @@
 					</li>
 					
 					<li
-						class="menu-top-list ${resource eq 'vanban'?'active-menu':''}"
-						zk:if="${entry.quyen.vanban_lietke and !dakhoa}">
+						class="menu-top-list ${resource eq 'nhanvien'?'active-menu':''}"
+						zk:if="${entry.quyen.nhanvien_lietke and !dakhoa}">
 						<a class="link-menu"
-							href="${execution.contextPath}/vanban">
+							href="${execution.contextPath}/nhanvien">
 							<span
 								class="iconct-thu-vien box-icon-menu box-icon-menu1">
 							</span>

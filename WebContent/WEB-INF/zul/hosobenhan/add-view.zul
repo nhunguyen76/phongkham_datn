@@ -1,0 +1,48 @@
+<idspace>
+	<window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"
+		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
+		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
+		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
+		width="500px"
+		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='listHoSoBenhAn')"
+		whatever="@load(false,after='saveHoSoBenhAn') @converter('vn.toancauxanh.service.DetachConverter')"
+		viewModel="@id('vm') @init(arg.model)"
+		validationMessages="@id('vmsgs')">
+
+		<zscript><![CDATA[
+			vn.toancauxanh.gg.model.HoSoThongTin hoSoThongTin = arg.get("vmArgs");
+			strSave = arg.get("save");
+			vm.setBenhNhan(hoSoThongTin);
+		]]></zscript> 
+		
+	<div class="row box-body">
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Dịch vụ
+				<n:span class="required">*</n:span>
+			</n:span>
+			<combobox model="@load(entry.dichVus.targetQuery.fetch())"
+				width="100%" readonly="true" class="hv-cbb"
+				placeholder="Chọn dịch vụ"
+				value="@load(vm.dichVu eq null ? '' : vm.dichVu.tenDichVu)"
+				selectedItem="@load(vm.dichVu) @save(vm.dichVu, before={'saveHoSoBenhAn'})
+					@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
+				<template name="model">
+					<comboitem
+						label="@load(empty each ? 'Chọn dịch vụ' :  each.tenDichVu)" />
+				</template>
+			</combobox>
+			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+	</div>
+	<div class="row box-footer box-thaotac">
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.hosobenhan_them) or (!vm.noId() and entry.quyen.hosobenhan_sua)) and !checkView}"
+			onClick="@command('saveHoSoBenhAn', list=vmArgs, attr='listHoSoBenhAn', wdn=wdn)">
+			<n:i class="icon-save"></n:i>Lưu 
+		</x:button>
+		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='listHoSoBenhAn')">
+			<n:i class="icon-cancel3"></n:i>Đóng
+		</x:button>
+	</div>
+</window>
+</idspace>

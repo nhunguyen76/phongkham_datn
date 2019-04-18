@@ -36,6 +36,7 @@ import org.zkoss.zul.Window;
 import com.google.common.base.Strings;
 import com.querydsl.jpa.impl.JPAQuery;
 
+import vn.toancauxanh.gg.model.enums.VaiTroEnum;
 import vn.toancauxanh.service.Quyen;
 
 @Entity
@@ -46,8 +47,15 @@ public class VaiTro extends Model<VaiTro> {
 	public static transient final Logger LOG = LogManager.getLogger(VaiTro.class.getName());
 
 	public static final String QUANTRIVIEN = "quantrivien";
+	public static final String BACSI = "bacsi";
+	public static final String BENHNHAN = "benhnhan";
+	public static final String KYTHUATVIEN = "kythuatvien";
 
-	public static final String[] VAITRO_DEFAULTS = {QUANTRIVIEN};
+	public static final String[] VAITRO_DEFAULTS = {
+			QUANTRIVIEN, 
+			BACSI, 
+			BENHNHAN,
+			KYTHUATVIEN };
 
 	private Set<String> quyens = new HashSet<>();
 	private Set<String> quyenEdits = quyens;

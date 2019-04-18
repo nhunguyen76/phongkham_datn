@@ -137,9 +137,22 @@ public class Entry extends BaseObject<Object> {
 	public String HOSOBENHANXOA = "";
 	@Value("${url.hosobenhan}" + ":" + "${action.sua}")
 	public String HOSOBENHANSUA = "";
+	
+	@Value("${url.nhanvien}")
+	public String NHANVIEN = "";
+	@Value("${url.nhanvien}" + ":" + "${action.xem}")
+	public String NHANVIENXEM = "";
+	@Value("${url.nhanvien}" + ":" + "${action.them}")
+	public String NHANVIENTHEM = "";
+	@Value("${url.nhanvien}" + ":" + "${action.list}")
+	public String NHANVIENLIST = "";
+	@Value("${url.nhanvien}" + ":" + "${action.xoa}")
+	public String NHANVIENXOA = "";
+	@Value("${url.nhanvien}" + ":" + "${action.sua}")
+	public String NHANVIENSUA = "";
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN };
+		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN };
 	}
 
 	public String[] getACTIONS() {
