@@ -67,6 +67,7 @@ public class NguoiDung extends Model<NguoiDung> {
 	private String email = "";
 	private String hinhDaiDien = "";
 	private String matKhau = "";
+	private String matKhau2 = "";
 	private String salkey = "";
 	private String tenDangNhap = "";
 	private Date ngaySinh;
@@ -137,6 +138,37 @@ public class NguoiDung extends Model<NguoiDung> {
 
 	@Command
 	public void attachImages(@BindingParam("media") final Media media,
+			@BindingParam("vmsgs") final ValidationMessages vmsgs) {
+		if (media instanceof org.zkoss.image.Image) {
+			if (media.getName().toLowerCase().endsWith(".png") || media.getName().toLowerCase().endsWith(".jpg")) {
+				int lengthOfImage = media.getByteData().length;
+				if (lengthOfImage > 10000000) {
+					showNotification("Chọn hình ảnh có dung lượng nhỏ hơn 10MB.", "", "error");
+					return;
+				} else {
+					String tenFile = media.getName();
+
+					tenFile = tenFile.replace(" ", "");
+					tenFile = unAccent(tenFile.substring(0, tenFile.lastIndexOf("."))) + "_"
+							+ Calendar.getInstance().getTimeInMillis() + tenFile.substring(tenFile.lastIndexOf("."));
+					setImageContent((org.zkoss.image.Image) media);
+					setIconName(tenFile);
+					if (vmsgs != null) {
+						vmsgs.clearKeyMessages("errLabel");
+					}
+					BindUtils.postNotifyChange(null, null, this, "imageContent");
+					BindUtils.postNotifyChange(null, null, this, "iconname");
+				}
+			} else {
+				showNotification("Chọn hình ảnh theo đúng định dạng (*.png, *.jpg)", "", "error");
+			}
+		} else {
+			showNotification("Không phải hình ảnh", "", "warning");
+		}
+	}
+	
+	@Command
+	public void getAttachImages(@BindingParam("media") final Media media,
 			@BindingParam("vmsgs") final ValidationMessages vmsgs) {
 		if (media instanceof org.zkoss.image.Image) {
 			if (media.getName().toLowerCase().endsWith(".png") || media.getName().toLowerCase().endsWith(".jpg")) {
@@ -477,6 +509,9 @@ public class NguoiDung extends Model<NguoiDung> {
 			@BindingParam("isUpdateInfo") final boolean isUpdateInfo, @BindingParam("wdn") final Window wdn)
 			throws IOException {
 		beforeSaveImg();
+		if (matKhau2 != null && !matKhau2.isEmpty()) {
+			updatePassword(matKhau2);
+		}
 		save();
 		if (isUpdateInfo) {
 			BindUtils.postNotifyChange(null, null, this, "*");
@@ -577,19 +612,7 @@ public class NguoiDung extends Model<NguoiDung> {
 		BindUtils.postNotifyChange(null, null, this, "change");
 	}
 
-	@Transient
-	public AbstractValidator getValidateSoDienThoai() {
-		return new AbstractValidator() {
-			@Override
-			public void validate(final ValidationContext ctx) {
-				String value = (String) ctx.getProperty().getValue();
-				if (!value.isEmpty() && !value.trim()
-						.matches("^\\+?\\d{1,3}?[- .]?\\(?(?:\\d{2,3})\\)?[- .]?\\d\\d\\d[- .]?\\d\\d\\d\\d$")) {
-					addInvalidMessage(ctx, "error", "Số điện thoại không đúng định dạng.");
-				}
-			}
-		};
-	}
+	
 
 	@Transient
 	public AbstractValidator getValidatorTenDangNhap() {
@@ -631,5 +654,13 @@ public class NguoiDung extends Model<NguoiDung> {
 				}
 			}
 		};
+	}
+
+	public String getMatKhau2() {
+		return matKhau2;
+	}
+
+	public void setMatKhau2(String matKhau2) {
+		this.matKhau2 = matKhau2 != null ? matKhau2.trim() : matKhau2;
 	}
 }

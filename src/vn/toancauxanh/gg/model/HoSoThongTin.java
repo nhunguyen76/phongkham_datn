@@ -38,7 +38,7 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	private String soDienThoai;
 	private GioiTinhEnum gioiTinh;
 	private HoSoThongTin nguoiGiamHo;
-	private NguoiDung taiKhoan;
+	private NguoiDung taiKhoan = new NguoiDung();
 
 	public HoSoThongTin() {
 		super();
@@ -108,6 +108,13 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 		if(nguoiGiamHo!=null) {
 			nguoiGiamHo.save();
 		}
+		save();
+	}
+	
+	@Command
+	public void saveThongTinNhanVien(@BindingParam("wdn") final Window wdn, @BindingParam("vm") HoSoThongTin hoSoThongTin)
+			throws IOException {
+		taiKhoan.saveNguoiDung(null, null, true, wdn);
 		save();
 	}
 
@@ -219,4 +226,33 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 			}
 		};
 	}
+	
+	@Transient
+	public AbstractValidator getValidatorSoDienThoai() {
+		return new AbstractValidator() {
+			@Override
+			public void validate(ValidationContext ctx) {
+				String value = (String) ctx.getProperty().getValue();
+				if (value.isEmpty()) {
+					addInvalidMessage(ctx, "Không được để trống trường này.");
+				} else if (StringUtils.isBlank(value)) {
+					addInvalidMessage(ctx, "Không được để khoảng trắng.");
+				} else {
+					JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class)
+							.where(QHoSoThongTin.hoSoThongTin.soDienThoai.eq(value));
+					if (!HoSoThongTin.this.noId()) {
+						q.where(QHoSoThongTin.hoSoThongTin.id.ne(getId()));
+					}
+					if (q.fetchCount() > 0) {
+						addInvalidMessage(ctx, "Đã tồn tại số điện thoại này.");
+					}
+					if (!value.trim().matches("^\\+?\\d{1,3}?[- .]?\\(?(?:\\d{2,3})\\)?[- .]?\\d\\d\\d[- .]?\\d\\d\\d\\d$")) {
+						addInvalidMessage(ctx, "error", "Số điện thoại không đúng định dạng.");
+					}
+				}
+			}
+		};
+	}
+	
+	
 }
