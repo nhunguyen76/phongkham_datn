@@ -66,7 +66,7 @@
 						zk:if="${(entry.quyen.chungchihanhnghecanhan_lietke or entry.quyen.chungchihanhnghetochuc_lietke) and !dakhoa}">
 						<a class="link-menu" href="javascript:;">
 							<span
-								class="iconct-chung-chi box-icon-menu box-icon-menu1">
+								class="icon-calendar box-icon-menu box-icon-menu1">
 							</span>
 							<span class="text-menu">Quản lý lịch hẹn</span>
 						</a>
@@ -96,19 +96,7 @@
 							</span>
 							<span class="text-menu">Quản lý nhân viên</span>
 						</a>
-					</li>
-					<li
-						class="menu-top-list ${resource eq 'nhathau'?'active-menu':''}"
-						zk:if="${entry.quyen.nhathau_lietke and !dakhoa}">
-						<a class="link-menu"
-							href="${execution.contextPath}/nhathau">
-							<span
-								class="iconct-icon-dau-thau box-icon-menu box-icon-menu1">
-							</span>
-							<span class="text-menu">Quản lý danh mục</span>
-						</a>
-					</li>
-					
+					</li>					
 					<li
 						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'hosobenhnhan' 
 	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ||  resource eq 'loaicongtrinh'

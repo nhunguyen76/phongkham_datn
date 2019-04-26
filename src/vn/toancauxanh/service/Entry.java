@@ -30,6 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Object;
 
+import vn.toancauxanh.cms.service.ChiTietBenhAnService;
 import vn.toancauxanh.cms.service.DichVuService;
 import vn.toancauxanh.cms.service.HoSoBenhAnService;
 import vn.toancauxanh.cms.service.ImageService;
@@ -150,9 +151,22 @@ public class Entry extends BaseObject<Object> {
 	public String NHANVIENXOA = "";
 	@Value("${url.nhanvien}" + ":" + "${action.sua}")
 	public String NHANVIENSUA = "";
+	
+	@Value("${url.chitietbenhan}")
+	public String CHITIETBENHAN = "";
+	@Value("${url.chitietbenhan}" + ":" + "${action.xem}")
+	public String CHITIETBENHANXEM = "";
+	@Value("${url.chitietbenhan}" + ":" + "${action.them}")
+	public String CHITIETBENHANTHEM = "";
+	@Value("${url.chitietbenhan}" + ":" + "${action.list}")
+	public String CHITIETBENHANLIST = "";
+	@Value("${url.chitietbenhan}" + ":" + "${action.xoa}")
+	public String CHITIETBENHANXOA = "";
+	@Value("${url.chitietbenhan}" + ":" + "${action.sua}")
+	public String CHITIETBENHANSUA = "";
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN };
+		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN };
 	}
 
 	public String[] getACTIONS() {
@@ -249,7 +263,7 @@ public class Entry extends BaseObject<Object> {
 
 	@RequestMapping(value = "/{path:.+$}/id/{id:\\d+}")
 	public String cp(@PathVariable String path, @PathVariable Long id) {
-		return "forward:/WEB-INF/zul/home.zul?resource=" + path + "&action=them&file=/WEB-INF/zul/" + path  + "/add.zul&id="+ id;
+		return "forward:/WEB-INF/zul/home.zul?resource=" + path + "&action=them&file=/WEB-INF/zul/" + path  + "/edit-detail.zul&id="+ id;
 	}
 	
 	@RequestMapping(value = "/login")
@@ -303,6 +317,10 @@ public class Entry extends BaseObject<Object> {
 	
 	public HoSoBenhAnService getHoSoBenhAns() {
 		return new HoSoBenhAnService();
+	}
+	
+	public ChiTietBenhAnService getChiTietBenhAns() {
+		return new ChiTietBenhAnService();
 	}
 	
 	public final ImageService getImages() {

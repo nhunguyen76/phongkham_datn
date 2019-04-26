@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.ValidationContext;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -102,13 +103,18 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 		this.nguoiGiamHo = nguoiGiamHo;
 	}
 
+	// Command save
+	
 	@Command
-	public void saveHoSoThongTin(@BindingParam("wdn") final Window wdn, @BindingParam("vm") HoSoThongTin hoSoThongTin)
+	public void saveThongTinBenhNhan(@BindingParam("wdn") final Window wdn, @BindingParam("vm") HoSoThongTin hoSoThongTin)
 			throws IOException {
 		if(nguoiGiamHo!=null) {
 			nguoiGiamHo.save();
 		}
+		taiKhoan.saveNguoiDung(null, null, true, wdn);
 		save();
+		wdn.detach();
+		redirectPageSession("/hosothongtin/id", this, new HoSoThongTinService());
 	}
 	
 	@Command
@@ -159,12 +165,41 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 		}
 	} 
 	
-	///
+	/**
+	 * Phần xử lsy hiển thị chi tiết bệnh án
+	 */
+	// Khởi tạo hiển thị chi tiết theo id bệnh án đầu tiên
+	private Long selectedIdHoSoBenhAn = 0L;
+
+	@Transient
+	public Long getSelectedIdHoSoBenhAn() {
+		return selectedIdHoSoBenhAn;
+	}
+
+	public void setSelectedIdHoSoBenhAn(Long selectedIdHoSoBenhAn) {
+		this.selectedIdHoSoBenhAn = selectedIdHoSoBenhAn;
+	}
+	
+	@Transient
+	public JPAQuery<ChiTietBenhAn> getChiTietBenhAn() {
+		JPAQuery<ChiTietBenhAn> q = find(ChiTietBenhAn.class).where(QChiTietBenhAn.chiTietBenhAn.benhAn.id.eq(selectedIdHoSoBenhAn));
+		q.orderBy(QChiTietBenhAn.chiTietBenhAn.ngayTao.desc());
+		return q;
+	}
+	
 	@Transient
 	public JPAQuery<HoSoBenhAn> getListHoSoBenhAn() {
 		JPAQuery<HoSoBenhAn> q = find(HoSoBenhAn.class).where(QHoSoBenhAn.hoSoBenhAn.benhNhan.id.eq(this.getId()));
 		q.orderBy(QHoSoBenhAn.hoSoBenhAn.ngayTao.desc());
 		return q;
+	}
+	
+	@Command
+	public void showChiTietBenhAn(@BindingParam("idBenhAn") Long id)
+			throws IOException {
+		System.out.println("Đã vào đây" + id);
+		this.selectedIdHoSoBenhAn = id;
+		BindUtils.postNotifyChange(null, null, this, "chiTietBenhAn");
 	}
 	
 	///

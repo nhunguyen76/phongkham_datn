@@ -32,7 +32,7 @@
 				          				Danh sách hồ sơ bệnh nhân
 				          			</n:p>
 	    							<x:a class="btn-add-new btn-page btn-flexbox" zk:if="${entry.quyen.hosothongtin_them}" 
-		    							href="${execution.getContextPath()}/hosothongtin/id/0">
+		    							onClick="@command('redirectPage', zul='hosothongtin/add.zul', vmArgs=vm, vm=null)">
 	    								<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
 	    							</x:a>
 				          		</div>

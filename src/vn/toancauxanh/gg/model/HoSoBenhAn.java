@@ -54,6 +54,8 @@ public class HoSoBenhAn extends Model<HoSoBenhAn> {
 			@BindingParam("wdn") final Window wdn,
 			@BindingParam("vm") HoSoBenhAn hoSoBenhAn)
 			throws IOException {
+		System.out.println("objeclis" + listObject);
+		System.out.println("attr" + attr);
 		save();
 		wdn.detach();
 		BindUtils.postNotifyChange(null, null, listObject, attr);

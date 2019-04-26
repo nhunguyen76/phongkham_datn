@@ -10,11 +10,9 @@
 		validationMessages="@id('vmsgs')">
 
 		<zscript><![CDATA[
-			vn.toancauxanh.gg.model.HoSoThongTin hoSoThongTin = arg.get("vmArgs");
-			strSave = arg.get("save");
-			vm.setBenhNhan(hoSoThongTin);
+			vmArgs = arg.get("vmArgs");
+			vm.setBenhNhan(arg.get("vmArgs").getHoSoThongTin());
 		]]></zscript> 
-		
 	<div class="row box-body">
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
@@ -33,6 +31,19 @@
 				</template>
 			</combobox>
 			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Ngày bắt đầu
+				<n:span class="required">*</n:span>
+			</n:span>
+			<datebox format="dd/MM/yyyy"
+				value="@bind(vm.ngayBatDau) @save(vm.ngayBatDau, before='saveHoSoBenhAn') 
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+				width="100%" placeholder="Chọn ngày bắt đầu">
+			</datebox>
+			<label class="error"
+				value="@load(vmsgs[self.previousSibling])" />
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
