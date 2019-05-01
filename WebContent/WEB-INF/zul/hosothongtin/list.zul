@@ -42,11 +42,12 @@
 				          					width="100%" id="grid" class="table-report"
 				          					emptyMessage="Danh sách không có bệnh nhân nào" >
 				          					<columns>
-				          						<column label="STT"
-				          							hflex="min" style="text-align: center;" />
-				          						<column label="Họ và tên" width="20%"
-				          							style="text-align: center;" />
-				          						
+				          						<column label="STT" hflex="min" style="text-align: center;" />
+				          						<column label="Họ và tên" hflex="min" style="text-align: center;" />
+				          						<column label="CMND" hflex="min" style="text-align: center;" />
+				          						<column label="Giới tính" hflex="min" style="text-align: center;" />
+				          						<column label="Ngày sinh" hflex="min" style="text-align: center;" />
+				          						<column label="Số điện thoại" hflex="min" style="text-align: center;" />
 				          						<column
 				          							zk:if="${entry.quyen.hosothongtin_sua}"
 				          							label="Thao tác" width="17%"
@@ -67,9 +68,11 @@
 				          							<label
 				          								value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
 				          								style="text-align:center;display:block" />
-				          							<a label="@load(each.hoVaTen)"
-				          								zk:if="${entry.quyen.hosothongtin_sua}"
-				          								style="display:block" />
+				          							<label value="@load(each.hoVaTen)" style="display:block" />
+				          							<label value="@load(each.cmnd)" style="text-align:center;display:block" />
+				          							<label value="@load(each.gioiTinh.text)" style="text-align:center;display:block"/>
+				          							<label value="@load(each.ngaySinh) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
+				          							<label value="@load(each.soDienThoai)" style="display:block" />
 				          							<div class="text-align-center center-cauhinh grid-action">
 													<a href="javascript:void(0);" tooltiptext="Chỉnh sửa" class="col-edit"
 														 zk:if="${entry.quyen.hosothongtin_sua}"

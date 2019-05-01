@@ -265,7 +265,7 @@ input[type=text], textarea {
 
 .icon-ds:before {
 	content: "\e906";
-	color: #e17e00
+	color: #c0c0c0;
 }
 
 .icon-edit:before {
@@ -349,6 +349,30 @@ input[type=text], textarea {
 	margin-right: 5px;
 	position: relative;
 	top: 3px;
+}
+
+.icon-ds-menu:before {
+	content: "\e906";
+	color: #c0c0c0;
+	font-size: 25px;
+}
+
+.icon-calendar-menu:before {
+	content: "\e901";
+	color: #c0c0c0;
+	font-size: 25px;
+}
+
+.icon-users-menu:before {
+	content: "\e913";
+	color: #c0c0c0;
+	font-size: 25px;
+}
+
+.icon-setting-menu:before {
+	content: "\e90f";
+	color: #c0c0c0;
+	font-size: 25px;
 }
 
 @font-face {
@@ -441,6 +465,10 @@ input[type=text], textarea {
 .icon-custom-up-arrow:before {
 	content: "\e900";
 	color: #48a0dc;
+}
+
+.icon-exit:before {
+  
 }
 
 .popup-wid {
@@ -1072,7 +1100,7 @@ input[type=text], textarea {
 }
 
 .top-header {
-	background: linear-gradient(#040609, #040609);
+	background: linear-gradient(to right, #318f94 0%, #5ec58c 100%);
 	padding: 12px 0 8px 0;
 	overflow: hidden
 }
@@ -1199,7 +1227,7 @@ input[type=text], textarea {
 
 .bottom-header .link-menu {
 	font-size: 13px;
-	color: #464646;
+	color: #808080;
 	/* font-family: Roboto, sans-serif;
 	font-weight: 700 */
 }
@@ -1212,9 +1240,9 @@ input[type=text], textarea {
 }
 
 .bottom-header .text-menu {
-	padding-top: 11px;
 	display: block;
-	font-family: 'Roboto-Bold';
+	font-family: Roboto, sans-serif;
+	font-size: 15px;
 }
 
 .menu-child {
@@ -3017,7 +3045,7 @@ button.toast-close-button {
 
 .z-grid-header th, .z-tree-header th {
 	background-color: #388edf;
-	border: 1px solid #1d859c;
+	border: 1px solid #cfcfcf;
 	border-top: none;
 	background: #388edf;
 }
@@ -3044,11 +3072,11 @@ button.toast-close-button {
 	font-family: Roboto, sans-serif;
 	font-weight: 500;
 	font-size: 14px;
-	color: #fff;
+	color: #000000;
 	letter-spacing: 0;
 	padding-left: 9px;
 	padding-right: 9px;
-	background-color: #388edf
+	background-color: #f3f1f1
 }
 
 .z-grid-body .z-row-content a, .z-grid-body .z-row-content span {
@@ -3193,7 +3221,7 @@ button.toast-close-button {
 }
 
 .title-content-process, .title-list-report {
-	color: #388edf;
+	color: #000000;
 	margin-bottom: -20px;
 	margin-top: 15px;
 }
@@ -3780,7 +3808,7 @@ row-support>div {
 .bar-top-content .title-page-main {
 	/* font-weight: 700 !important; */
 	text-transform: none !important;
-	color: #000 !important
+	color: #008080 !important
 }
 
 .box-cv-processed .col-cv-process, .row-page-content .box-dv {
@@ -4004,12 +4032,12 @@ row-support>div {
 	display: none;
 	position: absolute;
 	right: 15px;
-	background-color: #1985d8;
-	min-width: 110px;
+	background-color: #ffffff;
+	min-width: 150px;
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
 	z-index: 1;
 	border-radius: 5px;
-	border: 1px solid #66abe0
+	border: 1px solid #c0c0c0
 }
 
 .account-name {
@@ -4017,8 +4045,8 @@ row-support>div {
 }
 
 .dropdown-content1 a {
-	color: #fff;
-	padding: 12px 16px;
+	color: #808080;
+	padding: 12px 20px;
 	text-decoration: none;
 	display: block;
 	font-family: Roboto, sans-serif;
@@ -4026,7 +4054,7 @@ row-support>div {
 }
 
 .dropdown-content1 a:hover {
-	background-color: #4099de
+	background-color: #c4dfc9
 }
 
 .dropdown1:hover .dropdown-content1 {
@@ -4211,7 +4239,7 @@ input[disabled] {
 	}
 	.icon-ds:before {
 		content: "\e906";
-		color: #e17e00 !important;
+		color: #E6E6E6 !important;
 	}
 	.chuaxuli {
 		color: #E6E6E6 !important;
@@ -4261,7 +4289,7 @@ input[disabled] {
 		padding-left: 15px
 	}
 	.menu-child .list-menu-child .text-menu {
-		font-family: Roboto, sans-serif;
+		font-family: Times New Roman, serif;
 		font-weight: 700;
 		font-size: 13px
 	}

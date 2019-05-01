@@ -19,7 +19,6 @@
 				</div>
 				<div class="dropdown1" style="float:right;">
 					<li class="dropbtn1" style="display: inline">
-						
 						<z:image class="border-image"
 							content="@load(entry.nguoiDung.imageContent)" />
 						<span href="#" class="account-name">
@@ -31,10 +30,12 @@
 					<div class="dropdown-content1">
 						<x:a class="ctent" href="#" zk:if="${!dakhoa}"
 							zk:onClick="@command('redirectPage', zul='/WEB-INF/zul/common/view.zul',vmArgs=vm,vm=entry.nguoiDung)">
+							<span class="icon-page-1"></span>
 							Thông tin
 						</x:a>
 						<a class="ctent"
 							href="${execution.contextPath}/logout">
+							<span class="icon-exit"></span>
 							Đăng xuất
 						</a>
 					</div>
@@ -53,10 +54,9 @@
 						zk:if="${entry.quyen.congtrinh_lietke and !dakhoa}">
 						<a class="link-menu"
 							href="${execution.contextPath}/hosothongtin">
-							<span
-								class="icon-ds box-icon-menu box-icon-menu1">
-							</span>
-							<span class="text-menu">Quản lý hồ sơ bệnh nhân</span>
+							<span class="icon-ds-menu"></span>
+							<span class="text-menu">
+							Hồ sơ bệnh nhân</span>
 						</a>
 					</li>
 				
@@ -65,10 +65,9 @@
 	     				|| resource eq 'chungchihanhnghetochuc' ?'active-menu':''}"
 						zk:if="${(entry.quyen.chungchihanhnghecanhan_lietke or entry.quyen.chungchihanhnghetochuc_lietke) and !dakhoa}">
 						<a class="link-menu" href="javascript:;">
-							<span
-								class="icon-calendar box-icon-menu box-icon-menu1">
-							</span>
-							<span class="text-menu">Quản lý lịch hẹn</span>
+							<span class="icon-calendar-menu"></span>
+							<span class="text-menu">
+								Quản lý lịch hẹn</span>
 						</a>
 						<ul class="sub-menu menu-pull-left" style="width: 230px;" zk:if="${entry.quyen.chungchihanhnghecanhan_lietke and !dakhoa}">
 							<li class="menu-items">
@@ -92,7 +91,7 @@
 						<a class="link-menu"
 							href="${execution.contextPath}/nhanvien">
 							<span
-								class="iconct-thu-vien box-icon-menu box-icon-menu1">
+								class="icon-users-menu">
 							</span>
 							<span class="text-menu">Quản lý nhân viên</span>
 						</a>
@@ -109,7 +108,7 @@
 
 						<a class="link-menu" href="javascript:;">
 							<span
-								class="icon-setting box-icon-menu box-icon-menu1">
+								class="icon-setting-menu">
 							</span>
 							<span class="text-menu">Quản lý hệ thống</span>
 						</a>
@@ -229,15 +228,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="menu-top-list" zk:if="${!dakhoa}">
-						<x:a class="link-menu" href="#"
-							zk:onClick='Executions.createComponents("/WEB-INF/zul/cauhinhhethong/hotro.zul", null, null);'>
-							<span
-								class="icon-Help box-icon-menu box-icon-menu1">
-							</span>
-							<span class="text-menu">Trợ giúp</span>
-						</x:a>
-					</li>
+					
 				</ul>
 			</div>
 			
