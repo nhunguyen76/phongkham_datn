@@ -1,0 +1,108 @@
+<idspace>
+	<window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"
+		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
+		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
+		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
+		width="900px"
+		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
+		whatever="@load(false,after='saveCanLamSang') @converter('vn.toancauxanh.service.DetachConverter')"
+		viewModel="@id('vm') @init(arg.model)"
+		validationMessages="@id('vmsgs')">
+
+		<zscript><![CDATA[
+			vmArgs = arg.get("vmArgs");
+			strSave = arg.get("save");
+			Long idBenhAn = vmArgs.getSelectedIdBenhAn();
+			import vn.toancauxanh.cms.service.HoSoBenhAnService;
+			import vn.toancauxanh.gg.model.HoSoBenhAn;
+			HoSoBenhAn hoSoBenhAn = new HoSoBenhAnService().getHoSoBenhAnById(idBenhAn);
+			vm.setBenhAn(hoSoBenhAn);
+			import java.awt.*;
+			import java.awt.image.*;
+			import javax.imageio.ImageIO;
+			import java.net.URL;
+			import java.awt.geom.*;
+			BufferedImage imagevar2 = new BufferedImage(400, 300, BufferedImage.TYPE_INT_ARGB);
+		]]></zscript> 
+		
+	<div class="row box-body">
+		<div class="col-md-6 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Ngày khám
+				<n:span class="required">*</n:span>
+			</n:span>
+			<datebox format="dd/MM/yyyy"
+				value="@bind(vm.ngayKham) @save(vm.ngayKham, before='saveChiTietBenhAn') 
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+				width="100%" placeholder="Nhập ngày khám">
+			</datebox>
+			<label class="error"
+				value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-6 list-menu-sukien">
+			<div zclass="form-group" class="control-label">
+				<x:label>
+					Hình ảnh
+					<n:small class="required">*</n:small>
+				</x:label>
+				<div class="wd-image-box">
+					<image id="imageCmp" width="100%"
+						height="@load(vm.imageContent eq null ? '110px' : '')"
+						sclass="mis-image-upload"
+						content="@bind(vm.imageContent eq null ? imagevar2 : vm.imageContent ) 
+									@save(vm.imageContent, before='saveCanLamSang')"
+						style="margin-bottom: 5px;background-color: rgb(238, 238, 238);">
+					</image>
+					<label zclass="error" value="@load(vmsgs['error'])" />
+				</div>
+				<div zclass="form-group wd-vmargin-space">
+					<hlayout>
+						<button label="Chọn hình"
+							sclass="mis-btn-group mis-btn-lucent"
+							upload="true,maxsize=10000,accept=.png|.jpg"
+							onUpload="@command('attachImages',media=event.media,vmsgs=vmsgs)"
+							image="/img/icon_upload.png" />
+
+						<a href="#" sclass="mis-remove-image"
+							visible="@load(!empty vm.imageContent)"
+							onClick="@command('deleteImg')">
+							<n:i class="fa fa-trash-o"></n:i>
+							Xóa
+						</a>
+					</hlayout>
+					<n:small>
+						*Hỗ trợ định dạng *.png, *.jpg, tối đa 10MB
+					</n:small>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Tiêu đề
+				<n:span class="required">*</n:span>
+			</n:span>
+			<textbox class="hv-textbox" maxlength="255"
+					value="@bind(vm.tieuDe) @save(vm.tieuDe, before='saveCanLamSang')"/>
+			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+					Ghi chú
+					<n:span class="required">*</n:span>
+				</n:span>
+				<textbox class="form-control" rows="3"  width="100%" maxlength="1000"
+					value="@bind(vm.ghiChu) @save(vm.ghiChu, before='saveCanLamSang')"/>
+			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+	</div>
+	<div class="row box-footer box-thaotac">
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.chitietbenhan_them) or (!vm.noId() and entry.quyen.chitietbenhan_sua)) and !checkView}"
+			onClick="@command('saveCanLamSang', vmArgs=vmArgs, attr='listCanLamSangByIdChiTietBenhAn',wdn=wdn)">
+			<n:i class="icon-save"></n:i>Lưu 
+		</x:button>
+		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">
+			<n:i class="icon-cancel3"></n:i>Đóng
+		</x:button>
+	</div>
+</window>
+</idspace>

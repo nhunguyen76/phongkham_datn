@@ -34,6 +34,14 @@ public class HoSoThongTinService extends BasicService<HoSoThongTin> {
 		return list;
 	}
 	
+	//Lấy danh sách bác sĩ
+	public List<HoSoThongTin> getListBacSi() {
+		VaiTro vaiTro = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("bacsi")).fetchFirst();
+		JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.taiKhoan.vaiTros.any().eq(vaiTro));
+		return q.fetch();
+	}
+	
+	// lấy toàn bộ danh sách nhân viên
 	public JPAQuery<HoSoThongTin> getListThongTinNhanVien() {
 		String keyword = MapUtils.getString(argDeco(), Labels.getLabel("param.tukhoa"), "").trim();
 		VaiTro vaiTroBenhNhan = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("benhnhan")).fetchFirst();

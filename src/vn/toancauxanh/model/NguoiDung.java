@@ -656,6 +656,7 @@ public class NguoiDung extends Model<NguoiDung> {
 		};
 	}
 
+	@Transient
 	public String getMatKhau2() {
 		return matKhau2;
 	}

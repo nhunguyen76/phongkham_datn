@@ -30,6 +30,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Object;
 
+import vn.toancauxanh.cms.service.CanLamSangService;
 import vn.toancauxanh.cms.service.ChiTietBenhAnService;
 import vn.toancauxanh.cms.service.DichVuService;
 import vn.toancauxanh.cms.service.HoSoBenhAnService;
@@ -164,9 +165,23 @@ public class Entry extends BaseObject<Object> {
 	public String CHITIETBENHANXOA = "";
 	@Value("${url.chitietbenhan}" + ":" + "${action.sua}")
 	public String CHITIETBENHANSUA = "";
+	
+	@Value("${url.canlamsang}")
+	public String CANLAMSANG = "";
+	@Value("${url.canlamsang}" + ":" + "${action.xem}")
+	public String CANLAMSANGXEM = "";
+	@Value("${url.canlamsang}" + ":" + "${action.them}")
+	public String CANLAMSANGTHEM = "";
+	@Value("${url.canlamsang}" + ":" + "${action.list}")
+	public String CANLAMSANGLIST = "";
+	@Value("${url.canlamsang}" + ":" + "${action.xoa}")
+	public String CANLAMSANGXOA = "";
+	@Value("${url.canlamsang}" + ":" + "${action.sua}")
+	public String CANLAMSANGSUA = "";
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN };
+		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN,
+				CANLAMSANG};
 	}
 
 	public String[] getACTIONS() {
@@ -321,6 +336,10 @@ public class Entry extends BaseObject<Object> {
 	
 	public ChiTietBenhAnService getChiTietBenhAns() {
 		return new ChiTietBenhAnService();
+	}
+	
+	public CanLamSangService getCanLamSangs() {
+		return new CanLamSangService();
 	}
 	
 	public final ImageService getImages() {
