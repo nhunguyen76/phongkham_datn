@@ -213,7 +213,15 @@
 															<label value="@bind(each.chanDoan)" style="display:block"/>
 															<label value="@bind(each.thuThuat)" style="display:block"/>
 															<div class="text-align-center grid-action">
-																<x:a href="#" class="col-edit" title ="Chỉnh sửa"
+															     <x:a
+															     	href="#" class="col-edit" title="Toa thuốc"
+															     	zk:if="${entry.quyen.chitietdonthuoc_sua}"
+															     	onClick="@command(vm.showChiTietBenhAn(item.id))">
+															     	<n:i
+															     		class="icon-ds">
+															     	</n:i>
+															     </x:a>
+															     <x:a href="#" class="col-edit" title ="Chỉnh sửa"
 																zk:if="${entry.quyen.chitietbenhan_sua}" onClick="@command('redirectPage', zul='chitietbenhan/view.zul',vmArgs=vm,vm=item)"><n:i class="icon-edit"></n:i></x:a>
 																<x:a href="#" class="col-del" title="Xóa"
 				                          							zk:if="${entry.quyen.dichvu_xoa}"	

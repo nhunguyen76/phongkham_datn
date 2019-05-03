@@ -84,12 +84,12 @@
 					</li>					
 					<li
 						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'hosobenhnhan' 
-	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ||  resource eq 'loaicongtrinh'
+	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ||  resource eq 'thuoc'
 	     				||  resource eq 'dichvu' ||  resource eq 'hangmuccongtrinh' ||  resource eq 'quocgia' ?'active-menu':''}"
 						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.hosobenhnhan_lietke
 	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.dichvu_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
 	     				|| entry.quyen.vaitro_lietke || entry.quyen.phongban_lietke || entry.quyen.quantrihethong_lietke
-	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke || entry.quyen.loaicongtrinh_lietke 
+	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke || entry.quyen.thuoc_lietke 
 	     				|| entry.quyen.nhomdichvu_lietke || entry.quyen.hangmuccongtrinh_lietke || entry.quyen.quocgia_lietke ) and !dakhoa }">
 
 						<a class="link-menu" href="javascript:;">
@@ -108,9 +108,9 @@
 							</li>
 							
 							<li class="menu-items"
-								zk:if="${entry.quyen.loaicongtrinh_lietke}">
+								zk:if="${entry.quyen.thuoc_lietke}">
 								<a class="item-link"
-									href="${execution.contextPath}/loaicongtrinh">
+									href="${execution.contextPath}/thuoc">
 									Thuốc
 								</a>
 							</li>

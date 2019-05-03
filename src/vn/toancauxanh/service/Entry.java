@@ -32,11 +32,13 @@ import org.zkoss.zhtml.Object;
 
 import vn.toancauxanh.cms.service.CanLamSangService;
 import vn.toancauxanh.cms.service.ChiTietBenhAnService;
+import vn.toancauxanh.cms.service.ChiTietDonThuocService;
 import vn.toancauxanh.cms.service.DichVuService;
 import vn.toancauxanh.cms.service.HoSoBenhAnService;
 import vn.toancauxanh.cms.service.ImageService;
 import vn.toancauxanh.cms.service.LanguageService;
 import vn.toancauxanh.cms.service.SettingService;
+import vn.toancauxanh.cms.service.ThuocService;
 import vn.toancauxanh.gg.model.HoSoThongTin;
 import vn.toancauxanh.model.GopYPhanMem;
 import vn.toancauxanh.model.VaiTro;
@@ -178,10 +180,36 @@ public class Entry extends BaseObject<Object> {
 	public String CANLAMSANGXOA = "";
 	@Value("${url.canlamsang}" + ":" + "${action.sua}")
 	public String CANLAMSANGSUA = "";
+	
+	@Value("${url.thuoc}")
+    public String THUOC = "";
+    @Value("${url.thuoc}" + ":" + "${action.xem}")
+    public String THUOCXEM = "";
+    @Value("${url.thuoc}" + ":" + "${action.them}")
+    public String THUOCTHEM = "";
+    @Value("${url.thuoc}" + ":" + "${action.list}")
+    public String THUOCLIST = "";
+    @Value("${url.thuoc}" + ":" + "${action.xoa}")
+    public String THUOCXOA = "";
+    @Value("${url.thuoc}" + ":" + "${action.sua}")
+    public String THUOCSUA = "";
+    
+    @Value("${url.chitietdonthuoc}")
+    public String CHITIETDONTHUOC = "";
+    @Value("${url.chitietdonthuoc}" + ":" + "${action.xem}")
+    public String CHITIETDONTHUOCXEM = "";
+    @Value("${url.chitietdonthuoc}" + ":" + "${action.them}")
+    public String CHITIETDONTHUOCTHEM = "";
+    @Value("${url.chitietdonthuoc}" + ":" + "${action.list}")
+    public String CHITIETDONTHUOCLIST = "";
+    @Value("${url.chitietdonthuoc}" + ":" + "${action.xoa}")
+    public String CHITIETDONTHUOCXOA = "";
+    @Value("${url.chitietdonthuoc}" + ":" + "${action.sua}")
+    public String CHITIETDONTHUOCSUA = "";
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN,
-				CANLAMSANG};
+		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN, 
+				CANLAMSANG, THUOC, CHITIETDONTHUOC};
 	}
 
 	public String[] getACTIONS() {
@@ -341,6 +369,14 @@ public class Entry extends BaseObject<Object> {
 	public CanLamSangService getCanLamSangs() {
 		return new CanLamSangService();
 	}
+	
+	public ThuocService getThuocs() {
+        return new ThuocService();
+    }
+	
+	public ChiTietDonThuocService getChiTietDonThuocs() {
+        return new ChiTietDonThuocService();
+    }
 	
 	public final ImageService getImages() {
 		return new ImageService();
