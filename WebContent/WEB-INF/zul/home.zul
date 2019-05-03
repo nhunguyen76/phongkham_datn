@@ -70,7 +70,6 @@
 	<label class="tb-khong-quyen" if="${dakhoa}">Tài khoản của bạn đã bị khóa!</label>
    
   </div>
-  <z:include src="/WEB-INF/zul/common/footer.zhtml"></z:include>
 
   <!-- include scripts.html -->
  <script src="/backend/assets/scripts/vendor-d48965241f.min.js"></script>

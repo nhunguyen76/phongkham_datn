@@ -32,15 +32,108 @@
 								</image>
 				    		</div>							
 						</div>
-				   </div>
+				    	<div class="div-image-btn">
+				    		Hình ảnh
+				    	</div>
+					</div>
 				</div>
 				<div class="col-sm-10">
+					<div class= "row list-menu-sukien">
+						<div class="box-content-full">
+							<n:section class="box-result">
+					        	<div class="box-list-report">
+					        		<div class="box-report-top flex-list">
+					        			<n:p class="title-profile-benhnhan ">
+					        				Thông tin cá nhân
+					        			</n:p>
+					        		</div>
+					        		<div class="row list-menu-sukien">
+					        			<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Họ và tên
+					        					<n:span class="required">*</n:span>
+					        				</n:span>
+					        				<textbox width="100%" readonly="true"
+					        					class="hv-textbox" maxlength="255"
+					        					value="@load(vm.hoSoThongTin.hoVaTen)"/>
+					        			</div>
+					        			<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Ngày sinh<n:span class="required">*</n:span>
+					        				</n:span>
+					        				<datebox format="dd/MM/yyyy" readonly="true"
+					        					value="@bind(vm.hoSoThongTin.ngaySinh)"	width="100%">
+					        				</datebox>
+					        			</div>
+										<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Số điện thoại
+					        				</n:span>
+					        				<textbox width="100%" readonly="true" class="hv-textbox"
+					        					value="@bind(vm.hoSoThongTin.soDienThoai)"/>
+					        			</div>
+					        			<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Địa chỉ
+					        				</n:span>
+					        				<textbox width="100%" readonly="true" class="hv-textbox"
+					        					value="@bind(vm.hoSoThongTin.diaChi)" />
+					        			</div>
+					        			<div class="col-md-4">
+						        			<n:span
+						        				class="title-issue title-issue-detail">
+						        				Chứng minh nhân dân
+						        			</n:span>
+						        			<textbox width="100%"
+						        				readonly="true" class="hv-textbox"
+						        				value="@bind(vm.hoSoThongTin.cmnd)" />
+						        		</div>
+						        		<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Giới tính
+					        				</n:span>
+					        				<textbox width="100%"
+						        				readonly="true" class="hv-textbox"
+						        				value="@bind(vm.hoSoThongTin.gioiTinh.text)" />
+					        			</div>
+					        			<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Email
+					        				</n:span>
+					        				<textbox width="100%" readonly="true" class="hv-textbox"
+						        				value="@bind(vm.hoSoThongTin.taiKhoan.email)" />
+					        			</div>
+					        		</div>
+						        	<div class="row-vc-process list-menu-sukien">
+										<div class="box-thaotac box-thaotac-new">
+											<div class="range-menu position-button flex-right">
+												<div class="position-flex">
+													<x:span>
+														<x:a class="btn btn-success margin-button width-button" zk:if="${entry.quyen.hosothongtin_them}"
+															zk:onClick="@command('redirectPage', zul='hosothongtin/view.zul',vmArgs='vn.toancauxanh.cms.service.HoSoThongTinService',vm=vm.hoSoThongTin)">
+															Chỉnh sửa
+														</x:a>
+													</x:span>
+												</div>
+											</div>
+										</div>
+									</div>
+					        	</div>
+							</n:section>
+						</div>
+					</div>
 					<div class="row list-menu-sukien">
 						<div class="box-content-full">
 							<n:section class="box-result">
 								<div class="box-list-report">
 									<div class="box-report-top range-menu">
-										<n:p class="title-issue title-list-report">
+										<n:p class="title-profile-benhnhan">
 											Bệnh án
 										</n:p>
 										<div class="box-button-list">
@@ -63,12 +156,12 @@
 												<template name="model">
 													<row apply="org.zkoss.bind.BindComposer" viewModel="@id('item') @init(each)">
 														<label value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)" style="text-align:center;display:block"/>
-														<a label="@bind(each.dichVu.tenDichVu)" style="display:block"/>
+														<label value="@bind(each.dichVu.tenDichVu)" style="display:block"/>
 														<label value="@load(each.ngayBatDau) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
 														<div class="text-align-center grid-action">
 															<x:a href="#" class="col-edit" title ="Chỉnh sửa"
 															zk:if="${entry.quyen.hosobenhan_sua}" onClick="@command('redirectPage', zul='hosobenhan/view.zul',vmArgs=vm,vm=item)"><n:i class="icon-edit"></n:i></x:a>
-															<x:a href="#" class="col-edit" title ="Lịch sử điều trị"
+															<x:a href="#" class="col-edit" title ="Chi tiết điều trị"
 															zk:if="${entry.quyen.hosobenhan_sua}" onClick="@command(vm.showChiTietBenhAn(item.id))"><n:i class="icon-ds"></n:i></x:a>
 															<x:a href="#" class="col-del" title="Xóa"
 			                          							zk:if="${entry.quyen.hosobenhan_xoa}"	

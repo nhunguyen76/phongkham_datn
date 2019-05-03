@@ -69,20 +69,6 @@
 							<span class="text-menu">
 								Quản lý lịch hẹn</span>
 						</a>
-						<ul class="sub-menu menu-pull-left" style="width: 230px;" zk:if="${entry.quyen.chungchihanhnghecanhan_lietke and !dakhoa}">
-							<li class="menu-items">
-								<a class="item-link"
-									href="${execution.contextPath}/chungchihanhnghecanhan">
-									Chứng chỉ hành nghề cá nhân
-								</a>
-							</li>
-							<li class="menu-items" zk:if="${entry.quyen.chungchihanhnghetochuc_lietke and !dakhoa}">
-								<a class="item-link"
-									href="${execution.contextPath}/chungchihanhnghetochuc">
-									Chứng chỉ hành nghề tổ chức
-								</a>
-							</li>							
-						</ul>
 					</li>
 					
 					<li
@@ -93,7 +79,7 @@
 							<span
 								class="icon-users-menu">
 							</span>
-							<span class="text-menu">Quản lý nhân viên</span>
+							<span class="text-menu">Hồ sơ nhân viên</span>
 						</a>
 					</li>					
 					<li
@@ -120,110 +106,20 @@
 									Dịch vụ
 								</a>
 							</li>
-							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.dichvu_lietke || entry.quyen.nhomdichvu_lietke}">
-								<a class="item-link menu-con" tabindex="-1"
-									href="javascript:void(0)">
-									Quản lý dịch vụ
-									<span class="caret-right"></span>
-								</a>
-								<ul class="dropdown-menu box-menu-con">
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.dichvu_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/dichvu" class="menu-items dropdown-menu-con">
-											Dự án
-										</a>
-									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nhomdichvu_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/nhomdichvu" class="menu-items dropdown-menu-con">
-											Nhóm dự án
-										</a>
-									</li>
-								</ul>
-							</li>
-
-							
 							
 							<li class="menu-items"
 								zk:if="${entry.quyen.loaicongtrinh_lietke}">
 								<a class="item-link"
 									href="${execution.contextPath}/loaicongtrinh">
-									Loại công trình
+									Thuốc
 								</a>
 							</li>
-							<li class="menu-items"
-								zk:if="${entry.quyen.hangmuccongtrinh_lietke}">
-								<a class="item-link"
-									href="${execution.contextPath}/hangmuccongtrinh">
-									Hạng mục công trình
-								</a>
-							</li>
-							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.donvibanhanh_lietke || entry.quyen.capdonvihanhchinh_lietke
-							|| entry.quyen.donvihanhchinh_lietke}">
-								<a class="item-link menu-con" tabindex="-1"
-									href="javascript:void(0)">
-									Quản lý đơn vị
-									<span class="caret-right"></span>
-								</a>
-								<ul class="dropdown-menu box-menu-con">
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.donvibanhanh_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/donvibanhanh" class="menu-items dropdown-menu-con">
-											Đơn vị ban hành
-										</a>
-									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.capdonvihanhchinh_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/capdonvihanhchinh" class="menu-items dropdown-menu-con">
-											Cấp đơn vị hành chính
-										</a>
-									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.donvihanhchinh_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/donvihanhchinh" class="menu-items dropdown-menu-con">
-											Đơn vị hành chính
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nguoidung_lietke || entry.quyen.vaitro_lietke || entry.quyen.lichsunguoidung_lietke}">
-								<a class="item-link menu-con" tabindex="-1"
-									href="javascript:void(0)">
-									Quản lý người dùng
-									<span class="caret-right"></span>
-								</a>
-								<ul class="dropdown-menu box-menu-con">
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.nguoidung_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/nguoidung" class="menu-items dropdown-menu-con">
-											Người dùng
-										</a>
-									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.lichsunguoidung_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/lichsunguoidung" class="menu-items dropdown-menu-con">
-											Lịch sử người dùng
-										</a>
-									</li>
-									<li class="menu-items dropdown-menu-con" zk:if="${entry.quyen.vaitro_lietke}">
-										<a tabindex="-1" href="${execution.contextPath}/vaitro" class="menu-items dropdown-menu-con">
-											Vai trò
-										</a>
-									</li>
-								</ul>
-							</li>
+							
 							<li class="menu-items"
 								zk:if="${entry.quyen.phongban_lietke}">
 								<a class="item-link"
 									href="${execution.contextPath}/phongban">
-									Phòng ban
-								</a>
-							</li>
-							<li class="menu-items"
-								zk:if="${entry.quyen.quocgia_lietke}">
-								<a class="item-link"
-									href="${execution.contextPath}/quocgia">
-									Quốc gia
-								</a>
-							</li>
-							<li class="menu-items"
-								zk:if="${entry.quyen.cauhinhhethong_lietke}">
-								<a class="item-link"
-									href="${execution.contextPath}/cauhinhhethong">
-									Cấu hình
+									Tài khoản
 								</a>
 							</li>
 						</ul>

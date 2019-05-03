@@ -265,7 +265,7 @@ input[type=text], textarea {
 
 .icon-ds:before {
 	content: "\e906";
-	color: #c0c0c0;
+	color: #fcda1b;
 }
 
 .icon-edit:before {
@@ -353,25 +353,25 @@ input[type=text], textarea {
 
 .icon-ds-menu:before {
 	content: "\e906";
-	color: #c0c0c0;
+	color: #646464;
 	font-size: 25px;
 }
 
 .icon-calendar-menu:before {
 	content: "\e901";
-	color: #c0c0c0;
+	color: #646464;
 	font-size: 25px;
 }
 
 .icon-users-menu:before {
 	content: "\e913";
-	color: #c0c0c0;
+	color: #646464;
 	font-size: 25px;
 }
 
 .icon-setting-menu:before {
 	content: "\e90f";
-	color: #c0c0c0;
+	color: #646464;
 	font-size: 25px;
 }
 
@@ -1697,6 +1697,17 @@ input[type=text], textarea {
 	font-size: 15px;
 	color: #464646;
 	font-family: 'Roboto-Bold';
+}
+
+.title-profile-benhnhan {
+/* 	font-family: Roboto, sans-serif;
+	font-weight: 700; */
+	margin: 7px 0;
+	padding-bottom:7px;
+	font-size: 20px;
+	color: #2dbd60;
+	font-family: "Rubik", sans-serif;
+	font-weight: 500;
 }
 
 .title-list-report {
@@ -3111,15 +3122,15 @@ button.toast-close-button {
 
 .z-messagebox-window .z-window-header, .z-window-modal .z-window-header
 	{
-	padding: 18px 20px;
-	font-family: 'Roboto-Bold';
+	padding: 13px 15px;
+	font-family: 'Roboto';
 	font-weight: 700;
 	text-transform: uppercase;
 	font-size: 18px;
 	color: #fff;
 	letter-spacing: 0;
 	line-height: 20px;
-	background: #398edf
+	background: #acd2bc
 }
 
 .z-messagebox-window, .z-window-modal {
@@ -3129,8 +3140,8 @@ button.toast-close-button {
 
 .z-window-close {
 	font-size: 17px;
-	background: #398edf;
-	color: #d1d9e1;
+	background: #acd2bc;
+	color: #ffffff;
 	border: none
 }
 
@@ -3457,7 +3468,7 @@ row-support>div {
 }
 
 .ds-menu .sub-menu .menu-items:not(:last-child){
-	border-bottom:1px solid #1870db
+	border-bottom:1px solid #ffffff
 }
 .ds-menu .sub-menu .sub-menu-haschildren {
 	position: relative
@@ -3478,14 +3489,14 @@ row-support>div {
 }
 
 .ds-menu .sub-menu .item-link {
-	background: #1085f5;
-	color: #fff;
+	background: #ffffff;
+	color: #808080;
 	padding: 16px 30px 16px 20px;
 	font-size: 13px;
 	display: inline-block;
 	text-align: left;
 	width: 100%;
-	font-family: 'Roboto-Bold';
+	font-family: 'Roboto';
 	/* font-weight: 700 */
 }
 
@@ -3525,7 +3536,7 @@ row-support>div {
 
 .ds-menu .sub-menu .item-link:focus, .ds-menu .sub-menu .item-link:hover
 	{
-	background: #006ad0
+	background: #dddddd;
 }
 
 .ds-menu .sub-menu:after {
@@ -3538,7 +3549,7 @@ row-support>div {
 	height: 0;
 	border-left: .7rem solid transparent;
 	border-right: .7rem solid transparent;
-	border-bottom: .7rem solid #1085f5
+	border-bottom: .7rem solid #ffffff
 }
 
 .top-header .account .child-acc {
