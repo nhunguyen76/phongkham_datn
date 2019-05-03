@@ -3,42 +3,54 @@
 		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
 		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
 		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
-		width="500px"
+		width="1000px"
 		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
 		whatever="@load(false,after='saveDonThuoc') @converter('vn.toancauxanh.service.DetachConverter')"
-		viewModel="@id('vm') @init(arg.model)"
+		viewModel="@id('vm') @init('vn.toancauxanh.cms.service.ChiTietDonThuocService')"
 		validationMessages="@id('vmsgs')">
 
 		<zscript><![CDATA[
 			vmArgs = arg.get("vmArgs");
 			strSave = arg.get("save");
+			import vn.toancauxanh.gg.model.ChiTietBenhAn;
+			ChiTietBenhAn thongTinDieuTri = new ChiTietBenhAn();
+			thongTinDieuTri = arg.get("model");
+			vm.setSelectedIdThongTinDieuTri(thongTinDieuTri.getId());
+			
 		]]></zscript> 
 		
 	<div class="row box-body">
-        <grid hflex="min" model="@init(vm.dsThuoc) @template('row')">
-            <columns height="22px">
-                <column width="330px" label="Mã thuốc" iconSclass="z-icon-book" />
-                <column width="120px" label="Tên thuốc" />
-                <column width="100px" label="Số lượng" />
-                <column width="150px" label="Đơn vị" />
-                <column width="150px" label="Cách dùng" />
-            </columns>
-            <template name="row">
-                <row>
-                    <textbox inplace="true" width="100%"
-                             value="@bind(each.maThuoc)" />
-                    <textbox inplace="true" width="100%"
-                             value="@bind(each.tenThuoc)" />
-                    <textbox inplace="true" width="100%"
-                             value="@bind(each.soLuong)" />
-                    <textbox inplace="true" width="100%"
-                             value="@bind(each.donVi)" />
-                    <textbox inplace="true" width="100%"
-                             value="@bind(each.cachDung)" />
-                </row>
-            </template>
-        </grid>
-		
+		<div class="col-md-12 list-menu-sukien">
+			<div class="wrappre-tb">
+				<div class="wp-scrool">
+					<grid width="100%" id="grid"
+						model="@init(vm.chiTietToaThuoc) @template('row')"
+						class="table-report">
+						<columns height="22px">
+							<column width="120px" label="Mã thuốc" />
+							<column width="170px" label="Tên thuốc" />
+							<column width="100px" label="Số lượng" />
+							<column width="100px" label="Đơn vị" />
+							<column width="350px" label="Cách dùng" />
+						</columns>
+						<template name="row">
+							<row>
+								<textbox inplace="true" width="100%"
+									value="@bind(each.thuoc.maThuoc)" />
+								<textbox inplace="true" width="100%"
+									value="@bind(each.thuoc.tenThuoc)" />
+								<textbox inplace="true" width="100%"
+									value="@bind(each.soLuong)" />
+								<textbox inplace="true" width="100%"
+									value="@bind(each.donVi)" />
+								<textbox inplace="true" width="100%"
+									value="@bind(each.cachDung)" />
+							</row>
+						</template>
+					</grid>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
 		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"

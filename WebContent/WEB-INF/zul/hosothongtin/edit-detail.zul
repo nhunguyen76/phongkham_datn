@@ -214,16 +214,21 @@
 															<label value="@bind(each.thuThuat)" style="display:block"/>
 															<div class="text-align-center grid-action">
 															     <x:a
-															     	href="#" class="col-edit" title="Toa thuốc"
+															     	href="#" class="col-edit" title="Đơn thuốc"
 															     	zk:if="${entry.quyen.chitietdonthuoc_sua}"
-															     	onClick="@command(vm.showChiTietBenhAn(item.id))">
+															     	onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul',vmArgs=vm,vm=item)">
+															     	<n:i class="icon-edit"></n:i>
+															     </x:a>
+															     
+															     <x:a
+															     	href="#" class="col-edit" title="Chỉnh sửa"
+															     	zk:if="${entry.quyen.chitietbenhan_sua}"
+															     	onClick="@command('redirectPage', zul='chitietbenhan/view.zul',vmArgs=vm,vm=item)">
 															     	<n:i
-															     		class="icon-ds">
+															     		class="icon-edit">
 															     	</n:i>
 															     </x:a>
-															     <x:a href="#" class="col-edit" title ="Chỉnh sửa"
-																zk:if="${entry.quyen.chitietbenhan_sua}" onClick="@command('redirectPage', zul='chitietbenhan/view.zul',vmArgs=vm,vm=item)"><n:i class="icon-edit"></n:i></x:a>
-																<x:a href="#" class="col-del" title="Xóa"
+															     <x:a href="#" class="col-del" title="Xóa"
 				                          							zk:if="${entry.quyen.dichvu_xoa}"	
 				                          						onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
 				                          						<n:i class="icon-cancel"></n:i></x:a>

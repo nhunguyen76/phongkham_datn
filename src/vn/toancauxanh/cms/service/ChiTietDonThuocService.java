@@ -12,12 +12,23 @@ import vn.toancauxanh.service.BasicService;
 
 public class ChiTietDonThuocService extends BasicService<ChiTietDonThuocService> {
 
-    private Long selectedIdThongTinDieu;
+    private Long selectedIdThongTinDieuTri;
     
-    List<ChiTietDonThuoc> getChiTietToaThuoc() {
+    public Long getSelectedIdThongTinDieuTri() {
+		return selectedIdThongTinDieuTri;
+	}
+
+	public void setSelectedIdThongTinDieuTri(Long selectedIdThongTinDieuTri) {
+		this.selectedIdThongTinDieuTri = selectedIdThongTinDieuTri;
+	}
+
+	public List<ChiTietDonThuoc> getChiTietToaThuoc() {
         List<ChiTietDonThuoc> list = new ArrayList<>();
-        JPAQuery<ChiTietDonThuoc> q = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.thongTinDieuTri.id.eq(selectedIdThongTinDieu));
-        q.orderBy(QChiTietBenhAn.chiTietBenhAn.ngayTao.asc());
+        JPAQuery<ChiTietDonThuoc> q = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.thongTinDieuTri.id.eq(selectedIdThongTinDieuTri));
+        q.orderBy(QChiTietDonThuoc.chiTietDonThuoc.ngayTao.asc());
+        if(list.isEmpty()) {
+        	list.add(new ChiTietDonThuoc());
+        }
         return list;
     }
 }
