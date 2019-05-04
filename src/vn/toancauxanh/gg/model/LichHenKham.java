@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 
 import vn.toancauxanh.gg.model.enums.TrangThaiXuLyEnum;
 import vn.toancauxanh.model.Model;
@@ -17,6 +18,7 @@ public class LichHenKham extends Model<LichHenKham> {
     private HoSoThongTin nguoiDuyet; // Nguoi duyet lich kham
     private String noiDung;
 
+    @ManyToOne
     public HoSoThongTin getBenhNhan() {
         return benhNhan;
     }
@@ -42,6 +44,7 @@ public class LichHenKham extends Model<LichHenKham> {
         this.trangThaiXuLy = trangThaiXuLy;
     }
 
+    @ManyToOne
     public HoSoThongTin getNguoiDuyet() {
         return nguoiDuyet;
     }
