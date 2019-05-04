@@ -53,7 +53,6 @@ html {
 
 .wrapper {
 	min-height: calc(100% - 115px);
-	background-color: #EEF7FF;
 }
 
 body {
@@ -201,6 +200,11 @@ input[type=text], textarea {
 .icon-arrdown:before {
 	content: "\e918";
 	color: #cfcfcf
+}
+
+.icon-eye:before {
+    content: "\f082";
+    color: #f57900
 }
 
 .icon-analysis:before {
@@ -1452,7 +1456,7 @@ input[type=text], textarea {
 
 .main-container .center-body {
 	display: block;
-	width: 95%;
+	width: 80%;
 	margin: auto;
 }
 
@@ -1908,7 +1912,7 @@ input[type=text], textarea {
 }
 
 .wrappre-tb {
-	border: 1px solid #eee;
+/* 	border: 1px solid #eee; */
 	overflow: hidden;
 	border-radius: 2px
 }
@@ -3082,12 +3086,12 @@ button.toast-close-button {
 	{
 	font-family: Roboto, sans-serif;
 	font-weight: 500;
-	font-size: 14px;
+	font-size: 15px;
 	color: #000000;
 	letter-spacing: 0;
 	padding-left: 9px;
 	padding-right: 9px;
-	background-color: #f3f1f1
+	background-color: #ddd
 }
 
 .z-grid-body .z-row-content a, .z-grid-body .z-row-content span {

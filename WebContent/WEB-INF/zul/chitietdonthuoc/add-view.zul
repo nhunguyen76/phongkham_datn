@@ -3,7 +3,7 @@
 		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
 		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
 		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
-		width="1000px"
+		width="1200px"
 		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
 		whatever="@load(false,after='saveDonThuoc') @converter('vn.toancauxanh.service.DetachConverter')"
 		viewModel="@id('vm') @init('vn.toancauxanh.cms.service.ChiTietDonThuocService')"
@@ -16,35 +16,46 @@
 			ChiTietBenhAn thongTinDieuTri = new ChiTietBenhAn();
 			thongTinDieuTri = arg.get("model");
 			vm.setSelectedIdThongTinDieuTri(thongTinDieuTri.getId());
-			
+			vm.getChiTietToaThuoc();
 		]]></zscript> 
 		
 	<div class="row box-body">
 		<div class="col-md-12 list-menu-sukien">
-			<div class="wrappre-tb">
+            <div class="box-report-top flex-list">
+            	<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" 
+                    onClick="@command(vm.addRowThuoc())">
+		            <n:i class="icon-save"></n:i>Thêm thuốc 
+		        </x:button>
+            </div>
+            <div class="wrappre-tb">
 				<div class="wp-scrool">
-					<grid width="100%" id="grid"
-						model="@init(vm.chiTietToaThuoc) @template('row')"
+					<grid width="100%" id="grid" 
+						model="@load(vm.donThuoc)" height="300px"
 						class="table-report">
 						<columns height="22px">
-							<column width="120px" label="Mã thuốc" />
 							<column width="170px" label="Tên thuốc" />
 							<column width="100px" label="Số lượng" />
 							<column width="100px" label="Đơn vị" />
 							<column width="350px" label="Cách dùng" />
+                            <column width="350px" label="Ghi chú" />
+                            <column width="50px" label="Xóa "/>
 						</columns>
-						<template name="row">
+						<template name="model">
 							<row>
 								<textbox inplace="true" width="100%"
-									value="@bind(each.thuoc.maThuoc)" />
-								<textbox inplace="true" width="100%"
-									value="@bind(each.thuoc.tenThuoc)" />
+									value="@bind(each.tenThuoc)"/>
 								<textbox inplace="true" width="100%"
 									value="@bind(each.soLuong)" />
 								<textbox inplace="true" width="100%"
 									value="@bind(each.donVi)" />
 								<textbox inplace="true" width="100%"
 									value="@bind(each.cachDung)" />
+                                <textbox inplace="true" width="100%"
+                                    value="@bind(each.ghiChu)" />
+                                <x:button class="btn btn-danger btn-xs"  zk:if="${entry.quyen.congviec_xoa}"
+                                        onClick="@command('onDeleteThuoc',vm=vm, item=each)">
+                                        <n:i class="icon-cancel2"></n:i>
+                                </x:button> 
 							</row>
 						</template>
 					</grid>
@@ -54,7 +65,7 @@
 	</div>
 	<div class="row box-footer box-thaotac">
 		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
-			onClick="@command('saveDonThuoc', list=vmArgs, attr='targetQuery',wdn=wdn)">
+			onClick="@command(vm.saveDonThuoc(wdn))">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>
 		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">

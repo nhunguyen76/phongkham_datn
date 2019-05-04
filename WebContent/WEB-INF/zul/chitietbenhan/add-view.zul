@@ -49,24 +49,22 @@
 						label="@load(empty each ? 'Chọn bác sĩ' :  each.hoVaTen)" />
 				</template>
 			</combobox>
+			<label class="error"
+                value="@load(vmsgs[self.previousSibling])" />
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
 				Chẩn đoán
-				<n:span class="required">*</n:span>
 			</n:span>
 			<textbox class="form-control" rows="3"  width="100%" maxlength="1000"
 					value="@bind(vm.chanDoan) @save(vm.chanDoan, before='saveChiTietBenhAn')"/>
-			<label class="error" value="@load(vmsgs[self.previousSibling])" />
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
 					Thủ Thuật
-					<n:span class="required">*</n:span>
 				</n:span>
 				<textbox class="form-control" rows="3"  width="100%" maxlength="1000"
 					value="@bind(vm.thuThuat) @save(vm.thuThuat, before='saveChiTietBenhAn')"/>
-			<label class="error" value="@load(vmsgs[self.previousSibling])" />
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">

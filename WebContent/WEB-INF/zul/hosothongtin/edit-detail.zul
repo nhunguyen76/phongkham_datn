@@ -217,7 +217,7 @@
 															     	href="#" class="col-edit" title="Đơn thuốc"
 															     	zk:if="${entry.quyen.chitietdonthuoc_sua}"
 															     	onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul',vmArgs=vm,vm=item)">
-															     	<n:i class="icon-edit"></n:i>
+															     	<n:i class="icon-eye"></n:i>
 															     </x:a>
 															     
 															     <x:a

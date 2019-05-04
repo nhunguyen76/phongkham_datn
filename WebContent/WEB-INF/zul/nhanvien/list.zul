@@ -4,7 +4,7 @@
 		self.page.title= "Quản lý nhân viên";
 	]]></zscript>
 	<n:section class="main-container">
-		<div class="center">
+		<div class="center-body">
 			<div class="bar-top-content">
 				<n:h2 class="title-page-main">QUẢN LÝ NHÂN VIÊN</n:h2>
 			</div>

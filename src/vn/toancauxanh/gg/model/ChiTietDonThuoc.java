@@ -3,6 +3,11 @@ package vn.toancauxanh.gg.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.apache.commons.lang3.StringUtils;
+import org.zkoss.bind.ValidationContext;
+import org.zkoss.bind.validator.AbstractValidator;
 
 import vn.toancauxanh.model.Model;
 
@@ -10,21 +15,29 @@ import vn.toancauxanh.model.Model;
 @Table(name = "chitietdonthuoc")
 public class ChiTietDonThuoc extends Model<ChiTietDonThuoc>{
 
-    private Thuoc thuoc;
+    private String tenThuoc;
     private int soLuong;
-    private int donVi;
+    private String donVi;
     private String cachDung;
+    private String ghiChu;
     private ChiTietBenhAn thongTinDieuTri;
     
-    @ManyToOne
-    public Thuoc getThuoc() {
-        return thuoc;
+    public String getTenThuoc() {
+        return tenThuoc;
     }
-    
-    public void setThuoc(Thuoc thuoc) {
-        this.thuoc = thuoc;
+
+    public void setTenThuoc(String tenThuoc) {
+        this.tenThuoc = tenThuoc;
     }
-    
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
     public int getSoLuong() {
         return soLuong;
     }
@@ -33,14 +46,14 @@ public class ChiTietDonThuoc extends Model<ChiTietDonThuoc>{
         this.soLuong = soLuong;
     }
     
-    public int getDonVi() {
+    public String getDonVi() {
         return donVi;
     }
-    
-    public void setDonVi(int donVi) {
+
+    public void setDonVi(String donVi) {
         this.donVi = donVi;
     }
-    
+
     public String getCachDung() {
         return cachDung;
     }
@@ -56,6 +69,22 @@ public class ChiTietDonThuoc extends Model<ChiTietDonThuoc>{
     
     public void setThongTinDieuTri(ChiTietBenhAn thongTinDieuTri) {
         this.thongTinDieuTri = thongTinDieuTri;
+    }
+    
+  //Validation
+    @Transient
+    public AbstractValidator getValidatorStringUtitsNotBlank() {
+        return new AbstractValidator() {
+            @Override
+            public void validate(ValidationContext ctx) {
+                String value = (String) ctx.getProperty().getValue();
+                if (value.isEmpty()) {
+                    addInvalidMessage(ctx, "Không được để trống trường này.");
+                } else if (StringUtils.isBlank(value)) {
+                    addInvalidMessage(ctx, "Không được để khoảng trắng.");
+                }
+            }
+        };
     }
     
 }
