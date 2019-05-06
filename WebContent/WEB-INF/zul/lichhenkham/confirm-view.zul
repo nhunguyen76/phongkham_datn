@@ -12,41 +12,35 @@
 		<zscript><![CDATA[
 			vmArgs = arg.get("vmArgs");
 			strSave = arg.get("save");
-			vm.setBenhNhan(vmArgs);
 		]]></zscript> 
 		
 	<div class="row box-body">
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
-				Ngày hẹn
+				Bệnh nhân
+			</n:span>
+			<textbox class="hv-textbox" readonly="true" width="100%"
+				value="@bind(vm.benhNhan.hoVaTen) @save(vm.benhNhan.hoVaTen)">
+			</textbox>
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Thời gian đặt hẹn
 				<n:span class="required">*</n:span>
 			</n:span>
-			<datebox format="dd/MM/yyyy"
-				value="@bind(vm.thoiGianDatHen) @save(vm.thoiGianDatHen, before='saveLichHenKham') 
-							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
-				width="100%" placeholder="Nhập ngày hẹn">
+			<datebox format="dd/MM/yyyy" readonly="true" 
+				value="@bind(vm.thoiGianDatHen)"
+				width="100%">
 			</datebox>
-			<label class="error"
-				value="@load(vmsgs[self.previousSibling])" />
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
 				Buổi khám
-				<n:span class="required">*</n:span>
+			<n:span class="required">*</n:span>
 			</n:span>
-			<combobox model="@load(entry.lichHenKhams.buoiKhams)"
-				width="100%" readonly="true" class="hv-cbb"
-				placeholder="Chọn buổi khám"
-				value="@load(vm.buoiKham eq null ? '' : vm.buoiKham.text)"
-				selectedItem="@bind(vm.buoiKham) @save(vm.buoiKham, before={'saveLichHenKham'})
-							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
-				<template name="model">
-					<comboitem
-						label="@load(empty each ? 'Chọn buổi khám' :  each.text)" />
-				</template>
-			</combobox>
-			<label class="error"
-				value="@load(vmsgs[self.previousSibling])" />
+			<textbox class="hv-textbox" readonly="true" width="100%"
+				value="@bind(vm.buoiKham.text)">
+			</textbox>
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
@@ -54,8 +48,27 @@
 				<n:span class="required">*</n:span>
 			</n:span>
 			<spinner constraint="no negative,no zero"
-				value="@save(vm.thoiGianKhamUocTinh)" tabindex="10" /> 
+				value="@bind(vm.thoiGianKhamUocTinh)" tabindex="10" /> 
 			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Trạng thái
+				<n:span class="required">*</n:span>
+			</n:span>
+			<combobox model="@load(entry.lichHenKhams.trangThaiXuLys)"
+				width="100%" readonly="true" class="hv-cbb"
+				placeholder="Chọn trạng thái"
+				value="@load(vm.trangThaiXuLy eq null ? '' : vm.trangThaiXuLy.text)"
+				selectedItem="@bind(vm.trangThaiXuLy) @save(vm.trangThaiXuLy, before={'saveLichHenKham'})
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
+				<template name="model">
+					<comboitem
+						label="@load(empty each ? 'Chọn tình trạng' :  each.text)" />
+				</template>
+			</combobox>
+			<label class="error"
+				value="@load(vmsgs[self.previousSibling])" />
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
@@ -70,7 +83,7 @@
 	</div>
 	<div class="row box-footer box-thaotac">
 		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
-			onClick="@command('saveLichHenKham',wdn=wdn)">
+			onClick="@command('saveLichHenKhamConfirm',wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>
 		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">

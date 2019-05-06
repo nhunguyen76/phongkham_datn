@@ -3,7 +3,7 @@
 		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
 		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
 		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
-		width="1200px"
+		width="1155px"
 		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
 		whatever="@load(false,after='saveDonThuoc') @converter('vn.toancauxanh.service.DetachConverter')"
 		viewModel="@id('vm') @init('vn.toancauxanh.cms.service.ChiTietDonThuocService')"
@@ -22,9 +22,9 @@
 	<div class="row box-body">
 		<div class="col-md-12 list-menu-sukien">
             <div class="box-report-top flex-list">
-            	<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" 
+            	<x:button class="btn btn-success" style="margin-right: 10px;" 
                     onClick="@command(vm.addRowThuoc())">
-		            <n:i class="icon-save"></n:i>Thêm thuốc 
+		            <n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm thuốc 
 		        </x:button>
             </div>
             <div class="wrappre-tb">

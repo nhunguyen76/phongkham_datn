@@ -9,16 +9,46 @@
 				<n:h2 class="title-page-main">QUẢN LÝ HỒ SƠ BỆNH NHÂN</n:h2>
 			</div>
 			<div class="row">
-				<div class="col-sm-12">
 					<div class="box-content-full">
-						<n:section class="box-result">
+						<n:section class="box-result" style="padding-top:20px">
+							<div class="box-form-search" style="padding-left:10px">
+								<div class="col-sm-4">
+									<div class="form-group">
+										<x:label>Tên bệnh nhân</x:label>
+										<textbox class="keysearch" width="100%"
+											value="@bind(vm.paramHoVaTenBenhNhan)"
+											placeholder="Nhập tên bệnh nhân"
+											onOK="@command('cmd', notify=vm, attr='*')" />
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<x:label>
+											Chứng minh nhân dân
+										</x:label>
+										<textbox class="keysearch" width="100%"
+											value="@bind(vm.paramCMND)"
+											placeholder="Nhập chứng minh nhân dân"
+											onOK="@command('cmd', notify=vm, attr='*')" />
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<n:div class="form-group">
+										<x:label>Ngày sinh</x:label>
+										<datebox format="dd-MM-yyyy" width="100%" 
+											value="@bind(vm.paramNgaySinh)" />
+									</n:div>
+								</div>
+							</div>
 							<div class="box-form-search">
-								<n:form class="form-src padding-form-bt">
+								<n:form
+									class="form-src padding-form-bt">
 									<div class="row-box-src">
-										<textbox class="keysearch" value="@bind(vm.arg.tukhoa)" placeholder="Nhập tên bệnh nhân"
-													onOK="@command('cmd', notify=vm, attr='targetQueryNguoiDung')" />
-										<x:button class="btn-form-search btn-page" type="button" onClick="@command('cmd', notify=vm, attr='*')" >
-											<n:i class="icon-search"></n:i> Tìm kiếm
+										<x:button class="btn-form-search btn-page" type="button" style="float:right"
+											onClick="@command('cmd', notify=vm, attr='*')">
+											<n:i class="icon-search"></n:i>
+											Tìm kiếm
 										</x:button>
 									</div>
 								</n:form>
@@ -26,67 +56,98 @@
 							<div class="clearfix"></div>
 						</n:section>
 						<n:section class="box-result">
-				        	<div class="box-list-report">
-				          		<div class="box-report-top flex-list">
-				          			<n:p class="title-issue title-list-report margin-button-list">
-				          				Danh sách hồ sơ bệnh nhân
-				          			</n:p>
-	    							<x:a class="btn-add-new btn-page btn-flexbox" zk:if="${entry.quyen.hosothongtin_them}" 
-		    							onClick="@command('redirectPage', zul='hosothongtin/add.zul', vmArgs=vm, vm=null)">
-	    								<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
-	    							</x:a>
-				          		</div>
-				          		<div class="wrappre-tb">
-				          			<div class="wp-scrool">
-				          				<grid model="@load(vm.page(vm.targetQuery).fetch())"
-				          					width="100%" id="grid" class="table-report"
-				          					emptyMessage="Danh sách không có bệnh nhân nào" >
-				          					<columns>
-				          						<column label="STT" hflex="min" style="text-align: center;" />
-				          						<column label="Họ và tên" style="text-align: center;" />
-				          						<column label="CMND" hflex="min" style="text-align: center;" />
-				          						<column label="Giới tính" hflex="min" style="text-align: center;" />
-				          						<column label="Ngày sinh" hflex="min" style="text-align: center;" />
-				          						<column label="Số điện thoại" hflex="min" style="text-align: center;" />
-				          						<column label="Địa chỉ" style="text-align: center;" />
-				          						<column label="Thao tác" width="150px" style="text-align: center;" />
-				          					</columns>
-				          					<template name="model">
-				          						<row
-				          							apply="org.zkoss.bind.BindComposer"
-				          							viewModel="@id('item') @init(each)">
-				          							<label
-				          								value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
-				          								style="text-align:center;display:block" />
-				          							<label value="@load(each.hoVaTen)" style="display:block" />
-				          							<label value="@load(each.cmnd)" style="text-align:center;display:block" />
-				          							<label value="@load(each.gioiTinh.text)" style="text-align:center;display:block"/>
-				          							<label value="@load(each.ngaySinh) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
-				          							<label value="@load(each.soDienThoai)" style="display:block" />
-				          							<label value="@load(each.diaChi)" style="display:block" />
-				          							<div class="text-align-center center-cauhinh grid-action">
-														<a href="javascript:void(0);" tooltiptext="Chỉnh sửa" class="col-edit"
-															 zk:if="${entry.quyen.hosothongtin_sua}"
-															 zk:onClick="@command('redirectPageSession', url='/hosothongtin/id', vm=item, service=vm)">
-								    						
-							    							<n:i class="icon-edit"></n:i>
-							    						</a> 
-		                          						<x:a href="#" class="col-del" 
-	                          							zk:if="${entry.quyen.hosothongtin_xoa}" title="Xóa"
-	                          							onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='targetQuery')"><n:i class="icon-cancel"></n:i></x:a>
-												</div>
-											</row>
-										</template>
-									</grid>
-									<paging pageSize="@load(vm.arg.pagesize)" totalSize="@load(vm.targetQuery.fetchCount())"
-										visible="@load(vm.targetQuery.fetchCount() > vm.arg.pagesize ? true : false)"
-										activePage="@bind(vm.arg.page)" onPaging="@command('cmd', notify=vm, atr='targetQuery')" />
-	                			</div>
-	                		</div>
-				         	 </div>
-				         </n:section>
+							<div class="box-list-report">
+								<div class="box-report-top flex-list">
+									<n:p
+										class="title-issue title-list-report margin-button-list">
+										Danh sách hồ sơ bệnh nhân
+									</n:p>
+									<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.hosothongtin_them}"
+										onClick="@command('redirectPage', zul='hosothongtin/add.zul', vmArgs=vm, vm=null)">
+		    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
+		    						</x:button>
+								</div>
+								<div class="wrappre-tb">
+									<div class="wp-scrool">
+										<grid
+											model="@load(vm.page(vm.targetQuery).fetch())" width="100%"
+											id="grid" class="table-report"
+											emptyMessage="Danh sách không có bệnh nhân nào">
+											<columns>
+												<column label="STT"
+													hflex="min" style="text-align: center;" />
+												<column
+													label="Họ và tên" hflex="min" style="text-align: center;" />
+												<column label="CMND"
+													hflex="min" style="text-align: center;" />
+												<column
+													label="Giới tính" hflex="min" style="text-align: center;" />
+												<column
+													label="Ngày sinh" hflex="min" style="text-align: center;" />
+												<column
+													label="Số điện thoại" hflex="min"
+													style="text-align: center;" />
+												<column label="Địa chỉ"
+													style="text-align: center;" />
+												<column label="Thao tác"
+													width="150px" style="text-align: center;" />
+											</columns>
+											<template name="model">
+												<row
+													apply="org.zkoss.bind.BindComposer"
+													viewModel="@id('item') @init(each)">
+													<label
+														value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+														style="text-align:center;display:block" />
+													<label
+														value="@load(each.hoVaTen)" style="display:block" />
+													<label
+														value="@load(each.cmnd)"
+														style="text-align:center;display:block" />
+													<label
+														value="@load(each.gioiTinh.text)"
+														style="text-align:center;display:block" />
+													<label
+														value="@load(each.ngaySinh) @converter('formatedDate', format='dd/MM/yyyy')"
+														style="text-align:center;display:block" />
+													<label
+														value="@load(each.soDienThoai)" style="display:block" />
+													<label
+														value="@load(each.diaChi)" style="display:block" />
+													<div
+														class="text-align-center center-cauhinh grid-action">
+														<a
+															href="javascript:void(0);" tooltiptext="Chỉnh sửa"
+															class="col-edit" zk:if="${entry.quyen.hosothongtin_sua}"
+															zk:onClick="@command('redirectPageSession', url='/hosothongtin/id', vm=item, service=vm)">
+
+															<n:i
+																class="icon-edit">
+															</n:i>
+														</a>
+														<x:a href="#"
+															class="col-del" zk:if="${entry.quyen.hosothongtin_xoa}"
+															title="Xóa"
+															onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='targetQuery')">
+															<n:i
+																class="icon-cancel">
+															</n:i>
+														</x:a>
+													</div>
+												</row>
+											</template>
+										</grid>
+										<paging
+											pageSize="@load(vm.arg.pagesize)"
+											totalSize="@load(vm.targetQuery.fetchCount())"
+											visible="@load(vm.targetQuery.fetchCount() > vm.arg.pagesize ? true : false)"
+											activePage="@bind(vm.arg.page)"
+											onPaging="@command('cmd', notify=vm, atr='targetQuery')" />
+									</div>
+								</div>
+							</div>
+						</n:section>
 					</div>
-				</div>
 			</div>			
 		</div>
 	</n:section>

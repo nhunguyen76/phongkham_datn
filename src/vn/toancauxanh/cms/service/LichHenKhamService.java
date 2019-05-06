@@ -10,7 +10,9 @@ import com.querydsl.jpa.impl.JPAQuery;
 
 import vn.toancauxanh.gg.model.HoSoThongTin;
 import vn.toancauxanh.gg.model.LichHenKham;
+import vn.toancauxanh.gg.model.QLichHenKham;
 import vn.toancauxanh.gg.model.enums.BuoiKhamEnum;
+import vn.toancauxanh.gg.model.enums.TrangThaiXuLyEnum;
 import vn.toancauxanh.service.BasicService;
 
 public class LichHenKhamService extends BasicService<LichHenKham> {
@@ -20,13 +22,18 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 		return list;
 	}
 	
+	public List<TrangThaiXuLyEnum> getTrangThaiXuLys(){
+		List<TrangThaiXuLyEnum> list = Arrays.asList(TrangThaiXuLyEnum.values());
+		return list;
+	}
+	
 	public JPAQuery<LichHenKham> getTargetQuery() {
 		String keyword = MapUtils.getString(argDeco(), Labels.getLabel("param.tukhoa"), "").trim();
-		JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class);
+		JPAQuery<LichHenKham> q = find(LichHenKham.class);
 
 		if (keyword != null && !keyword.isEmpty()) {
 			String tukhoa = "%" + keyword + "%";
-			q.where(QLichHenKham.lichHenKham.benhNhan..like(tukhoa));
+			q.where(QLichHenKham.lichHenKham.benhNhan.hoVaTen.like(tukhoa));
 		}
 
 		q.orderBy(QLichHenKham.lichHenKham.ngayTao.desc());

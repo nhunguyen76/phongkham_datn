@@ -24,6 +24,7 @@ import vn.toancauxanh.model.Model;
 public class LichHenKham extends Model<LichHenKham> {
 
     private HoSoThongTin benhNhan;
+    private Date thoiGianDatHen; //thoi gian nguoi dat lich hen
     private Date thoiGianKham;
     private BuoiKhamEnum buoiKham;
     private int thoiGianKhamUocTinh;
@@ -99,5 +100,21 @@ public class LichHenKham extends Model<LichHenKham> {
 			this.setTrangThaiXuLy(TrangThaiXuLyEnum.CHO_DUYET);
 			save();
 			wdn.detach();
+	}
+	
+	@Command
+	public void saveLichHenKhamConfirm(@BindingParam("list") final Object listObject,
+			@BindingParam("attr") final String attr,
+			@BindingParam("wdn") final Window wdn) throws IOException {
+			save();
+			wdn.detach();
+	}
+
+	public Date getThoiGianDatHen() {
+		return thoiGianDatHen;
+	}
+
+	public void setThoiGianDatHen(Date thoiGianDatHen) {
+		this.thoiGianDatHen = thoiGianDatHen;
 	}
 }

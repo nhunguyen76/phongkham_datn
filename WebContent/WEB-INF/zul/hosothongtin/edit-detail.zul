@@ -33,14 +33,21 @@
 				    		</div>							
 						</div>
 				    	<div class="div-image-btn">
-				    		Hình ảnh
+				    		Ảnh đại diện
 				    	</div>
 					</div>
-					<div class="col-md-12">
-						<x:a class="btn btn-warning margin-button width-button"
+					<div class="col-md-12"  style="text-align:center; padding-top:20px">
+						<x:a class="btn btn-warning btn-block button-custom"
 							zk:if="${entry.quyen.lichhenkham_them}"
 							zk:onClick="@command('redirectPage', zul='lichhenkham/add.zul',vmArgs=vm.hoSoThongTin,vm=null)">
 							Đặt lịch hẹn
+						</x:a>
+					</div>
+					<div class="col-md-12"  style="text-align:center; padding-top:20px">
+						<x:a class="btn btn-primary btn-block button-custom"
+							zk:if="${entry.quyen.lichhenkham_them}"
+							zk:onClick="@command('redirectPage', zul='lichhenkham/add.zul',vmArgs=vm.hoSoThongTin,vm=null)">
+							Lịch hẹn khám
 						</x:a>
 					</div>
 				</div>
@@ -206,7 +213,7 @@
 													emptyMessage="Danh sách không có bệnh án nào" class="table-report">
 													<columns>
 														<column label="STT" hflex="min" style="text-align:center"/>
-														<column label="Ngày khám" width="15%" style="text-align:center;"/>
+														<column label="Ngày khám" width="90px" style="text-align:center;"/>
 														<column label="Bác sĩ" width="15%" style="text-align:center;"/>
 														<column label="Chẩn đoán" width="15%" style="text-align:center;"/>
 														<column label="Thủ thuật" width="15%" style="text-align:center;"/>
@@ -313,6 +320,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- 
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="box-content-full">
@@ -401,7 +409,7 @@
 				        					value="@bind(vm.hoSoThongTin.nguoiGiamHo.hoVaTen)"/>
 				        			</div>
 				        		</div>
-				        		<!-- 
+				        		
 				        		<div class="row list-menu-sukien">
 				        			<div class="col-md-3">
 				        				<n:span
@@ -469,7 +477,7 @@
 					        			</div>
 				        			</template>
 				        		</div>
-				        		 -->
+				        		
 				        		<div class="row list-menu-sukien">
 				        			<div class="col-md-3">
 				        				<n:span
@@ -514,7 +522,7 @@
 					</div>
 				</div>
 			</div>	
-			
+			 -->
 			<div class="row" style="padding-top:30px;">
 				<div class="col-sm-12">
 					
