@@ -7,7 +7,7 @@
 					<h4>
 						HỆ THỐNG QUẢN LÝ		 
 					</h4>
-					<h5>PHÒNG KHÁM NHA KHOA TCX</h5>
+					<h5>PHÒNG KHÁM NHA KHOA </h5>
 				</div>
 			</div>
 			<div class="box-user-header">
@@ -61,10 +61,10 @@
 					</li>
 				
 					<li
-						class="menu-top-list ${resource eq 'chungchihanhnghecanhan'
-	     				|| resource eq 'chungchihanhnghetochuc' ?'active-menu':''}"
-						zk:if="${(entry.quyen.chungchihanhnghecanhan_lietke or entry.quyen.chungchihanhnghetochuc_lietke) and !dakhoa}">
-						<a class="link-menu" href="javascript:;">
+						class="menu-top-list ${resource eq 'lichhenkham'
+	     				|| resource eq 'lichhenkham' ?'active-menu':''}"
+						zk:if="${(entry.quyen.lichhenkham_lietke or entry.quyen.lichhenkham_lietke) and !dakhoa}">
+						<a class="link-menu" href="${execution.contextPath}/lichhenkham">
 							<span class="icon-calendar-menu"></span>
 							<span class="text-menu">
 								Quản lý lịch hẹn</span>

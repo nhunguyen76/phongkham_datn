@@ -37,6 +37,7 @@ import vn.toancauxanh.cms.service.DichVuService;
 import vn.toancauxanh.cms.service.HoSoBenhAnService;
 import vn.toancauxanh.cms.service.ImageService;
 import vn.toancauxanh.cms.service.LanguageService;
+import vn.toancauxanh.cms.service.LichHenKhamService;
 import vn.toancauxanh.cms.service.SettingService;
 import vn.toancauxanh.cms.service.ThuocService;
 import vn.toancauxanh.gg.model.HoSoThongTin;
@@ -206,10 +207,23 @@ public class Entry extends BaseObject<Object> {
     public String CHITIETDONTHUOCXOA = "";
     @Value("${url.chitietdonthuoc}" + ":" + "${action.sua}")
     public String CHITIETDONTHUOCSUA = "";
+    
+    @Value("${url.lichhenkham}")
+    public String LICHHENKHAM = "";
+    @Value("${url.lichhenkham}" + ":" + "${action.xem}")
+    public String LICHHENKHAMXEM = "";
+    @Value("${url.lichhenkham}" + ":" + "${action.them}")
+    public String LICHHENKHAMTHEM = "";
+    @Value("${url.lichhenkham}" + ":" + "${action.list}")
+    public String LICHHENKHAMLIST = "";
+    @Value("${url.lichhenkham}" + ":" + "${action.xoa}")
+    public String LICHHENKHAMXOA = "";
+    @Value("${url.lichhenkham}" + ":" + "${action.sua}")
+    public String LICHHENKHAMSUA = "";
 	// aend
 	public String[] getRESOURCES() {
 		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN, 
-				CANLAMSANG, THUOC, CHITIETDONTHUOC};
+				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM};
 	}
 
 	public String[] getACTIONS() {
@@ -376,6 +390,10 @@ public class Entry extends BaseObject<Object> {
 	
 	public ChiTietDonThuocService getChiTietDonThuocs() {
         return new ChiTietDonThuocService();
+    }
+	
+	public LichHenKhamService getLichHenKhams() {
+        return new LichHenKhamService();
     }
 	
 	public final ImageService getImages() {

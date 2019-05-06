@@ -1,0 +1,81 @@
+<idspace>
+	<window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"
+		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
+		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
+		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
+		width="500px"
+		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
+		whatever="@load(false,after='saveLichHenKham') @converter('vn.toancauxanh.service.DetachConverter')"
+		viewModel="@id('vm') @init(arg.model)"
+		validationMessages="@id('vmsgs')">
+
+		<zscript><![CDATA[
+			vmArgs = arg.get("vmArgs");
+			strSave = arg.get("save");
+			vm.setBenhNhan(vmArgs);
+		]]></zscript> 
+		
+	<div class="row box-body">
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Ngày hẹn
+				<n:span class="required">*</n:span>
+			</n:span>
+			<datebox format="dd/MM/yyyy"
+				value="@bind(vm.thoiGianDatHen) @save(vm.thoiGianDatHen, before='saveLichHenKham') 
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+				width="100%" placeholder="Nhập ngày hẹn">
+			</datebox>
+			<label class="error"
+				value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Buổi khám
+				<n:span class="required">*</n:span>
+			</n:span>
+			<combobox model="@load(entry.lichHenKhams.buoiKhams)"
+				width="100%" readonly="true" class="hv-cbb"
+				placeholder="Chọn buổi khám"
+				value="@load(vm.buoiKham eq null ? '' : vm.buoiKham.text)"
+				selectedItem="@bind(vm.buoiKham) @save(vm.buoiKham, before={'saveLichHenKham'})
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
+				<template name="model">
+					<comboitem
+						label="@load(empty each ? 'Chọn buổi khám' :  each.text)" />
+				</template>
+			</combobox>
+			<label class="error"
+				value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Thời gian khám ước tính
+				<n:span class="required">*</n:span>
+			</n:span>
+			<spinner constraint="no negative,no zero"
+				value="@save(vm.thoiGianKhamUocTinh)" tabindex="10" /> 
+			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+					Nội dung
+					<n:span class="required">*</n:span>
+				</n:span>
+				<textbox class="form-control" rows="3"  width="100%" maxlength="1000"
+					value="@bind(vm.noiDung) @save(vm.noiDung, before='saveLichHenKham')"/>
+				<label class="error"
+					value="@load(vmsgs[self.previousSibling])" />
+		</div>
+	</div>
+	<div class="row box-footer box-thaotac">
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+			onClick="@command('saveLichHenKham',wdn=wdn)">
+			<n:i class="icon-save"></n:i>Lưu 
+		</x:button>
+		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">
+			<n:i class="icon-cancel3"></n:i>Đóng
+		</x:button>
+	</div>
+</window>
+</idspace>

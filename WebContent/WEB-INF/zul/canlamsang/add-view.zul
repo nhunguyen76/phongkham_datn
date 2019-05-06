@@ -27,6 +27,20 @@
 		
 	<div class="row box-body">
 		<div class="col-md-6 list-menu-sukien">
+			<div zclass="form-group" class="control-label">
+				<n:span class="title-issue title-issue-detail">
+					Tiêu đề
+					<n:span class="required">*</n:span>
+				</n:span>
+				
+				<textbox class="hv-textbox" width="100%" maxlength="255"
+					value="@bind(vm.tieuDe) @save(vm.tieuDe, before='saveCanLamSang') 
+					@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
+				<label class="error"
+					value="@load(vmsgs[self.previousSibling])" />
+			</div>
+			
+			
 			<n:span class="title-issue title-issue-detail">
 				Ngày khám
 				<n:span class="required">*</n:span>
@@ -38,6 +52,7 @@
 			</datebox>
 			<label class="error"
 				value="@load(vmsgs[self.previousSibling])" />
+			
 		</div>
 		<div class="col-md-6 list-menu-sukien">
 			<div zclass="form-group" class="control-label">
@@ -77,13 +92,7 @@
 			</div>
 		</div>
 		<div class="col-md-12 list-menu-sukien">
-			<n:span class="title-issue title-issue-detail">
-				Tiêu đề
-				<n:span class="required">*</n:span>
-			</n:span>
-			<textbox class="hv-textbox" maxlength="255"
-					value="@bind(vm.tieuDe) @save(vm.tieuDe, before='saveCanLamSang')"/>
-			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+			
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
