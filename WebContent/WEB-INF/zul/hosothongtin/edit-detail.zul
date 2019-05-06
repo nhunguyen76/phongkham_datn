@@ -66,7 +66,6 @@
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Họ và tên
-					        					<n:span class="required">*</n:span>
 					        				</n:span>
 					        				<textbox width="100%" readonly="true"
 					        					class="hv-textbox" maxlength="255"
@@ -75,11 +74,38 @@
 					        			<div class="col-md-4">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
-					        					Ngày sinh<n:span class="required">*</n:span>
+					        					Mã cá nhân
+					        				</n:span>
+					        				<textbox width="100%" readonly="true"
+					        					class="hv-textbox" maxlength="255"
+					        					value="@load(vm.hoSoThongTin.maCaNhan)"/>
+					        			</div>
+					        			<div class="col-md-4">
+						        			<n:span
+						        				class="title-issue title-issue-detail">
+						        				Chứng minh nhân dân
+						        			</n:span>
+						        			<textbox width="100%"
+						        				readonly="true" class="hv-textbox"
+						        				value="@bind(vm.hoSoThongTin.cmnd)" />
+						        		</div>
+					        			<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Ngày sinh
 					        				</n:span>
 					        				<datebox format="dd/MM/yyyy" readonly="true"
 					        					value="@bind(vm.hoSoThongTin.ngaySinh)"	width="100%">
 					        				</datebox>
+					        			</div>
+					        			<div class="col-md-4">
+					        				<n:span
+					        					class="title-issue title-issue-detail">
+					        					Giới tính
+					        				</n:span>
+					        				<textbox width="100%"
+						        				readonly="true" class="hv-textbox"
+						        				value="@bind(vm.hoSoThongTin.gioiTinh.text)" />
 					        			</div>
 										<div class="col-md-4">
 					        				<n:span
@@ -97,24 +123,8 @@
 					        				<textbox width="100%" readonly="true" class="hv-textbox"
 					        					value="@bind(vm.hoSoThongTin.diaChi)" />
 					        			</div>
-					        			<div class="col-md-4">
-						        			<n:span
-						        				class="title-issue title-issue-detail">
-						        				Chứng minh nhân dân
-						        			</n:span>
-						        			<textbox width="100%"
-						        				readonly="true" class="hv-textbox"
-						        				value="@bind(vm.hoSoThongTin.cmnd)" />
-						        		</div>
-						        		<div class="col-md-4">
-					        				<n:span
-					        					class="title-issue title-issue-detail">
-					        					Giới tính
-					        				</n:span>
-					        				<textbox width="100%"
-						        				readonly="true" class="hv-textbox"
-						        				value="@bind(vm.hoSoThongTin.gioiTinh.text)" />
-					        			</div>
+					        			
+						        		
 					        			<div class="col-md-4">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
@@ -129,9 +139,9 @@
 											<div class="range-menu position-button flex-right">
 												<div class="position-flex">
 													<x:span>
-														<x:a class="btn btn-success margin-button width-button" zk:if="${entry.quyen.hosothongtin_them}"
+														<x:a class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom " zk:if="${entry.quyen.hosothongtin_them}"
 															zk:onClick="@command('redirectPage', zul='hosothongtin/view.zul',vmArgs='vn.toancauxanh.cms.service.HoSoThongTinService',vm=vm.hoSoThongTin)">
-															Chỉnh sửa
+															<n:i class="icon-edit-white"></n:i> Chỉnh sửa
 														</x:a>
 													</x:span>
 												</div>
@@ -291,6 +301,7 @@
 															<label value="@load(each.ngayKham) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
 															<label value="@bind(each.tieuDe)" style="display:block"/>
 															<div class="text-align-center">
+																<a src="@load(each.iconUrl)"></a>
 																<image
 																	width="40px"
 																	height="@load(each.imageContent eq null ? '50px' : '')"

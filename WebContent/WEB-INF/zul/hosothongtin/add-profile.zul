@@ -57,6 +57,20 @@
 				</div>
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
+						Mã cá nhân
+						<n:span class="required">*</n:span>
+					</n:span>
+					<textbox width="100%" class="hv-textbox" maxlength="255"
+						value="@load(vm.maCaNhan) @save(vm.maCaNhan, before='saveThongTinBenhNhan') 
+							@validator(vm.validatorMaCaNhan)"
+						placeholder="Nhập mã cá nhân" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
 						Ngày sinh
 						<n:span class="required">*</n:span>
 					</n:span>
@@ -68,32 +82,9 @@
 					<label class="error"
 						value="@load(vmsgs[self.previousSibling])" />
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<n:span class="title-issue title-issue-detail">
-						Số điện thoại
-					</n:span>
-					<textbox width="100%" maxlength="255" class="hv-textbox"
-						value="@bind(vm.soDienThoai) @save(vm.soDienThoai, before='saveHoSoThongTin')
-							@validator(vm.validatorSoDienThoai)"
-						placeholder="Nhập số điện thoại" />
-				</div>
-				<div class="col-md-6">
-					<n:span class="title-issue title-issue-detail">
-						Địa chỉ
-					</n:span>
-					<textbox width="100%" maxlength="255" class="hv-textbox"
-						value="@bind(vm.diaChi)" placeholder="Nhập địa chỉ" />
-					<label class="error"
-						value="@load(vmsgs[self.previousSibling])" />
-				</div>
-			</div>
-			<div class="row">
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
 						Chứng minh nhân dân
-						<n:span class="required">*</n:span>
 					</n:span>
 					<textbox width="100%" maxlength="255" class="hv-textbox"
 						value="@bind(vm.cmnd) @save(vm.cmnd, before='saveThongTinBenhNhan') 
@@ -102,6 +93,10 @@
 					<label class="error"
 						value="@load(vmsgs[self.previousSibling])" />
 				</div>
+				
+			</div>
+			<div class="row">
+				
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
 						Giới tính
@@ -121,8 +116,29 @@
 					<label class="error"
 						value="@load(vmsgs[self.previousSibling])" />
 				</div>
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Địa chỉ
+					</n:span>
+					<textbox width="100%" maxlength="255" class="hv-textbox"
+						value="@bind(vm.diaChi)" placeholder="Nhập địa chỉ" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
 			</div>
 			<div class="row">
+				
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Số điện thoại
+					</n:span>
+					<textbox width="100%" maxlength="255" class="hv-textbox"
+						value="@bind(vm.soDienThoai) @save(vm.soDienThoai, before='saveThongTinBenhNhan')
+							@validator(vm.validatorSoDienThoai)"
+						placeholder="Nhập số điện thoại" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
 						Email
@@ -135,6 +151,8 @@
 					<label class="error"
 						value="@load(vmsgs[self.previousSibling])" />
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
 						Tên đăng nhập

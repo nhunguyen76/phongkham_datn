@@ -32,6 +32,7 @@ import vn.toancauxanh.service.HoSoThongTinService;
 @Table(name = "hosothongtin")
 public class HoSoThongTin extends Model<HoSoThongTin> {
 
+	private String maCaNhan;
 	private String hoVaTen;
 	private Date ngaySinh;
 	private String cmnd;
@@ -50,7 +51,7 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	}
 
 	public void setHoVaTen(String hoVaTen) {
-		this.hoVaTen = hoVaTen;
+		this.hoVaTen = hoVaTen != null ? hoVaTen.trim() : hoVaTen;
 	}
 
 	public Date getNgaySinh() {
@@ -75,7 +76,7 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	}
 
 	public void setCmnd(String cmnd) {
-		this.cmnd = cmnd;
+		this.cmnd = cmnd != null ? cmnd.trim() : cmnd;
 	}
 
 	public String getDiaChi() {
@@ -83,7 +84,7 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	}
 
 	public void setDiaChi(String diaChi) {
-		this.diaChi = diaChi;
+		this.diaChi = diaChi != null ? diaChi.trim() : diaChi;
 	}
 
 	public String getSoDienThoai() {
@@ -91,7 +92,7 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	}
 
 	public void setSoDienThoai(String soDienThoai) {
-		this.soDienThoai = soDienThoai;
+		this.soDienThoai = soDienThoai != null ? soDienThoai.trim() : soDienThoai;
 	}
 
 	@ManyToOne
@@ -102,9 +103,20 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	public void setNguoiGiamHo(HoSoThongTin nguoiGiamHo) {
 		this.nguoiGiamHo = nguoiGiamHo;
 	}
+	
+	public String getMaCaNhan() {
+		return maCaNhan;
+	}
+
+	public void setMaCaNhan(String maCaNhan) {
+		this.maCaNhan = maCaNhan != null ? maCaNhan.trim() : maCaNhan;
+	}
+	
+	
 
 	// Command save
 	
+
 	@Command
 	public void saveThongTinBenhNhan(@BindingParam("wdn") final Window wdn, @BindingParam("vm") HoSoThongTin hoSoThongTin)
 			throws IOException {
@@ -112,9 +124,14 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 			nguoiGiamHo.save();
 		}
 		taiKhoan.saveNguoiDung(null, null, true, wdn);
-		save();
-		wdn.detach();
-		redirectPageSession("/hosothongtin/id", this, new HoSoThongTinService());
+		if(this.noId() || this.getId() == 0) {
+			save();
+			wdn.detach();
+			redirectPageSession("/hosothongtin/id", this, new HoSoThongTinService());
+		} else {
+			save();
+			wdn.detach();
+		}
 	}
 	
 	@Command
@@ -240,24 +257,40 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 		return new AbstractValidator() {
 			@Override
 			public void validate(ValidationContext ctx) {
-				if(hasCmnd) {
-					String value = (String) ctx.getProperty().getValue();
-					if (value.isEmpty()) {
-						addInvalidMessage(ctx, "Không được để trống trường này.");
-					} else if (StringUtils.isBlank(value)) {
-						addInvalidMessage(ctx, "Không được để khoảng trắng.");
-					} else{
-						JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.cmnd.eq(value));
-						if(!HoSoThongTin.this.noId()) {
-							q.where(QHoSoThongTin.hoSoThongTin.id.ne(getId()));
-						}
-						if (q.fetchCount() > 0) {
-							addInvalidMessage(ctx, "Đã tồn tại số CMND này.");
-						}
-					}
+				String value = (String) ctx.getProperty().getValue();
+
+				JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.cmnd.eq(value));
+				if (!HoSoThongTin.this.noId()) {
+					q.where(QHoSoThongTin.hoSoThongTin.id.ne(getId()));
+				}
+				if (q.fetchCount() > 0) {
+					addInvalidMessage(ctx, "Đã tồn tại số CMND này.");
 				}
 				
-				
+			}
+		};
+	}
+	
+	@Transient
+	public AbstractValidator getValidatorMaCaNhan() {
+		return new AbstractValidator() {
+			@Override
+			public void validate(ValidationContext ctx) {
+				String value = (String) ctx.getProperty().getValue();
+				if (value.isEmpty()) {
+					addInvalidMessage(ctx, "Không được để trống trường này.");
+				} else if (StringUtils.isBlank(value)) {
+					addInvalidMessage(ctx, "Không được để khoảng trắng.");
+				} else {
+					JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class)
+							.where(QHoSoThongTin.hoSoThongTin.maCaNhan.eq(value));
+					if (!HoSoThongTin.this.noId()) {
+						q.where(QHoSoThongTin.hoSoThongTin.id.ne(getId()));
+					}
+					if (q.fetchCount() > 0) {
+						addInvalidMessage(ctx, "Đã tồn tại mã cá nhân này.");
+					}
+				}
 			}
 		};
 	}
@@ -272,18 +305,8 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 					addInvalidMessage(ctx, "Không được để trống trường này.");
 				} else if (StringUtils.isBlank(value)) {
 					addInvalidMessage(ctx, "Không được để khoảng trắng.");
-				} else {
-					JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class)
-							.where(QHoSoThongTin.hoSoThongTin.soDienThoai.eq(value));
-					if (!HoSoThongTin.this.noId()) {
-						q.where(QHoSoThongTin.hoSoThongTin.id.ne(getId()));
-					}
-					if (q.fetchCount() > 0) {
-						addInvalidMessage(ctx, "Đã tồn tại số điện thoại này.");
-					}
-					if (!value.trim().matches("^\\+?\\d{1,3}?[- .]?\\(?(?:\\d{2,3})\\)?[- .]?\\d\\d\\d[- .]?\\d\\d\\d\\d$")) {
+				} else if (!value.trim().matches("^\\+?\\d{1,3}?[- .]?\\(?(?:\\d{2,3})\\)?[- .]?\\d\\d\\d[- .]?\\d\\d\\d\\d$")) {
 						addInvalidMessage(ctx, "error", "Số điện thoại không đúng định dạng.");
-					}
 				}
 			}
 		};
