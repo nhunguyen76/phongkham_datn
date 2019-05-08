@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -108,6 +109,7 @@ public class LichHenKham extends Model<LichHenKham> {
 			@BindingParam("wdn") final Window wdn) throws IOException {
 			save();
 			wdn.detach();
+			BindUtils.postNotifyChange(null, null, listObject, attr);
 	}
 
 	public Date getThoiGianDatHen() {
@@ -117,4 +119,19 @@ public class LichHenKham extends Model<LichHenKham> {
 	public void setThoiGianDatHen(Date thoiGianDatHen) {
 		this.thoiGianDatHen = thoiGianDatHen;
 	}
+	
+	@Transient
+    public String setStyleStatus( String strStyle) {
+        if (strStyle.equals(TrangThaiXuLyEnum.HUY_HEN.name())) {
+            return "label label-danger width-90px";
+        } else if (strStyle.equals(TrangThaiXuLyEnum.CHO_DUYET.name())) {
+            return "label label-warning width-90px";
+        } else if (strStyle.equals(TrangThaiXuLyEnum.DA_DUYET.name())) {
+            return "label label-primary width-90px";
+        } else if (strStyle.equals(TrangThaiXuLyEnum.DA_THUC_HIEN.name())) {
+            return "label label-default width-90px";
+        } else {
+            return "";
+        }
+    }
 }

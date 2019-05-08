@@ -78,6 +78,7 @@
 													hflex="min" style="text-align: center;" />
 												<column
 													label="Họ và tên" hflex="min" style="text-align: center;" />
+												<column label="Mã cá nhân" hflex="min" style="text-align: center;" />
 												<column label="CMND"
 													hflex="min" style="text-align: center;" />
 												<column
@@ -96,14 +97,11 @@
 												<row
 													apply="org.zkoss.bind.BindComposer"
 													viewModel="@id('item') @init(each)">
-													<label
-														value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+													<label value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
 														style="text-align:center;display:block" />
-													<label
-														value="@load(each.hoVaTen)" style="display:block" />
-													<label
-														value="@load(each.cmnd)"
-														style="text-align:center;display:block" />
+													<label value="@load(each.hoVaTen)" style="display:block" />
+													<label value="@load(each.maCaNhan)" style="display:block" />
+													<label value="@load(each.cmnd)" style="text-align:center;display:block" />
 													<label
 														value="@load(each.gioiTinh.text)"
 														style="text-align:center;display:block" />

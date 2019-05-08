@@ -39,4 +39,12 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 		q.orderBy(QLichHenKham.lichHenKham.ngayTao.desc());
 		return q;
 	}
+	
+	public JPAQuery<LichHenKham> getLichKhamCaNhan(Long idBenhNhan) {
+        JPAQuery<LichHenKham> q = find(LichHenKham.class);
+
+        q.where(QLichHenKham.lichHenKham.benhNhan.id.eq(idBenhNhan));
+        q.orderBy(QLichHenKham.lichHenKham.ngayTao.desc());
+        return q;
+    }
 }

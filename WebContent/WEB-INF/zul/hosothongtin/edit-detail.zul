@@ -46,7 +46,7 @@
 					<div class="col-md-12"  style="text-align:center; padding-top:20px">
 						<x:a class="btn btn-primary btn-block button-custom"
 							zk:if="${entry.quyen.lichhenkham_them}"
-							zk:onClick="@command('redirectPage', zul='lichhenkham/add.zul',vmArgs=vm.hoSoThongTin,vm=null)">
+							zk:onClick="@command('redirectPage', zul='lichhenkham/view-lich-ca-nhan.zul',vmArgs=vm.hoSoThongTin.id)">
 							Lịch hẹn khám
 						</x:a>
 					</div>

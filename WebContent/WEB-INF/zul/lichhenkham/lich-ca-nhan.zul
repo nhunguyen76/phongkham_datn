@@ -1,0 +1,88 @@
+<idspace>
+    <window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"
+        apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
+        mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
+        contentStyle="overflow:auto;" closable="true" title="${arg.save}"
+        width="1155px"
+        onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
+        whatever="@converter('vn.toancauxanh.service.DetachConverter')"
+        viewModel="@id('vm') @init('vn.toancauxanh.cms.service.LichHenKhamService')" >
+
+        <zscript><![CDATA[
+            Long idBenhNhan = (Long) arg.get("vmArgs");
+        ]]></zscript> 
+        
+    <div class="row box-body">
+        <div class="col-md-12 list-menu-sukien">
+            <div class="wrappre-tb">
+            	<div class="wp-scrool">
+            		<grid model="@load(vm.getLichKhamCaNhan(idBenhNhan).fetch())"
+            			width="100%" id="grid"
+            			emptyMessage="Chưa có lịch hẹn nào"
+            			class="table-report">
+            			<columns>
+            				<column label="STT" hflex="min"
+            					style="text-align:center" />
+            				<column label="Bệnh nhân" width="15%"
+            					style="text-align:center;" />
+            				<column label="Thời gian đặt hẹn"
+            					width="30%" style="text-align:center;" />
+            				<column label="Buổi khám" width="30%"
+            					style="text-align:center;" />
+            				<column label="Thời gian khám xác nhận"
+            					width="30%" style="text-align:center;" />
+            				<column label="Trạng thái" width="30%"
+            					style="text-align:center;" />
+            				<column label="Thao tác" width="100px"
+            					style="text-align:center;" />
+            			</columns>
+            			<template name="model">
+            				<row apply="org.zkoss.bind.BindComposer"
+            					viewModel="@id('item') @init(each)">
+            					<label
+            						value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+            						style="text-align:center;display:block" />
+            					<label
+            						value="@bind(each.benhNhan.hoVaTen)"
+            						style="text-align:center;display:block" />
+            					<label
+            						value="@load(each.thoiGianDatHen)"
+            						style="display:block" />
+            					<label value="@load(each.buoiKham.text)"
+            						style="display:block" />
+            					<label
+            						value="@load(each.thoiGianKham)  @converter('formatedDate', format='hh:mm dd/MM/yyyy')"
+            						style="display:block" />
+            					<span class="${each.setStyleStatus(each.trangThaiXuLy.name())}">
+                                    ${each.trangThaiXuLy eq null ? '   ' : each.trangThaiXuLy.text}</span>
+            					<div class="text-align-center grid-action">
+            						<x:a href="#" class="col-edit"
+            							title="Chỉnh sửa"
+            							zk:if="${entry.quyen.lichhenkham_sua}"
+            							onClick="@command('redirectPage', zul='lichhenkham/view.zul',vmArgs=vm,vm=item)">
+            							<n:i class="icon-edit"></n:i>
+            						</x:a>
+            						<x:a href="#" class="col-del"
+            							title="Xóa" zk:if="${entry.quyen.lichhenkham_xoa}"
+            							onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='targetQuery', type = 'lichhenkham')">
+            							<n:i class="icon-cancel"></n:i>
+            						</x:a>
+            					</div>
+            				</row>
+            			</template>
+            		</grid>
+            	</div>
+            </div>
+        </div>
+    </div>
+    <div class="row box-footer box-thaotac">
+        <x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+            onClick="@command(vm.saveDonThuoc(wdn))">
+            <n:i class="icon-save"></n:i>Lưu 
+        </x:button>
+        <x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">
+            <n:i class="icon-cancel3"></n:i>Đóng
+        </x:button>
+    </div>
+</window>
+</idspace>

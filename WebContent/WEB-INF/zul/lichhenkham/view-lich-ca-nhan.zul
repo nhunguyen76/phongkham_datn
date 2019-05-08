@@ -1,0 +1,2 @@
+<?component name="add-view" inline="true" macroURI="lich-ca-nhan.zul"?>
+<add-view vmArgs="${arg.vmArgs}" save="Thông tin lịch hẹn" />

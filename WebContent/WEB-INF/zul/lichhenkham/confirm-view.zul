@@ -5,7 +5,7 @@
 		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
 		width="500px"
 		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
-		whatever="@load(false,after='saveLichHenKham') @converter('vn.toancauxanh.service.DetachConverter')"
+		whatever="@load(false,after='saveLichHenKhamConfirm') @converter('vn.toancauxanh.service.DetachConverter')"
 		viewModel="@id('vm') @init(arg.model)"
 		validationMessages="@id('vmsgs')">
 
@@ -83,7 +83,7 @@
 	</div>
 	<div class="row box-footer box-thaotac">
 		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
-			onClick="@command('saveLichHenKhamConfirm',wdn=wdn)">
+			onClick="@command('saveLichHenKhamConfirm', list=vmArgs, attr='targetQuery',wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>
 		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">
