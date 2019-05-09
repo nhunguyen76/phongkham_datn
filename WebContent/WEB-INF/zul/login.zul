@@ -70,15 +70,63 @@
 						<div>
 							<a sclass="btn btn-default submit btn-login" label="Đăng nhập" onClick="@command('login',email=username.getValue(),password=password.getValue())">
 							</a>
-							<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
-                                        onClick="@command('redirectPage', zul='dangkytaikhoan/add.zul', vmArgs=null, vm=null)">
-                                        <n:i class="icon-themmoi"></n:i>&#160;&#160;Đăng ký
-                                    </x:button>
 						</div>
 						<div class="clearfix"></div>
 					</n:form>
 				</n:section>
 			</n:div>
 		</n:div>
-	</div>	
+	</div>
+	
+	<div class="" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('vn.toancauxanh.gg.model.HoSoThongTin')">
+		<include src="/WEB-INF/zul/notification.zul"></include>
+		<n:div id="wrapper box-login">
+			
+			<n:div id="login" class="mg-box-login animate form" style="max-width: 420px !important; display: block; margin: auto">				
+				<n:h2>ĐĂNG KÝ</n:h2>
+				<n:section class="login_content">
+						<div class="register-field">
+							<textbox type="text"
+								class="form-control" placeholder="Họ và tên" 
+								value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveThongTinBenhNhan') 
+                            		@validator(vm.validatorStringUtitsNotBlank)">
+							</textbox>	
+							<label class="error"
+                        		value="@load(vmsgs[self.previousSibling])" />			
+						</div>
+						<div class="register-field">
+							<datebox format="dd/MM/yyyy" class="form-control"
+								value="@bind(vm.ngaySinh) @save(vm.ngaySinh, before='saveThongTinBenhNhan') 
+                            	@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+								width="100%" placeholder="Ngày sinh"/>
+							<label class="error"
+								value="@load(vmsgs[self.previousSibling])" />				
+						</div>
+						<div class="login-field">
+							<textbox type="text" id="username1" focus="true" 
+								class="form-control username" placeholder="Tên đăng nhập" onOK="@command('login',email=username.getValue(),password=password.getValue())">
+							</textbox>		
+							<n:span class="icon-username"></n:span>						
+						</div>
+						<div class="login-field">
+							<textbox type="password" id="password1" ca:autocomplete="on"
+								class="form-control password" placeholder="Mật khẩu" onOK="@command('login',email=username.getValue(),password=password.getValue())">
+							</textbox>
+							<n:span class="icon-password"></n:span>	
+							<timer id="timer1" delay="10" repeats="true" w:onTimer="zk.Widget.$('$username').updateChange_();zk.Widget.$('$password').updateChange_();" />
+						</div>
+						<div>
+							<a sclass="btn btn-default submit btn-login" label="Đăng nhập" onClick="@command('login',email=username.getValue(),password=password.getValue())">
+							</a>
+							<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
+                                        onClick="@command('redirectPage', zul='dangkytaikhoan/add.zul', vmArgs=null, vm=null)">
+                                        <n:i class="icon-themmoi"></n:i>&#160;&#160;Đăng ký
+                                    </x:button>
+						</div>
+						<div class="clearfix"></div>
+				</n:section>
+			</n:div>
+		</n:div>
+	</div>		
 </zk>

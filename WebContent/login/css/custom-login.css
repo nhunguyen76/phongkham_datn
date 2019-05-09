@@ -349,9 +349,15 @@ input.form-control.username:-webkit-autofill {
 	
 }
 
+.register-field {
+	position: relative;
+}
+
 .login-field {
 	position: relative;
 }
+
+
 
 .login-field .icon-username {
 	background: url(../img/icon-user.png) no-repeat !important;
