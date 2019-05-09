@@ -23,20 +23,16 @@
 				value="@bind(vm.benhNhan.hoVaTen) @save(vm.benhNhan.hoVaTen)">
 			</textbox>
 		</div>
-		<div class="col-md-12 list-menu-sukien">
+		<div class="col-md-6 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
 				Thời gian đặt hẹn
-				<n:span class="required">*</n:span>
 			</n:span>
-			<datebox format="dd/MM/yyyy" readonly="true" 
-				value="@bind(vm.thoiGianDatHen)"
-				width="100%">
-			</datebox>
+			<datebox format="dd/MM/yyyy" readonly="true"
+				value="@load(vm.thoiGianDatHen)" width="100%" />
 		</div>
-		<div class="col-md-12 list-menu-sukien">
+		<div class="col-md-6 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
 				Buổi khám
-			<n:span class="required">*</n:span>
 			</n:span>
 			<textbox class="hv-textbox" readonly="true" width="100%"
 				value="@bind(vm.buoiKham.text)">
@@ -47,9 +43,18 @@
 				Thời gian khám ước tính
 				<n:span class="required">*</n:span>
 			</n:span>
-			<spinner constraint="no negative,no zero"
+			<spinner constraint="no negative,no zero" width="100%"
 				value="@bind(vm.thoiGianKhamUocTinh)" tabindex="10" /> 
 			<label class="error" value="@load(vmsgs[self.previousSibling])" />
+		</div>
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Thời gian khám xác nhận
+			</n:span>
+			<datebox format="HH:mm dd/MM/yyyy" readonly="true" 
+				value="@bind(vm.thoiGianKham)"
+				width="100%">
+			</datebox>
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
@@ -73,12 +78,9 @@
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
 					Nội dung
-					<n:span class="required">*</n:span>
 				</n:span>
 				<textbox class="form-control" rows="3"  width="100%" maxlength="1000"
-					value="@bind(vm.noiDung) @save(vm.noiDung, before='saveLichHenKham')"/>
-				<label class="error"
-					value="@load(vmsgs[self.previousSibling])" />
+					value="@bind(vm.noiDung)"/>
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
