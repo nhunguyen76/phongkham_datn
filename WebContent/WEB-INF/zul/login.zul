@@ -70,6 +70,10 @@
 						<div>
 							<a sclass="btn btn-default submit btn-login" label="Đăng nhập" onClick="@command('login',email=username.getValue(),password=password.getValue())">
 							</a>
+							<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
+                                        onClick="@command('redirectPage', zul='dangkytaikhoan/add.zul', vmArgs=null, vm=null)">
+                                        <n:i class="icon-themmoi"></n:i>&#160;&#160;Đăng ký
+                                    </x:button>
 						</div>
 						<div class="clearfix"></div>
 					</n:form>
