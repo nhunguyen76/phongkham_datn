@@ -44,10 +44,10 @@
 											emptyMessage="Danh sách không có dịch vụ nào" class="table-report">
 											<columns>
 												<column label="STT" hflex="min" style="text-align:center"/>
-												<column label="Bệnh nhân" width="15%" style="text-align:center;"/>			
+												<column label="Bệnh nhân" width="200px" style="text-align:center;"/>			
 												<column label="Thời gian đặt hẹn" width="30%" style="text-align:center;"/>
 												<column label="Buổi khám" width="30%" style="text-align:center;"/>
-												<column label="Thời gian khám xác nhận" width="30%" style="text-align:center;"/>
+												<column label="Thời gian khám xác nhận" hflex="min" style="text-align:center;"/>
 												<column label="Trạng thái" width="30%" style="text-align:center;"/>
 												<column label="Thao tác" width="100px" style="text-align:center;"/>
 											</columns>
