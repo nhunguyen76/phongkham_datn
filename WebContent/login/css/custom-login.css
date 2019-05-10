@@ -351,6 +351,7 @@ input.form-control.username:-webkit-autofill {
 
 .register-field {
 	position: relative;
+	margin-bottom: 50px;
 }
 
 .login-field {
@@ -459,4 +460,8 @@ body {
 		font-size: 16px;
 		line-height: 21px;
 	}
+}
+
+.form-dang-ky-lich-hen {
+	margin-bottom:20px;
 }

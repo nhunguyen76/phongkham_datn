@@ -78,51 +78,77 @@
 		</n:div>
 	</div>
 	
+	<zscript>
+        entry = new vn.toancauxanh.service.BaseObject().core();
+    </zscript>
 	<div class="" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('vn.toancauxanh.gg.model.HoSoThongTin')">
+		viewModel="@id('vmLichHen') @init('vn.toancauxanh.gg.model.LichHenKham')">
 		<include src="/WEB-INF/zul/notification.zul"></include>
 		<n:div id="wrapper box-login">
 			
 			<n:div id="login" class="mg-box-login animate form" style="max-width: 420px !important; display: block; margin: auto">				
-				<n:h2>ĐĂNG KÝ</n:h2>
+				<n:h2>ĐĂNG KÝ KHÁM</n:h2>
 				<n:section class="login_content">
 						<div class="register-field">
 							<textbox type="text"
-								class="form-control" placeholder="Họ và tên" 
-								value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveThongTinBenhNhan') 
-                            		@validator(vm.validatorStringUtitsNotBlank)">
+								class="form-control form-dang-ky-lich-hen" placeholder="Họ và tên" 
+								value="@load(vmLichHen.hoVaTen) @save(vmLichHen.hoVaTen, before='saveLichHenKhamNgoai') 
+                            		@validator(vmLichHen.validatorStringUtitsNotBlank)">
 							</textbox>	
 							<label class="error"
                         		value="@load(vmsgs[self.previousSibling])" />			
 						</div>
 						<div class="register-field">
-							<datebox format="dd/MM/yyyy" class="form-control"
-								value="@bind(vm.ngaySinh) @save(vm.ngaySinh, before='saveThongTinBenhNhan') 
+							<datebox format="dd/MM/yyyy" class="form-control form-dang-ky-lich-hen"
+								value="@bind(vmLichHen.ngaySinh) @save(vmLichHen.ngaySinh, before='saveLichHenKhamNgoai') 
                             	@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
 								width="100%" placeholder="Ngày sinh"/>
 							<label class="error"
 								value="@load(vmsgs[self.previousSibling])" />				
 						</div>
-						<div class="login-field">
-							<textbox type="text" id="username1" focus="true" 
-								class="form-control username" placeholder="Tên đăng nhập" onOK="@command('login',email=username.getValue(),password=password.getValue())">
-							</textbox>		
-							<n:span class="icon-username"></n:span>						
+						<div class="register-field">
+                            <datebox format="dd/MM/yyyy" class="form-control"
+                                value="@bind(vmLichHen.thoiGianDatHen) @save(vmLichHen.thoiGianDatHen, before='saveLichHenKhamNgoai') 
+                                @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+                                width="100%" placeholder="Ngày hẹn khám"/>
+                            <label class="error"
+                                value="@load(vmsgs[self.previousSibling])" />
+                        </div>
+                        <div class="register-field">
+                            <combobox model="@load(entry.lichHenKhams.buoiKhams)"
+                            	width="100%" readonly="true" class="hv-cbb"
+                            	placeholder="Chọn buổi khám"
+                            	value="@load(vmLichHen.buoiKham eq null ? '' : vmLichHen.buoiKham.text)"
+                            	selectedItem="@save(vmLichHen.buoiKham)">
+                            	<template name="model">
+                            		<comboitem
+                            			label="@load(empty each ? 'Chọn buổi khám' :  each.text)" />
+                            	</template>
+                            </combobox>
+                            <label class="error"
+                                value="@load(vmsgs[self.previousSibling])" />
+                        </div>
+						<div class="register-field">
+							<textbox type="text"
+                                class="form-control" placeholder="Số điện thoại liên lạc" 
+                                value="@load(vmLichHen.dienThoaiLienLac) @save(vmLichHen.dienThoaiLienLac, before='saveLichHenKhamNgoai') 
+                                    @validator(vmLichHen.validatorStringUtitsNotBlank)">
+                            </textbox>  
+                            <label class="error"
+                                value="@load(vmsgs[self.previousSibling])" />
 						</div>
-						<div class="login-field">
-							<textbox type="password" id="password1" ca:autocomplete="on"
-								class="form-control password" placeholder="Mật khẩu" onOK="@command('login',email=username.getValue(),password=password.getValue())">
-							</textbox>
-							<n:span class="icon-password"></n:span>	
-							<timer id="timer1" delay="10" repeats="true" w:onTimer="zk.Widget.$('$username').updateChange_();zk.Widget.$('$password').updateChange_();" />
-						</div>
+						<div class="register-field">
+                            <textbox type="text"
+                                class="form-control form-dang-ky-lich-hen" placeholder="Nội dung" rows="3"
+                                value="@load(vmLichHen.noiDung) @save(vmLichHen.noiDung, before='saveLichHenKhamNgoai') 
+                                    @validator(vmLichHen.validatorStringUtitsNotBlank) " >
+                            </textbox>  
+                            <label class="error"
+                                value="@load(vmsgs[self.previousSibling])" />           
+                        </div>
 						<div>
-							<a sclass="btn btn-default submit btn-login" label="Đăng nhập" onClick="@command('login',email=username.getValue(),password=password.getValue())">
+							<a sclass="btn btn-default submit btn-login" label="Đăng ký" onClick="@command('saveLichHenKhamNgoai')">
 							</a>
-							<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
-                                        onClick="@command('redirectPage', zul='dangkytaikhoan/add.zul', vmArgs=null, vm=null)">
-                                        <n:i class="icon-themmoi"></n:i>&#160;&#160;Đăng ký
-                                    </x:button>
 						</div>
 						<div class="clearfix"></div>
 				</n:section>

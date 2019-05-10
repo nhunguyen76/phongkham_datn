@@ -11,9 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.StringUtils;
 import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.ValidationContext;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.zul.Window;
 
 import vn.toancauxanh.gg.model.enums.BuoiKhamEnum;
@@ -32,6 +35,10 @@ public class LichHenKham extends Model<LichHenKham> {
     private TrangThaiXuLyEnum trangThaiXuLy;
     private HoSoThongTin nguoiDuyet; // Nguoi duyet lich kham
     private String noiDung;
+    // thong tin benh nhan ngoai
+    private String hoVaTen; // ho ten benh nhan
+    private Date ngaySinh; // ngay sinh benh nhan
+    private String dienThoaiLienLac;
 
     @ManyToOne
     public HoSoThongTin getBenhNhan() {
@@ -111,6 +118,15 @@ public class LichHenKham extends Model<LichHenKham> {
 			wdn.detach();
 			BindUtils.postNotifyChange(null, null, listObject, attr);
 	}
+	
+	// Đặt lịch hẹn cho bệnh nhân ngoai
+	@Command
+    public void saveLichHenKhamNgoai(@BindingParam("list") final Object listObject,
+            @BindingParam("attr") final String attr) throws IOException {
+            save();
+            this.setTrangThaiXuLy(TrangThaiXuLyEnum.CHO_DUYET);
+            showNotification("Đã tạo lịch khám. Phòng khám sẽ liên lạc với bạn để xác nhận!", "", "success");
+    }
 
 	public Date getThoiGianDatHen() {
 		return thoiGianDatHen;
@@ -133,5 +149,46 @@ public class LichHenKham extends Model<LichHenKham> {
         } else {
             return "";
         }
+    }
+
+    public String getHoVaTen() {
+        return hoVaTen;
+    }
+
+    public void setHoVaTen(String hoVaTen) {
+        this.hoVaTen = hoVaTen;
+    }
+
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getDienThoaiLienLac() {
+        return dienThoaiLienLac;
+    }
+
+    public void setDienThoaiLienLac(String dienThoaiLienLac) {
+        this.dienThoaiLienLac = dienThoaiLienLac;
+    }
+
+    // Validation
+    @Transient
+    public AbstractValidator getValidatorStringUtitsNotBlank() {
+        return new AbstractValidator() {
+            @Override
+            public void validate(ValidationContext ctx) {
+                String value = (String) ctx.getProperty().getValue();
+                if (value.isEmpty()) {
+                    addInvalidMessage(ctx, "Không được để trống trường này.");
+                }
+                else if (StringUtils.isBlank(value)) {
+                    addInvalidMessage(ctx, "Không được để khoảng trắng.");
+                } 
+            }
+        };
     }
 }
