@@ -48,6 +48,15 @@ public class LichHenKham extends Model<LichHenKham> {
     public void setBenhNhan(HoSoThongTin benhNhan) {
         this.benhNhan = benhNhan;
     }
+    
+    @Transient
+    public String getTenBenhNhanHienThi() {
+    	if (this.benhNhan != null) {
+    		return this.benhNhan.getHoVaTen();
+    	} else {
+    		return this.hoVaTen;
+    	}
+    }
 
     public Date getThoiGianKham() {
         return thoiGianKham;
@@ -123,8 +132,8 @@ public class LichHenKham extends Model<LichHenKham> {
 	@Command
     public void saveLichHenKhamNgoai(@BindingParam("list") final Object listObject,
             @BindingParam("attr") final String attr) throws IOException {
-            save();
-            this.setTrangThaiXuLy(TrangThaiXuLyEnum.CHO_DUYET);
+        	this.setTrangThaiXuLy(TrangThaiXuLyEnum.CHO_DUYET);
+            saveNotShowNotification();
             showNotification("Đã tạo lịch khám. Phòng khám sẽ liên lạc với bạn để xác nhận!", "", "success");
     }
 

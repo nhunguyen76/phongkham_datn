@@ -3245,7 +3245,7 @@ tbody.collapse.in{
     pointer-events:none
 }
 .input-group{
-    position:relative;
+/*  position:relative; */
     display:table;
     border-collapse:separate
 }
@@ -6129,12 +6129,9 @@ a:hover{
 }
 .login_content form div a{
     background:#00a356;
-    height:44px;
     font-family:SourceSansPro-Semibold;
-    font-size:16px;
     color:#fff;
     text-shadow:none;
-    padding-top:9px;
     margin:0
 }
 .login_content form div a:hover{
@@ -6273,7 +6270,9 @@ input:-webkit-autofill{
     text-align:left;
 }
 .login_content{
-    padding:20px 40px
+    padding-left:40px;
+    padding-right:40px;
+    padding-bottom:20px;
 }
 #login h2{
     text-align:center;

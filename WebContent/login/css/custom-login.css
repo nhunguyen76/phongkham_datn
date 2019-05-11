@@ -349,11 +349,6 @@ input.form-control.username:-webkit-autofill {
 	
 }
 
-.register-field {
-	position: relative;
-	margin-bottom: 50px;
-}
-
 .login-field {
 	position: relative;
 }
@@ -394,7 +389,7 @@ input:-webkit-autofill {
 	font-weight: bold;
 }
 .login_content {
-	padding: 20px 40px 20px;
+	padding: 10px 20px 20px;
 }
 
 #login h2 {
@@ -441,7 +436,7 @@ body {
 }
 
 .login-head {
-	padding-top: 25%;
+	padding-top: 20%;
 	padding-bottom: 14px;
     overflow: hidden;
 }
