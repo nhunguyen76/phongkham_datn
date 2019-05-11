@@ -353,6 +353,8 @@ input.form-control.username:-webkit-autofill {
 	position: relative;
 }
 
+
+
 .login-field .icon-username {
 	background: url(../img/icon-user.png) no-repeat !important;
     position: absolute;
@@ -387,7 +389,7 @@ input:-webkit-autofill {
 	font-weight: bold;
 }
 .login_content {
-	padding: 20px 40px 20px;
+	padding: 10px 20px 20px;
 }
 
 #login h2 {
@@ -434,7 +436,7 @@ body {
 }
 
 .login-head {
-	padding-top: 25%;
+	padding-top: 20%;
 	padding-bottom: 14px;
     overflow: hidden;
 }
@@ -453,4 +455,8 @@ body {
 		font-size: 16px;
 		line-height: 21px;
 	}
+}
+
+.form-dang-ky-lich-hen {
+	margin-bottom:20px;
 }
