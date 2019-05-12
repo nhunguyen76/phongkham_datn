@@ -54,11 +54,8 @@
 	String file = execution.getParameter("file");
 	String action = execution.getParameter("action");
 	String ctxPath = execution.getContextPath();
-	boolean coquyen = true;
+	boolean coquyen = entry.quyen.get(resource + "_" + action);
 	boolean dakhoa = entry.nguoiDungDaKhoa;
-	if (!"dashboard".equals(resource) && !"trogiup".equals(resource)) {
-		coquyen = entry.quyen.get(resource + "_" + action);
-	}
 ]]></zscript>
   <div class="wrapper">
     <!-- include header.html -->

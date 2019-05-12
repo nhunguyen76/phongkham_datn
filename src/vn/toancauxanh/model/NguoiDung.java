@@ -55,6 +55,8 @@ import org.zkoss.zul.Window;
 import com.google.common.base.Strings;
 import com.querydsl.jpa.impl.JPAQuery;
 
+import vn.toancauxanh.gg.model.HoSoThongTin;
+import vn.toancauxanh.gg.model.QHoSoThongTin;
 import vn.toancauxanh.service.Quyen;
 
 @Entity
@@ -664,4 +666,12 @@ public class NguoiDung extends Model<NguoiDung> {
 	public void setMatKhau2(String matKhau2) {
 		this.matKhau2 = matKhau2 != null ? matKhau2.trim() : matKhau2;
 	}
+	
+	// Lay ho so thong tin theo ten dang nhap cua nguoi dung
+	@Transient
+	public HoSoThongTin getHoSoThongTin() {
+		JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.taiKhoan.eq(this));
+		return q.fetchOne();
+	}
+	
 }

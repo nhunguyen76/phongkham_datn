@@ -1708,15 +1708,15 @@ input[type=text], textarea {
 	font-family: 'Roboto-Bold';
 }
 
-.title-profile-benhnhan {
+.title-panel-table {
 /* 	font-family: Roboto, sans-serif;
 	font-weight: 700; */
 	margin: 7px 0;
 	padding-bottom:7px;
 	font-size: 20px;
-	color: #2dbd60;
-	font-family: "Rubik", sans-serif;
-	font-weight: 500;
+	color: #000000;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
 }
 
 .title-list-report {

@@ -49,9 +49,8 @@
 		<div class="center center-menu">
 			<div class="open-menu" style="text-align: center;">
 				<ul class="ds-menu">
-					<li
-						class="menu-top-list ${resource eq 'hosobenhnhan'?'active-menu':''}"
-						zk:if="${entry.quyen.congtrinh_lietke and !dakhoa}">
+					<li class="menu-top-list ${resource eq 'hosothongtin'?'active-menu':''}"
+						zk:if="${entry.quyen.hosothongtin_lietke and !dakhoa}">
 						<a class="link-menu"
 							href="${execution.contextPath}/hosothongtin">
 							<span class="icon-ds-menu"></span>
@@ -59,11 +58,17 @@
 							Hồ sơ bệnh nhân</span>
 						</a>
 					</li>
-				
-					<li
-						class="menu-top-list ${resource eq 'lichhenkham'
+					<li class="menu-top-list ${resource eq 'hosothongtin'?'active-menu':''}"
+						zk:if="${entry.quyen.hosothongtin_xem and !dakhoa}">
+						<x:a class="link-menu" href="#" zk:if="${!dakhoa}"
+							zk:onClick="@command('redirectPageSession', url='/hosothongtin/id', vm=entry.nguoiDung.hoSoThongTin)">
+							<span class="icon-ds-menu"></span>
+							<span class="text-menu">Hồ sơ cá nhân</span>
+						</x:a>
+					</li>
+					<li class="menu-top-list ${resource eq 'lichhenkham'
 	     				|| resource eq 'lichhenkham' ?'active-menu':''}"
-						zk:if="${(entry.quyen.lichhenkham_lietke or entry.quyen.lichhenkham_lietke) and !dakhoa}">
+						zk:if="${(entry.quyen.lichhenkham_lietke ) and !dakhoa}">
 						<a class="link-menu" href="${execution.contextPath}/lichhenkham">
 							<span class="icon-calendar-menu"></span>
 							<span class="text-menu">
@@ -82,15 +87,10 @@
 							<span class="text-menu">Hồ sơ nhân viên</span>
 						</a>
 					</li>					
-					<li
-						class="menu-top-list ${resource eq 'nguoidung' || resource eq 'hosobenhnhan' 
-	     				|| resource eq 'vaitro' || resource eq 'lichsunguoidung' ||  resource eq 'cauhinhhethong' ||  resource eq 'thuoc'
-	     				||  resource eq 'dichvu' ||  resource eq 'hangmuccongtrinh' ||  resource eq 'quocgia' ?'active-menu':''}"
-						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.hosobenhnhan_lietke
-	     				|| entry.quyen.thutucthanhphanhoso_lietke || entry.quyen.capdonvihanhchinh_lietke || entry.quyen.dichvu_lietke || entry.quyen.donvihanhchinh_lietke || entry.quyen.donvibanhanh_lietke
-	     				|| entry.quyen.vaitro_lietke || entry.quyen.phongban_lietke || entry.quyen.quantrihethong_lietke
-	     				|| entry.quyen.quanlyhethong_vaitro || entry.quyen.lichsunguoidung_lietke || entry.quyen.cauhinhhethong_lietke || entry.quyen.thuoc_lietke 
-	     				|| entry.quyen.nhomdichvu_lietke || entry.quyen.hangmuccongtrinh_lietke || entry.quyen.quocgia_lietke ) and !dakhoa }">
+					<li class="menu-top-list ${resource eq 'nguoidung' || resource eq 'dichvu' 
+	     				|| resource eq 'vaitro' || resource eq 'taikhoan' ||  resource eq 'thuoc' ?'active-menu':''}"
+						zk:if="${(entry.quyen.nguoidung_lietke || entry.quyen.dichvu_lietke
+	     				|| entry.quyen.vaitro_lietke || entry.quyen.taikhoan_lietke || entry.quyen.thuoc_lietke ) and !dakhoa }">
 
 						<a class="link-menu" href="javascript:;">
 							<span
@@ -116,10 +116,18 @@
 							</li>
 							
 							<li class="menu-items"
-								zk:if="${entry.quyen.phongban_lietke}">
+								zk:if="${entry.quyen.taikhoan_lietke}">
 								<a class="item-link"
-									href="${execution.contextPath}/phongban">
+									href="${execution.contextPath}/taikhoan">
 									Tài khoản
+								</a>
+							</li>
+							
+							<li class="menu-items"
+								zk:if="${entry.quyen.vaitro_lietke}">
+								<a class="item-link"
+									href="${execution.contextPath}/vaitro">
+									Vai trò
 								</a>
 							</li>
 						</ul>

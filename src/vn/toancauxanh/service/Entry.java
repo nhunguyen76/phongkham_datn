@@ -320,7 +320,7 @@ public class Entry extends BaseObject<Object> {
 
 	@RequestMapping(value = "/{path:.+$}/id/{id:\\d+}")
 	public String cp(@PathVariable String path, @PathVariable Long id) {
-		return "forward:/WEB-INF/zul/home.zul?resource=" + path + "&action=them&file=/WEB-INF/zul/" + path  + "/edit-detail.zul&id="+ id;
+		return "forward:/WEB-INF/zul/home.zul?resource=" + path + "&action=xem&file=/WEB-INF/zul/" + path  + "/edit-detail.zul&id="+ id;
 	}
 	
 	@RequestMapping(value = "/login")

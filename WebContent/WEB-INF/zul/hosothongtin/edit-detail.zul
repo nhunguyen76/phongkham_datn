@@ -44,7 +44,7 @@
 						</x:a>
 					</div>
 					<div class="col-md-12"  style="text-align:center; padding-top:20px">
-						<x:a class="btn btn-primary btn-block button-custom"
+						<x:a class="btn btn-info btn-block button-custom"
 							zk:if="${entry.quyen.lichhenkham_them}"
 							zk:onClick="@command('redirectPage', zul='lichhenkham/view-lich-ca-nhan.zul',vmArgs=vm.hoSoThongTin.id)">
 							Lịch hẹn khám
@@ -57,7 +57,7 @@
 							<n:section class="box-result">
 					        	<div class="box-list-report">
 					        		<div class="box-report-top flex-list">
-					        			<n:p class="title-profile-benhnhan ">
+					        			<n:p class="title-panel-table ">
 					        				Thông tin cá nhân
 					        			</n:p>
 					        		</div>
@@ -157,7 +157,7 @@
 							<n:section class="box-result">
 								<div class="box-list-report">
 									<div class="box-report-top range-menu">
-										<n:p class="title-profile-benhnhan">
+										<n:p class="title-panel-table">
 											Bệnh án
 										</n:p>
 										<div class="box-button-list">
@@ -186,7 +186,7 @@
 															<x:a href="#" class="col-edit" title ="Chỉnh sửa"
 															zk:if="${entry.quyen.hosobenhan_sua}" onClick="@command('redirectPage', zul='hosobenhan/view.zul',vmArgs=vm,vm=item)"><n:i class="icon-edit"></n:i></x:a>
 															<x:a href="#" class="col-edit" title ="Chi tiết điều trị"
-															zk:if="${entry.quyen.hosobenhan_sua}" onClick="@command(vm.showChiTietBenhAn(item.id))"><n:i class="icon-ds"></n:i></x:a>
+															zk:if="${entry.quyen.hosobenhan_xem}" onClick="@command(vm.showChiTietBenhAn(item.id))"><n:i class="icon-ds"></n:i></x:a>
 															<x:a href="#" class="col-del" title="Xóa"
 			                          							zk:if="${entry.quyen.hosobenhan_xoa}"	
 			                          						onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
@@ -207,7 +207,7 @@
 								<n:section class="box-result">
 									<div class="box-list-report">
 										<div class="box-report-top range-menu">
-											<n:p class="title-issue title-list-report">
+											<n:p class="title-panel-table">
 												Chi tiết bệnh án
 											</n:p>
 											<div class="box-button-list">
@@ -239,7 +239,7 @@
 															<div class="text-align-center grid-action">
 															     <x:a
 															     	href="#" class="col-edit" title="Đơn thuốc"
-															     	zk:if="${entry.quyen.chitietdonthuoc_sua}"
+															     	zk:if="${entry.quyen.chitietdonthuoc_xem}"
 															     	onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul',vmArgs=vm,vm=item)">
 															     	<n:i class="icon-eye"></n:i>
 															     </x:a>
@@ -273,7 +273,7 @@
 								<n:section class="box-result">
 									<div class="box-list-report">
 										<div class="box-report-top range-menu">
-											<n:p class="title-issue title-list-report">
+											<n:p class="title-panel-table">
 												Cận lâm sàng
 											</n:p>
 											<div class="box-button-list">

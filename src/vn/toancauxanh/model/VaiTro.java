@@ -189,17 +189,53 @@ public class VaiTro extends Model<VaiTro> {
 		quyens1.add(core().VAITROLIST);
 		quyens1.add(core().VAITROXOA);
 		
-		quyens1.add(core().VAITROTHEM);
-		quyens1.add(core().VAITROLIST);
-		quyens1.add(core().VAITROSUA);
-		quyens1.add(core().VAITROXOA);
-		quyens1.add(core().VAITROXEM);
-		
 		quyens1.add(core().HOSOTHONGTINTHEM);
 		quyens1.add(core().HOSOTHONGTINLIST);
 		quyens1.add(core().HOSOTHONGTINSUA);
 		quyens1.add(core().HOSOTHONGTINXOA);
 		quyens1.add(core().HOSOTHONGTINXEM);
+		
+		quyens1.add(core().DICHVUTHEM);
+		quyens1.add(core().DICHVULIST);
+		quyens1.add(core().DICHVUSUA);
+		quyens1.add(core().DICHVUXOA);
+		quyens1.add(core().DICHVUXEM);
+		
+		quyens1.add(core().HOSOBENHANTHEM);
+		quyens1.add(core().HOSOBENHANLIST);
+		quyens1.add(core().HOSOBENHANSUA);
+		quyens1.add(core().HOSOBENHANXOA);
+		quyens1.add(core().HOSOBENHANXEM);
+		
+		quyens1.add(core().NHANVIENTHEM);
+		quyens1.add(core().NHANVIENLIST);
+		quyens1.add(core().NHANVIENSUA);
+		quyens1.add(core().NHANVIENXOA);
+		quyens1.add(core().NHANVIENXEM);
+		
+		quyens1.add(core().CHITIETBENHANTHEM);
+		quyens1.add(core().CHITIETBENHANLIST);
+		quyens1.add(core().CHITIETBENHANSUA);
+		quyens1.add(core().CHITIETBENHANXOA);
+		quyens1.add(core().CHITIETBENHANXEM);
+		
+		quyens1.add(core().CANLAMSANGTHEM);
+		quyens1.add(core().CANLAMSANGLIST);
+		quyens1.add(core().CANLAMSANGSUA);
+		quyens1.add(core().CANLAMSANGXOA);
+		quyens1.add(core().CANLAMSANGXEM);
+		
+		quyens1.add(core().CHITIETDONTHUOCTHEM);
+		quyens1.add(core().CHITIETDONTHUOCLIST);
+		quyens1.add(core().CHITIETDONTHUOCSUA);
+		quyens1.add(core().CHITIETDONTHUOCXOA);
+		quyens1.add(core().CHITIETDONTHUOCXEM);
+		
+		quyens1.add(core().LICHHENKHAMTHEM);
+		quyens1.add(core().LICHHENKHAMLIST);
+		quyens1.add(core().LICHHENKHAMSUA);
+		quyens1.add(core().LICHHENKHAMXOA);
+		quyens1.add(core().LICHHENKHAMXEM);
 		
 		return quyens1;
 	}
