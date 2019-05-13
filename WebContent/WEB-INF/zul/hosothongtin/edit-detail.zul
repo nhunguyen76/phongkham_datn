@@ -139,7 +139,7 @@
 											<div class="range-menu position-button flex-right">
 												<div class="position-flex">
 													<x:span>
-														<x:a class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom " zk:if="${entry.quyen.hosothongtin_them}"
+														<x:a class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom " zk:if="${!entry.quyen.hosothongtin_sua}"
 															zk:onClick="@command('redirectPage', zul='hosothongtin/view.zul',vmArgs='vn.toancauxanh.cms.service.HoSoThongTinService',vm=vm.hoSoThongTin)">
 															<n:i class="icon-edit-white"></n:i> Chỉnh sửa
 														</x:a>

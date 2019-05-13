@@ -228,7 +228,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3 list-menu-sukien">
+		<div class="col-md-3 list-menu-sukien" zk:if="${entry.quyen.hosothongtin_them}">
 			<div class="col-md-12">
 				<vlayout>
 					<groupbox closable="false" mold="3d"

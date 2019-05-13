@@ -21,13 +21,13 @@
 		
 	<div class="row box-body">
 		<div class="col-md-12 list-menu-sukien">
-            <div class="box-report-top flex-list">
+            <div class="box-report-top flex-list" zk:if="${entry.quyen.chitietdonthuoc_them and !dakhoa}">
             	<x:button class="btn btn-success" style="margin-right: 10px;" 
                     onClick="@command(vm.addRowThuoc())">
 		            <n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm thuốc 
 		        </x:button>
             </div>
-            <div class="wrappre-tb">
+            <div class="wrappre-tb" zk:if="${entry.quyen.chitietdonthuoc_them and !dakhoa}">
 				<div class="wp-scrool">
 					<grid width="100%" id="grid" 
 						model="@load(vm.donThuoc)" height="300px"
@@ -56,6 +56,35 @@
                                         onClick="@command('onDeleteThuoc',vm=vm, item=each)">
                                         <n:i class="icon-cancel2"></n:i>
                                 </x:button> 
+							</row>
+						</template>
+					</grid>
+				</div>
+			</div>
+			<div class="wrappre-tb" zk:if="${!entry.quyen.chitietdonthuoc_them and !dakhoa}">
+				<div class="wp-scrool">
+					<grid hflex="min" id="grid2"  
+						model="@load(vm.donThuoc)" height="280px"
+						class="table-report">
+						<columns height="22px">
+							<column width="170px" label="Tên thuốc1" />
+							<column width="100px" label="Số lượng" />
+							<column width="100px" label="Đơn vị" />
+							<column width="350px" label="Cách dùng" />
+                            <column width="350px" label="Ghi chú" />
+						</columns>
+						<template name="model">
+							<row>
+								<label width="100%"
+									value="@bind(each.tenThuoc)"/>
+								<label width="100%"
+									value="@bind(each.soLuong)" />
+								<label width="100%"
+									value="@bind(each.donVi)" />
+								<label width="100%"
+									value="@bind(each.cachDung)" />
+                                <label width="100%"
+                                    value="@bind(each.ghiChu)" />
 							</row>
 						</template>
 					</grid>

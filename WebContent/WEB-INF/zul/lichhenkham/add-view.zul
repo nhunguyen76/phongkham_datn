@@ -23,7 +23,7 @@
 			</n:span>
 			<datebox format="dd/MM/yyyy"
 				value="@bind(vm.thoiGianDatHen) @save(vm.thoiGianDatHen, before='saveLichHenKham') 
-							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no past')"
 				width="100%" placeholder="Nhập ngày hẹn">
 			</datebox>
 			<label class="error"
@@ -48,7 +48,7 @@
 			<label class="error"
 				value="@load(vmsgs[self.previousSibling])" />
 		</div>
-		<div class="col-md-12 list-menu-sukien">
+		<div class="col-md-12 list-menu-sukien" zk:if="${entry.quyen.lichhenkham_sua}">
 			<n:span class="title-issue title-issue-detail">
 				Thời gian khám ước tính
 				<n:span class="required">*</n:span>
@@ -69,7 +69,7 @@
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
-		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.lichhenkham_them) or (!vm.noId() and entry.quyen.lichhenkham_sua)) and !checkView}"
 			onClick="@command('saveLichHenKham',wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>

@@ -17,11 +17,17 @@ import org.zkoss.bind.ValidationContext;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.validator.AbstractValidator;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import vn.toancauxanh.gg.model.enums.BuoiKhamEnum;
 import vn.toancauxanh.gg.model.enums.TrangThaiXuLyEnum;
 import vn.toancauxanh.model.Model;
+import vn.toancauxanh.model.NguoiDung;
+import vn.toancauxanh.model.QNguoiDung;
+import vn.toancauxanh.model.VaiTro;
 
 @Entity
 @Table(name = "lichhenkham")
@@ -135,6 +141,21 @@ public class LichHenKham extends Model<LichHenKham> {
         	this.setTrangThaiXuLy(TrangThaiXuLyEnum.CHO_DUYET);
             saveNotShowNotification();
             showNotification("Đã tạo lịch khám. Phòng khám sẽ liên lạc với bạn để xác nhận!", "", "success");
+    }
+	
+	@Command
+    public void huyHen(@BindingParam("wdn") final Window wdn) {
+		Messagebox.show("Bạn muốn hủy cuộc hẹn này?", "Xác nhận", Messagebox.CANCEL | Messagebox.OK,
+				Messagebox.QUESTION, new EventListener<Event>() {
+					@Override
+					public void onEvent(final Event event) {
+						if (Messagebox.ON_OK.equals(event.getName())) {
+							setTrangThaiXuLy(TrangThaiXuLyEnum.HUY_HEN);
+							save();
+							wdn.detach();
+						}
+					}
+				});
     }
 
 	public Date getThoiGianDatHen() {
