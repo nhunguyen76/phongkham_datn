@@ -49,13 +49,13 @@ public class VaiTro extends Model<VaiTro> {
 	public static final String QUANTRIVIEN = "quantrivien";
 	public static final String BACSI = "bacsi";
 	public static final String BENHNHAN = "benhnhan";
-	public static final String KYTHUATVIEN = "kythuatvien";
+	public static final String NHANVIEN = "nhanvien";
 
 	public static final String[] VAITRO_DEFAULTS = {
 			QUANTRIVIEN, 
 			BACSI, 
 			BENHNHAN,
-			KYTHUATVIEN };
+			NHANVIEN };
 
 	private Set<String> quyens = new HashSet<>();
 	private Set<String> quyenEdits = quyens;
@@ -236,6 +236,12 @@ public class VaiTro extends Model<VaiTro> {
 		quyens1.add(core().LICHHENKHAMSUA);
 		quyens1.add(core().LICHHENKHAMXOA);
 		quyens1.add(core().LICHHENKHAMXEM);
+		
+		quyens1.add(core().TAIKHOANTHEM);
+		quyens1.add(core().TAIKHOANLIST);
+		quyens1.add(core().TAIKHOANSUA);
+		quyens1.add(core().TAIKHOANXOA);
+		quyens1.add(core().TAIKHOANXEM);
 		
 		return quyens1;
 	}

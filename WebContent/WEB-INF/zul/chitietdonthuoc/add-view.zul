@@ -6,27 +6,161 @@
 		width="1155px"
 		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
 		whatever="@load(false,after='saveDonThuoc') @converter('vn.toancauxanh.service.DetachConverter')"
-		viewModel="@id('vm') @init('vn.toancauxanh.cms.service.ChiTietDonThuocService')"
+		viewModel="@id('vm') @init(arg.model)"
 		validationMessages="@id('vmsgs')">
 
 		<zscript><![CDATA[
 			vmArgs = arg.get("vmArgs");
+			nhom = arg.get("nhom");
 			strSave = arg.get("save");
-			import vn.toancauxanh.gg.model.ChiTietBenhAn;
-			ChiTietBenhAn thongTinDieuTri = new ChiTietBenhAn();
-			thongTinDieuTri = arg.get("model");
-			vm.setSelectedIdThongTinDieuTri(thongTinDieuTri.getId());
-			vm.getChiTietToaThuoc();
+			import vn.toancauxanh.gg.model.HoSoThongTin;
+			import vn.toancauxanh.gg.model.ChiTietDonThuoc;
+			vm.getChiTietDonThuocs().clear();
+			if (vm.getId() == null || vm.getId() == 0 ) {
+			HoSoThongTin benhNhan = new HoSoThongTin();
+			benhNhan = arg.get("nhom");
+			vm.setBenhNhan(benhNhan);
+			} else {
+				vm.getChiTietDonThuocInDB();
+			}
+			
 		]]></zscript> 
 		
 	<div class="row box-body">
+		<div class="row">
+			<n:section class="box-result" style="padding-top:20px">
+				<div class="box-form-search" style="padding-left:10px">
+					<div class = "col-md-12">
+						<div class="col-md-4">
+							<n:span class="title-issue title-issue-detail">
+	        					Thuốc
+	        				</n:span>
+							<combobox model="@load(entry.thuocs.listTenThuoc)" width="100%"
+								autodrop="true" buttonVisible="false"
+								selectedItem="@load(vm.chiTietDonThuoc.tenThuoc) @save(vm.chiTietDonThuoc.tenThuoc, before='themThuoc') "
+								value="@load(vm.chiTietDonThuoc.tenThuoc ne null ? vm.chiTietDonThuoc.tenThuoc : '')  @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
+								<template name="model">
+									<comboitem
+										label="@load(empty each? 'Chọn thuốc' :  each)" />
+								</template>
+							</combobox>
+							<label zclass="error"
+								value="@load(vmsgs[self.previousSibling])" />
+							<!-- <bandbox id="suggestion" autodrop="true"
+					                buttonVisible="false" width="300px" 
+					                value="@bind(vm.chiTietDonThuoc.thuoc) @save(vm.chiTietDonThuoc.thuoc, before={'saveThuoc'}) 
+									@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
+					                <bandpopup > 
+					                    <listbox model="@load(entry.thuocs.targetQuery.fetch())" width="350px"  selectedItem="@bind(vm.chiTietDonThuoc.thuoc)"
+					                  	onSelect="suggestion.value=self.selectedItem.label;suggestion.close();">
+					                          <template name="model" var="item">
+							                    <listitem>
+							                        <listcell label="@bind(item.tenThuoc)"/>
+							                    </listitem>
+							                </template>	
+					                    </listbox>
+					                </bandpopup>
+					            </bandbox> -->
+						</div>
+						<div class="col-md-2">
+							<n:span class="title-issue title-issue-detail">
+								Số lượng
+							</n:span>
+							<spinner constraint="no negative,no zero" width="100%"
+								value="@bind(vm.chiTietDonThuoc.soLuong)" tabindex="10" /> 
+							<label zclass="error"
+								value="@load(vmsgs[self.previousSibling])" />
+						</div>
+						
+						<div class="col-md-2">
+							<n:span class="title-issue title-issue-detail">Đơn vị</n:span>
+							<textbox class="keysearch" width="100%"
+								value="@load(vm.chiTietDonThuoc.donVi)"/>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<x:label>Liều dùng</x:label>
+							<textbox class="form-control" rows="3" width="100%"
+								value="@bind(vm.chiTietDonThuoc.lieuDung) 
+									@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"/>
+							<label zclass="error"
+								value="@load(vmsgs[self.previousSibling])" />
+						</div>
+						<div class="col-md-6">
+							<x:label>Ghi chú</x:label>
+							<textbox class="form-control" rows="3" width="100%"
+								value="@bind(vm.chiTietDonThuoc.ghiChu)"/>
+						</div>
+					</div>
+				</div>
+				<div class="box-form-search">
+					<n:form
+						class="form-src padding-form-bt">
+						<div class="row-box-src">
+							<x:button class="btn btn-success" style="margin-right: 10px;" 
+			                    onClick="@command('themThuoc')">
+					            <n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm thuốc 
+					        </x:button>
+						</div>
+					</n:form>
+				</div>
+				<div class="clearfix"></div>
+			</n:section>
+		</div>
+		<div class="wrappre-tb col-md-12">
+			<div class="wp-scrool">
+				<grid model="@bind(vm.chiTietDonThuocs)"
+					width="100%" id="grid" class="table-report"
+					emptyMessage="Chưa có thông tin nào" >
+					<columns>
+						<column label="STT" hflex="min"
+							style="text-align:center" />
+						<column label="Tên thuốc" width="15%"
+							style="text-align:center;" />
+						<column label="Số lượng" width="100px"
+							style="text-align:center;" />
+						<column label="Đơn vị" width="100px"
+							style="text-align:center;" />
+						<column label="Cách dùng" width="30%"
+							style="text-align:center;" />
+						<column label="Thao tác" width="12%"
+							style="text-align:center;" />
+					</columns>
+					<template name="model">
+						<row apply="org.zkoss.bind.BindComposer"
+							viewModel="@id('item') @init(each)">
+							<label
+								value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+								style="text-align:center;display:block" />
+							<label value="@bind(each.tenThuoc)"
+								style="text-align:center;display:block" />
+								<label value="@bind(each.soLuong)"
+								style="text-align:center;display:block" />
+								<label value="@bind(each.donVi)"
+								style="text-align:center;display:block" />
+							<label value="@bind(each.lieuDung)"
+								style="text-align:center;display:block" />
+							<div
+								class="text-align-center grid-action">
+								<x:a href="#" class="col-edit"
+									title="Chỉnh sửa" zk:if="${entry.quyen.thuoc_sua}"
+									onClick="@command('redirectPage', zul='thuoc/view.zul',vmArgs=vm,vm=item)">
+									<n:i class="icon-edit"></n:i>
+								</x:a>
+								<x:a href="#" class="col-del"
+									title="Xóa" zk:if="${entry.quyen.thuoc_xoa}"
+									onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='targetQuery', type = 'thuoc')">
+									<n:i class="icon-cancel"></n:i>
+								</x:a>
+							</div>
+						</row>
+					</template>
+				</grid>
+			</div>
+		</div>
 		<div class="col-md-12 list-menu-sukien">
-            <div class="box-report-top flex-list" zk:if="${entry.quyen.chitietdonthuoc_them and !dakhoa}">
-            	<x:button class="btn btn-success" style="margin-right: 10px;" 
-                    onClick="@command(vm.addRowThuoc())">
-		            <n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm thuốc 
-		        </x:button>
-            </div>
+            <!-- 
             <div class="wrappre-tb" zk:if="${entry.quyen.chitietdonthuoc_them and !dakhoa}">
 				<div class="wp-scrool">
 					<grid width="100%" id="grid" 
@@ -90,11 +224,13 @@
 					</grid>
 				</div>
 			</div>
+		 -->
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
 		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
-			onClick="@command(vm.saveDonThuoc(wdn))">
+			
+			onClick="@command('saveDonThuoc', list=vmArgs, attr='listDonThuoc', wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>
 		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">

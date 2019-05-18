@@ -37,7 +37,7 @@
 									<n:div class="form-group">
 										<x:label>Ngày sinh</x:label>
 										<datebox format="dd-MM-yyyy" width="100%" 
-											value="@bind(vm.paramNgaySinh)" />
+											value="@bind(vm.paramNgaySinh)" placeholder="Nhập ngày sinh"/>
 									</n:div>
 								</div>
 							</div>
@@ -79,14 +79,13 @@
 												<column
 													label="Họ và tên" hflex="min" style="text-align: center;" />
 												<column label="Mã cá nhân" hflex="min" style="text-align: center;" />
-												<column label="CMND"
-													hflex="min" style="text-align: center;" />
+												<column label="CMND" width="130px" style="text-align: center;" />
 												<column
-													label="Giới tính" hflex="min" style="text-align: center;" />
+													label="Giới tính" width="80px" style="text-align: center;" />
 												<column
-													label="Ngày sinh" hflex="min" style="text-align: center;" />
+													label="Ngày sinh" width="130px" style="text-align: center;" />
 												<column
-													label="Số điện thoại" hflex="min"
+													label="Số điện thoại" width="130px"
 													style="text-align: center;" />
 												<column label="Địa chỉ"
 													style="text-align: center;" />

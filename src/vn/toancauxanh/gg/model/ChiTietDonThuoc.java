@@ -2,6 +2,7 @@ package vn.toancauxanh.gg.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,63 +16,77 @@ import vn.toancauxanh.model.Model;
 @Table(name = "chitietdonthuoc")
 public class ChiTietDonThuoc extends Model<ChiTietDonThuoc>{
 
+    private DonThuoc donThuoc;
     private String tenThuoc;
     private int soLuong;
     private String donVi;
-    private String cachDung;
+    private String lieuDung;
     private String ghiChu;
-    private ChiTietBenhAn thongTinDieuTri;
-    
-    public String getTenThuoc() {
-        return tenThuoc;
-    }
-
-    public void setTenThuoc(String tenThuoc) {
-        this.tenThuoc = tenThuoc;
-    }
-
-    public String getGhiChu() {
-        return ghiChu;
-    }
-
-    public void setGhiChu(String ghiChu) {
-        this.ghiChu = ghiChu;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-    
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-    
-    public String getDonVi() {
-        return donVi;
-    }
-
-    public void setDonVi(String donVi) {
-        this.donVi = donVi;
-    }
-
-    public String getCachDung() {
-        return cachDung;
-    }
-    
-    public void setCachDung(String cachDung) {
-        this.cachDung = cachDung;
-    }
     
     @ManyToOne
-    public ChiTietBenhAn getThongTinDieuTri() {
-        return thongTinDieuTri;
-    }
-    
-    public void setThongTinDieuTri(ChiTietBenhAn thongTinDieuTri) {
-        this.thongTinDieuTri = thongTinDieuTri;
-    }
-    
-  //Validation
+    public DonThuoc getDonThuoc() {
+		return donThuoc;
+	}
+
+	public void setDonThuoc(DonThuoc donThuoc) {
+		this.donThuoc = donThuoc;
+	}
+
+	public String getTenThuoc() {
+		return tenThuoc;
+	}
+
+	public void setTenThuoc(String tenThuoc) {
+		this.tenThuoc = tenThuoc;
+	}
+
+	public int getSoLuong() {
+		return soLuong;
+	}
+	
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
+	}
+
+
+
+	public String getDonVi() {
+		return donVi;
+	}
+
+
+
+	public void setDonVi(String donVi) {
+		this.donVi = donVi;
+	}
+
+
+
+	public String getLieuDung() {
+		return lieuDung;
+	}
+
+
+
+	public void setLieuDung(String lieuDung) {
+		this.lieuDung = lieuDung;
+	}
+
+
+
+	public String getGhiChu() {
+		return ghiChu;
+	}
+
+
+
+	public void setGhiChu(String ghiChu) {
+		this.ghiChu = ghiChu;
+	}
+
+
+
+	//Validation
     @Transient
     public AbstractValidator getValidatorStringUtitsNotBlank() {
         return new AbstractValidator() {

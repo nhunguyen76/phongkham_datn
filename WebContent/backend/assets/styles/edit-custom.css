@@ -272,6 +272,11 @@ input[type=text], textarea {
 	color: #fcda1b;
 }
 
+.icon-ds-orange:before {
+	content: "\e906";
+	color: #ff8000;
+}
+
 .icon-edit:before {
 	content: "\e907";
 	color: #4099de
@@ -1714,9 +1719,9 @@ input[type=text], textarea {
 	margin: 7px 0;
 	padding-bottom:7px;
 	font-size: 20px;
-	color: #000000;
-	font-family: 'Montserrat', sans-serif;
-	font-weight: 600;
+	color: #3CB371;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
 }
 
 .title-list-report {
@@ -1725,7 +1730,7 @@ input[type=text], textarea {
 }
 
 .box-list-report {
-	padding: 12px 24px 20px;
+	padding: 12px 24px 10px;
 	height:auto;
 	overflow:auto;
 }
@@ -2045,7 +2050,9 @@ input[type=text], textarea {
 }
 
 .title-issue-detail {
-	font-size: 13px
+	font-size: 12px;
+	font-family:'Open Sans', sans-serif;
+	font-weight : bold;
 }
 
 .fix-margin-title {
@@ -3086,7 +3093,7 @@ button.toast-close-button {
 
 .z-grid-header th, .z-tree-header th {
 	background-color: #388edf;
-	border: 1px solid #cfcfcf;
+	border: 1px solid #e0e0e0;
 	border-top: none;
 	background: #388edf;
 }
@@ -3117,7 +3124,7 @@ button.toast-close-button {
 	letter-spacing: 0;
 	padding-left: 9px;
 	padding-right: 9px;
-	background-color: #ddd
+	background-color: #ffffff
 }
 
 .z-grid-body .z-row-content a, .z-grid-body .z-row-content span {
@@ -4237,7 +4244,7 @@ input[disabled] {
 }
 
 .list-menu-sukien {
-	margin-top: 10px;
+	margin-bottom: 30px;
 }
 
 .search-timkiem {
@@ -5250,4 +5257,8 @@ input[disabled] {
 .text-area-ho-so[disabled] {
 	background: whitesmoke !important;
     border: none;
+}
+
+.div-textbox-custom {
+	margin-bottom : 12px;
 }

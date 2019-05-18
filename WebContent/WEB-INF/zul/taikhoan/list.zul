@@ -1,52 +1,25 @@
 <z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml"
 	viewModel="@id('vm') @init('vn.toancauxanh.service.HoSoThongTinService')">
 	<zscript><![CDATA[
-		self.page.title= "Quản lý nhân viên";
+		self.page.title= "Quản lý tài khoản";
 	]]></zscript>
 	<n:section class="main-container">
 		<div class="center-body">
 			<div class="bar-top-content">
-				<n:h2 class="title-page-main">QUẢN LÝ NHÂN VIÊN</n:h2>
+				<n:h2 class="title-page-main">QUẢN LÝ TÀI KHOẢN</n:h2>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="box-content-full">
-						<n:section class="box-result" style="padding-top:20px">
-							<div class="box-form-search" style="padding-left:10px">
-								<div class="col-sm-4">
-									<div class="form-group">
-										<x:label>Tên nhân viên</x:label>
-										<textbox class="keysearch" width="100%"
-											value="@bind(vm.paramHoVaTenBenhNhan)"
-											placeholder="Nhập tên nhân viên cần tìm"
-											onOK="@command('cmd', notify=vm, attr='*')" />
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<x:label>
-											Vai trò
-										</x:label>
-										<combobox model="@load(entry.vaiTros.vaiTroQuery.fetch())"
-											width="100%" readonly="true" class="hv-cbb"
-											placeholder="Chọn vai trò"
-											selectedItem="@save(vm.paramVaiTro)">
-											<template name="model">
-												<comboitem
-													label="@load(empty each ? 'Chọn vaitro' :  each.tenVaiTro)" />
-											</template>
-										</combobox>
-									</div>
-								</div>
-							</div>
+						<n:section class="box-result">
 							<div class="box-form-search">
-								<n:form
-									class="form-src padding-form-bt">
+								<n:form class="form-src padding-form-bt">
 									<div class="row-box-src">
-										<x:button class="btn-form-search btn-page" type="button" style="float:right"
-											onClick="@command('cmd', notify=vm, attr='listThongTinNhanVien')">
-											<n:i class="icon-search"></n:i>
-											Tìm kiếm
+										<textbox class="keysearch" value="@bind(vm.arg.tukhoa)" placeholder="Nhập tên người dùng"
+													onOK="@command('cmd', notify=vm, attr='listThongTinNhanVien')" />
+										<x:button class="btn-form-search btn-page width-100-2" type="button" 
+											onClick="@command('cmd', notify=vm, attr='listThongTinNhanVien')" >
+											<n:i class="icon-search"></n:i> Tìm kiếm
 										</x:button>
 									</div>
 								</n:form>
@@ -57,16 +30,16 @@
 				        	<div class="box-list-report">
 				          		<div class="box-report-top flex-list">
 				          			<n:p class="title-issue title-list-report margin-button-list">
-				          				Danh sách nhân viên
+				          				Danh sách tài khoản người dùng
 				          			</n:p>
 				          			<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.nguoidung_them}" 
-			    						onClick="@command('redirectPage', zul='nhanvien/add.zul', vmArgs=vm, vm=null)">
+			    						onClick="@command('redirectPage', zul='taikhoan/add.zul', vmArgs=vm, vm=null)">
 		    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
 		    						</x:button>
 				          		</div>
 				          		 <div class="wrappre-tb">
 		                			<div class="wp-scrool">
-		                				<grid model="@load(vm.page(vm.listThongTinNhanVien).fetch())" width="100%" id="grid"
+		                				<grid model="@load(vm.page(vm.targetQuery).fetch())" width="100%" id="grid"
 											emptyMessage="Danh sách không có người dùng nào" class="table-report">
 											<columns>
 												<column label="STT" hflex="min" style="text-align: center;"/>
@@ -83,23 +56,23 @@
 													<label value="@load(each.taiKhoan.tenDangNhap)" style="text-align: center;display:block"/>
 													<label value="@load(each.taiKhoan.vaiTroText)" style="text-align: center;display:block"/>
 													<cell style="text-align:center;">
-														<n:span style="font-size: 11px" class="${each.setStyleTrangThai(each.trangThai)}">${each.checkApDung ? 'Áp dụng' : 'Đã khóa'}</n:span>
+														<n:span style="font-size: 11px" class="${each.setStyleTrangThai(each.taiKhoan.trangThai)}">${each.checkApDung ? 'Áp dụng' : 'Đã khóa'}</n:span>
 													</cell>
 													
 													<div class="text-align-center grid-action">
-														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.nhanvien_sua}" title ="Chỉnh sửa"
-															onClick="@command('redirectPage', zul='nhanvien/view.zul',vmArgs=vm,vm=item)">
+														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.taikhoan_sua}" title ="Chỉnh sửa"
+															onClick="@command('redirectPage', zul='taikhoan/view.zul',vmArgs=vm,vm=item)">
 															<n:i class="icon-edit"></n:i>
 														</x:a>
-														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.nguoidung_khoa and item.checkApDung and item.id ne 1}"
-															title ="Khóa" onClick="@command('khoaThanhVien', vm=vm)">
+														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.nguoidung_khoa and item.checkApDung}"
+															title ="Khóa" onClick="@command('khoaTaiKhoan', vm=vm)">
 															<n:i class="icon-custom-lock"></n:i>
 														</x:a>
-														<x:a href="#" class="col-edit" zk:if="${entry.quyen.nguoidung_mokhoa and !item.checkApDung and item.id ne 1}"
+														<x:a href="#" class="col-edit" zk:if="${entry.quyen.nguoidung_mokhoa and !item.checkApDung}"
 															title ="Mở khóa" onClick="@command('moKhoaThanhVien', vm=vm)">
 															<n:i class="icon-custom-unclock"></n:i>
 														</x:a>
-		                          						<x:a href="#" class="col-del" zk:if="${entry.quyen.nguoidung_xoa and each.id ne 1}" title ="Xóa"
+		                          						<x:a href="#" class="col-del" zk:if="${entry.quyen.nguoidung_xoa}" title ="Xóa"
 		                          							onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='listThongTinNhanVien')">
 		                          							<n:i class="icon-cancel"></n:i>
 		                          						</x:a>

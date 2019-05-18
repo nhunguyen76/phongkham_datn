@@ -19,6 +19,9 @@ import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.querydsl.jpa.impl.JPAQuery;
@@ -312,5 +315,35 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 		};
 	}
 	
+	@Command
+	public void khoaTaiKhoan(@BindingParam("vm") final Object vm) {
+		System.out.println("=============================" + vm + "==============");
+		Messagebox.show("Bạn muốn khóa tài khoản này?", "Xác nhận", Messagebox.CANCEL | Messagebox.OK,
+				Messagebox.QUESTION, new EventListener<Event>() {
+					@Override
+					public void onEvent(final Event event) {
+						if (Messagebox.ON_OK.equals(event.getName())) {
+							taiKhoan.setCheckApDung(false);
+							taiKhoan.save();
+							BindUtils.postNotifyChange(null, null, vm, "targetQuery");
+						}
+					}
+				});
+	}
+	
+	@Command
+	public void moKhoaTaiKhoan(@BindingParam("vm") final Object vm) {
+		Messagebox.show("Bạn muốn mở khóa tài khoản này?", "Xác nhận", Messagebox.CANCEL | Messagebox.OK,
+				Messagebox.QUESTION, new EventListener<Event>() {
+					@Override
+					public void onEvent(final Event event) {
+						if (Messagebox.ON_OK.equals(event.getName())) {
+							taiKhoan.setCheckApDung(true);
+							taiKhoan.save();
+							BindUtils.postNotifyChange(null, null, vm, "targetQuery");
+						}
+					}
+				});
+	}
 	
 }

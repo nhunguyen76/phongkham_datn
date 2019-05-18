@@ -9,7 +9,6 @@
 	<zscript>
 		entry = new vn.toancauxanh.service.BaseObject().core();
 		notifyObject = arg.get("vmArgs");
-		phongBans = entry.phongBans;
 	</zscript>
 	<div class="row box-body">
 		<div class="${(vm.noId() and entry.quyen.nguoidung_them) or (!vm.noId() and entry.quyen.nguoidung_sua) ? 'col-md-12' : 'col-md-12'}">
@@ -30,29 +29,7 @@
 				   </div>
 				</div>
 				<div class="col-sm-6">
-					 <div class="row" if="${vm.tenDangNhap eq 'admin' ? false : true}">
-						<div class="col-sm-6">
-							<n:span class="title-issue title-issue-detail">Phòng Ban<n:small class="required"> *</n:small></n:span>
-							<combobox width="100%" model="@load(entry.phongBans.listAllPhongBan)" class="hv-cbb"
-								readonly="true" disabled="@load(!entry.quyen.nguoidung_them)"
-								value="@load(vm.phongBan ne null ? vm.phongBan.ten : 'Chọn phòng ban')"
-								selectedItem="@load(vm.phongBan) @save(vm.phongBan, before='saveNguoiDung') 
-									@bind(phongBans.selectedPhongBan)
-									@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" >
-								<template name="model">
-									<comboitem label="@load(empty each? 'Chọn phòng ban' :  each.ten)" />
-								</template>
-							</combobox>
-							<label class="error" value="@load(vmsgs[self.previousSibling])" />
-						</div>
-					</div>
 					<div class="row list-menu-sukien">
-						<div class="col-sm-6">
-							<n:span class="title-issue title-issue-detail">Họ và tên<n:small class="required"> *</n:small></n:span>
-							<textbox class="hv-textbox" width="100%"  maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
-								value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
-							<label class="error" value="@load(vmsgs[self.previousSibling])" />
-						</div>
 						<div class="col-sm-6">
 							<n:span class="title-issue title-issue-detail">Tên đăng nhập<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%" maxlength="255"
@@ -106,12 +83,6 @@
 							<n:span class="title-issue title-issue-detail">Email<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%" maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
 								value="@bind(vm.email) @save(vm.email, before='saveNguoiDung') @validator(vm.validatorEmail)" />
-							<label class="error" value="@load(vmsgs[self.previousSibling])" />
-						</div>
-						<div class="col-sm-6">
-							<n:span class="title-issue title-issue-detail">Số điện thoại</n:span>
-							<textbox class="hv-textbox" placeholder="Ví dụ: 0905112233" maxlength="11" width="100%" 
-								value="@load(vm.soDienThoai) @save(vm.soDienThoai, before='saveNguoiDung') @validator(vm.validateSoDienThoai)" />
 							<label class="error" value="@load(vmsgs[self.previousSibling])" />
 						</div>
 					</div>

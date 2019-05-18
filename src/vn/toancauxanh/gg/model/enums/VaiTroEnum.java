@@ -2,7 +2,7 @@ package vn.toancauxanh.gg.model.enums;
 
 public enum VaiTroEnum {
 	BACSI("Bác sĩ"), 
-	KYTHUATVIEN("Kỹ thuật viên"), 
+	NHANVIEN("Nhân viên"), 
 	BENHNHAN("Bệnh nhân");
 
 	VaiTroEnum(String text) {

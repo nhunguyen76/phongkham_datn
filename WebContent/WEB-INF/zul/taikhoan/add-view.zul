@@ -1,0 +1,251 @@
+<idspace>
+	<window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"
+		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
+		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
+		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
+		width="1000px"
+		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
+		whatever="@load(false,after='saveThongTinNhanVien') @converter('vn.toancauxanh.service.DetachConverter')"
+		viewModel="@id('vm') @init(arg.model)"
+		validationMessages="@id('vmsgs')">
+
+		<zscript><![CDATA[
+			vmArgs = arg.get("vmArgs");
+			strSave = arg.get("save");
+			import java.awt.*;
+			import java.awt.image.*;
+			import javax.imageio.ImageIO;
+			import java.net.URL;
+			import java.awt.geom.*;
+			BufferedImage imagevar2 = new BufferedImage(400, 300, BufferedImage.TYPE_INT_ARGB);
+		]]></zscript> 
+		
+	<div class="row box-body">
+		<div class="col-md-3 list-menu-sukien">
+				<div style="text-align:center;">
+					<div class="form-group">
+						<div class="div-image">
+							<image id="imageCmp"
+								style="width: 160px; height: 160px;object-fit:cover;border-radius:50%"
+								content="@load(vm.taiKhoan.imageContent eq null ? imagevar2 : vm.taiKhoan.imageContent) @save(vm.taiKhoan.imageContent, before='saveThongTinNhanVien')">
+							</image>
+						</div>
+					</div>
+					<div class="div-image-btn">
+						<button class="btn-ad-image"
+							upload="true,maxsize=10000,accept=.png|.jpg|.jpeg|.gif"
+							label="Cập nhập ảnh"
+							onUpload="@command(vm.taiKhoan.attachImages(event.media,vmsgs))" />
+					</div>
+				</div>
+		</div>
+		<div class="col-md-6 list-menu-sukien">
+			<div class="row">
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Họ và tên
+						<n:span class="required">*</n:span>
+					</n:span>
+					<textbox width="100%" class="hv-textbox" maxlength="255"
+						value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveThongTinNhanVien') 
+							@validator(vm.validatorStringUtitsNotBlank)"
+						placeholder="Nhập họ và tên" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Ngày sinh
+						<n:span class="required">*</n:span>
+					</n:span>
+					<datebox format="dd/MM/yyyy"
+						value="@bind(vm.ngaySinh) @save(vm.ngaySinh, before='saveThongTinNhanVien') 
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"
+						width="100%" placeholder="Nhập ngày sinh">
+					</datebox>
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Số điện thoại
+					</n:span>
+					<textbox width="100%" maxlength="255" class="hv-textbox"
+						value="@bind(vm.soDienThoai) @save(vm.soDienThoai, before='saveHoSoThongTin')
+							@validator(vm.validatorSoDienThoai)"
+						placeholder="Nhập số điện thoại" />
+				</div>
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Địa chỉ
+					</n:span>
+					<textbox width="100%" maxlength="255" class="hv-textbox"
+						value="@bind(vm.diaChi)" placeholder="Nhập địa chỉ" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Chứng minh nhân dân
+						<n:span class="required">*</n:span>
+					</n:span>
+					<textbox width="100%" maxlength="255" class="hv-textbox"
+						value="@bind(vm.cmnd) @save(vm.cmnd, before='saveThongTinNhanVien') 
+							@validator(vm.validatorCMND)"
+						placeholder="Nhập CMND" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Giới tính
+						<n:span class="required">*</n:span>
+					</n:span>
+					<combobox model="@load(entry.hoSoThongTins.gioiTinhs)"
+						width="100%" readonly="true" class="hv-cbb"
+						placeholder="Chọn giới tính"
+						value="@load(vm.gioiTinh eq null ? '' : vm.gioiTinh.text)"
+						selectedItem="@bind(vm.gioiTinh) @save(vm.gioiTinh, before={'saveThongTinNhanVien'})
+							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
+						<template name="model">
+							<comboitem
+								label="@load(empty each ? 'Chọn giới tính' :  each.text)" />
+						</template>
+					</combobox>
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+					Email
+					<n:small class="required">*</n:small>
+					</n:span>
+					<textbox class="hv-textbox" width="100%" maxlength="255"
+						disabled="@load(!entry.quyen.nguoidung_them)"
+						value="@bind(vm.taiKhoan.email) @save(vm.taiKhoan.email, before='saveThongTinNhanVien') 
+							@validator(vm.taiKhoan.validatorEmail)" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Tên đăng nhập
+						<n:small class="required">*</n:small>
+					</n:span>
+					<textbox class="hv-textbox" width="100%"
+						maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
+						value="@bind(vm.taiKhoan.tenDangNhap) @save(vm.taiKhoan.tenDangNhap, before='saveThongTinNhanVien') @validator(vm.taiKhoan.validatorTenDangNhap)" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+			</div>
+			<div class="row" if="${vm.noId()}">
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Mật khẩu
+						<n:small class="required">*</n:small>
+					</n:span>
+					<textbox class="hv-textbox" width="100%"
+						type="password" maxlength="255"
+						value="@bind(vm.taiKhoan.matKhau2) @save(vm.taiKhoan.matKhau2, before='saveThongTinNhanVien') @validator(vm.validatorStringUtitsNotBlank)" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+				<div class="col-md-6">
+					<n:span class="title-issue title-issue-detail">
+						Xác nhận mật khẩu
+						<n:small class="required">*</n:small>
+					</n:span>
+					<textbox class="hv-textbox" width="100%"
+						type="password" maxlength="255"
+						value="@bind(vm.taiKhoan.matKhau) @save(vm.taiKhoan.matKhau, before='saveThongTinNhanVien') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty', password=vm.taiKhoan.matKhau2)" />
+					<label class="error"
+						value="@load(vmsgs[self.previousSibling])" />
+				</div>
+			</div>
+			<div class="row" if="${!vm.noId()}" style="padding-top:20px">
+				<div class="col-md-12">
+					<vlayout>
+						<groupbox mold="3d" class="" open="false"
+							width="100%">
+							<caption class="">
+								<n:i class="fa fa-edit"></n:i>
+								<label value="Mật khẩu mới" />
+							</caption>
+							<div class="col-md-6">
+								<div class="form-group">
+									<n:span
+										class="title-issue title-issue-detail">
+										Mật khẩu
+									</n:span>
+									<textbox class="hv-textbox" width="100%"
+										type="password" maxlength="255"
+										value="@bind(vm.taiKhoan.matKhau2) @save(vm.taiKhoan.matKhau2, before='saveThongTinNhanVien')" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<n:span
+										class="title-issue title-issue-detail">
+										Xác nhận mật khẩu
+									</n:span>
+									<textbox class="hv-textbox" width="100%"
+										type="password" maxlength="255"
+										value="@save(vm.taiKhoan.matKhau2, before='saveThongTinNhanVien') 
+											@validator('vn.toancauxanh.vm.BaseValid', password=vm.noId() ? '' : vm.taiKhoan.matKhau2)" />
+									<label class="error"
+										value="@load(vmsgs[self.previousSibling])" />
+								</div>
+							</div>
+						</groupbox>
+					</vlayout>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 list-menu-sukien">
+			<vlayout>
+				<groupbox closable="false" mold="3d"
+					class="mis-group-user mis-mend">
+					<div class="mis-pd10">
+						<listbox
+							model="@bind(entry.vaiTros.vaiTroQuery.fetch())"
+							selectedItems="@bind(vm.taiKhoan.vaiTros)" multiple="true"
+							checkmark="true" rows="7">
+							<listhead>
+								<listheader label="Vai trò">
+									<n:small class="required">
+										*
+									</n:small>
+								</listheader>
+							</listhead>
+							<template name="model">
+								<listitem>
+									<listcell
+										label="${each.tenVaiTro}" />
+								</listitem>
+							</template>
+						</listbox>
+					</div>
+				</groupbox>
+				<label class="error"
+					value="@load(vmsgs['lblErrVaiTros'])" />
+			</vlayout>
+		</div>
+	</div>
+	<div class="row box-footer box-thaotac">
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+			onClick="@command('saveThongTinNhanVien', list=vmArgs, attr='targetQuery',wdn=wdn)">
+			<n:i class="icon-save"></n:i>Lưu 
+		</x:button>
+		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">
+			<n:i class="icon-cancel3"></n:i>Đóng
+		</x:button>
+	</div>
+</window>
+</idspace>

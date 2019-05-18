@@ -8,10 +8,12 @@ import com.querydsl.jpa.impl.JPAQuery;
 
 import vn.toancauxanh.gg.model.CanLamSang;
 import vn.toancauxanh.gg.model.ChiTietBenhAn;
+import vn.toancauxanh.gg.model.DonThuoc;
 import vn.toancauxanh.gg.model.HoSoBenhAn;
 import vn.toancauxanh.gg.model.HoSoThongTin;
 import vn.toancauxanh.gg.model.QCanLamSang;
 import vn.toancauxanh.gg.model.QChiTietBenhAn;
+import vn.toancauxanh.gg.model.QDonThuoc;
 import vn.toancauxanh.gg.model.QHoSoBenhAn;
 import vn.toancauxanh.service.BasicService;
 
@@ -42,6 +44,13 @@ public class HoSoBenhAnService extends BasicService<HoSoBenhAn>{
 	public HoSoBenhAn getHoSoBenhAnById(Long id) {
 		HoSoBenhAn entity = find(HoSoBenhAn.class).where(QHoSoBenhAn.hoSoBenhAn.id.eq(id)).fetchOne();
 		return entity;
+	}
+	
+	// Get list đơn thuốc của mỗi bệnh nhân
+	public JPAQuery<DonThuoc> getListDonthuoc() {
+		JPAQuery<DonThuoc> q = find(DonThuoc.class).where(QDonThuoc.donThuoc.benhNhan.id.eq(hoSoThongTin.getId()));
+		q.orderBy(QDonThuoc.donThuoc.ngayXuat.desc());
+		return q;
 	}
 
 	private Long selectedIdBenhAn;

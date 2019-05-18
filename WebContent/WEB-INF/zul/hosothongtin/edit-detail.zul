@@ -23,7 +23,7 @@
 				<n:h2 class="title-page-main">HỒ SƠ BỆNH NHÂN</n:h2>
 			</div>
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<div style="text-align:center;">
 				    	<div class="form-group">
 				    		<div class="div-image">
@@ -51,7 +51,7 @@
 						</x:a>
 					</div>
 				</div>
-				<div class="col-sm-10">
+				<div class="col-sm-9">
 					<div class= "row list-menu-sukien">
 						<div class="box-content-full">
 							<n:section class="box-result">
@@ -62,7 +62,7 @@
 					        			</n:p>
 					        		</div>
 					        		<div class="row list-menu-sukien">
-					        			<div class="col-md-4">
+					        			<div class="col-md-4 div-textbox-custom">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Họ và tên
@@ -71,7 +71,7 @@
 					        					class="hv-textbox" maxlength="255"
 					        					value="@load(vm.hoSoThongTin.hoVaTen)"/>
 					        			</div>
-					        			<div class="col-md-4">
+					        			<div class="col-md-4 div-textbox-custom">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Mã cá nhân
@@ -80,7 +80,7 @@
 					        					class="hv-textbox" maxlength="255"
 					        					value="@load(vm.hoSoThongTin.maCaNhan)"/>
 					        			</div>
-					        			<div class="col-md-4">
+					        			<div class="col-md-4 div-textbox-custom">
 						        			<n:span
 						        				class="title-issue title-issue-detail">
 						        				Chứng minh nhân dân
@@ -89,7 +89,7 @@
 						        				readonly="true" class="hv-textbox"
 						        				value="@bind(vm.hoSoThongTin.cmnd)" />
 						        		</div>
-					        			<div class="col-md-4">
+					        			<div class="col-md-4 div-textbox-custom">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Ngày sinh
@@ -98,7 +98,7 @@
 					        					value="@bind(vm.hoSoThongTin.ngaySinh)"	width="100%">
 					        				</datebox>
 					        			</div>
-					        			<div class="col-md-4">
+					        			<div class="col-md-4 div-textbox-custom">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Giới tính
@@ -107,7 +107,7 @@
 						        				readonly="true" class="hv-textbox"
 						        				value="@bind(vm.hoSoThongTin.gioiTinh.text)" />
 					        			</div>
-										<div class="col-md-4">
+										<div class="col-md-4 div-textbox-custom">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Số điện thoại
@@ -115,7 +115,7 @@
 					        				<textbox width="100%" readonly="true" class="hv-textbox"
 					        					value="@bind(vm.hoSoThongTin.soDienThoai)"/>
 					        			</div>
-					        			<div class="col-md-4">
+					        			<div class="col-md-4 div-textbox-custom">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Địa chỉ
@@ -125,7 +125,7 @@
 					        			</div>
 					        			
 						        		
-					        			<div class="col-md-4">
+					        			<div class="col-md-4 div-textbox-custom">
 					        				<n:span
 					        					class="title-issue title-issue-detail">
 					        					Email
@@ -139,7 +139,7 @@
 											<div class="range-menu position-button flex-right">
 												<div class="position-flex">
 													<x:span>
-														<x:a class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom " zk:if="${!entry.quyen.hosothongtin_sua}"
+														<x:a class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom "
 															zk:onClick="@command('redirectPage', zul='hosothongtin/view.zul',vmArgs='vn.toancauxanh.cms.service.HoSoThongTinService',vm=vm.hoSoThongTin)">
 															<n:i class="icon-edit-white"></n:i> Chỉnh sửa
 														</x:a>
@@ -152,6 +152,11 @@
 							</n:section>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-7 ">
 					<div class="row list-menu-sukien">
 						<div class="box-content-full">
 							<n:section class="box-result">
@@ -161,113 +166,252 @@
 											Bệnh án
 										</n:p>
 										<div class="box-button-list">
-											<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.hosobenhan_them}" 
-					    						onClick="@command('redirectPage', zul='hosobenhan/add.zul', vmArgs=vm, vm=null)">
-				    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
-			    							</x:a>
-					          			</div>
-					          		</div>
+											<x:a
+												class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
+												zk:if="${entry.quyen.hosobenhan_them}"
+												onClick="@command('redirectPage', zul='hosobenhan/add.zul', vmArgs=vm, vm=null)">
+												<n:i class="icon-themmoi"></n:i>
+												&#160;&#160;Thêm mới
+											</x:a>
+										</div>
+									</div>
 									<div class="wrappre-tb">
-			                			<div class="wp-scrool" >
-			                				<grid model="@load(vm.page(vm.listHoSoBenhAn).fetch())" width="100%" id="grid"
-												emptyMessage="Danh sách không có bệnh án nào" class="table-report">
+										<div class="wp-scrool">
+											<grid
+												model="@load(vm.page(vm.listHoSoBenhAn).fetch())" width="100%"
+												id="grid" emptyMessage="Danh sách không có bệnh án nào"
+												class="table-report">
 												<columns>
-													<column label="STT" hflex="min" style="text-align:center"/>
-													<column label="Dịch vụ" width="15%" style="text-align:center;"/>
-													<column label="Ngày bắt đầu" width="15%" style="text-align:center;"/>
-													<column label="Thao tác" width="12%" style="text-align:center;"/>
+													<column label="STT"
+														hflex="min" style="text-align:center" />
+													<column label="Dịch vụ"
+														width="15%" style="text-align:center;" />
+													<column label="Ngày bắt đầu"
+														width="15%" style="text-align:center;" />
+													<column label="Thao tác"
+														width="12%" style="text-align:center;" />
 												</columns>
 												<template name="model">
-													<row apply="org.zkoss.bind.BindComposer" viewModel="@id('item') @init(each)">
-														<label value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)" style="text-align:center;display:block"/>
-														<label value="@bind(each.dichVu.tenDichVu)" style="display:block"/>
-														<label value="@load(each.ngayBatDau) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
-														<div class="text-align-center grid-action">
-															<x:a href="#" class="col-edit" title ="Chỉnh sửa"
-															zk:if="${entry.quyen.hosobenhan_sua}" onClick="@command('redirectPage', zul='hosobenhan/view.zul',vmArgs=vm,vm=item)"><n:i class="icon-edit"></n:i></x:a>
-															<x:a href="#" class="col-edit" title ="Chi tiết điều trị"
-															zk:if="${entry.quyen.hosobenhan_xem}" onClick="@command(vm.showChiTietBenhAn(item.id))"><n:i class="icon-ds"></n:i></x:a>
-															<x:a href="#" class="col-del" title="Xóa"
-			                          							zk:if="${entry.quyen.hosobenhan_xoa}"	
-			                          						onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
-			                          						<n:i class="icon-cancel"></n:i></x:a>
+													<row
+														apply="org.zkoss.bind.BindComposer"
+														viewModel="@id('item') @init(each)">
+														<label
+															value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+															style="text-align:center;display:block" />
+														<label
+															value="@bind(each.dichVu.tenDichVu)" style="display:block" />
+														<label
+															value="@load(each.ngayBatDau) @converter('formatedDate', format='dd/MM/yyyy')"
+															style="text-align:center;display:block" />
+														<div
+															class="text-align-center grid-action">
+															<x:a href="#"
+																class="col-edit" title="Chỉnh sửa"
+																zk:if="${entry.quyen.hosobenhan_sua}"
+																onClick="@command('redirectPage', zul='hosobenhan/view.zul',vmArgs=vm,vm=item)">
+																<n:i
+																	class="icon-edit">
+																</n:i>
+															</x:a>
+															<x:a href="#"
+																class="col-edit" title="Chi tiết điều trị"
+																zk:if="${entry.quyen.hosobenhan_xem}"
+																onClick="@command(vm.showChiTietBenhAn(item.id))">
+																<n:i
+																	class="icon-ds">
+																</n:i>
+															</x:a>
+															<x:a href="#"
+																class="col-del" title="Xóa"
+																zk:if="${entry.quyen.hosobenhan_xoa}"
+																onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
+																<n:i
+																	class="icon-cancel">
+																</n:i>
+															</x:a>
 														</div>
 													</row>
 												</template>
 											</grid>
-			                			</div>
-			                		</div>
+										</div>
+									</div>
 								</div>
 							</n:section>
 						</div>
 					</div>
-					<div class="row list-menu-sukien" children="@load(vm.selectedIdBenhAn)">
-						<template name="children">
-							<div class="box-content-full" zk:if="${vm.selectedIdBenhAn != null}">
-								<n:section class="box-result">
-									<div class="box-list-report">
-										<div class="box-report-top range-menu">
-											<n:p class="title-panel-table">
-												Chi tiết bệnh án
-											</n:p>
-											<div class="box-button-list">
-												<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.hosobenhan_them}" 
-						    						onClick="@command('redirectPage', zul='chitietbenhan/add.zul', vmArgs=vm, vm=null)">
-					    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
-				    							</x:a>
-						          			</div>
-						          		</div>
-										<div class="wrappre-tb">
-				                			<div class="wp-scrool" >
-				                				<grid model="@load(vm.page(vm.listChiTietBenhAnByIdBenhAn).fetch())" width="100%" id="grid1"
-													emptyMessage="Danh sách không có bệnh án nào" class="table-report">
-													<columns>
-														<column label="STT" hflex="min" style="text-align:center"/>
-														<column label="Ngày khám" width="90px" style="text-align:center;"/>
-														<column label="Bác sĩ" width="15%" style="text-align:center;"/>
-														<column label="Chẩn đoán" width="15%" style="text-align:center;"/>
-														<column label="Thủ thuật" width="15%" style="text-align:center;"/>
-														<column label="Thao tác" width="12%" style="text-align:center;"/>
-													</columns>
-													<template name="model">
-														<row apply="org.zkoss.bind.BindComposer" viewModel="@id('item') @init(each)">
-															<label value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)" style="text-align:center;display:block"/>
-															<label value="@load(each.ngayKham) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
-															<label value="@bind(each.bacSi.hoVaTen)" style="display:block"/>
-															<label value="@bind(each.chanDoan)" style="display:block"/>
-															<label value="@bind(each.thuThuat)" style="display:block"/>
-															<div class="text-align-center grid-action">
-															     <x:a
-															     	href="#" class="col-edit" title="Đơn thuốc"
-															     	zk:if="${entry.quyen.chitietdonthuoc_xem}"
-															     	onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul',vmArgs=vm,vm=item)">
-															     	<n:i class="icon-eye"></n:i>
-															     </x:a>
-															     
-															     <x:a
-															     	href="#" class="col-edit" title="Chỉnh sửa"
-															     	zk:if="${entry.quyen.chitietbenhan_sua}"
-															     	onClick="@command('redirectPage', zul='chitietbenhan/view.zul',vmArgs=vm,vm=item)">
-															     	<n:i
-															     		class="icon-edit">
-															     	</n:i>
-															     </x:a>
-															     <x:a href="#" class="col-del" title="Xóa"
-				                          							zk:if="${entry.quyen.dichvu_xoa}"	
-				                          						onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
-				                          						<n:i class="icon-cancel"></n:i></x:a>
-															</div>
-														</row>
-													</template>
-												</grid>
-				                			</div>
-				                		</div>
+				</div>
+				<div class ="col-sm-5" >
+					<div class="row list-menu-sukien">
+						<div class="box-content-full">
+							<n:section class="box-result">
+								<div class="box-list-report">
+									<div class="box-report-top range-menu">
+										<n:p class="title-panel-table">
+											Đơn thuốc
+										</n:p>
+										<div class="box-button-list">
+											<x:a
+												class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
+												zk:if="${entry.quyen.hosobenhan_them}"
+												onClick="@command('redirectPage', zul='chitietdonthuoc/add.zul', vmArgs=vm, nhom=vm.hoSoThongTin , vm=null)">
+												<n:i class="icon-themmoi"></n:i>
+												&#160;&#160;Thêm mới
+											</x:a>
+										</div>
 									</div>
-								</n:section>
-							</div>
-						</template>
+									<div class="wrappre-tb">
+										<div class="wp-scrool">
+											<grid
+												model="@load(vm.page(vm.listDonthuoc).fetch())" width="100%"
+												id="" emptyMessage="Danh sách không có đơn thuốc nào"
+												class="table-report">
+												<columns>
+													<column label="STT"
+														width="50px" style="text-align:center" />
+													<column label="Ngày xuất đơn" style="text-align:center;" />
+													<column label="Thao tác"
+														hflex="min" style="text-align:center;" />
+												</columns>
+												<template name="model">
+													<row
+														apply="org.zkoss.bind.BindComposer"
+														viewModel="@id('item') @init(each)">
+														<label
+															value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+															style="text-align:center;display:block" />
+														<label
+															value="@load(each.ngayTao) @converter('formatedDate', format='dd/MM/yyyy')"
+															style="text-align:center;display:block" />
+														<div
+															class="text-align-center grid-action">
+															<x:a href="#"
+																class="col-edit" title="Chỉnh sửa"
+																zk:if="${entry.quyen.hosobenhan_sua}"
+																onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul', vmArgs=vm, nhom=vm.hoSoThongTin , vm=item)">
+																<n:i
+																	class="icon-edit">
+																</n:i>
+															</x:a>
+															<x:a href="#"
+																class="col-del" title="Xóa"
+																zk:if="${entry.quyen.hosobenhan_xoa}"
+																onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
+																<n:i
+																	class="icon-cancel">
+																</n:i>
+															</x:a>
+														</div>
+													</row>
+												</template>
+											</grid>
+										</div>
+									</div>
+								</div>
+							</n:section>
+						</div>
 					</div>
-					<div class="row list-menu-sukien" children="@load(vm.selectedIdBenhAn)">
+				</div>
+			</div>
+			
+			
+			<div class="row list-menu-sukien"
+				children="@load(vm.selectedIdBenhAn)">
+				<template name="children">
+					<div class="box-content-full"
+						zk:if="${vm.selectedIdBenhAn != null}">
+						<n:section class="box-result">
+							<div class="box-list-report">
+								<div
+									class="box-report-top range-menu">
+									<n:p class="title-panel-table">
+										Chi tiết bệnh án
+									</n:p>
+									<div class="box-button-list">
+										<x:a
+											class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
+											zk:if="${entry.quyen.hosobenhan_them}"
+											onClick="@command('redirectPage', zul='chitietbenhan/add.zul', vmArgs=vm, vm=null)">
+											<n:i class="icon-themmoi"></n:i>
+											&#160;&#160;Thêm mới
+										</x:a>
+									</div>
+								</div>
+								<div class="wrappre-tb">
+									<div class="wp-scrool">
+										<grid
+											model="@load(vm.page(vm.listChiTietBenhAnByIdBenhAn).fetch())"
+											width="100%" id="grid1"
+											emptyMessage="Danh sách không có bệnh án nào"
+											class="table-report">
+											<columns>
+												<column label="STT"
+													hflex="min" style="text-align:center" />
+												<column
+													label="Ngày khám" width="90px" style="text-align:center;" />
+												<column label="Bác sĩ"
+													width="15%" style="text-align:center;" />
+												<column
+													label="Chẩn đoán" width="15%" style="text-align:center;" />
+												<column
+													label="Thủ thuật" width="15%" style="text-align:center;" />
+												<column label="Thao tác"
+													width="12%" style="text-align:center;" />
+											</columns>
+											<template name="model">
+												<row
+													apply="org.zkoss.bind.BindComposer"
+													viewModel="@id('item') @init(each)">
+													<label
+														value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+														style="text-align:center;display:block" />
+													<label
+														value="@load(each.ngayKham) @converter('formatedDate', format='dd/MM/yyyy')"
+														style="text-align:center;display:block" />
+													<label
+														value="@bind(each.bacSi.hoVaTen)" style="display:block" />
+													<label
+														value="@bind(each.chanDoan)" style="display:block" />
+													<label
+														value="@bind(each.thuThuat)" style="display:block" />
+													<div
+														class="text-align-center grid-action">
+														<x:a href="#"
+															class="col-edit" title="Đơn thuốc"
+															zk:if="${entry.quyen.chitietdonthuoc_xem}"
+															onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul',vmArgs=vm,vm=item)">
+															<n:i
+																class="icon-ds-orange">
+															</n:i>
+														</x:a>
+	
+														<x:a href="#"
+															class="col-edit" title="Chỉnh sửa"
+															zk:if="${entry.quyen.chitietbenhan_sua}"
+															onClick="@command('redirectPage', zul='chitietbenhan/view.zul',vmArgs=vm,vm=item)">
+															<n:i
+																class="icon-edit">
+															</n:i>
+														</x:a>
+														<x:a href="#"
+															class="col-del" title="Xóa"
+															zk:if="${entry.quyen.dichvu_xoa}"
+															onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
+															<n:i
+																class="icon-cancel">
+															</n:i>
+														</x:a>
+													</div>
+												</row>
+											</template>
+										</grid>
+									</div>
+								</div>
+							</div>
+						</n:section>
+					</div>
+				</template>
+			</div>
+			<div class="row list-menu-sukien" children="@load(vm.selectedIdBenhAn)">
 						<template name="children">
 							<div class="box-content-full" zk:if="${vm.selectedIdBenhAn != null}">
 								<n:section class="box-result">
@@ -299,7 +443,7 @@
 														<row apply="org.zkoss.bind.BindComposer" viewModel="@id('item') @init(each)">
 															<label value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)" style="text-align:center;display:block"/>
 															<label value="@load(each.ngayKham) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
-															<label value="@bind(each.tieuDe)" style="display:block"/>
+															<label value="@bind(each.iconUrl)" style="display:block"/>
 															<div class="text-align-center">
 																<a src="@load(each.iconUrl)"></a>
 																<image
@@ -329,8 +473,7 @@
 							</div>
 						</template>
 					</div>
-				</div>
-			</div>
+				
 			<!-- 
 			<div class="row">
 				<div class="col-sm-12">

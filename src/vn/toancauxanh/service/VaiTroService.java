@@ -36,7 +36,7 @@ public final class VaiTroService extends BasicService<VaiTro> {
 		if(listDefaultAlias.isEmpty()){
 			listDefaultAlias.put(VaiTro.QUANTRIVIEN, "Quản trị viên");
 			listDefaultAlias.put(VaiTroEnum.BACSI.name(), VaiTroEnum.BACSI.getText());
-			listDefaultAlias.put(VaiTroEnum.KYTHUATVIEN.name(), VaiTroEnum.KYTHUATVIEN.getText());
+			listDefaultAlias.put(VaiTroEnum.NHANVIEN.name(), VaiTroEnum.NHANVIEN.getText());
 			listDefaultAlias.put(VaiTroEnum.BENHNHAN.name(), VaiTroEnum.BENHNHAN.getText());		}
 		return listDefaultAlias;
 	}

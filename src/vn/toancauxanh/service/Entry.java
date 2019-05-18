@@ -34,6 +34,7 @@ import vn.toancauxanh.cms.service.CanLamSangService;
 import vn.toancauxanh.cms.service.ChiTietBenhAnService;
 import vn.toancauxanh.cms.service.ChiTietDonThuocService;
 import vn.toancauxanh.cms.service.DichVuService;
+import vn.toancauxanh.cms.service.DonThuocService;
 import vn.toancauxanh.cms.service.HoSoBenhAnService;
 import vn.toancauxanh.cms.service.ImageService;
 import vn.toancauxanh.cms.service.LanguageService;
@@ -195,6 +196,19 @@ public class Entry extends BaseObject<Object> {
     @Value("${url.thuoc}" + ":" + "${action.sua}")
     public String THUOCSUA = "";
     
+    @Value("${url.donthuoc}")
+    public String DONTHUOC = "";
+    @Value("${url.donthuoc}" + ":" + "${action.xem}")
+    public String DONTHUOCXEM = "";
+    @Value("${url.donthuoc}" + ":" + "${action.them}")
+    public String DONTHUOCTHEM = "";
+    @Value("${url.donthuoc}" + ":" + "${action.list}")
+    public String DONTHUOCLIST = "";
+    @Value("${url.donthuoc}" + ":" + "${action.xoa}")
+    public String DONTHUOCXOA = "";
+    @Value("${url.donthuoc}" + ":" + "${action.sua}")
+    public String DONTHUOCSUA = "";
+    
     @Value("${url.chitietdonthuoc}")
     public String CHITIETDONTHUOC = "";
     @Value("${url.chitietdonthuoc}" + ":" + "${action.xem}")
@@ -220,10 +234,23 @@ public class Entry extends BaseObject<Object> {
     public String LICHHENKHAMXOA = "";
     @Value("${url.lichhenkham}" + ":" + "${action.sua}")
     public String LICHHENKHAMSUA = "";
+    
+    @Value("${url.taikhoan}")
+    public String TAIKHOAN = "";
+    @Value("${url.taikhoan}" + ":" + "${action.xem}")
+    public String TAIKHOANXEM = "";
+    @Value("${url.taikhoan}" + ":" + "${action.them}")
+    public String TAIKHOANTHEM = "";
+    @Value("${url.taikhoan}" + ":" + "${action.list}")
+    public String TAIKHOANLIST = "";
+    @Value("${url.taikhoan}" + ":" + "${action.xoa}")
+    public String TAIKHOANXOA = "";
+    @Value("${url.taikhoan}" + ":" + "${action.sua}")
+    public String TAIKHOANSUA = "";
 	// aend
 	public String[] getRESOURCES() {
 		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN, 
-				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM};
+				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM, TAIKHOAN};
 	}
 
 	public String[] getACTIONS() {
@@ -386,6 +413,10 @@ public class Entry extends BaseObject<Object> {
 	
 	public ThuocService getThuocs() {
         return new ThuocService();
+    }
+	
+	public DonThuocService getDonThuocs() {
+        return new DonThuocService();
     }
 	
 	public ChiTietDonThuocService getChiTietDonThuocs() {

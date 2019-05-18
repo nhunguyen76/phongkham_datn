@@ -1,0 +1,3 @@
+<?component name="add-view" inline="true" macroURI="add-view.zul"?>
+<add-view model="${entry.donThuocs.type().newInstance()}"  vmArgs="${arg.vmArgs}" nhom="${arg.nhom}" save="Tạo mới đơn thuốc" />
+

@@ -46,15 +46,15 @@ public class ChiTietDonThuocService extends BasicService<ChiTietDonThuocService>
         this.donThuoc = donThuoc;
     }
 
-	public List<ChiTietDonThuoc> getChiTietToaThuoc() {
-        JPAQuery<ChiTietDonThuoc> q = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.thongTinDieuTri.id.eq(selectedIdThongTinDieuTri));
-        q.orderBy(QChiTietDonThuoc.chiTietDonThuoc.ngayTao.asc());
-        donThuoc.addAll(q.fetch());
-        if(donThuoc.isEmpty()) {
-            donThuoc.add(new ChiTietDonThuoc());
-        }
-        return donThuoc;
-    }
+//	public List<ChiTietDonThuoc> getChiTietToaThuoc() {
+//        JPAQuery<ChiTietDonThuoc> q = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.thongTinDieuTri.id.eq(selectedIdThongTinDieuTri));
+//        q.orderBy(QChiTietDonThuoc.chiTietDonThuoc.ngayTao.asc());
+//        donThuoc.addAll(q.fetch());
+//        if(donThuoc.isEmpty()) {
+//            donThuoc.add(new ChiTietDonThuoc());
+//        }
+//        return donThuoc;
+//    }
 	
 	//Thêm row thuốc vào đơn thuốc
 	@Command
@@ -63,32 +63,32 @@ public class ChiTietDonThuocService extends BasicService<ChiTietDonThuocService>
 	    BindUtils.postNotifyChange(null, null, this, "donThuoc");
 	}
 	
-	@Command
-    public void saveDonThuoc(@BindingParam("wdn") final Window wdn) {
-	    JPAQuery<ChiTietBenhAn> q = find(ChiTietBenhAn.class).where(QChiTietBenhAn.chiTietBenhAn.id.eq(selectedIdThongTinDieuTri));
-	    ChiTietBenhAn chiTietBenhAn = q.fetchFirst();
-	    
-	    //Đơn thuốc trong DB
-	    JPAQuery<ChiTietDonThuoc> query = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.thongTinDieuTri.id.eq(selectedIdThongTinDieuTri));
-        List<ChiTietDonThuoc> donThuocInDB = new ArrayList<>();
-        donThuocInDB.addAll(query.fetch());
-        
-	    //List thuốc bị xóa
-	    List<ChiTietDonThuoc> removed = donThuocInDB.stream()
-	            .filter(thuocDB -> this.donThuoc.stream().noneMatch(thuoc -> thuoc.getId().equals(thuocDB.getId())))
-	            .collect(Collectors.toList());
-	    for(ChiTietDonThuoc obj : removed) {
-	        obj.doDelete(true);
-	    }
-	    
-	    //Cập nhật và thêm toa thuốc
-	    for (ChiTietDonThuoc thuoc : this.donThuoc) {
-            thuoc.setThongTinDieuTri(chiTietBenhAn);
-            thuoc.saveNotShowNotification();
-        }
-	    showNotification("Đã lưu thành công!", "", "success");
-	    wdn.detach();
-    }
+//	@Command
+//    public void saveDonThuoc(@BindingParam("wdn") final Window wdn) {
+//	    JPAQuery<ChiTietBenhAn> q = find(ChiTietBenhAn.class).where(QChiTietBenhAn.chiTietBenhAn.id.eq(selectedIdThongTinDieuTri));
+//	    ChiTietBenhAn chiTietBenhAn = q.fetchFirst();
+//	    
+//	    //Đơn thuốc trong DB
+//	    JPAQuery<ChiTietDonThuoc> query = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.thongTinDieuTri.id.eq(selectedIdThongTinDieuTri));
+//        List<ChiTietDonThuoc> donThuocInDB = new ArrayList<>();
+//        donThuocInDB.addAll(query.fetch());
+//        
+//	    //List thuốc bị xóa
+//	    List<ChiTietDonThuoc> removed = donThuocInDB.stream()
+//	            .filter(thuocDB -> this.donThuoc.stream().noneMatch(thuoc -> thuoc.getId().equals(thuocDB.getId())))
+//	            .collect(Collectors.toList());
+//	    for(ChiTietDonThuoc obj : removed) {
+//	        obj.doDelete(true);
+//	    }
+//	    
+//	    //Cập nhật và thêm toa thuốc
+//	    for (ChiTietDonThuoc thuoc : this.donThuoc) {
+//            thuoc.setThongTinDieuTri(chiTietBenhAn);
+//            thuoc.saveNotShowNotification();
+//        }
+//	    showNotification("Đã lưu thành công!", "", "success");
+//	    wdn.detach();
+//    }
 
 	@Command
     public void onDeleteThuoc(@ContextParam(ContextType.TRIGGER_EVENT) Event e,

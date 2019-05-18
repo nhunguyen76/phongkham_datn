@@ -11,14 +11,33 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="box-content-full">
-						<n:section class="box-result">
+						<n:section class="box-result" style="padding-top:20px">
+							<div class="box-form-search" style="padding-left:10px">
+								<div class="col-md-4">
+									<n:div class="form-group">
+										<x:label>Ngày Khám</x:label>
+										<datebox format="dd-MM-yyyy" width="100%" 
+											value="@bind(vm.paramNgayKham)" placeholder="Chọn ngày khám"/>
+									</n:div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<x:label>Tên bệnh nhân</x:label>
+										<textbox class="keysearch" width="100%"
+											value="@bind(vm.paramHoVaTenBenhNhan)"
+											placeholder="Nhập tên bệnh nhân"
+											onOK="@command('cmd', notify=vm, attr='*')" />
+									</div>
+								</div>
+							</div>
 							<div class="box-form-search">
-								<n:form class="form-src padding-form-bt">
+								<n:form
+									class="form-src padding-form-bt">
 									<div class="row-box-src">
-										<textbox class="keysearch" value="@bind(vm.arg.tukhoa)" placeholder="Nhập từ tìm kiếm"
-													onOK="@command('cmd', notify=vm, attr='targetQuery')" />
-										<x:button class="btn-form-search btn-page" type="button" onClick="@command('cmd', notify=vm, attr='*')" >
-											<n:i class="icon-search"></n:i> Tìm kiếm
+										<x:button class="btn-form-search btn-page" type="button" style="float:right"
+											onClick="@command('cmd', notify=vm, attr='*')">
+											<n:i class="icon-search"></n:i>
+											Tìm kiếm
 										</x:button>
 									</div>
 								</n:form>
@@ -47,7 +66,7 @@
 												<column label="Bệnh nhân" style="text-align:center;"/>			
 												<column label="Thời gian đặt hẹn" width="150px" style="text-align:center;"/>
 												<column label="Buổi khám" width="100px" style="text-align:center;"/>
-												<column label="Thời gian khám" hflex="min" style="text-align:center;"/>
+												<column label="Thời gian khám" width="150px" style="text-align:center;"/>
 												<column label="Trạng thái" width="100px" style="text-align:center;"/>
 												<column label="Thao tác" width="100px" style="text-align:center;"/>
 											</columns>
