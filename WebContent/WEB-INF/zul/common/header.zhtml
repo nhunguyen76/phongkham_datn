@@ -2,7 +2,7 @@
 	<div class="top-header">
 		<div class="center">
 			<div class="box-logo">
-				<a href="${execution.contextPath}/congtrinh">
+				<a href="${execution.contextPath}/">
 				<div class="box-title-page">
 					<h4>
 						HỆ THỐNG QUẢN LÝ		 
@@ -75,7 +75,15 @@
 								Quản lý lịch hẹn</span>
 						</a>
 					</li>
-					
+					<li class="menu-top-list ${resource eq 'cauhoi'
+	     				|| resource eq 'cauhoi' ?'active-menu':''}"
+						zk:if="${(entry.quyen.cauhoi_lietke ) and !dakhoa}">
+						<a class="link-menu" href="${execution.contextPath}/cauhoi">
+							<span class="icon-calendar-menu"></span>
+							<span class="text-menu">
+								Hỏi - đáp</span>
+						</a>
+					</li>
 					<li
 						class="menu-top-list ${resource eq 'nhanvien'?'active-menu':''}"
 						zk:if="${entry.quyen.nhanvien_lietke and !dakhoa}">

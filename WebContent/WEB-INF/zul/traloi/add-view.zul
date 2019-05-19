@@ -1,0 +1,74 @@
+<idspace>
+	<window xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"
+		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
+		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
+		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
+		width="700px"
+		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
+		whatever="@load(false,after='saveCauHoi') @converter('vn.toancauxanh.service.DetachConverter')"
+		viewModel="@id('vm') @init(arg.model)"
+		validationMessages="@id('vmsgs')">
+
+		<zscript><![CDATA[
+			vmArgs = arg.get("vmArgs");
+			strSave = arg.get("save");
+		]]></zscript> 
+		
+	<div class="row box-body">
+		
+		<div class="col-md-12 list-menu-sukien">
+			<n:span class="title-issue title-issue-detail">
+				Câu hỏi :
+			</n:span>
+			<x:br/>
+			<label class="title-cauhoi" value="@bind(vm.noiDung)"/>
+		</div>
+		
+		<div class="row">
+			<n:section class="box-result" style="padding-top:20px">
+				<div class="box-form-search" style="padding-left:10px">
+					<div class="col-md-12">
+						<x:label>Trả lời</x:label>
+						<textbox class="form-control" rows="3"
+							width="100%"
+							value="@load(vm.selectedTraLoi.noiDung) @save(vm.selectedTraLoi.noiDung, before={'saveCauTraLoi'}) 
+									@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
+						<label zclass="error"
+							value="@load(vmsgs[self.previousSibling])" />
+					</div>
+				</div>
+				<div class="box-form-search">
+					<n:form
+						class="form-src padding-form-bt">
+						<div class="row-box-src">
+							<x:button class="btn btn-success" style="margin-right: 10px;" 
+			                    onClick="@command('saveCauTraLoi', list=vm, attr='listCauTraLoi',wdn=wdn)">
+					            <n:i class="icon-themmoi"></n:i>&#160;&#160;Lưu
+					        </x:button>
+						</div>
+					</n:form>
+				</div>
+				<div class="clearfix"></div>
+			</n:section>
+		</div>
+	</div>
+	<div class="row" children="@load(vm.listCauTraLoi)" style="margin-top:50px">
+				<template name="children">
+					<div class="col-sm-12" apply="org.zkoss.bind.BindComposer"
+						viewModel="@id('item') @init(each)">
+						<x:hr/>
+						- <label value="@bind(item.noiDung)"/>
+					</div>
+				</template>
+	</div>
+	<div class="row box-footer box-thaotac">
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.cauhoi_them) or (!vm.noId() and entry.quyen.cauhoi_sua)) and !checkView}"
+			onClick="@command('saveCauHoi', list=vmArgs, attr='targetQuery',wdn=wdn)">
+			<n:i class="icon-save"></n:i>Lưu 
+		</x:button>
+		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">
+			<n:i class="icon-cancel3"></n:i>Đóng
+		</x:button>
+	</div>
+</window>
+</idspace>

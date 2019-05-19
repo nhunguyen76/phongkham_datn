@@ -77,6 +77,57 @@
 
     <!-- include banner.html -->
 	<z:include if="${coquyen and !dakhoa}" src="${file}"></z:include>
+	
+	<div class="container" style="margin-top:30px" >
+		<div class="row">
+			<div class="text-center col-md-6">
+				<div class="panel panel-default">
+				  <div class="panel-body">Panel Content</div>
+				</div>
+			</div>
+			<div class="text-center col-md-6">
+				<div class="panel panel-default">
+				  <div class="panel-body">Panel Content</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="text-center col-md-12">
+				<div class="panel panel-default">
+				  <div class="panel-body">Panel Content</div>
+				</div>
+			</div>
+		</div>
+		<div class="row my-1">
+			<div class="text-center col-4">
+				<div class="bg-info mx-3">Widget</div>
+			</div>
+			<div class="text-center col-4">
+				<div class="bg-info mx-3">Widget</div>
+			</div>
+			<div class="text-center col-4">
+				<div class="bg-info mx-3">Widget</div>
+			</div>
+		</div>
+		<h4>Less spacing</h4>
+		<div class="row">
+			<div class="text-center col-md-6 pr-md-1">
+				<div class="bg-info">Widget 1</div>
+			</div>
+			<div class="text-center col-md-6 pl-md-2">
+				<div class="bg-info">Widget 2</div>
+			</div>
+		</div>
+		<h4>No spacing</h4>
+		<div class="row no-gutters">
+			<div class="text-center col-md-6">
+				<div class="bg-info">Widget 1</div>
+			</div>
+			<div class="text-center col-md-6">
+				<div class="bg-info">Widget 2</div>
+			</div>
+		</div>
+	</div>
 	<label class="tb-khong-quyen" if="${!coquyen and !dakhoa}">Bạn không có quyền truy cập chức năng này!</label>
 	<label class="tb-khong-quyen" if="${dakhoa}">Tài khoản của bạn đã bị khóa!</label>
    

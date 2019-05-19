@@ -138,6 +138,15 @@ public class CanLamSang extends Model<CanLamSang>{
 	}
 	
 	@Command
+	public void deleteImg() {
+		setImageContent(null);
+		setIconName("");
+		flagImage = false;
+		BindUtils.postNotifyChange(null, null, this, "imageContent");
+		BindUtils.postNotifyChange(null, null, this, "iconName");
+	}
+	
+	@Command
 	public void getAttachImages(@BindingParam("media") final Media media,
 			@BindingParam("vmsgs") final ValidationMessages vmsgs) {
 		if (media instanceof org.zkoss.image.Image) {

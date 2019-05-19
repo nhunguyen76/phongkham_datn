@@ -5262,3 +5262,13 @@ input[disabled] {
 .div-textbox-custom {
 	margin-bottom : 12px;
 }
+
+.panel-cauhoi {
+	
+}
+
+.title-cauhoi {
+	font-size: 14px;
+	font-family:'Open Sans', sans-serif;
+	font-weight : bold;
+}

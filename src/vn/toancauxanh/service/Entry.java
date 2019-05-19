@@ -31,6 +31,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Object;
 
 import vn.toancauxanh.cms.service.CanLamSangService;
+import vn.toancauxanh.cms.service.CauHoiService;
 import vn.toancauxanh.cms.service.ChiTietBenhAnService;
 import vn.toancauxanh.cms.service.ChiTietDonThuocService;
 import vn.toancauxanh.cms.service.DichVuService;
@@ -41,6 +42,7 @@ import vn.toancauxanh.cms.service.LanguageService;
 import vn.toancauxanh.cms.service.LichHenKhamService;
 import vn.toancauxanh.cms.service.SettingService;
 import vn.toancauxanh.cms.service.ThuocService;
+import vn.toancauxanh.cms.service.TraLoiService;
 import vn.toancauxanh.gg.model.HoSoThongTin;
 import vn.toancauxanh.model.GopYPhanMem;
 import vn.toancauxanh.model.VaiTro;
@@ -247,10 +249,36 @@ public class Entry extends BaseObject<Object> {
     public String TAIKHOANXOA = "";
     @Value("${url.taikhoan}" + ":" + "${action.sua}")
     public String TAIKHOANSUA = "";
+    
+    @Value("${url.cauhoi}")
+    public String CAUHOI = "";
+    @Value("${url.cauhoi}" + ":" + "${action.xem}")
+    public String CAUHOIXEM = "";
+    @Value("${url.cauhoi}" + ":" + "${action.them}")
+    public String CAUHOITHEM = "";
+    @Value("${url.cauhoi}" + ":" + "${action.list}")
+    public String CAUHOILIST = "";
+    @Value("${url.cauhoi}" + ":" + "${action.xoa}")
+    public String CAUHOIXOA = "";
+    @Value("${url.cauhoi}" + ":" + "${action.sua}")
+    public String CAUHOISUA = "";
+    
+    @Value("${url.traloi}")
+    public String TRALOI = "";
+    @Value("${url.traloi}" + ":" + "${action.xem}")
+    public String TRALOIXEM = "";
+    @Value("${url.traloi}" + ":" + "${action.them}")
+    public String TRALOITHEM = "";
+    @Value("${url.traloi}" + ":" + "${action.list}")
+    public String TRALOILIST = "";
+    @Value("${url.traloi}" + ":" + "${action.xoa}")
+    public String TRALOIXOA = "";
+    @Value("${url.traloi}" + ":" + "${action.sua}")
+    public String TRALOISUA = "";
 	// aend
 	public String[] getRESOURCES() {
 		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN, 
-				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM, TAIKHOAN};
+				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM, TAIKHOAN, TRALOI, CAUHOI};
 	}
 
 	public String[] getACTIONS() {
@@ -426,6 +454,14 @@ public class Entry extends BaseObject<Object> {
 	public LichHenKhamService getLichHenKhams() {
         return new LichHenKhamService();
     }
+	
+	public CauHoiService getCauHois() {
+		return new CauHoiService();
+	}
+	
+	public TraLoiService getTraLois() {
+		return new TraLoiService();
+	}
 	
 	public final ImageService getImages() {
 		return new ImageService();

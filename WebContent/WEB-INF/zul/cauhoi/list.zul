@@ -1,0 +1,85 @@
+<z:idspace xmlns:n="native" xmlns:zk="zk" xmlns:z="zul" xmlns:x="xhtml"
+	viewModel="@id('vm') @init('vn.toancauxanh.cms.service.CauHoiService')">
+	<zscript><![CDATA[
+		self.page.title= "Quản lý hỏi đáp";
+		import java.awt.*;
+		import java.awt.image.*;
+		import javax.imageio.ImageIO;
+		import java.net.URL;
+		import java.awt.geom.*;
+		BufferedImage imagevar2 = new BufferedImage(400, 300, BufferedImage.TYPE_INT_ARGB);
+	]]></zscript>
+	<n:section class="main-container">
+		<div class="center">
+			<div class="bar-top-content">
+				<n:h2 class="title-page-main">QUẢN LÝ HỎI-ĐÁP</n:h2>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="box-content-full">
+						<n:section class="box-result">
+							<div class="box-form-search">
+								<n:form class="form-src padding-form-bt">
+									<div class="row-box-src">
+										<textbox class="keysearch" value="@bind(vm.arg.tukhoa)" placeholder="Nhập từ tìm kiếm"
+													onOK="@command('cmd', notify=vm, attr='targetQuery')" />
+										<x:button class="btn-form-search btn-page" type="button" onClick="@command('cmd', notify=vm, attr='*')" >
+											<n:i class="icon-search"></n:i> Tìm kiếm
+										</x:button>
+									</div>
+								</n:form>
+							</div>
+						</n:section>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top:15px">
+				<div class="col-md-12">
+					<x:a class="btn btn-primary btn-flexbox width-100 margin-10-pu"
+						zk:if="${entry.quyen.cauhoi_them}"
+						onClick="@command('redirectPage', zul='cauhoi/add.zul', vmArgs=vm, vm=null)">
+						<n:i class="icon-themmoi"></n:i>
+						&#160;&#160;Đặt câu hỏi
+					</x:a>
+				</div>
+			</div>
+			<div class="row" children="@load(vm.page(vm.targetQuery).fetch())" style="margin-top:15px">
+				<template name="children">
+					<div class="col-sm-12" apply="org.zkoss.bind.BindComposer"
+														viewModel="@id('item') @init(each)">
+						<div class="panel panel-success">
+					      <div class="panel-body">
+					      	<div class="row">
+					      		<div class="col-md-1">
+					      			<div class="div-image">
+						    			<image class="imageCmp" style="width: 50px; height: 50px; object-fit:cover;border-radius:50%"
+											content="@load(item.nguoiTao.imageContent eq null ? imagevar2 : item.nguoiTao.imageContent)">
+										</image>
+						    		</div>
+					      		</div>
+					      		<div class="col-md-11">
+					      			<label class="title-cauhoi" value = "@load(item.noiDung)"></label>
+									<x:a href="#" class="col-edit" title ="Chỉnh sửa"
+										zk:if="${entry.quyen.cauhoi_sua}" 
+										onClick="@command('redirectPage', zul='cauhoi/view.zul',vmArgs=vm,vm=item)">
+										<n:i class="icon-edit"></n:i></x:a>
+					      			<x:hr/>
+					      			<label value="@load(item.nguoiTao.tenDangNhap)"/>
+					      			<x:br/>
+					      			<label value="@load(item.ngayTao) @converter('formatedDate', format='hh:mm dd/MM/yyyy')"/>
+					      			<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" 
+			    						onClick="@command('redirectPage', zul='traloi/view.zul', vmArgs=vm, vm=item)">
+		    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Trả lời
+	    							</x:a>
+					      		</div>
+					      	</div>
+					      	
+					      </div>
+					    </div>
+					</div>
+				</template>
+				
+			</div>
+		</div>
+	</n:section>
+</z:idspace>

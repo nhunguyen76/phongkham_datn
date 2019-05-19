@@ -3,7 +3,7 @@
 		apply="org.zkoss.bind.BindComposer" id="wdn" border="normal"
 		mode="modal" action="show: slideIn" class="pop-up-mg pop-up-width-100"
 		contentStyle="overflow:auto;" closable="true" title="${arg.save}"
-		width="900px"
+		width="700px"
 		onClose="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')"
 		whatever="@load(false,after='saveCanLamSang') @converter('vn.toancauxanh.service.DetachConverter')"
 		viewModel="@id('vm') @init(arg.model)"
@@ -26,7 +26,7 @@
 		]]></zscript> 
 		
 	<div class="row box-body">
-		<div class="col-md-6 list-menu-sukien">
+		<div class="col-md-8 list-menu-sukien">
 			<div zclass="form-group" class="control-label">
 				<n:span class="title-issue title-issue-detail">
 					Tiêu đề
@@ -54,7 +54,7 @@
 				value="@load(vmsgs[self.previousSibling])" />
 			
 		</div>
-		<div class="col-md-6 list-menu-sukien">
+		<div class="col-md-4 list-menu-sukien">
 			<div zclass="form-group" class="control-label">
 				<x:label>
 					Hình ảnh
@@ -85,23 +85,18 @@
 							Xóa
 						</a>
 					</hlayout>
-					<n:small>
+					<n:small style="font-size:10px">
 						*Hỗ trợ định dạng *.png, *.jpg, tối đa 10MB
 					</n:small>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-12 list-menu-sukien">
-			
-		</div>
-		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
 					Ghi chú
-					<n:span class="required">*</n:span>
 				</n:span>
 				<textbox class="form-control" rows="3"  width="100%" maxlength="1000"
 					value="@bind(vm.ghiChu) @save(vm.ghiChu, before='saveCanLamSang')"/>
-			<label class="error" value="@load(vmsgs[self.previousSibling])" />
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
