@@ -5263,8 +5263,10 @@ input[disabled] {
 	margin-bottom : 12px;
 }
 
-.panel-cauhoi {
-	
+.panel-dashboard {
+	padding: 30px 0px 30px 0px; 
+	color:white;
+	height:100px;
 }
 
 .title-cauhoi {

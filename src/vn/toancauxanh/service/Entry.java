@@ -120,6 +120,19 @@ public class Entry extends BaseObject<Object> {
 	@Value("${url.hosothongtin}" + ":" + "${action.sua}")
 	public String HOSOTHONGTINSUA = "";
 	
+	@Value("${url.hosocanhan}")
+    public String HOSOCANHAN = "";
+    @Value("${url.hosocanhan}" + ":" + "${action.xem}")
+    public String HOSOCANHANXEM = "";
+    @Value("${url.hosocanhan}" + ":" + "${action.them}")
+    public String HOSOCANHANTHEM = "";
+    @Value("${url.hosocanhan}" + ":" + "${action.list}")
+    public String HOSOCANHANLIST = "";
+    @Value("${url.hosocanhan}" + ":" + "${action.xoa}")
+    public String HOSOCANHANXOA = "";
+    @Value("${url.hosocanhan}" + ":" + "${action.sua}")
+    public String HOSOCANHANSUA = "";
+	
 	@Value("${url.dichvu}")
 	public String DICHVU = "";
 	@Value("${url.dichvu}" + ":" + "${action.xem}")
@@ -278,7 +291,7 @@ public class Entry extends BaseObject<Object> {
 	// aend
 	public String[] getRESOURCES() {
 		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN, 
-				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM, TAIKHOAN, TRALOI, CAUHOI};
+				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM, TAIKHOAN, TRALOI, CAUHOI, HOSOCANHAN};
 	}
 
 	public String[] getACTIONS() {

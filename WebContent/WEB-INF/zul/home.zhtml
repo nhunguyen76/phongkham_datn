@@ -6,7 +6,7 @@
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
   <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
   <!-- favicon -->
-  <link href="${execution.contextPath}/backend/assets/images/favicon.ico" type="image/x-icon" rel="icon">
+  <link href="${execution.contextPath}/backend/assets/images/symbol-clinic.png" type="image/x-icon" rel="icon">
   <!-- meta social -->
   <meta name="twitter:card" content="" />
   <meta name="twitter:site" content="" />
@@ -78,23 +78,66 @@
     <!-- include banner.html -->
 	<z:include if="${coquyen and !dakhoa}" src="${file}"></z:include>
 	
-	<div class="container" style="margin-top:30px" >
+	<div class="container" style="margin-top:30px">
 		<div class="row">
-			<div class="text-center col-md-6">
+			<div class="text-center col-md-4">
 				<div class="panel panel-default">
-				  <div class="panel-body">Panel Content</div>
+					<div class="panel-body panel-dashboard"
+						style="background-color:#ffc107; ">
+						<div class="col-md-4">
+							<i class='far fa-user'
+								style='font-size:40px'>
+							</i>
+						</div>
+						<div class="col-md-6">
+							<p>Số bệnh nhân</p>
+							<p>
+								${entry.nguoiDungService.tongSoBenhNhan}
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="text-center col-md-6">
+			<div class="text-center col-md-4">
 				<div class="panel panel-default">
-				  <div class="panel-body">Panel Content</div>
+					<div class="panel-body panel-dashboard"
+						style="background-color:#dc3545">
+						<div class="col-md-4">
+							<i class='far fa-user' style='font-size:40px'>
+							</i>
+						</div>
+						<div class="col-md-6">
+							<p>Số nhân viên</p>
+							<p>
+								${entry.nguoiDungService.tongSoBenhNhan}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="text-center col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-body panel-dashboard"
+						style="background-color:#007bff">
+						<div class="col-md-4">
+							<i class='far fa-user'
+								style='font-size:40px'>
+							</i>
+						</div>
+						<div class="col-md-6">
+							<p>Lịch hẹn trong ngày</p>
+							<p>
+								${entry.nguoiDungService.tongSoBenhNhan}
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="text-center col-md-12">
 				<div class="panel panel-default">
-				  <div class="panel-body">Panel Content</div>
+					<div class="panel-body">Lịch hẹn trong ngày</div>
 				</div>
 			</div>
 		</div>

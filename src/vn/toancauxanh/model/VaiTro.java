@@ -20,6 +20,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.beans.factory.annotation.Value;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -231,6 +232,12 @@ public class VaiTro extends Model<VaiTro> {
 		quyens1.add(core().CHITIETDONTHUOCXOA);
 		quyens1.add(core().CHITIETDONTHUOCXEM);
 		
+		quyens1.add(core().THUOCTHEM);
+        quyens1.add(core().THUOCLIST);
+        quyens1.add(core().THUOCSUA);
+        quyens1.add(core().THUOCXOA);
+        quyens1.add(core().THUOCXEM);
+		
 		quyens1.add(core().LICHHENKHAMTHEM);
 		quyens1.add(core().LICHHENKHAMLIST);
 		quyens1.add(core().LICHHENKHAMSUA);
@@ -243,6 +250,18 @@ public class VaiTro extends Model<VaiTro> {
 		quyens1.add(core().TAIKHOANXOA);
 		quyens1.add(core().TAIKHOANXEM);
 		
+		quyens1.add(core().CAUHOITHEM);
+        quyens1.add(core().CAUHOILIST);
+        quyens1.add(core().CAUHOISUA);
+        quyens1.add(core().CAUHOIXOA);
+        quyens1.add(core().CAUHOIXEM);
+        
+        quyens1.add(core().TRALOITHEM);
+        quyens1.add(core().TRALOILIST);
+        quyens1.add(core().TRALOISUA);
+        quyens1.add(core().TRALOIXOA);
+        quyens1.add(core().TRALOIXEM);
+		
 		return quyens1;
 	}
 	
@@ -251,18 +270,6 @@ public class VaiTro extends Model<VaiTro> {
 		Set<String> quyens1 = new HashSet<>();
 		if (!alias1.isEmpty()) {
 			if (QUANTRIVIEN.equals(alias1)) {
-				
-				quyens1.add(core().VAITROTHEM);
-				quyens1.add(core().VAITROLIST);
-				quyens1.add(core().VAITROSUA);
-				quyens1.add(core().VAITROXOA);
-				quyens1.add(core().VAITROXEM);
-				
-				quyens1.add(core().NGUOIDUNGTHEM);
-				quyens1.add(core().NGUOIDUNGSUA);
-				quyens1.add(core().NGUOIDUNGXEM);
-				quyens1.add(core().NGUOIDUNGLIST);
-				quyens1.add(core().NGUOIDUNGXOA);
 				
 				quyens1.add(core().HOSOTHONGTINTHEM);
 				quyens1.add(core().HOSOTHONGTINLIST);

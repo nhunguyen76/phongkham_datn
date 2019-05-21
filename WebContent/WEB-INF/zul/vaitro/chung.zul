@@ -18,7 +18,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<x:label>Tên vai trò<n:small class="required"> *</n:small></x:label>
-						<textbox width="100%" class="form-control"
+						<textbox width="100%" class="form-control" readonly="true"
 							value="@bind(vm.tenVaiTro) @save(vm.tenVaiTro, before='saveVaiTro') 
 							@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty', field='tenVaiTro', id=vm, cmsg='Tên vai trò này đã tồn tại.')" />
 						<label class="error" value="@load(vmsgs[self.previousSibling])" />

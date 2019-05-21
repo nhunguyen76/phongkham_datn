@@ -24,6 +24,8 @@ import org.zkoss.zk.ui.Sessions;
 
 import com.querydsl.jpa.impl.JPAQuery;
 
+import vn.toancauxanh.gg.model.HoSoThongTin;
+import vn.toancauxanh.gg.model.QHoSoThongTin;
 import vn.toancauxanh.model.NguoiDung;
 import vn.toancauxanh.model.QNguoiDung;
 import vn.toancauxanh.model.QVaiTro;
@@ -43,7 +45,6 @@ public final class NguoiDungService extends BasicService<NguoiDung> {
 		String paramTrangThai = MapUtils.getString(argDeco(), Labels.getLabel("param.trangthai"), "").trim();
 		String tuKhoa = MapUtils.getString(argDeco(), Labels.getLabel("param.tukhoa"), "").trim();
 		Long paramVaiTro = (Long) argDeco().get(Labels.getLabel("param.vaitro"));
-		Long paramPhongBan = (Long) argDeco().get(Labels.getLabel("param.phongban"));
 
 		JPAQuery<NguoiDung> q = find(NguoiDung.class).where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA));
 
@@ -102,19 +103,6 @@ public final class NguoiDungService extends BasicService<NguoiDung> {
 			Executions.sendRedirect("/login");
 		}
 	}
-
-	public List<NguoiDung> getTacGias() {
-		// TODO add them dk nhan vien là tác giả
-		return getTargetQueryNguoiDung().fetch();
-	}
-
-	public List<NguoiDung> getTacGiasAndNull() {
-		// TODO add them dk nhan vien là tác giả
-		List<NguoiDung> list = new ArrayList<>();
-		list.add(null);
-		list.addAll(getTargetQueryNguoiDung().fetch());
-		return list;
-	}
 	
 	public List<NguoiDung> getListNguoiDungs() {
 		List<NguoiDung> list = new ArrayList<NguoiDung>();
@@ -127,29 +115,6 @@ public final class NguoiDungService extends BasicService<NguoiDung> {
 		list.add(null);
 		list.addAll(getListNguoiDungs());
 		return list;
-	}
-
-	private List<NguoiDung> tacGiasTimKiem = new ArrayList<>();
-
-	public List<NguoiDung> getTacGiasTimKiem() {
-		if (tacGiasTimKiem.size() == 0) {
-			tacGiasTimKiem = getTacGiasAndNull();
-		}
-		return tacGiasTimKiem;
-	}
-
-	@Command
-	public void timKiems(@BindingParam("hoTenTacGia") @Default(value = "") final String name,
-			@BindingParam("baiViet") final Object bv) {
-
-		if (name.isEmpty()) {
-			tacGiasTimKiem = getTacGiasAndNull();
-		} else {
-			tacGiasTimKiem.clear();
-			tacGiasTimKiem.addAll(find(NguoiDung.class).where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA))
-					.fetch());
-		}
-		BindUtils.postNotifyChange(null, null, this, "tacGiasTimKiem");
 	}
 	
 	@Command
@@ -178,4 +143,20 @@ public final class NguoiDungService extends BasicService<NguoiDung> {
 			}
 		}
 	}
+	
+	// Count
+	public Long getTongSoBenhNhan() {
+	    VaiTro vaiTro = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("benhnhan")).fetchFirst();
+        JPAQuery<NguoiDung> q = find(NguoiDung.class).where(QNguoiDung.nguoiDung.vaiTros.any().eq(vaiTro));
+        return q.fetchCount();
+	}
+	
+	public Long getTongSoNhanVien() {
+        VaiTro vaiTroBacSi = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("bacsi")).fetchFirst();
+        VaiTro vaiTroNhanVien = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("nhanvien")).fetchFirst();
+        JPAQuery<NguoiDung> query = find(NguoiDung.class).where(QNguoiDung.nguoiDung.vaiTros.any().eq(vaiTroBacSi));
+        JPAQuery<NguoiDung> query2 = find(NguoiDung.class).where(QNguoiDung.nguoiDung.vaiTros.any().eq(vaiTroNhanVien));
+        return query.fetchCount() + query2.fetchCount();
+    }
+	
 }

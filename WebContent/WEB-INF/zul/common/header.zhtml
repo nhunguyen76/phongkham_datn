@@ -59,7 +59,7 @@
 						</a>
 					</li>
 					<li class="menu-top-list ${resource eq 'hosothongtin'?'active-menu':''}"
-						zk:if="${entry.quyen.hosothongtin_xem and !dakhoa}">
+						zk:if="${entry.quyen.hosocanhan_xem and !dakhoa}">
 						<x:a class="link-menu" href="#" zk:if="${!dakhoa}"
 							zk:onClick="@command('redirectPageSession', url='/hosothongtin/id', vm=entry.nguoiDung.hoSoThongTin)">
 							<span class="icon-ds-menu"></span>

@@ -6,7 +6,7 @@
 <?style href="/backend/assets/styles/gopy.css" ?>
 <?meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"?>
 <?meta http-equiv="Content-type" content="text/html;charset=UTF-8"?>
-<?link href="/backend/assets/images/favicon.ico" rel="icon"  type="image/x-icon"?>
+<?link href="/backend/assets/images/symbol-clinic.png" rel="icon"  type="image/x-icon"?>
 <zk xmlns:n="native" xmlns:x="xhtml" xmlns:zk="zk"  xmlns:z="zul">
 <n:head>
   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
