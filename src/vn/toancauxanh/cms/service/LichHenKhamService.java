@@ -88,7 +88,7 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 //	}
 	
 	
-	public JPAQuery<LichHenKham> getLichHenKhamTrongNgay() {
+	public List<LichHenKham> getLichHenKhamTrongNgay() {
         Calendar calendar = Calendar.getInstance(); // ngay hien tai
         calendar.add(Calendar.DATE, -1); // tru 1 ngay
         JPAQuery<LichHenKham> q = find(LichHenKham.class);
@@ -97,6 +97,6 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
             calendar.add(Calendar.DATE, 2); // cong 2 ngay
             q.where(QLichHenKham.lichHenKham.thoiGianKham.before(calendar.getTime()));
         } catch (Exception e) {}
-        return q;
+        return q.fetch();
     }
 }
