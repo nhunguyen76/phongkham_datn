@@ -75,17 +75,17 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
         return q;
     }
 	
-//	public Long getTongLichHenKhamTrongNgay() {
-//	    Calendar calendar = Calendar.getInstance(); // ngay hien tai
-//	    calendar.add(Calendar.DATE, -1); // tru 1 ngay
-//        JPAQuery<LichHenKham> q = find(LichHenKham.class);
-//	    try {
-//	    q.where(QLichHenKham.lichHenKham.thoiGianKham.after(calendar.getTime()));
-//	    calendar.add(Calendar.DATE, 2); // cong 2 ngay
-//	    q.where(QLichHenKham.lichHenKham.thoiGianKham.before(calendar.getTime()));
-//	    } catch (Exception e) {}
-//	    return q.fetchCount();
-//	}
+	public Long getTongLichHenKhamTrongNgay() {
+	    Calendar calendar = Calendar.getInstance(); // ngay hien tai
+	    calendar.add(Calendar.DATE, -1); // tru 1 ngay
+        JPAQuery<LichHenKham> q = find(LichHenKham.class);
+	    try {
+	    q.where(QLichHenKham.lichHenKham.thoiGianKham.after(calendar.getTime()));
+	    calendar.add(Calendar.DATE, 2); // cong 2 ngay
+	    q.where(QLichHenKham.lichHenKham.thoiGianKham.before(calendar.getTime()));
+	    } catch (Exception e) {}
+	    return q.fetchCount();
+	}
 	
 	
 	public List<LichHenKham> getLichHenKhamTrongNgay() {

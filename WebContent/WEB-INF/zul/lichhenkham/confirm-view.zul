@@ -40,8 +40,7 @@
 		</div>
 		<div class="col-md-12 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
-				Thời gian khám ước tính
-				<n:span class="required">*</n:span>
+				Thời gian khám ước tính (phút)
 			</n:span>
 			<spinner constraint="no negative,no zero" width="100%"
 				value="@bind(vm.thoiGianKhamUocTinh)" tabindex="10" /> 

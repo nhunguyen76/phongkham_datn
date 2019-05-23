@@ -47,15 +47,17 @@
 						<n:section class="box-result">
 				        	<div class="box-list-report">
 				          		<div class="box-report-top range-menu">
-				          			<n:p class="title-issue title-list-report">
+				          			<n:p class="title-issue title-list-report" style="margin-bottom:10px">
 				          				DANH SÁCH LỊCH HẸN
 				          			</n:p>
+				          			<!-- 
 				          			<div class="box-button-list">
 										<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.lichhenkham_them}" 
 				    						onClick="@command('redirectPage', zul='lichhenkham/add.zul', vmArgs=vm, vm=null)">
 			    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
 		    							</x:a>
 				          			</div>
+				          			 -->
 				          		</div>
 				          		 <div class="wrappre-tb">
 		                			<div class="wp-scrool">

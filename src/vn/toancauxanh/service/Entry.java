@@ -43,6 +43,7 @@ import vn.toancauxanh.cms.service.SettingService;
 import vn.toancauxanh.cms.service.ThuocService;
 import vn.toancauxanh.cms.service.TraLoiService;
 import vn.toancauxanh.model.GopYPhanMem;
+import vn.toancauxanh.model.NguoiDung;
 import vn.toancauxanh.model.VaiTro;
 
 @Configuration
@@ -413,6 +414,10 @@ public class Entry extends BaseObject<Object> {
 	public final Quyen getQuyen() {
 		return getNguoiDung().getTatCaQuyen();
 	}
+	
+//	public final NguoiDung getNguoiDung() {
+//		return getNguoiDung();
+//	}
 
 	public final NguoiDungService getNguoiDungService() {
 		return new NguoiDungService();
