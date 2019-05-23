@@ -109,7 +109,7 @@
 						<div class="col-md-6">
 							<p>Số nhân viên</p>
 							<p>
-								${entry.nguoiDungService.tongSoBenhNhan}
+								${entry.nguoiDungService.tongSoNhanVien}
 							</p>
 						</div>
 					</div>
@@ -127,7 +127,7 @@
 						<div class="col-md-6">
 							<p>Lịch hẹn trong ngày</p>
 							<p>
-								${entry.nguoiDungService.tongSoBenhNhan}
+								${entry.lichHenKhams.lichHenKhamTrongNgay.fetchCount()}
 							</p>
 						</div>
 					</div>
@@ -138,6 +138,58 @@
 			<div class="text-center col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-body">Lịch hẹn trong ngày</div>
+						<grid model="@load(entry.lichHenKhams.lichHenKhamTrongNgay.fetch())"
+							width="100%" id="grid"
+							emptyMessage="Không có lịch hẹn nào hôm nay"
+							class="table-report">
+							<columns>
+								<column label="STT" hflex="min"
+									style="text-align:center" />
+								<column label="Bệnh nhân"
+									style="text-align:center;" />
+								<column label="Thời gian đặt hẹn"
+									width="150px" style="text-align:center;" />
+								<column label="Buổi khám" width="100px"
+									style="text-align:center;" />
+								<column label="Thời gian khám" width="150px"
+									style="text-align:center;" />
+								<column label="Trạng thái" width="100px"
+									style="text-align:center;" />
+								<column label="Thao tác" width="100px"
+									style="text-align:center;" />
+							</columns>
+							<template name="model">
+								<row apply="org.zkoss.bind.BindComposer"
+									viewModel="@id('item') @init(each)">
+									<label
+										value="@bind(forEachStatus.index + 1 + vm.arg.page * vm.arg.pagesize)"
+										style="text-align:center;display:block" />
+									<label
+										value="@bind(each.tenBenhNhanHienThi)" style="display:block" />
+									<label
+										value="@load(each.thoiGianDatHen) @converter('formatedDate', format='dd/MM/yyyy')"
+										style="text-align:center; display:block" />
+									<label value="@load(each.buoiKham.text)"
+										style="text-align:center; display:block" />
+									<label
+										value="@load(each.thoiGianKham)  @converter('formatedDate', format='hh:mm dd/MM/yyyy')"
+										style="text-align:center; display:block" />
+									<span
+										class="${each.setStyleStatus(each.trangThaiXuLy.name())}"
+										style="text-align:center; display:block; font:white">
+										${each.trangThaiXuLy eq null ? ' ' :
+										each.trangThaiXuLy.text}
+									</span>
+									<div class="text-align-center grid-action">
+										<a href="#" class="col-edit"
+											title="Chỉnh sửa" zk:if="${entry.quyen.lichhenkham_sua}"
+											onClick="@command('redirectPage', zul='lichhenkham/view.zul',vmArgs=vm,vm=item)">
+											<n:i class="icon-edit"></n:i>
+										</a>
+									</div>
+								</row>
+							</template>
+						</grid>
 				</div>
 			</div>
 		</div>

@@ -149,13 +149,4 @@ public class FileEntry extends Model<FileEntry> {
 		}
 	}
 	
-	public FileEntryModel toFileEntryModel() {
-		FileEntryModel rs = new FileEntryModel();
-		rs.setId(getId() != null ? getId() : null);
-		rs.setFileUrl(getFileUrl() != null ? getFileUrl() : "");
-		rs.setTenHienThi(getTenHienThi() != null ? getTenHienThi() : "");
-		rs.setTepDinhKem(getTepDinhKem() != null ? getTenFileDinhKem() : "");
-		return rs;
-	}
-	
 }

@@ -38,12 +38,10 @@ import vn.toancauxanh.cms.service.DichVuService;
 import vn.toancauxanh.cms.service.DonThuocService;
 import vn.toancauxanh.cms.service.HoSoBenhAnService;
 import vn.toancauxanh.cms.service.ImageService;
-import vn.toancauxanh.cms.service.LanguageService;
 import vn.toancauxanh.cms.service.LichHenKhamService;
 import vn.toancauxanh.cms.service.SettingService;
 import vn.toancauxanh.cms.service.ThuocService;
 import vn.toancauxanh.cms.service.TraLoiService;
-import vn.toancauxanh.gg.model.HoSoThongTin;
 import vn.toancauxanh.model.GopYPhanMem;
 import vn.toancauxanh.model.VaiTro;
 
@@ -479,11 +477,6 @@ public class Entry extends BaseObject<Object> {
 	public final ImageService getImages() {
 		return new ImageService();
 	}
-
-	public final LanguageService getLanguages() {
-		return new LanguageService();
-	}
-	
 	
 	public boolean checkVaiTro(String vaiTro) {
 		if (vaiTro == null || vaiTro.isEmpty()) {

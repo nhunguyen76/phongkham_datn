@@ -1,6 +1,9 @@
 package vn.toancauxanh.cms.service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -69,6 +72,31 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 
         q.where(QLichHenKham.lichHenKham.benhNhan.id.eq(idBenhNhan));
         q.orderBy(QLichHenKham.lichHenKham.ngayTao.desc());
+        return q;
+    }
+	
+//	public Long getTongLichHenKhamTrongNgay() {
+//	    Calendar calendar = Calendar.getInstance(); // ngay hien tai
+//	    calendar.add(Calendar.DATE, -1); // tru 1 ngay
+//        JPAQuery<LichHenKham> q = find(LichHenKham.class);
+//	    try {
+//	    q.where(QLichHenKham.lichHenKham.thoiGianKham.after(calendar.getTime()));
+//	    calendar.add(Calendar.DATE, 2); // cong 2 ngay
+//	    q.where(QLichHenKham.lichHenKham.thoiGianKham.before(calendar.getTime()));
+//	    } catch (Exception e) {}
+//	    return q.fetchCount();
+//	}
+	
+	
+	public JPAQuery<LichHenKham> getLichHenKhamTrongNgay() {
+        Calendar calendar = Calendar.getInstance(); // ngay hien tai
+        calendar.add(Calendar.DATE, -1); // tru 1 ngay
+        JPAQuery<LichHenKham> q = find(LichHenKham.class);
+        try {
+            q.where(QLichHenKham.lichHenKham.thoiGianKham.after(calendar.getTime()));
+            calendar.add(Calendar.DATE, 2); // cong 2 ngay
+            q.where(QLichHenKham.lichHenKham.thoiGianKham.before(calendar.getTime()));
+        } catch (Exception e) {}
         return q;
     }
 }
