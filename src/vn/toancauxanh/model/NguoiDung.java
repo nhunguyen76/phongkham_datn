@@ -597,14 +597,14 @@ public class NguoiDung extends Model<NguoiDung> {
 		BindUtils.postNotifyChange(null, null, this, "change");
 	}
 
-	@Command
-	public void saveNguoiDung() {
-		save();
-		setChange(false);
-		setEditable(false);
-		BindUtils.postNotifyChange(null, null, this, "change");
-		BindUtils.postNotifyChange(null, null, this, "editable");
-	}
+//	@Command
+//	public void saveNguoiDung() {
+//		save();
+//		setChange(false);
+//		setEditable(false);
+//		BindUtils.postNotifyChange(null, null, this, "change");
+//		BindUtils.postNotifyChange(null, null, this, "editable");
+//	}
 
 	@Command
 	public void editableStatus() {
@@ -674,4 +674,13 @@ public class NguoiDung extends Model<NguoiDung> {
 		return q.fetchOne();
 	}
 	
+	// get ho ten tuong ung
+	@Transient
+    public String getHoVaTen() {
+        JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.taiKhoan.eq(this));
+        if (q.fetchOne() != null) {
+            return q.fetchOne().getHoVaTen();
+        }
+        return this.tenDangNhap;
+    }
 }

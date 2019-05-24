@@ -28,7 +28,7 @@
 						<span class="caret"></span>
 					</li>
 					<div class="dropdown-content1">
-						<x:a class="ctent" href="#" zk:if="${!dakhoa}"
+						<x:a class="ctent" href="#" zk:if="${!dakhoa and isSuperAdmin}"
 							zk:onClick="@command('redirectPage', zul='/WEB-INF/zul/common/view.zul',vmArgs=vm,vm=entry.nguoiDung)">
 							<span class="icon-page-1"></span>
 							Thông tin

@@ -56,6 +56,10 @@
 	String ctxPath = execution.getContextPath();
 	boolean coquyen = entry.quyen.get(resource + "_" + action);
 	boolean dakhoa = entry.nguoiDungDaKhoa;
+	boolean isSuperAdmin = false;
+    if ( entry.nguoiDung.tenDangNhap.equals("admin")) {
+        isSuperAdmin = true;
+    }
 ]]></zscript>
   <div class="wrapper">
     <!-- include header.html -->

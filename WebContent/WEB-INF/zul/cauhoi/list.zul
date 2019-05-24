@@ -58,19 +58,25 @@
 						    		</div>
 					      		</div>
 					      		<div class="col-md-11">
-					      			<label class="title-cauhoi" value = "@load(item.noiDung)"></label>
-									<x:a href="#" class="col-edit" title ="Chỉnh sửa"
-										zk:if="${entry.quyen.cauhoi_sua}" 
-										onClick="@command('redirectPage', zul='cauhoi/view.zul',vmArgs=vm,vm=item)">
-										<n:i class="icon-edit"></n:i></x:a>
-					      			<x:hr/>
-					      			<label value="@load(item.nguoiTao.tenDangNhap)"/>
-					      			<x:br/>
-					      			<label value="@load(item.ngayTao) @converter('formatedDate', format='hh:mm dd/MM/yyyy')"/>
-					      			<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" 
-			    						onClick="@command('redirectPage', zul='traloi/view.zul', vmArgs=vm, vm=item)">
-		    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Trả lời
-	    							</x:a>
+					      			<label class="title-cauhoi"
+					      				value="@load(item.noiDung)">
+					      			</label>
+					      			<x:hr />
+					      			Người tạo :
+					      			<label value="@load(item.nguoiTao.hoVaTen)" />
+					      			<x:br />
+					      			Lúc :
+					      			<label value="@load(item.ngayTao) @converter('formatedDate', format='hh:mm dd/MM/yyyy')" />
+					      			<x:a title="Chỉnh sửa" zk:if="${entry.quyen.cauhoi_sua}"
+					      				class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom "
+					      				onClick="@command('redirectPage', zul='cauhoi/view.zul',vmArgs=vm,vm=item)">
+					      				<n:i class="icon-edit-white"></n:i>Sửa câu hỏi
+					      			</x:a>
+					      			<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
+						      				onClick="@command('redirectPage', zul='traloi/view.zul', vmArgs=vm, vm=item)">
+						      				<n:i class="icon-themmoi"></n:i>
+						      				&#160;&#160;Trả lời
+						      			</x:a>
 					      		</div>
 					      	</div>
 					      	

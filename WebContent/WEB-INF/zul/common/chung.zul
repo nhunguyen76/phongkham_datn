@@ -4,7 +4,7 @@
 	contentStyle="overflow:auto;" class="pop-up-mg" closable="true" title="${arg.save}"
 	onClose="@command('invokeGG', notify=notifyObject, detach=nguoiDungWin, attr='targetQueryNguoiDung')"
 	whatever="@load(false,after='saveNguoiDung') @converter('vn.toancauxanh.service.DetachConverter')"
-	viewModel="@id('vm') @init(arg.model)" validationMessages="@id('vmsgs')" width="65%"
+	viewModel="@id('vm') @init(arg.model)" validationMessages="@id('vmsgs')" width="50%"
 	form="@id('fx') @load(vm) @save(vm, before={'saveNguoiDung'})">
 	<zscript>
 		entry = new vn.toancauxanh.service.BaseObject().core();
@@ -30,7 +30,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="row list-menu-sukien">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<n:span class="title-issue title-issue-detail">Tên đăng nhập<n:small class="required"> *</n:small></n:span>
 							<textbox class="hv-textbox" width="100%" maxlength="255"
 								disabled="@load((entry.quyen.nguoidung_them and vm.tenDangNhap eq 'admin') or !entry.quyen.nguoidung_them)"
@@ -39,25 +39,41 @@
 						</div>
 					</div>
 					
+					<!-- <div class="row list-menu-sukien">
+                        <div class="col-sm-12">
+                            <n:span class="title-issue title-issue-detail">Email<n:small class="required"> *</n:small></n:span>
+                            <textbox class="hv-textbox" width="100%" maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
+                                value="@bind(vm.email) @save(vm.email, before='saveNguoiDung') @validator(vm.validatorEmail)" />
+                            <label class="error" value="@load(vmsgs[self.previousSibling])" />
+                        </div>
+                    </div> -->
 					<div class="row list-menu-sukien">
-						<div class="col-sm-6" if="${vm.noId()}">
-							<n:span class="title-issue title-issue-detail">Mật khẩu<n:small class="required"> *</n:small></n:span>
-							<textbox class="hv-textbox" width="100%" type="password" maxlength="255"
-								value="@bind(vm.matKhau2) @save(vm.matKhau2, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" />
-							<label class="error" value="@load(vmsgs[self.previousSibling])" />
-						</div>
-						<div class="col-sm-6" if="${vm.noId()}">
-							<n:span class="title-issue title-issue-detail">Xác nhận mật khẩu<n:small class="required"> *</n:small></n:span>
-							<textbox class="hv-textbox" width="100%" type="password" maxlength="255"
-								value="@bind(vm.matKhau) @save(vm.matKhau, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty', password=vm.matKhau2)" />
-							<label class="error" value="@load(vmsgs[self.previousSibling])" />
-						</div>
+					   <div class="col-sm-12">
+					       <div class="form-group">
+					       	<n:span class="title-issue title-issue-detail">
+					       		Mật khẩu
+					       	</n:span>
+					       	<textbox class="hv-textbox" width="100%"
+					       		type="password" maxlength="255"
+					       		value="@bind(vm.matKhau2) @save(vm.matKhau2, before='saveNguoiDung')" />
+					       </div>
+					       <div class="form-group">
+					       	<n:span class="title-issue title-issue-detail">
+					       		Xác nhận mật khẩu
+					       	</n:span>
+					       	<textbox class="hv-textbox" width="100%"
+					       		type="password" maxlength="255"
+					       		value="@save(vm.matKhau2, before='saveNguoiDung') @validator('vn.toancauxanh.vm.BaseValid', password=vm.noId() ? '' : vm.matKhau2)" />
+					       	<label class="error"
+					       		value="@load(vmsgs[self.previousSibling])" />
+					       </div>
+					   </div>
 					</div>
-					
+					<!-- 
 					<div class="row list-menu-sukien">
 						<div class="col-md-12 col-sm-12" if="${!vm.noId()}">
 							<vlayout>	
-								<groupbox mold="3d" class="" open="false" width="100%">
+								<groupbox class="" open="false" width="100%">
 									<caption class="">
 										<n:i class="fa fa-edit"></n:i> <label value="Mật khẩu mới"/> 
 									</caption>
@@ -78,14 +94,7 @@
 							</vlayout>
 						</div>	
 					</div>
-					<div class="row list-menu-sukien">	
-						<div class="col-sm-6">
-							<n:span class="title-issue title-issue-detail">Email<n:small class="required"> *</n:small></n:span>
-							<textbox class="hv-textbox" width="100%" maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
-								value="@bind(vm.email) @save(vm.email, before='saveNguoiDung') @validator(vm.validatorEmail)" />
-							<label class="error" value="@load(vmsgs[self.previousSibling])" />
-						</div>
-					</div>
+					 -->
 				</div>
 				<!-- <div class="col-md-3" if="${(!vm.noId() and entry.quyen.nguoidung_sua)}" if="${vm.tenDangNhap eq 'admin' ? false : true}">
 					<vlayout>
