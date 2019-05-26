@@ -131,6 +131,7 @@
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
 						Số điện thoại
+						<n:span class="required">*</n:span>
 					</n:span>
 					<textbox width="100%" maxlength="255" class="hv-textbox"
 						value="@bind(vm.soDienThoai) @save(vm.soDienThoai, before='saveThongTinBenhNhan')

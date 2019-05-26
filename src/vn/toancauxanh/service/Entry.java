@@ -42,8 +42,6 @@ import vn.toancauxanh.cms.service.LichHenKhamService;
 import vn.toancauxanh.cms.service.SettingService;
 import vn.toancauxanh.cms.service.ThuocService;
 import vn.toancauxanh.cms.service.TraLoiService;
-import vn.toancauxanh.model.GopYPhanMem;
-import vn.toancauxanh.model.NguoiDung;
 import vn.toancauxanh.model.VaiTro;
 
 @Configuration
@@ -429,10 +427,6 @@ public class Entry extends BaseObject<Object> {
 	
 	public final SettingService getSettings() {
 		return new SettingService();
-	}
-
-	public GopYPhanMem getGopYPhanMem() {
-		return new GopYPhanMem();
 	}
 	
 	public HoSoThongTinService getHoSoThongTins() {

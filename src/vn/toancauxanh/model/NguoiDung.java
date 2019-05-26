@@ -60,14 +60,12 @@ import vn.toancauxanh.gg.model.QHoSoThongTin;
 import vn.toancauxanh.service.Quyen;
 
 @Entity
-@Table(name = "nguoidung", indexes = { @Index(columnList = "email"),
-		@Index(columnList = "hinhDaiDien"), @Index(columnList = "tenDangNhap"), @Index(columnList = "checkKichHoat") })
+@Table(name = "nguoidung", indexes = { @Index(columnList = "email"), @Index(columnList = "tenDangNhap"), @Index(columnList = "checkKichHoat") })
 public class NguoiDung extends Model<NguoiDung> {
 
 	public static transient final Logger LOG = LogManager.getLogger(NguoiDung.class.getName());
 	public static final String ADMIN = "admin";
 	private String email = "";
-	private String hinhDaiDien = "";
 	private String matKhau = "";
 	private String matKhau2 = "";
 	private String salkey = "";
@@ -310,10 +308,6 @@ public class NguoiDung extends Model<NguoiDung> {
 		return email;
 	}
 
-	public String getHinhDaiDien() {
-		return hinhDaiDien;
-	}
-
 	public String getMatKhau() {
 		return matKhau;
 	}
@@ -337,10 +331,6 @@ public class NguoiDung extends Model<NguoiDung> {
 
 	public void setEmail(final String _email) {
 		email = Strings.nullToEmpty(_email) != null ? Strings.nullToEmpty(_email).trim() : Strings.nullToEmpty(_email);
-	}
-
-	public void setHinhDaiDien(final String _hinhDaiDien) {
-		hinhDaiDien = Strings.nullToEmpty(_hinhDaiDien);
 	}
 
 	public void setMatKhau(final String _matKhau) {

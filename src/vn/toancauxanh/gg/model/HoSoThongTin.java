@@ -42,7 +42,6 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	private String diaChi;
 	private String soDienThoai;
 	private GioiTinhEnum gioiTinh;
-	private HoSoThongTin nguoiGiamHo;
 	private NguoiDung taiKhoan = new NguoiDung();
 
 	public HoSoThongTin() {
@@ -97,15 +96,6 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	public void setSoDienThoai(String soDienThoai) {
 		this.soDienThoai = soDienThoai != null ? soDienThoai.trim() : soDienThoai;
 	}
-
-	@ManyToOne
-	public HoSoThongTin getNguoiGiamHo() {
-		return nguoiGiamHo;
-	}
-
-	public void setNguoiGiamHo(HoSoThongTin nguoiGiamHo) {
-		this.nguoiGiamHo = nguoiGiamHo;
-	}
 	
 	public String getMaCaNhan() {
 		return maCaNhan;
@@ -123,9 +113,6 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	@Command
 	public void saveThongTinBenhNhan(@BindingParam("wdn") final Window wdn, @BindingParam("vm") HoSoThongTin hoSoThongTin)
 			throws IOException {
-		if(nguoiGiamHo!=null) {
-			nguoiGiamHo.save();
-		}
 		taiKhoan.saveNguoiDung(null, null, true, wdn);
 		if(this.noId() || this.getId() == 0) {
 			save();
@@ -151,20 +138,6 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 			public void validate(final ValidationContext ctx) {
 			}
 		};
-	}
-
-	private boolean hasCmnd = true;
-
-	@Transient
-	public boolean getHasCmnd() {
-		if(!hasCmnd) {
-			nguoiGiamHo = new HoSoThongTin();
-		}
-		return hasCmnd;
-	}
-
-	public void setHasCmnd(boolean hasCmnd) {
-		this.hasCmnd = hasCmnd;
 	}
 
 	@Enumerated(EnumType.STRING)
