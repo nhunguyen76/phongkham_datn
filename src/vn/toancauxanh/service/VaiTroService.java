@@ -71,6 +71,15 @@ public final class VaiTroService extends BasicService<VaiTro> {
 		q.orderBy(QVaiTro.vaiTro.ngaySua.desc());
 		return q;
 	}
+	
+	public JPAQuery<VaiTro> getVaiTroQueryNotInBenhNhan() {
+		bootstrap();
+		VaiTro vaiTroBenhNhan = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("benhnhan")).fetchFirst();
+		JPAQuery<VaiTro> q = find(VaiTro.class).where(QVaiTro.vaiTro.trangThai.ne(core().TT_DA_XOA));
+		q.where(QVaiTro.vaiTro.ne(vaiTroBenhNhan));
+		q.orderBy(QVaiTro.vaiTro.ngaySua.desc());
+		return q;
+	}
 
 	public VaiTro findOrNewByAlias(String alias) {
 		VaiTro find = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq(alias)).fetchFirst();

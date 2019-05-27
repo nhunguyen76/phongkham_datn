@@ -21,7 +21,7 @@
 		]]></zscript> 
 		
 	<div class="row box-body">
-		<div class="col-md-4 list-menu-sukien">
+		<div class="col-md-3 list-menu-sukien">
 			<div class="col-md-12">
 				<div style="text-align:center;">
 					<div class="form-group">
@@ -40,36 +40,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12">
-				<vlayout>
-					<groupbox closable="false" mold="3d"
-						class="mis-group-user mis-mend">
-						<div class="mis-pd10">
-							<listbox
-								model="@bind(entry.vaiTros.vaiTroQuery.fetch())"
-								selectedItems="@bind(vm.taiKhoan.vaiTros)" multiple="false"
-								checkmark="true" rows="7">
-								<listhead>
-									<listheader label="Vai trò">
-										<n:small class="required">
-											*
-										</n:small>
-									</listheader>
-								</listhead>
-								<template name="model">
-									<listitem>
-										<listcell label="${each.tenVaiTro}" />
-									</listitem>
-								</template>
-							</listbox>
-						</div>
-					</groupbox>
-					<label class="error"
-						value="@load(vmsgs['lblErrVaiTros'])" />
-				</vlayout>
-			</div>
 		</div>
-		<div class="col-md-8 list-menu-sukien">
+		<div class="col-md-6 list-menu-sukien">
 			<div class="row">
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
@@ -238,11 +210,40 @@
 				</div>
 			</div>
 		</div>
-		
+		<div class="col-md-3 list-menu-sukien">
+			<div class="col-md-12">
+				<vlayout>
+					<groupbox closable="false" mold="3d"
+						class="mis-group-user mis-mend">
+						<div class="mis-pd10">
+							<listbox
+								model="@bind(entry.vaiTros.vaiTroQuery.fetch())"
+								selectedItems="@bind(vm.taiKhoan.vaiTros)" multiple="false"
+								checkmark="true" rows="7">
+								<listhead>
+									<listheader label="Vai trò">
+										<n:small class="required">
+											*
+										</n:small>
+									</listheader>
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell label="${each.tenVaiTro}" />
+									</listitem>
+								</template>
+							</listbox>
+						</div>
+					</groupbox>
+					<label class="error"
+						value="@load(vmsgs['lblErrVaiTros'])" />
+				</vlayout>
+			</div>
+		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
 		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
-			onClick="@command('saveThongTinNhanVien', list=vmArgs, attr='targetQuery',wdn=wdn)">
+			onClick="@command('saveThongTinNhanVien', list=vmArgs, attr='listThongTinNhanVien',wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>
 		<x:button class="btn btn-info width-button bgcolor-button"  onClick="@command('invokeGG', notify=vmArgs, detach=wdn, attr='targetQuery')">

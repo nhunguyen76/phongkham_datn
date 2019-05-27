@@ -188,7 +188,7 @@
 													<column label="Ngày bắt đầu"
 														width="15%" style="text-align:center;" />
 													<column label="Thao tác"
-														width="12%" style="text-align:center;" />
+														width="80px" style="text-align:center;" />
 												</columns>
 												<template name="model">
 													<row

@@ -105,6 +105,11 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 		this.maCaNhan = maCaNhan != null ? maCaNhan.trim() : maCaNhan;
 	}
 	
+	@Transient
+	public void setTuDongMaCaNhan() {
+		this.maCaNhan = "ND" + this.getId();
+	}
+	
 	
 
 	// Command save
@@ -115,6 +120,8 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 			throws IOException {
 		taiKhoan.saveNguoiDung(null, null, true, wdn);
 		if(this.noId() || this.getId() == 0) {
+			saveNotShowNotification();
+			setTuDongMaCaNhan();
 			save();
 			wdn.detach();
 			redirectPageSession("/hosothongtin/id", this, new HoSoThongTinService());
@@ -125,10 +132,13 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	}
 	
 	@Command
-	public void saveThongTinNhanVien(@BindingParam("wdn") final Window wdn, @BindingParam("vm") HoSoThongTin hoSoThongTin)
+	public void saveThongTinNhanVien(@BindingParam("list") final Object listObject,
+			@BindingParam("attr") final String attr,
+			@BindingParam("wdn") final Window wdn)
 			throws IOException {
 		taiKhoan.saveNguoiDung(null, null, true, wdn);
 		save();
+		BindUtils.postNotifyChange(null, null, listObject, attr);
 	}
 
 	@Transient
