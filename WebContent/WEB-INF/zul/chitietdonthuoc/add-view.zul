@@ -35,7 +35,10 @@
 							<n:span class="title-issue title-issue-detail">
 	        					Thuốc
 	        				</n:span>
-							<combobox model="@load(entry.thuocs.listTenThuoc)" width="100%"
+	        				<textbox class="form-control" width="100%"
+								value="@bind(vm.chiTietDonThuoc.tenThuoc) 
+									@validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"/>
+							<!-- <combobox model="@load(entry.thuocs.listTenThuoc)" width="100%"
 								autodrop="true" buttonVisible="false"
 								selectedItem="@load(vm.chiTietDonThuoc.tenThuoc) @save(vm.chiTietDonThuoc.tenThuoc, before='themThuoc') "
 								value="@load(vm.chiTietDonThuoc.tenThuoc ne null ? vm.chiTietDonThuoc.tenThuoc : '')  @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')">
@@ -43,7 +46,7 @@
 									<comboitem
 										label="@load(empty each? 'Chọn thuốc' :  each)" />
 								</template>
-							</combobox>
+							</combobox> -->
 							<label zclass="error"
 								value="@load(vmsgs[self.previousSibling])" />
 							<!-- <bandbox id="suggestion" autodrop="true"

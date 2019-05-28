@@ -218,7 +218,7 @@
 						<div class="mis-pd10">
 							<listbox
 								model="@bind(entry.vaiTros.vaiTroQuery.fetch())"
-								selectedItems="@bind(vm.taiKhoan.vaiTros)" multiple="false"
+								selectedItems="@bind(vm.taiKhoan.vaiTros)" multiple="true"
 								checkmark="true" rows="7">
 								<listhead>
 									<listheader label="Vai trò">
@@ -242,7 +242,7 @@
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
-		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.nhanvien_them) or (!vm.noId() and entry.quyen.nhanvien_sua)) and !checkView}"
 			onClick="@command('saveThongTinNhanVien', list=vmArgs, attr='listThongTinNhanVien',wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>

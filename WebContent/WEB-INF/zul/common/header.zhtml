@@ -49,10 +49,10 @@
 		<div class="center center-menu">
 			<div class="open-menu" style="text-align: center;">
 				<ul class="ds-menu">
-					<li class="menu-top-list ${resource eq 'hosothongtin'?'active-menu':''}"
-						zk:if="${entry.quyen.hosothongtin_lietke and !dakhoa}">
+					<li class="menu-top-list ${resource eq 'hosobenhnhan'?'active-menu':''}"
+						zk:if="${entry.quyen.hosobenhnhan_lietke and !dakhoa}">
 						<a class="link-menu"
-							href="${execution.contextPath}/hosothongtin">
+							href="${execution.contextPath}/hosobenhnhan">
 							<span class="icon-ds-menu"></span>
 							<span class="text-menu">
 							Hồ sơ bệnh nhân</span>

@@ -156,6 +156,19 @@ public class Entry extends BaseObject<Object> {
 	@Value("${url.hosobenhan}" + ":" + "${action.sua}")
 	public String HOSOBENHANSUA = "";
 	
+	@Value("${url.hosobenhnhan}")
+	public String HOSOBENHNHAN = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.xem}")
+	public String HOSOBENHNHANXEM = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.them}")
+	public String HOSOBENHNHANTHEM = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.list}")
+	public String HOSOBENHNHANLIST = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.xoa}")
+	public String HOSOBENHNHANXOA = "";
+	@Value("${url.hosobenhnhan}" + ":" + "${action.sua}")
+	public String HOSOBENHNHANSUA = "";
+	
 	@Value("${url.nhanvien}")
 	public String NHANVIEN = "";
 	@Value("${url.nhanvien}" + ":" + "${action.xem}")
@@ -287,8 +300,8 @@ public class Entry extends BaseObject<Object> {
     public String TRALOISUA = "";
 	// aend
 	public String[] getRESOURCES() {
-		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, HOSOBENHAN, NHANVIEN, CHITIETBENHAN, 
-				CANLAMSANG, THUOC, CHITIETDONTHUOC, LICHHENKHAM, TAIKHOAN, TRALOI, CAUHOI, HOSOCANHAN};
+		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, NHANVIEN, 
+				 THUOC, LICHHENKHAM, TAIKHOAN, TRALOI, CAUHOI, HOSOBENHNHAN};
 	}
 
 	public String[] getACTIONS() {

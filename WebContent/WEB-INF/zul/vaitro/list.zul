@@ -31,10 +31,11 @@
 				          			<n:p class="title-issue title-list-report margin-button-list">
 				          				Danh sách vai trò
 				          			</n:p>
+				          			<!-- 
 				          			<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.vaitro_them}" 
 			    						onClick="@command('redirectPage', zul='vaitro/add.zul', vmArgs=vm, vm=null)">
 		    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
-		    						</x:button>
+		    						</x:button> -->
 				          		</div>
 				          		 <div class="wrappre-tb">
 		                			<div class="wp-scrool">

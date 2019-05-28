@@ -32,7 +32,7 @@
 				          			<n:p class="title-issue title-list-report margin-button-list">
 				          				Danh sách tài khoản người dùng
 				          			</n:p>
-				          			<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.nguoidung_them}" 
+				          			<x:button class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.taikhoan_them}" 
 			    						onClick="@command('redirectPage', zul='taikhoan/add.zul', vmArgs=vm, vm=null)">
 		    							<n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm mới
 		    						</x:button>
@@ -64,15 +64,15 @@
 															onClick="@command('redirectPage', zul='taikhoan/view.zul',vmArgs=vm,vm=item)">
 															<n:i class="icon-edit"></n:i>
 														</x:a>
-														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.nguoidung_khoa and item.checkApDung}"
+														<x:a href="#" class="col-edit"  zk:if="${entry.quyen.taikhoan_khoa and item.checkApDung}"
 															title ="Khóa" onClick="@command('khoaTaiKhoan', vm=vm)">
 															<n:i class="icon-custom-lock"></n:i>
 														</x:a>
-														<x:a href="#" class="col-edit" zk:if="${entry.quyen.nguoidung_mokhoa and !item.checkApDung}"
+														<x:a href="#" class="col-edit" zk:if="${entry.quyen.taikhoan_mokhoa and !item.checkApDung}"
 															title ="Mở khóa" onClick="@command('moKhoaThanhVien', vm=vm)">
 															<n:i class="icon-custom-unclock"></n:i>
 														</x:a>
-		                          						<x:a href="#" class="col-del" zk:if="${entry.quyen.nguoidung_xoa}" title ="Xóa"
+		                          						<x:a href="#" class="col-del" zk:if="${entry.quyen.taikhoan_xoa}" title ="Xóa"
 		                          							onClick="@command('deleteTrangThaiConfirmAndNotify', notify=vm, attr='listThongTinNhanVien')">
 		                          							<n:i class="icon-cancel"></n:i>
 		                          						</x:a>

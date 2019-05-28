@@ -29,7 +29,7 @@
 			<label class="error"
 				value="@load(vmsgs[self.previousSibling])" />
 		</div>
-		<div class="col-md-12 list-menu-sukien">
+		<div class="col-md-12 list-menu-sukien" zk:if="${!entry.quyen.hosobenhnhan_sua}"	>
 			<n:span class="title-issue title-issue-detail">
 				Buổi khám
 				<n:span class="required">*</n:span>
@@ -48,13 +48,13 @@
 			<label class="error"
 				value="@load(vmsgs[self.previousSibling])" />
 		</div>
-		<div class="col-md-12 list-menu-sukien" zk:if="${entry.quyen.lichhenkham_sua}">
+		<div class="col-md-12 list-menu-sukien" zk:if="${entry.quyen.hosobenhnhan_sua}">
 			<n:span class="title-issue title-issue-detail">
 				Thời gian khám ước tính
-				<n:span class="required">*</n:span>
+				<n:span class="required">*</n:span> (phút)
 			</n:span>
-			<spinner constraint="no negative,no zero"
-				value="@save(vm.thoiGianKhamUocTinh)" tabindex="10" /> 
+			<spinner constraint="no negative,no zero" width="100%"
+				value="@save(vm.thoiGianKhamUocTinh)" tabindex="10" />
 			<label class="error" value="@load(vmsgs[self.previousSibling])" />
 		</div>
 		<div class="col-md-12 list-menu-sukien">

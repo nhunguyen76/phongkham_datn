@@ -27,8 +27,9 @@
 			<n:span class="title-issue title-issue-detail">
 				Thời gian đặt hẹn
 			</n:span>
-			<datebox format="dd/MM/yyyy" readonly="true"
-				value="@load(vm.thoiGianDatHen)" width="100%" />
+			<textbox class="hv-textbox" readonly="true" width="100%"
+				value="@load(vm.thoiGianDatHen) @converter('formatedDate', format='dd/MM/yyyy')">
+			</textbox>
 		</div>
 		<div class="col-md-6 list-menu-sukien">
 			<n:span class="title-issue title-issue-detail">
@@ -50,8 +51,7 @@
 			<n:span class="title-issue title-issue-detail">
 				Thời gian khám xác nhận
 			</n:span>
-			<datebox format="HH:mm dd/MM/yyyy" readonly="true" 
-				value="@bind(vm.thoiGianKham)"
+			<datebox format="HH:mm dd/MM/yyyy" value="@bind(vm.thoiGianKham)"
 				width="100%">
 			</datebox>
 		</div>
