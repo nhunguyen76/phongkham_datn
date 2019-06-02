@@ -70,5 +70,15 @@ public class CauHoi extends Model<CauHoi> {
 			BindUtils.postNotifyChange(null, null, listObject, attr);
 	}
 	
+	@Command
+	public void onEditCauTraLoi(@BindingParam("item") TraLoi item) {
+		this.selectedTraLoi = item;
+		BindUtils.postNotifyChange(null, null, this, "selectedTraLoi");
+	}
 	
+	@Command
+	public void huyCauTraLoi() {
+		this.selectedTraLoi = new TraLoi();
+		BindUtils.postNotifyChange(null, null, this, "selectedTraLoi");
+	}
 }

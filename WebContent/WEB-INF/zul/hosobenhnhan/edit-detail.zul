@@ -37,14 +37,14 @@
 				    	</div>
 					</div>
 					<div class="col-md-12"  style="text-align:center; padding-top:20px">
-						<x:a class="btn btn-warning btn-block button-custom"
+						<x:a class="btn btn-default btn-block button-custom"
 							zk:if="${entry.quyen.hosobenhnhan_sua or entry.quyen.hosocanhan_sua}"
 							zk:onClick="@command('redirectPage', zul='lichhenkham/add.zul',vmArgs=vm.hoSoThongTin,vm=null)">
 							Đặt lịch hẹn
 						</x:a>
 					</div>
 					<div class="col-md-12"  style="text-align:center; padding-top:20px">
-						<x:a class="btn btn-info btn-block button-custom"
+						<x:a class="btn btn-warning btn-block button-custom"
 							zk:if="${entry.quyen.hosobenhnhan_xem or entry.quyen.hosocanhan_xem}"
 							zk:onClick="@command('redirectPage', zul='lichhenkham/view-lich-ca-nhan.zul',vmArgs=vm.hoSoThongTin.id)">
 							Lịch hẹn khám
@@ -61,7 +61,7 @@
 											Thông tin cá nhân
 										</n:p>
 										<div class="box-button-list" zk:if="${entry.quyen.hosobenhnhan_sua or entry.quyen.hosocanhan_sua}">
-											<x:a class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom "
+											<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
 													zk:onClick="@command('redirectPage', zul='hosobenhnhan/view.zul',vmArgs='vn.toancauxanh.cms.service.HoSoThongTinService',vm=vm.hoSoThongTin)">
 													<n:i class="icon-edit-white"></n:i> Chỉnh sửa
 											</x:a>
@@ -301,7 +301,7 @@
 		        </div>
 		    </div>
 		    
-		    <div class="row">
+		    <div class="row" style="margin-top:25px">
 		        <div class="col-md-12" children="@load(vm.selectedIdBenhAn)">
 					<template name="children">
 						<div class="box-content-full"
@@ -390,7 +390,7 @@
 		        </div>
 		    </div> 
 		    
-			<div class="row" >
+			<div class="row" style="margin-top:25px">
 				<div class="col-md-12" children="@load(vm.selectedIdBenhAn)">
 						<template name="children">
 							<div class="box-content-full" zk:if="${vm.selectedIdBenhAn != null}">

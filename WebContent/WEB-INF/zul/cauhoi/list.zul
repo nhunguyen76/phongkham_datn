@@ -35,7 +35,7 @@
 			</div>
 			<div class="row" style="margin-top:15px">
 				<div class="col-md-12">
-					<x:a class="btn btn-primary btn-flexbox width-100 margin-10-pu"
+					<x:a class="btn btn-success btn-flexbox width-100 margin-10-pu"
 						zk:if="${entry.quyen.cauhoi_them}"
 						onClick="@command('redirectPage', zul='cauhoi/add.zul', vmArgs=vm, vm=null)">
 						<n:i class="icon-themmoi"></n:i>
@@ -72,7 +72,7 @@
 					      				onClick="@command('redirectPage', zul='cauhoi/view.zul',vmArgs=vm,vm=item)">
 					      				<n:i class="icon-edit-white"></n:i>Sửa câu hỏi
 					      			</x:a>
-					      			<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu"
+					      			<x:a class="btn-add-new btn-page btn-flexbox width-100 margin-10-pu" zk:if="${entry.quyen.traloi_xem}"
 						      				onClick="@command('redirectPage', zul='traloi/view.zul', vmArgs=vm, vm=item)">
 						      				<n:i class="icon-themmoi"></n:i>
 						      				&#160;&#160;Trả lời

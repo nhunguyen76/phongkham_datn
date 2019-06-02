@@ -118,13 +118,13 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 	@Command
 	public void saveThongTinBenhNhan(@BindingParam("wdn") final Window wdn, @BindingParam("vm") HoSoThongTin hoSoThongTin)
 			throws IOException {
-		taiKhoan.saveNguoiDung(null, null, true, wdn);
+		taiKhoan.saveNguoiDungNotShowNotification(null, null, true, wdn);
 		if(this.noId() || this.getId() == 0) {
 			saveNotShowNotification();
 			setTuDongMaCaNhan();
 			save();
 			wdn.detach();
-			redirectPageSession("/hosothongtin/id", this, new HoSoThongTinService());
+			redirectPageSession("/hosobenhnhan/id", this, new HoSoThongTinService());
 		} else {
 			save();
 			wdn.detach();
@@ -137,6 +137,7 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 			@BindingParam("wdn") final Window wdn)
 			throws IOException {
 		taiKhoan.saveNguoiDung(null, null, true, wdn);
+		setTuDongMaCaNhan();
 		save();
 		BindUtils.postNotifyChange(null, null, listObject, attr);
 	}
@@ -244,15 +245,15 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 			@Override
 			public void validate(ValidationContext ctx) {
 				String value = (String) ctx.getProperty().getValue();
-
-				JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.cmnd.eq(value));
-				if (!HoSoThongTin.this.noId()) {
-					q.where(QHoSoThongTin.hoSoThongTin.id.ne(getId()));
+				if (!value.isEmpty()) {
+					JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.cmnd.eq(value));
+					if (!HoSoThongTin.this.noId()) {
+						q.where(QHoSoThongTin.hoSoThongTin.id.ne(getId()));
+					}
+					if (q.fetchCount() > 0) {
+						addInvalidMessage(ctx, "Đã tồn tại số CMND này.");
+					}
 				}
-				if (q.fetchCount() > 0) {
-					addInvalidMessage(ctx, "Đã tồn tại số CMND này.");
-				}
-				
 			}
 		};
 	}

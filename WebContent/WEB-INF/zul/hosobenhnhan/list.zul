@@ -117,7 +117,7 @@
 															class="col-edit" zk:if="${entry.quyen.hosobenhnhan_xem}"
 															zk:onClick="@command('redirectPageSession', url='/hosobenhnhan/id', vm=item, service=vm)">
 															<n:i
-																class="icon-eye">
+																class="icon-ds-orange">
 															</n:i>
 														</a>
 														<a

@@ -24,10 +24,12 @@
 		</div>
 		
 		<div class="row">
-			<n:section class="box-result" style="padding-top:20px">
-				<div class="box-form-search" style="padding-left:10px">
+			<n:section class="box-result" style="padding-top:10px">
+				<div class="box-form-search col-md-12">
 					<div class="col-md-12">
-						<x:label>Trả lời</x:label>
+						<n:span class="title-issue title-issue-detail">
+							Trả lời :
+						</n:span>
 						<textbox class="form-control" rows="3"
 							width="100%"
 							value="@load(vm.selectedTraLoi.noiDung) @save(vm.selectedTraLoi.noiDung, before={'saveCauTraLoi'}) 
@@ -37,33 +39,58 @@
 					</div>
 				</div>
 				<div class="box-form-search">
-					<n:form
-						class="form-src padding-form-bt">
+					<div class="form-src padding-form-bt col-md-12 ">
 						<div class="row-box-src">
-							<x:button class="btn btn-success" style="margin-right: 10px;" 
+							<x:button class="btn btn-warning" style="float:right" 
 			                    onClick="@command('saveCauTraLoi', list=vm, attr='listCauTraLoi',wdn=wdn)">
 					            <n:i class="icon-themmoi"></n:i>&#160;&#160;Lưu
 					        </x:button>
+					        <x:button class="btn btn-default" style="float:right" 
+			                    onClick="@command('huyCauTraLoi')">
+					            <n:i class="icon-cancel1"></n:i>&#160;&#160;Hủy
+					        </x:button>
 						</div>
-					</n:form>
+					</div>
 				</div>
 				<div class="clearfix"></div>
 			</n:section>
 		</div>
 	</div>
 	<div class="row" children="@load(vm.listCauTraLoi)"
-		style="margin-top:30px">
+		style="margin-top:10px">
 		<template name="children">
 			<div class="col-sm-12" apply="org.zkoss.bind.BindComposer"
 				viewModel="@id('item') @init(each)">
 				<div class="panel panel-warning">
 					<div class="panel-body">
-					   <label value="@bind(item.noiDung)" />
-					   <x:hr/>
-					   Người tạo :  
-					   <label class="" style="font-weight:bold" value="@bind(item.nguoiTao.hoVaTen)"/>
-					   lúc <label style="font-weight:bold" value="@load(item.ngayTao) @converter('formatedDate', format='hh:mm dd/MM/yyyy')" />
-                    </div>
+					<div class="row">
+						<div class="col-md-1">
+							<div class="div-image">
+								<image class="imageCmp"
+									style="width: 50px; height: 50px; object-fit:cover;border-radius:50%"
+									content="@load(item.nguoiTao.imageContent eq null ? imagevar2 : item.nguoiTao.imageContent)">
+								</image>
+							</div>
+						</div>
+						<div class="col-md-11">
+							<label class="title-cauhoi"
+								value="@load(item.noiDung)">
+							</label>
+							<x:hr />
+							Người tạo :
+							<label value="@load(item.nguoiTao.hoVaTen)" />
+							<x:br />
+							Lúc :
+							<label
+								value="@load(item.ngayTao) @converter('formatedDate', format='hh:mm dd/MM/yyyy')" />
+							<x:a title="Chỉnh sửa" zk:if="${entry.quyen.traloi_sua}"
+			      				class="btn-edit-purple btn-flexbox width-100 margin-10-pu button-custom "
+			      				onClick="@command(vm.onEditCauTraLoi(item))">
+			      				<n:i class="icon-edit-white"></n:i>
+			      			</x:a>
+						</div>
+					</div>
+					</div>
 				</div>
 			</div>
 		</template>

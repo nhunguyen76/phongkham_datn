@@ -512,6 +512,23 @@ public class NguoiDung extends Model<NguoiDung> {
 		}
 		wdn.detach();
 	}
+	
+	@Command
+	public void saveNguoiDungNotShowNotification(@BindingParam("list") final Object listObject, @BindingParam("attr") final String attr,
+			@BindingParam("isUpdateInfo") final boolean isUpdateInfo, @BindingParam("wdn") final Window wdn)
+			throws IOException {
+		beforeSaveImg();
+		if (matKhau2 != null && !matKhau2.isEmpty()) {
+			updatePassword(matKhau2);
+		}
+		saveNotShowNotification();
+		if (isUpdateInfo) {
+			BindUtils.postNotifyChange(null, null, this, "*");
+		} else {
+			BindUtils.postNotifyChange(null, null, listObject, attr);
+		}
+		wdn.detach();
+	}
 
 	public String getCookieToken(long expire) {
 		String token = getId() + ":" + expire + ":";
@@ -542,18 +559,32 @@ public class NguoiDung extends Model<NguoiDung> {
 			@Override
 			public void validate(final ValidationContext ctx) {
 				String value = (String) ctx.getProperty().getValue();
-				if (value == null || "".equals(value)) {
-					addInvalidMessage(ctx, "error", "Không được để trống trường này");
-				} else if (!value.trim().matches(".+@.+\\.[a-z]+")) {
-					addInvalidMessage(ctx, "error", "Email không đúng định dạng");
-				} else {
-					JPAQuery<NguoiDung> q = find(NguoiDung.class).where(QNguoiDung.nguoiDung.email.eq(value))
-							.where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA));
-					if (!NguoiDung.this.noId()) {
-						q.where(QNguoiDung.nguoiDung.id.ne(getId()));
-					}
-					if (q.fetchCount() > 0) {
-						addInvalidMessage(ctx, "error", "Email đã được sử dụng");
+//				if (value == null || "".equals(value)) {
+//					addInvalidMessage(ctx, "error", "Không được để trống trường này");
+//				} else if (!value.trim().matches(".+@.+\\.[a-z]+")) {
+//					addInvalidMessage(ctx, "error", "Email không đúng định dạng");
+//				} else {
+//					JPAQuery<NguoiDung> q = find(NguoiDung.class).where(QNguoiDung.nguoiDung.email.eq(value))
+//							.where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA));
+//					if (!NguoiDung.this.noId()) {
+//						q.where(QNguoiDung.nguoiDung.id.ne(getId()));
+//					}
+//					if (q.fetchCount() > 0) {
+//						addInvalidMessage(ctx, "error", "Email đã được sử dụng");
+//					}
+//				}
+				if (!value.isEmpty()) {
+					if (!value.trim().matches(".+@.+\\.[a-z]+")) {
+						addInvalidMessage(ctx, "error", "Email không đúng định dạng");
+					} else {
+						JPAQuery<NguoiDung> q = find(NguoiDung.class).where(QNguoiDung.nguoiDung.email.eq(value))
+								.where(QNguoiDung.nguoiDung.trangThai.ne(core().TT_DA_XOA));
+						if (!NguoiDung.this.noId()) {
+							q.where(QNguoiDung.nguoiDung.id.ne(getId()));
+						}
+						if (q.fetchCount() > 0) {
+							addInvalidMessage(ctx, "error", "Email đã được sử dụng");
+						}
 					}
 				}
 			}

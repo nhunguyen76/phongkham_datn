@@ -29,7 +29,7 @@
 	<div class="row box-body">
 		<div class="row">
 			<n:section class="box-result" style="padding-top:20px">
-				<div class="box-form-search" style="padding-left:10px">
+				<div class="box-form-search">
 					<div class = "col-md-12">
 						<div class="col-md-4">
 							<n:span class="title-issue title-issue-detail">
@@ -70,7 +70,7 @@
 								Số lượng
 							</n:span>
 							<spinner constraint="no negative,no zero" width="100%"
-								value="@bind(vm.chiTietDonThuoc.soLuong)" tabindex="10" /> 
+								value="@bind(vm.chiTietDonThuoc.soLuong) @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')" tabindex="10" /> 
 							<label zclass="error"
 								value="@load(vmsgs[self.previousSibling])" />
 						</div>
@@ -78,7 +78,9 @@
 						<div class="col-md-2">
 							<n:span class="title-issue title-issue-detail">Đơn vị</n:span>
 							<textbox class="keysearch" width="100%"
-								value="@load(vm.chiTietDonThuoc.donVi)"/>
+								value="@bind(vm.chiTietDonThuoc.donVi) @validator('vn.toancauxanh.vm.BaseValid', constraint='no empty')"/>
+							<label zclass="error"
+								value="@load(vmsgs[self.previousSibling])" />
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -97,16 +99,31 @@
 						</div>
 					</div>
 				</div>
-				<div class="box-form-search">
-					<n:form
-						class="form-src padding-form-bt">
-						<div class="row-box-src">
-							<x:button class="btn btn-success" style="margin-right: 10px;" 
-			                    onClick="@command('themThuoc')">
-					            <n:i class="icon-themmoi"></n:i>&#160;&#160;Thêm thuốc 
-					        </x:button>
-						</div>
-					</n:form>
+				<div class="box-form-search col-md-12" style="padding-top:20px">
+					<div class="row-box-src col-md-12" 
+						children="@load(vm.chiTietDonThuoc)"
+						zk:if="${entry.quyen.donthuoc_them}">
+						<template name="children">
+							<x:button class="btn btn-success"
+								 style="float:right" onClick="@command('themThuoc')"
+								zk:if="${vm.chiTietDonThuoc.id eq 0}">
+								<n:i class="icon-themmoi"></n:i>
+								&#160;&#160;Thêm thuốc
+							</x:button>
+							<x:button class="btn btn-danger"
+								style="margin-left: 10px; float:right" onClick="@command('huySuaThuoc')"
+								zk:if="${vm.chiTietDonThuoc.id ne 0}">
+								<n:i class="icon-cancel2"></n:i>
+								&#160;&#160;Hủy sửa
+							</x:button>
+							<x:button class="btn btn-success"
+								style="margin-left: 10px; float:right" onClick="@command('suaThuoc')"
+								zk:if="${vm.chiTietDonThuoc.id ne 0}">
+								<n:i class="icon-edit-white"></n:i>
+								&#160;&#160;Sửa
+							</x:button>
+						</template>
+					</div>
 				</div>
 				<div class="clearfix"></div>
 			</n:section>
@@ -148,12 +165,12 @@
 								class="text-align-center grid-action">
 								<x:a href="#" class="col-edit"
 									title="Chỉnh sửa" zk:if="${entry.quyen.thuoc_sua}"
-									onClick="@command('redirectPage', zul='thuoc/view.zul',vmArgs=vm,vm=item)">
+									onClick="@command(vm.onEditThuoc(vm, each))">
 									<n:i class="icon-edit"></n:i>
 								</x:a>
 								<x:a href="#" class="col-del"
 									title="Xóa" zk:if="${entry.quyen.thuoc_xoa}"
-									onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='targetQuery', type = 'thuoc')">
+									onClick="@command(vm.onDeleteThuoc(vm, each))">
 									<n:i class="icon-cancel"></n:i>
 								</x:a>
 							</div>
@@ -161,73 +178,6 @@
 					</template>
 				</grid>
 			</div>
-		</div>
-		<div class="col-md-12 list-menu-sukien">
-            <!-- 
-            <div class="wrappre-tb" zk:if="${entry.quyen.chitietdonthuoc_them and !dakhoa}">
-				<div class="wp-scrool">
-					<grid width="100%" id="grid" 
-						model="@load(vm.donThuoc)" height="300px"
-						class="table-report">
-						<columns height="22px">
-							<column width="170px" label="Tên thuốc" />
-							<column width="100px" label="Số lượng" />
-							<column width="100px" label="Đơn vị" />
-							<column width="350px" label="Cách dùng" />
-                            <column width="350px" label="Ghi chú" />
-                            <column width="50px" label="Xóa "/>
-						</columns>
-						<template name="model">
-							<row>
-								<textbox inplace="true" width="100%"
-									value="@bind(each.tenThuoc)"/>
-								<textbox inplace="true" width="100%"
-									value="@bind(each.soLuong)" />
-								<textbox inplace="true" width="100%"
-									value="@bind(each.donVi)" />
-								<textbox inplace="true" width="100%"
-									value="@bind(each.cachDung)" />
-                                <textbox inplace="true" width="100%"
-                                    value="@bind(each.ghiChu)" />
-                                <x:button class="btn btn-danger btn-xs"  zk:if="${entry.quyen.congviec_xoa}"
-                                        onClick="@command('onDeleteThuoc',vm=vm, item=each)">
-                                        <n:i class="icon-cancel2"></n:i>
-                                </x:button> 
-							</row>
-						</template>
-					</grid>
-				</div>
-			</div>
-			<div class="wrappre-tb" zk:if="${!entry.quyen.chitietdonthuoc_them and !dakhoa}">
-				<div class="wp-scrool">
-					<grid hflex="min" id="grid2"  
-						model="@load(vm.donThuoc)" height="280px"
-						class="table-report">
-						<columns height="22px">
-							<column width="170px" label="Tên thuốc1" />
-							<column width="100px" label="Số lượng" />
-							<column width="100px" label="Đơn vị" />
-							<column width="350px" label="Cách dùng" />
-                            <column width="350px" label="Ghi chú" />
-						</columns>
-						<template name="model">
-							<row>
-								<label width="100%"
-									value="@bind(each.tenThuoc)"/>
-								<label width="100%"
-									value="@bind(each.soLuong)" />
-								<label width="100%"
-									value="@bind(each.donVi)" />
-								<label width="100%"
-									value="@bind(each.cachDung)" />
-                                <label width="100%"
-                                    value="@bind(each.ghiChu)" />
-							</row>
-						</template>
-					</grid>
-				</div>
-			</div>
-		 -->
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">

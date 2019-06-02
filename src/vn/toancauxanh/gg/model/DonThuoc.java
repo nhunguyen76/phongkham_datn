@@ -1,8 +1,10 @@
 package vn.toancauxanh.gg.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -12,10 +14,17 @@ import javax.persistence.Transient;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.Messagebox.ClickEvent;
 
 import com.querydsl.jpa.impl.JPAQuery;
 
+import vn.toancauxanh.gg.model.enums.TrangThaiXuLyEnum;
 import vn.toancauxanh.model.Model;
 
 @Entity
@@ -63,9 +72,8 @@ public class DonThuoc extends Model<DonThuoc> {
 	@Transient
 	public void getChiTietDonThuocInDB() {
 		JPAQuery<ChiTietDonThuoc> q = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.donThuoc.id.eq(this.getId()));
-		q.orderBy(QChiTietDonThuoc.chiTietDonThuoc.ngayTao.desc());
+		q.orderBy(QChiTietDonThuoc.chiTietDonThuoc.ngayTao.asc());
 		chiTietDonThuocs.addAll(q.fetch());
-		System.out.println("=========" + chiTietDonThuocs.size());
 	}
 	
 	@Command
@@ -80,8 +88,18 @@ public class DonThuoc extends Model<DonThuoc> {
 	public void saveDonThuoc(@BindingParam("wdn") final Window wdn,
 			@BindingParam("vmArgs") Object vmArgs,
 			@BindingParam("attr") final String attr) {
+		List<ChiTietDonThuoc> listInDB = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.donThuoc.id.eq(this.getId())).fetch();
 		if (!chiTietDonThuocs.isEmpty()) {
 			save();
+			// list thuoc DB bi xoa
+			List<ChiTietDonThuoc> removed = listInDB.stream()
+					.filter(db -> chiTietDonThuocs.stream().noneMatch(obj -> obj.getId().equals(db.getId())))
+					.collect(Collectors.toList());
+			removed.forEach(System.out::println);
+			for (ChiTietDonThuoc obj : removed) {
+				obj.doDelete(true);
+			}
+			// Save don thuoc
 			for (ChiTietDonThuoc dto : chiTietDonThuocs) {
 				dto.setDonThuoc(this);
 				dto.saveNotShowNotification();
@@ -89,5 +107,40 @@ public class DonThuoc extends Model<DonThuoc> {
 		}
 		wdn.detach();
 		BindUtils.postNotifyChange(null, null, vmArgs, attr);
+	}
+	
+	@Command
+	public void onEditThuoc(@BindingParam("vm") Object vm,  @BindingParam("item") ChiTietDonThuoc item) {
+		this.chiTietDonThuoc = item;
+		BindUtils.postNotifyChange(null,null,vm,"chiTietDonThuoc");
+	}
+	
+	@Command
+	public void onDeleteThuoc(
+			@BindingParam("vm") Object vm,
+			@BindingParam("item") ChiTietDonThuoc item)throws IOException{
+		Messagebox.show("Bạn muốn xóa thuốc này?", "Xác nhận", Messagebox.CANCEL | Messagebox.OK,
+				Messagebox.QUESTION, new EventListener<Event>() {
+					@Override
+					public void onEvent(final Event event) {
+						if (Messagebox.ON_OK.equals(event.getName())) {
+							chiTietDonThuocs.remove(item);
+							BindUtils.postNotifyChange(null,null,vm,"chiTietDonThuocs");
+						}
+					}
+				});
+	}
+	
+	@Command
+	public void suaThuoc() {
+		BindUtils.postNotifyChange(null,null,this,"chiTietDonThuocs");
+		this.chiTietDonThuoc = new ChiTietDonThuoc();
+		BindUtils.postNotifyChange(null,null,this,"chiTietDonThuoc");
+	}
+	
+	@Command
+	public void huySuaThuoc() {
+		this.chiTietDonThuoc = new ChiTietDonThuoc();
+		BindUtils.postNotifyChange(null,null,this,"chiTietDonThuoc");
 	}
 }

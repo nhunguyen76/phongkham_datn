@@ -49,7 +49,7 @@
 						<n:span class="required">*</n:span>
 					</n:span>
 					<textbox width="100%" class="hv-textbox" maxlength="255"
-						value="@load(vm.hoVaTen) @save(vm.hoVaTen, before='saveThongTinBenhNhan') 
+						value="@bind(vm.hoVaTen) @save(vm.hoVaTen, before='saveThongTinBenhNhan') 
 							@validator(vm.validatorStringUtitsNotBlank)"
 						placeholder="Nhập họ và tên" />
 					<label class="error"
@@ -132,7 +132,6 @@
 				<div class="col-md-6">
 					<n:span class="title-issue title-issue-detail">
 						Email
-					<n:small class="required">*</n:small>
 					</n:span>
 					<textbox class="hv-textbox" width="100%" maxlength="255"
 						disabled="@load(!entry.quyen.nguoidung_them)"
@@ -178,7 +177,7 @@
 						value="@load(vmsgs[self.previousSibling])" />
 				</div>
 			</div>
-			<div class="row" if="${!vm.noId()}">
+			<div class="row" if="${!vm.noId()}" style="margin-top:20px">
 				<div class="col-md-12">
 					<vlayout>
 						<groupbox mold="3d" class="" open="false"
