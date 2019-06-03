@@ -58,10 +58,10 @@
 							Hồ sơ bệnh nhân</span>
 						</a>
 					</li>
-					<li class="menu-top-list ${resource eq 'hosothongtin'?'active-menu':''}"
+					<li class="menu-top-list ${resource eq 'hosobenhnhan'?'active-menu':''}"
 						zk:if="${entry.quyen.hosocanhan_xem and !dakhoa and !isSuperAdmin}">
 						<x:a class="link-menu" href="#" zk:if="${!dakhoa}"
-							zk:onClick="@command('redirectPageSession', url='/hosothongtin/id', vm=entry.nguoiDung.hoSoThongTin)">
+							zk:onClick="@command('redirectPageSession', url='/hosobenhnhan/id', vm=entry.nguoiDung.hoSoThongTin)">
 							<span class="icon-ds-menu"></span>
 							<span class="text-menu">Hồ sơ cá nhân</span>
 						</x:a>

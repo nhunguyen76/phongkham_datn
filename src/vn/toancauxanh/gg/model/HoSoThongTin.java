@@ -137,8 +137,13 @@ public class HoSoThongTin extends Model<HoSoThongTin> {
 			@BindingParam("wdn") final Window wdn)
 			throws IOException {
 		taiKhoan.saveNguoiDung(null, null, true, wdn);
-		setTuDongMaCaNhan();
-		save();
+		if(this.noId() || this.getId() == 0) {
+			save();
+			setTuDongMaCaNhan();
+			save();
+		} else {
+			save();
+		}
 		BindUtils.postNotifyChange(null, null, listObject, attr);
 	}
 

@@ -301,7 +301,7 @@ public class Entry extends BaseObject<Object> {
 	// aend
 	public String[] getRESOURCES() {
 		return new String[] { NGUOIDUNG, VAITRO, HOSOTHONGTIN, DICHVU, NHANVIEN, 
-				 THUOC, LICHHENKHAM, TAIKHOAN, TRALOI, CAUHOI, HOSOBENHNHAN};
+				 THUOC, LICHHENKHAM, TAIKHOAN, TRALOI, CAUHOI, HOSOBENHNHAN, HOSOCANHAN};
 	}
 
 	public String[] getACTIONS() {
