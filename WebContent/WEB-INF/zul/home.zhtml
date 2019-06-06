@@ -145,9 +145,9 @@
 						<li class="prev">&#10094;</li>
 						<li class="next">&#10095;</li>
 						<li>
-							August
+							 June
 							<br>
-								<span style="font-size:18px">2017</span>
+								<span style="font-size:18px">2019</span>
 						</li>
 					</ul>
 				</div>
@@ -165,16 +165,16 @@
 				<ul class="days">
 					<li>1</li>
 					<li>2</li>
-					<li>3</li>
+					<li>
+						<span class="active">3</span>
+					</li>
 					<li>4</li>
 					<li>5</li>
 					<li>6</li>
 					<li>7</li>
 					<li>8</li>
 					<li>9</li>
-					<li>
-						<span class="active">10</span>
-					</li>
+					<li>10</li>
 					<li>11</li>
 					<li>12</li>
 					<li>13</li>
@@ -201,6 +201,10 @@
 			<div class="text-center col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-body">
+						<img width="100%"
+							src="/backend/assets/images/cover1.jpeg">
+						</img>
+						<!-- 
 						<p style="padding-bottom:20px">Lịch hẹn trong ngày</p>
 						<div class="col-md-12">
 							<z:grid model="@load(entry.lichHenKhams.lichHenKhamTrongNgay)"
@@ -238,6 +242,7 @@
 								</template>
 							</z:grid>
 						</div>
+						 -->
 					</div>
 				</div>
 			</div>

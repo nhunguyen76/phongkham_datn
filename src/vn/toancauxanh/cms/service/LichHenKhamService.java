@@ -2,6 +2,7 @@ package vn.toancauxanh.cms.service;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 	
 	private String paramHoVaTenBenhNhan;
 	private Date paramNgayKham;
+	private TrangThaiXuLyEnum paramTrangThaiXuLy;
 
 	public String getParamHoVaTenBenhNhan() {
 		return paramHoVaTenBenhNhan;
@@ -41,6 +43,15 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 		this.paramNgayKham = paramNgayKham;
 	}
 
+
+	public TrangThaiXuLyEnum getParamTrangThaiXuLy() {
+		return paramTrangThaiXuLy;
+	}
+
+	public void setParamTrangThaiXuLy(TrangThaiXuLyEnum paramTrangThaiXuLy) {
+		this.paramTrangThaiXuLy = paramTrangThaiXuLy;
+	}
+	
 	public List<BuoiKhamEnum> getBuoiKhams(){
 		List<BuoiKhamEnum> list = Arrays.asList(BuoiKhamEnum.values());
 		return list;
@@ -48,6 +59,13 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 	
 	public List<TrangThaiXuLyEnum> getTrangThaiXuLys(){
 		List<TrangThaiXuLyEnum> list = Arrays.asList(TrangThaiXuLyEnum.values());
+		return list;
+	}
+	
+	public List<TrangThaiXuLyEnum> getTrangThaiXuLysAndNull(){
+		List<TrangThaiXuLyEnum> list = new ArrayList<>();
+		list.add(null);
+		list.addAll(Arrays.asList(TrangThaiXuLyEnum.values()));
 		return list;
 	}
 	
@@ -61,6 +79,10 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 		
 		if (paramNgayKham != null) {
 			q.where(QLichHenKham.lichHenKham.thoiGianKham.eq(paramNgayKham));
+		}
+		
+		if (paramTrangThaiXuLy != null) {
+			q.where(QLichHenKham.lichHenKham.trangThaiXuLy.eq(paramTrangThaiXuLy));
 		}
 
 		q.orderBy(QLichHenKham.lichHenKham.ngayTao.desc());

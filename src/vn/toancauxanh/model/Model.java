@@ -31,6 +31,8 @@ import org.zkoss.zul.Window;
 import com.google.common.base.Strings;
 import com.querydsl.core.annotations.QueryInit;
 
+import vn.toancauxanh.gg.model.HoSoBenhAn;
+import vn.toancauxanh.gg.model.QHoSoBenhAn;
 import vn.toancauxanh.service.BaseObject;
 import vn.toancauxanh.service.BasicService;
 import vn.toancauxanh.service.Quyen;
@@ -146,6 +148,9 @@ public class Model<T extends Model<T>> extends BaseObject<T> {
 								if ("vaitro".equals(type)) {
 									count = find(NguoiDung.class).where(QNguoiDung.nguoiDung.vaiTros.contains((VaiTro) Model.this))
 											.fetchCount();
+								}
+								if ("dichvu".equals(type)) {
+									count = find(HoSoBenhAn.class).where(QHoSoBenhAn.hoSoBenhAn.dichVu.id.eq(Model.this.id)).fetchCount();
 								}
 								if (count == 0) {
 									doDelete(true);

@@ -29,6 +29,21 @@
 											onOK="@command('cmd', notify=vm, attr='*')" />
 									</div>
 								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<x:label>Trang thái</x:label>
+										<combobox model="@load(entry.lichHenKhams.trangThaiXuLysAndNull)"
+											width="100%" readonly="true" class="hv-cbb"
+											placeholder="Chọn trạng thái"
+											value="@load(vm.paramTrangThaiXuLy eq null ? 'Tất cả' : vm.paramTrangThaiXuLy.text)"
+											selectedItem="@bind(vm.paramTrangThaiXuLy)">
+											<template name="model">
+												<comboitem
+													label="@load(empty each ? 'Tất cả' :  each.text)" />
+											</template>
+										</combobox>
+									</div>
+								</div>
 							</div>
 							<div class="box-form-search">
 								<n:form

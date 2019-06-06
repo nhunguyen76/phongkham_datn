@@ -20,7 +20,10 @@ public class HoSoThongTinService extends BasicService<HoSoThongTin> {
 	
 	public JPAQuery<HoSoThongTin> getTargetQuery() {
 		String keyword = MapUtils.getString(argDeco(), Labels.getLabel("param.tukhoa"), "").trim();
-		JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class);
+//		JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class);
+		// Get danh sách bệnh nhân
+		VaiTro benhNhanVaiTro = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("benhnhan")).fetchFirst();
+		JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.taiKhoan.vaiTros.any().eq(benhNhanVaiTro));
 		
 		if (paramHoVaTenBenhNhan != null && !paramHoVaTenBenhNhan.isEmpty()) {
 			String tukhoa = "%" + paramHoVaTenBenhNhan + "%";

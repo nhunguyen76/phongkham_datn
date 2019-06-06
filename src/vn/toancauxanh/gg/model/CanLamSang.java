@@ -65,6 +65,11 @@ public class CanLamSang extends Model<CanLamSang>{
 	}
 
 	@Transient
+	public String getShowImage() {
+		String root = "C:\\home\\phongkham-datn\\";
+		return root + getIconUrl();
+	}
+	@Transient
 	private boolean flagImage = true;
 
 	public void setImageContent(org.zkoss.image.Image _imageContent) {

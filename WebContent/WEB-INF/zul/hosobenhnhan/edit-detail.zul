@@ -274,6 +274,14 @@
 														<div
 															class="text-align-center grid-action">
 															<x:a href="#"
+																class="col-edit" title="Chi tiết đơn thuốc"
+																zk:if="${entry.quyen.hosocanhan_xem}"
+																onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul', vmArgs=vm, nhom=vm.hoSoThongTin , vm=item)">
+																<n:i
+																	class="icon-ds-orange">
+																</n:i>
+															</x:a>
+															<x:a href="#"
 																class="col-edit" title="Chỉnh sửa"
 																zk:if="${entry.quyen.hosobenhnhan_sua}"
 																onClick="@command('redirectPage', zul='chitietdonthuoc/view.zul', vmArgs=vm, nhom=vm.hoSoThongTin , vm=item)">
@@ -425,7 +433,7 @@
 															<label value="@load(each.ngayKham) @converter('formatedDate', format='dd/MM/yyyy')" style="text-align:center;display:block"/>
 															<label value="@bind(each.tieuDe)" style="display:block"/>
 															<div class="text-align-center">
-																<a href="@bind(each.iconUrl)" target="_blank">
+																<a href="@bind(each.showImage)" target="_blank">
 																<image
 																	width="40px"
 																	height="@load(each.imageContent eq null ? '50px' : '')"

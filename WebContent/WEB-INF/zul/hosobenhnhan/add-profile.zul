@@ -224,7 +224,7 @@
 						<div class="mis-pd10">
 							<listbox
 								model="@bind(entry.vaiTros.vaiTroQuery.fetch())"
-								selectedItems="@bind(vm.taiKhoan.vaiTros)" multiple="false"
+								selectedItems="@bind(vm.taiKhoan.vaiTros)" multiple="true"
 								checkmark="true" rows="7">
 								<listhead>
 									<listheader label="Vai trò">
