@@ -18,6 +18,7 @@ import vn.toancauxanh.gg.model.LichHenKham;
 import vn.toancauxanh.gg.model.QHoSoThongTin;
 import vn.toancauxanh.gg.model.QLichHenKham;
 import vn.toancauxanh.gg.model.enums.BuoiKhamEnum;
+import vn.toancauxanh.gg.model.enums.ThoiGianDatHenEnum;
 import vn.toancauxanh.gg.model.enums.TrangThaiXuLyEnum;
 import vn.toancauxanh.service.BasicService;
 
@@ -26,6 +27,7 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 	private String paramHoVaTenBenhNhan;
 	private Date paramNgayKham;
 	private TrangThaiXuLyEnum paramTrangThaiXuLy;
+	private ThoiGianDatHenEnum paramThoiGianDatHen;
 
 	public String getParamHoVaTenBenhNhan() {
 		return paramHoVaTenBenhNhan;
@@ -50,6 +52,11 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 
 	public void setParamTrangThaiXuLy(TrangThaiXuLyEnum paramTrangThaiXuLy) {
 		this.paramTrangThaiXuLy = paramTrangThaiXuLy;
+	}
+	 
+	public List<ThoiGianDatHenEnum> getThoiGianDatHenEnum(){
+		List<ThoiGianDatHenEnum> list = Arrays.asList(ThoiGianDatHenEnum.values());
+		return list;
 	}
 	
 	public List<BuoiKhamEnum> getBuoiKhams(){
@@ -83,6 +90,15 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
 		
 		if (paramTrangThaiXuLy != null) {
 			q.where(QLichHenKham.lichHenKham.trangThaiXuLy.eq(paramTrangThaiXuLy));
+		}
+		
+		
+		if (paramThoiGianDatHen != null) {
+			if( ThoiGianDatHenEnum.GAN_NHAT.equals(paramThoiGianDatHen)) {
+				q.orderBy(QLichHenKham.lichHenKham.thoiGianDatHen.desc());
+			} else {
+				q.orderBy(QLichHenKham.lichHenKham.thoiGianDatHen.asc());
+			}
 		}
 
 		q.orderBy(QLichHenKham.lichHenKham.ngayTao.desc());
@@ -121,4 +137,12 @@ public class LichHenKhamService extends BasicService<LichHenKham> {
         } catch (Exception e) {}
         return q.fetch();
     }
+
+	public ThoiGianDatHenEnum getParamThoiGianDatHen() {
+		return paramThoiGianDatHen;
+	}
+
+	public void setParamThoiGianDatHen(ThoiGianDatHenEnum paramThoiGianDatHen) {
+		this.paramThoiGianDatHen = paramThoiGianDatHen;
+	}
 }

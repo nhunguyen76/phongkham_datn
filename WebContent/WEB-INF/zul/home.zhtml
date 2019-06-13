@@ -165,9 +165,7 @@
 				<ul class="days">
 					<li>1</li>
 					<li>2</li>
-					<li>
-						<span class="active">3</span>
-					</li>
+					<li>3</li>
 					<li>4</li>
 					<li>5</li>
 					<li>6</li>
@@ -176,7 +174,9 @@
 					<li>9</li>
 					<li>10</li>
 					<li>11</li>
-					<li>12</li>
+					<li>
+						<span class="active">12</span>
+					</li>
 					<li>13</li>
 					<li>14</li>
 					<li>15</li>
@@ -258,8 +258,8 @@
 		</div>
 		
 	</div>
-	<label class="tb-khong-quyen" if="${!coquyen and !dakhoa}">Bạn không có quyền truy cập chức năng này!</label>
-	<label class="tb-khong-quyen" if="${dakhoa}">Tài khoản của bạn đã bị khóa!</label>
+	<!-- <label class="tb-khong-quyen" if="${!coquyen and !dakhoa}">Bạn không có quyền truy cập chức năng này!</label>
+	<label class="tb-khong-quyen" if="${dakhoa}">Tài khoản của bạn đã bị khóa!</label> -->
    
   </div>
 

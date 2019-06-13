@@ -86,7 +86,7 @@ public class DonThuoc extends Model<DonThuoc> {
 	
 	@Command
 	public void saveDonThuoc(@BindingParam("wdn") final Window wdn,
-			@BindingParam("vmArgs") Object vmArgs,
+			@BindingParam("list") final Object listObject,
 			@BindingParam("attr") final String attr) {
 		List<ChiTietDonThuoc> listInDB = find(ChiTietDonThuoc.class).where(QChiTietDonThuoc.chiTietDonThuoc.donThuoc.id.eq(this.getId())).fetch();
 		if (!chiTietDonThuocs.isEmpty()) {
@@ -106,7 +106,8 @@ public class DonThuoc extends Model<DonThuoc> {
 			}
 		}
 		wdn.detach();
-		BindUtils.postNotifyChange(null, null, vmArgs, attr);
+		System.out.println("=========="+ listObject+ "====" + attr);
+		BindUtils.postNotifyChange(null, null, listObject, attr);
 	}
 	
 	@Command

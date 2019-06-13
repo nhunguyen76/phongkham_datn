@@ -100,7 +100,7 @@
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
-		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.chitietbenhan_them) or (!vm.noId() and entry.quyen.chitietbenhan_sua)) and !checkView}"
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.hosobenhan_them) or (!vm.noId() and entry.quyen.hosobenhan_sua)) and !checkView}"
 			onClick="@command('saveCanLamSang', vmArgs=vmArgs, attr='listCanLamSangByIdChiTietBenhAn',wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>

@@ -23,7 +23,7 @@
 			} else {
 				vm.getChiTietDonThuocInDB();
 			}
-			
+			System.out.println(vmArgs);
 		]]></zscript> 
 		
 	<div class="row box-body">
@@ -186,7 +186,7 @@
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
-		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.thuoc_them) or (!vm.noId() and entry.quyen.thuoc_sua)) and !checkView}"
 			
 			onClick="@command('saveDonThuoc', list=vmArgs, attr='listDonThuoc', wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 

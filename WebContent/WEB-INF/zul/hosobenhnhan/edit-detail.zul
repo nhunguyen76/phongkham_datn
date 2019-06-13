@@ -174,13 +174,13 @@
 												class="table-report">
 												<columns>
 													<column label="STT"
-														hflex="min" style="text-align:center" />
+														width="50px" style="text-align:center" />
 													<column label="Dịch vụ"
-														width="15%" style="text-align:center;" />
+														hflex="min" style="text-align:center;" />
 													<column label="Ngày bắt đầu"
 														width="15%" style="text-align:center;" />
 													<column label="Thao tác"
-														width="80px" style="text-align:center;" />
+														width="120px" style="text-align:center;" />
 												</columns>
 												<template name="model">
 													<row
@@ -236,7 +236,7 @@
 								<div class="box-list-report">
 									<div class="box-report-top range-menu">
 										<n:p class="title-panel-table">
-											Đơn thuốc
+											Đơn thuốc 
 										</n:p>
 										<div class="box-button-list">
 											<x:a
@@ -244,7 +244,7 @@
 												zk:if="${entry.quyen.hosobenhnhan_sua}"
 												onClick="@command('redirectPage', zul='chitietdonthuoc/add.zul', vmArgs=vm, nhom=vm.hoSoThongTin , vm=null)">
 												<n:i class="icon-themmoi"></n:i>
-												&#160;&#160;Thêm mới
+												&#160;&#160;Thêm mới 
 											</x:a>
 										</div>
 									</div>
@@ -252,7 +252,7 @@
 										<div class="wp-scrool">
 											<grid
 												model="@load(vm.page(vm.listDonthuoc).fetch())" width="100%"
-												id="" emptyMessage="Danh sách không có đơn thuốc nào"
+												id="gridDonThuoc" emptyMessage="Danh sách không có đơn thuốc nào"
 												class="table-report">
 												<columns>
 													<column label="STT"
@@ -292,7 +292,7 @@
 															<x:a href="#"
 																class="col-del" title="Xóa"
 																zk:if="${entry.quyen.hosobenhnhan_sua}"
-																onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
+																onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listDonThuoc', type = 'chitietdonthuoc')">
 																<n:i
 																	class="icon-cancel">
 																</n:i>
@@ -349,8 +349,8 @@
 														label="Chẩn đoán" width="15%" style="text-align:center;" />
 													<column
 														label="Thủ thuật" width="15%" style="text-align:center;" />
-													<column label="Thao tác"
-														width="12%" style="text-align:center;" />
+													<column label="Thao tác" zk:if="${entry.quyen.hosobenhnhan_sua or entry.quyen.hosobenhnhan_xoa}"
+														hflex="min" style="text-align:center;" />
 												</columns>
 												<template name="model">
 													<row
@@ -368,7 +368,7 @@
 															value="@bind(each.chanDoan)" style="display:block" />
 														<label
 															value="@bind(each.thuThuat)" style="display:block" />
-														<div class="text-align-center grid-action">
+														<div class="text-align-center grid-action" zk:if="${entry.quyen.hosobenhnhan_sua or entry.quyen.hosobenhnhan_xoa}">
 															<x:a href="#"
 																class="col-edit" title="Chỉnh sửa"
 																zk:if="${entry.quyen.hosobenhnhan_sua}"
@@ -379,7 +379,7 @@
 															</x:a>
 															<x:a href="#"
 																class="col-del" title="Xóa"
-																zk:if="${entry.quyen.hosobenhnhan_sua}"
+																zk:if="${entry.quyen.hosobenhnhan_xoa}"
 																onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
 																<n:i
 																	class="icon-cancel">
@@ -425,7 +425,8 @@
 														<column label="Tiêu đề" width="15%" style="text-align:center;"/>
 														<column label="Hình ảnh" width="15%" style="text-align:center;"/>
 														<column label="Ghi chú" width="15%" style="text-align:center;"/>
-														<column label="Thao tác" width="12%" style="text-align:center;"/>
+														<column label="Thao tác" width="12%" style="text-align:center;" 
+															zk:if="${entry.quyen.hosobenhnhan_sua or entry.quyen.hosobenhnhan_xoa}"/>
 													</columns>
 													<template name="model">
 														<row apply="org.zkoss.bind.BindComposer" viewModel="@id('item') @init(each)">
@@ -444,11 +445,11 @@
 																</a>
 															</div>
 															<label value="@bind(each.ghiChu)" style="display:block"/>
-															<div class="text-align-center grid-action">
+															<div class="text-align-center grid-action" zk:if="${entry.quyen.hosobenhnhan_sua or entry.quyen.hosobenhnhan_xoa}">
 																<x:a href="#" class="col-edit" title ="Chỉnh sửa"
 																zk:if="${entry.quyen.hosobenhnhan_sua}" onClick="@command('redirectPage', zul='canlamsang/view.zul',vmArgs=vm,vm=item)"><n:i class="icon-edit"></n:i></x:a>
 																<x:a href="#" class="col-del" title="Xóa"
-				                          							zk:if="${entry.quyen.hosobenhnhan_sua}"	
+				                          							zk:if="${entry.quyen.hosobenhnhan_xoa}"	
 				                          						onClick="@command('deleteTrangThaiConfirmAndNotifyAndCheck', notify=vm, attr='listHoSoBenhAn', type = 'hosobenhan')">
 				                          						<n:i class="icon-cancel"></n:i></x:a>
 															</div>

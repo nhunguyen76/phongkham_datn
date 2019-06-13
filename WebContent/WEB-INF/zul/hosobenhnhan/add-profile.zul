@@ -134,7 +134,7 @@
 						Email
 					</n:span>
 					<textbox class="hv-textbox" width="100%" maxlength="255"
-						disabled="@load(!entry.quyen.nguoidung_them)"
+						disabled="@load(!entry.quyen.hosobenhnhan_sua)"
 						value="@bind(vm.taiKhoan.email) @save(vm.taiKhoan.email, before='saveThongTinBenhNhan') 
 							@validator(vm.taiKhoan.validatorEmail)" />
 					<label class="error"
@@ -146,7 +146,7 @@
 						<n:small class="required">*</n:small>
 					</n:span>
 					<textbox class="hv-textbox" width="100%"
-						maxlength="255" disabled="@load(!entry.quyen.nguoidung_them)"
+						maxlength="255" disabled="@load(!entry.quyen.hosobenhnhan_sua)"
 						value="@bind(vm.taiKhoan.tenDangNhap) @save(vm.taiKhoan.tenDangNhap, before='saveThongTinBenhNhan') @validator(vm.taiKhoan.validatorTenDangNhap)" />
 					<label class="error"
 						value="@load(vmsgs[self.previousSibling])" />
@@ -249,7 +249,7 @@
 		</div>
 	</div>
 	<div class="row box-footer box-thaotac">
-		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${((vm.noId() and entry.quyen.dichvu_them) or (!vm.noId() and entry.quyen.dichvu_sua)) and !checkView}"
+		<x:button class="btn btn-success margin-button width-button" style="margin-right: 10px;" zk:if="${(idCurrentUser eq vm.id) or ((vm.noId() and entry.quyen.hosobenhnhan_them) or (!vm.noId() and entry.quyen.hosobenhnhan_sua)) and !checkView}"
 			onClick="@command('saveThongTinBenhNhan', list=vmArgs, attr='targetQuery',wdn=wdn)">
 			<n:i class="icon-save"></n:i>Lưu 
 		</x:button>

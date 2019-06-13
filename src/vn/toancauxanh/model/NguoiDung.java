@@ -704,4 +704,22 @@ public class NguoiDung extends Model<NguoiDung> {
         }
         return this.tenDangNhap;
     }
+	
+	// get ho so thong tin tuong ung
+	@Transient
+	public Long getIdHoSoThongTin() {
+		JPAQuery<HoSoThongTin> q = find(HoSoThongTin.class).where(QHoSoThongTin.hoSoThongTin.taiKhoan.eq(this));
+        if (q.fetchOne() != null) {
+            return q.fetchOne().getId();
+        }
+        return 0L;
+	}
+	
+	@Transient
+	public boolean isQuanTriVien() {
+		VaiTro vaiTro = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("quantrivien")).fetchFirst();
+		if (getVaiTros().contains(vaiTro))
+			return true;
+		else return false;
+	}
 }

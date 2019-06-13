@@ -44,6 +44,21 @@
 										</combobox>
 									</div>
 								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<x:label>Thời gian đặt hẹn</x:label>
+										<combobox model="@load(entry.lichHenKhams.thoiGianDatHenEnum)"
+											width="100%" readonly="true" class="hv-cbb"
+											placeholder="Chọn thời gian đặt hẹn"
+											value="@load(vm.paramThoiGianDatHen eq null ? '' : vm.paramThoiGianDatHen.text)"
+											selectedItem="@bind(vm.paramThoiGianDatHen)">
+											<template name="model">
+												<comboitem
+													label="@load(empty each ? '' :  each.text)" />
+											</template>
+										</combobox>
+									</div>
+								</div>
 							</div>
 							<div class="box-form-search">
 								<n:form

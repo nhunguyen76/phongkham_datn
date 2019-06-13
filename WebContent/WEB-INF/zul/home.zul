@@ -60,6 +60,8 @@
     if ( entry.nguoiDung.tenDangNhap.equals("admin")) {
         isSuperAdmin = true;
     }
+    boolean isAdmin = entry.nguoiDung.isQuanTriVien();
+    Long idCurrentUser = entry.nguoiDung.idHoSoThongTin;
 ]]></zscript>
   <div class="wrapper">
     <!-- include header.html -->
