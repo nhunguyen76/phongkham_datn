@@ -21,13 +21,13 @@ public class ChiTietBenhAnService extends BasicService<ChiTietBenhAn>{
 	
 	public JPAQuery<ChiTietBenhAn> getChiTietBenhAnByIdBenhAn(Long id) {
 		JPAQuery<ChiTietBenhAn> q = find(ChiTietBenhAn.class).where(QChiTietBenhAn.chiTietBenhAn.benhAn.id.eq(id));
-		q.orderBy(QChiTietBenhAn.chiTietBenhAn.ngayTao.desc());
+		q.orderBy(QChiTietBenhAn.chiTietBenhAn.ngayKham.desc());
 		return q;
 	}
 	
 	public JPAQuery<ChiTietBenhAn> getChiTietBenhAn() {
 		JPAQuery<ChiTietBenhAn> q = find(ChiTietBenhAn.class).where(QChiTietBenhAn.chiTietBenhAn.benhAn.id.eq(this.idBenhAn));
-		q.orderBy(QChiTietBenhAn.chiTietBenhAn.ngayTao.desc());
+		q.orderBy(QChiTietBenhAn.chiTietBenhAn.ngayKham.desc());
 		return q;
 	}
 

@@ -61,6 +61,8 @@
         isSuperAdmin = true;
     }
     boolean isAdmin = entry.nguoiDung.isQuanTriVien();
+    boolean isOnlyBenhNhan = entry.nguoiDung.isOnlyBenhNhan();
+    System.out.println("=======================" + isOnlyBenhNhan);
     Long idCurrentUser = entry.nguoiDung.idHoSoThongTin;
 ]]></zscript>
   <div class="wrapper">

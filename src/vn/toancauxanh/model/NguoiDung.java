@@ -718,8 +718,18 @@ public class NguoiDung extends Model<NguoiDung> {
 	@Transient
 	public boolean isQuanTriVien() {
 		VaiTro vaiTro = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("quantrivien")).fetchFirst();
-		if (getVaiTros().contains(vaiTro))
+		if (getVaiTros().contains(vaiTro)) {
 			return true;
-		else return false;
+		} else return false;
+	}
+	
+	@Transient
+	public boolean isOnlyBenhNhan() {
+		VaiTro vaiTro = find(VaiTro.class).where(QVaiTro.vaiTro.alias.eq("benhnhan")).fetchFirst();
+		if (getVaiTros().contains(vaiTro)) {
+			if (getVaiTros().size() == 1) {
+				return true;
+			} else return false;
+		} return false;
 	}
 }

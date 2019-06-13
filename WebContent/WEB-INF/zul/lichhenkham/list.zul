@@ -46,12 +46,19 @@
 								</div>
 								<div class="col-sm-4">
 									<div class="form-group">
-										<x:label>Thời gian đặt hẹn</x:label>
-										<combobox model="@load(entry.lichHenKhams.thoiGianDatHenEnum)"
+										<x:label>Ngày đặt hẹn</x:label>
+										<datebox format="dd-MM-yyyy" width="100%" 
+											value="@bind(vm.paramNgayDatHen)" placeholder="Chọn ngày đặt hẹn"/>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<x:label>Sắp xếp theo</x:label>
+										<combobox model="@load(entry.lichHenKhams.sapXepLichKhamEnum)"
 											width="100%" readonly="true" class="hv-cbb"
-											placeholder="Chọn thời gian đặt hẹn"
-											value="@load(vm.paramThoiGianDatHen eq null ? '' : vm.paramThoiGianDatHen.text)"
-											selectedItem="@bind(vm.paramThoiGianDatHen)">
+											placeholder="Sắp xếp theo"
+											value="@load(vm.paramSapXepLichKham eq null ? '' : vm.paramSapXepLichKham.text)"
+											selectedItem="@bind(vm.paramSapXepLichKham)">
 											<template name="model">
 												<comboitem
 													label="@load(empty each ? '' :  each.text)" />

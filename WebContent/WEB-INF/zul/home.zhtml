@@ -174,11 +174,11 @@
 					<li>9</li>
 					<li>10</li>
 					<li>11</li>
-					<li>
-						<span class="active">12</span>
-					</li>
+					<li>12</li>
 					<li>13</li>
-					<li>14</li>
+					<li>
+						<span class="active">14</span>
+					</li>
 					<li>15</li>
 					<li>16</li>
 					<li>17</li>

@@ -22,7 +22,7 @@ public class CanLamSangService extends BasicService<CanLamSang> {
 	
 	public JPAQuery<CanLamSang> getListCanLamSangByIdChiTietBenhAn() {
 		JPAQuery<CanLamSang> q = find(CanLamSang.class).where(QCanLamSang.canLamSang.benhAn.id.eq(idBenhAn));
-		q.orderBy(QHoSoBenhAn.hoSoBenhAn.ngayTao.desc());
+		q.orderBy(QCanLamSang.canLamSang.ngayKham.desc());
 		return q;
 	}
 
