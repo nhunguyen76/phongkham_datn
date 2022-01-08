@@ -21,7 +21,7 @@
 		<p.type>war</p.type>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>5.2.11.Final</hibernate.version>
-		<pac4j.version>2.1.0</pac4j.version>
+		<pac4j.version>5.2.0</pac4j.version>
 		<spring-webmvc-pac4j.version>2.1.0</spring-webmvc-pac4j.version>
 	</properties>
 	<repositories>
